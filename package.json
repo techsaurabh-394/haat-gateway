@@ -52,7 +52,7 @@
     "serve": "node src/main.ts"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.5",
+    "@eslint/js": "^10.0.1",
     "@types/node": "^26.6.6",
     "eslint": "^10.14.0",
     "globals": "^17.13.0",
