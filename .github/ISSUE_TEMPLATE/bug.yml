@@ -1,0 +1,22 @@
+name: Bug report
+description: Something doesn't work as documented.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations: { required: true }
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: Commands or a minimal test. Please don't include real personal data.
+      render: bash
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes:
+      label: Node version and commit
+      placeholder: "node 22.18.0, commit abc1234"

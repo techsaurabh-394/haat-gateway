@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 400" width="1100" height="400" role="img" aria-labelledby="t d">
+  <title id="t">Hinglish pipeline</title>
+  <desc id="d">A request typed in Hinglish is split into items, quantities are extracted, spelling variants are matched with a phonetic key and a lexicon, and a single-seller basket is built.</desc>
+  <style>
+    :root { --bg:#ffffff; --ink:#1c2033; --muted:#5b6178; --indigo:#26346f; --marigold:#efa00b; --leaf:#2e7a4b; --teal:#13707f; --card:#f3f5fb; --line:#c9cee0; --on:#ffffff; --red:#b3372f; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#141831; --ink:#e9ecf7; --muted:#a6acc6; --indigo:#8fa2ec; --marigold:#f5b437; --leaf:#5cc489; --teal:#4fc0cf; --card:#1e2344; --line:#3a4170; --on:#0f1430; --red:#ef8178; }
+    }
+    .bg{fill:var(--bg)} .h{font:600 26px "Iowan Old Style","Palatino Linotype",Georgia,serif;fill:var(--ink)}
+    .t{font:600 15px "Segoe UI","Helvetica Neue",Arial,sans-serif;fill:var(--ink)}
+    .s{font:400 13px "Segoe UI","Helvetica Neue",Arial,sans-serif;fill:var(--muted)}
+    .m{font:400 13px ui-monospace,"Cascadia Code",Menlo,Consolas,monospace;fill:var(--ink)}
+    .card{fill:var(--card);stroke:var(--line);stroke-width:1.5}
+    .life{stroke:var(--line);stroke-width:2;stroke-dasharray:4 6}
+    .arrow{stroke:var(--teal);stroke-width:2.2;fill:none;marker-end:url(#ah)}
+    .arrow.back{stroke:var(--indigo);stroke-dasharray:6 5;marker-end:url(#ahb)}
+    .arrow.human{stroke:var(--marigold);marker-end:url(#ahm)}
+    .arrow.bad{stroke:var(--red);marker-end:url(#ahr)}
+    .gate{fill:none;stroke:var(--marigold);stroke-width:2.5}
+    .pill{fill:var(--indigo)} .pilltxt{font:600 13px "Segoe UI",Arial,sans-serif;fill:var(--on)}
+    .good{fill:var(--leaf)} .warn{fill:var(--marigold)} .teal{fill:var(--teal)}
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--teal)"/></marker>
+    <marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--indigo)"/></marker>
+    <marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--marigold)"/></marker>
+    <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--red)"/></marker>
+  </defs>
+  <rect class="bg" width="1100" height="400"/>
+  <text class="h" x="40" y="50" text-anchor="start">From how people type to what sellers sell</text>
+  <text class="s" x="40" y="76" text-anchor="start">Data-driven: every word list lives in packs/&lt;domain&gt;/lexicon.json, so adding a language is a pull request with no code.</text>
+  <rect class="card" x="40" y="120" width="188" height="170" rx="12"/>
+  <rect x="40" y="120" width="188" height="6" rx="3" style="fill:var(--indigo)"/>
+  <text class="t" x="54" y="152" text-anchor="start">You type</text>
+  <text class="m" x="54" y="182" text-anchor="start">&quot;do kilo aata aur</text>
+  <text class="m" x="54" y="206" text-anchor="start">1 litre doodh&quot;</text>
+  <line class="arrow" x1="232" y1="205" x2="252" y2="205"/>
+  <rect class="card" x="256" y="120" width="188" height="170" rx="12"/>
+  <rect x="256" y="120" width="188" height="6" rx="3" style="fill:var(--teal)"/>
+  <text class="t" x="270" y="152" text-anchor="start">Split + quantities</text>
+  <text class="m" x="270" y="182" text-anchor="start">[do kilo] aata</text>
+  <text class="m" x="270" y="206" text-anchor="start">[1 litre] doodh</text>
+  <text class="m" x="270" y="230" text-anchor="start">split on aur / और</text>
+  <line class="arrow" x1="448" y1="205" x2="468" y2="205"/>
+  <rect class="card" x="472" y="120" width="188" height="170" rx="12"/>
+  <rect x="472" y="120" width="188" height="6" rx="3" style="fill:var(--teal)"/>
+  <text class="t" x="486" y="152" text-anchor="start">Phonetic key</text>
+  <text class="m" x="486" y="182" text-anchor="start">aata, atta: ata</text>
+  <text class="m" x="486" y="206" text-anchor="start">doodh, dudh: dud</text>
+  <text class="m" x="486" y="230" text-anchor="start">दूध stays दूध</text>
+  <line class="arrow" x1="664" y1="205" x2="684" y2="205"/>
+  <rect class="card" x="688" y="120" width="188" height="170" rx="12"/>
+  <rect x="688" y="120" width="188" height="6" rx="3" style="fill:var(--marigold)"/>
+  <text class="t" x="702" y="152" text-anchor="start">Lexicon term</text>
+  <text class="s" x="702" y="182" text-anchor="start">wheat flour, 2000 g</text>
+  <text class="s" x="702" y="206" text-anchor="start">milk, 1000 ml</text>
+  <line class="arrow" x1="880" y1="205" x2="900" y2="205"/>
+  <rect class="card" x="904" y="120" width="188" height="170" rx="12"/>
+  <rect x="904" y="120" width="188" height="6" rx="3" style="fill:var(--leaf)"/>
+  <text class="t" x="918" y="152" text-anchor="start">Basket</text>
+  <text class="s" x="918" y="182" text-anchor="start">2 × Atta 1 kg</text>
+  <text class="s" x="918" y="206" text-anchor="start">1 × Milk 1 L</text>
+  <text class="s" x="918" y="230" text-anchor="start">one seller, least waste</text>
+  <text class="s" x="40" y="330" text-anchor="start">Known limits: English loanwords, regional spellings not yet in the lexicon, and look-alike words. A test pins every fixed case,</text>
+  <text class="s" x="40" y="350" text-anchor="start">e.g. &#x27;makhana&#x27; (fox nuts) must never match &#x27;makhan&#x27; (butter).</text>
+
+</svg>

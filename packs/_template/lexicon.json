@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "languages": ["en", "hi", "hi-Latn"],
+  "notes": "Copy this folder to packs/ondc-retXX-your-domain, rename the id, and add at least 10 entries. Variants are how people actually type the product.",
+  "entries": [
+    { "term": "kurta", "category": "Clothing", "variants": ["kurta", "kurtaa", "कुर्ता"] }
+  ],
+  "stopwords": [],
+  "separators": [],
+  "numbers": {},
+  "units": {}
+}

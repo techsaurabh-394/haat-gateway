@@ -1,0 +1,14 @@
+name: Feature or spec coverage
+description: Propose a feature or a missing part of the Personal Agent Protocol.
+labels: [spec]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: Who needs this and why. Link the spec section if it's protocol coverage.
+    validations: { required: true }
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach

@@ -1,0 +1,156 @@
+Note: The run started 2 test conversation(s) and closed all 2.
+Note: Most Milestone 3 (sign-in and accounts) checks need a real sign-in, which the validator never does. It checks only what it can without one, such as Mediated Sign-In's grant type and an unknown sign_in_id. Check the rest by hand against checklist.md.
+Note: Extension checks are limited to what a signed-out run can see, such as no operations returned to a Personal Agent that doesn't list the Operations extension. Check the rest by hand against checklist.md.
+✓ discovery.https  poppy.json is served over HTTPS at the well-known path                  spec 3
+  Served at https://haat.localhost/.well-known/poppy.json.
+✓ discovery.redirects-https  Every redirect of the well-known URL is to an HTTPS URL       spec 3
+  No redirects.
+✓ discovery.redirects-well-known  Redirects of the well-known URL end at /.well-known/poppy.json, with no query spec 3
+  No redirects.
+✓ discovery.json  poppy.json is a JSON object                                              spec 2
+✓ discovery.schema  poppy.json fields have the forms section 3.1 describes                 spec 2
+✓ discovery.protocol-version  protocol_version is the version this validator checks        spec 3.1
+  protocol_version 0.3.
+✓ discovery.domain-matches-host  organization.domain is the host that serves poppy.json, after redirects spec 3.1
+  organization.domain haat.localhost matches the host.
+✓ discovery.interface-present  poppy.json lists at least one of agent, apis, or web        spec 3.1
+✓ discovery.extension-names  Extension names are ones the protocol defines, or start with a domain spec 3.3
+✓ discovery.excluded-tasks  The excluded-tasks document loads and has the fields in 9.1    spec 9.1
+  4 excluded task(s).
+✓ discovery.alternative-references  Each openapi or mcp reference in an alternative names an API listed in poppy.json spec 9.2
+✓ metadata.issuer-required  The Company has an issuer when it offers account access        spec 3.2
+✓ metadata.resource-metadata  The domain's protected resource metadata is for https://{organization.domain} and names authorization servers spec 3.2
+✓ metadata.issuer-chosen  auth.issuer is one of authorization_servers, and is present when there are several spec 3.1
+  One authorization server, https://haat.localhost.
+✓ metadata.published  The issuer publishes OAuth Authorization Server Metadata             spec 3.2
+  Loaded from https://haat.localhost/.well-known/oauth-authorization-server.
+✓ metadata.schema  The metadata has the fields section 3.2 requires, in the right forms    spec 3.2
+✓ metadata.issuer-matches  The metadata's issuer exactly matches the issuer the protected resource metadata names spec 3.2
+✓ metadata.protected-resources  protected_resources includes https://{organization.domain} spec 3.2
+✓ metadata.token-endpoint  The metadata has a token_endpoint                               spec 3.2
+✓ metadata.revocation-endpoint  The metadata has a revocation_endpoint                     spec 3.2
+✓ metadata.grant-types  grant_types_supported includes refresh_token                       spec 3.2
+✓ metadata.authorization-endpoint  The metadata has an authorization_endpoint when it offers Direct Sign-In spec 3.2
+- metadata.device-authorization-endpoint  The metadata has a device_authorization_endpoint when it offers Device Sign-In spec 3.2
+  grant_types_supported doesn't include urn:ietf:params:oauth:grant-type:device_code.
+✓ metadata.scopes-supported  scopes_supported lists every scope a sign-in can grant        spec 3.2
+✓ metadata.scopes-described  Every scope in scopes_supported has a description             spec 4.7
+  Every scope is described in auth.scopes.
+- metadata.same-issuer  Other Company domains select the same issuer                       spec 3.2
+  The issuer's protected_resources lists no other domain.
+- metadata.same-auth  Other domains with the same issuer have matching scope descriptions and hints spec 3.2
+- metadata.mediated-grant  With Mediated Sign-In listed, the issuer's metadata lists its grant type Mediated Sign-In 2
+  poppy.json doesn't list Mediated Sign-In version 1.
+- mediated.unknown-sign-in  A Mediated Sign-In code for an unknown sign_in_id gets invalid_grant Mediated Sign-In 5
+✓ session.start  A resource accepts a signed-out request with a valid Session header       spec 5.3
+✓ session.continue  A fresh Session JWT with the same sid continues the Session            spec 5.3
+✓ session.new-key  A Session JWT signed with a new delegated key continues the Session     spec 5.2
+✓ session.new-session  A new sid for the same User starts another Session                  spec 5.3
+✓ session.delegation-ps384  A resource accepts a Session JWT whose delegation is signed with PS384 spec 5.2
+✓ session.other-user  A resource rejects a Session JWT that changes its Session's User ID  spec 5.3
+✓ session.other-agent  A resource rejects a Session JWT that changes its Session's Agent ID spec 5.3
+✓ assertion.ps384  The token endpoint accepts a client assertion signed with PS384         spec 4.1
+✓ assertion.signature  The token endpoint refuses a client assertion whose signature doesn't verify spec 4.1
+✓ assertion.expired  The token endpoint refuses an expired client assertion                spec 4.1
+✓ assertion.claims  The token endpoint refuses a client assertion without exp or sub       spec 4.1
+✓ assertion.aud-array  The token endpoint refuses a client assertion whose aud is an array spec 4.1
+✓ assertion.aud-endpoint  The token endpoint refuses a client assertion whose aud is its own URL spec 4.1
+✓ assertion.jti-reuse  The token endpoint refuses a client assertion whose jti it has already seen guides
+✓ session.missing  A request without the Session header gets 400 invalid_session           spec 7
+✓ session.typ  A resource rejects a Session JWT whose typ isn't poppy-session+jwt          spec 5.2
+✓ session.unknown-key  A resource rejects a Session JWT signed by a key its delegation doesn't name spec 5.2
+✓ session.kid-thumbprint  A resource rejects a Session JWT whose kid isn't its key's thumbprint spec 5.2
+✓ session.without-delegation  A resource rejects a Session JWT signed directly with a key from jwks_uri spec 5.2
+✓ session.delegation-signature  A resource rejects a delegation that the key its kid names didn't sign spec 5.2
+✓ session.delegation-expired  A resource rejects a Session JWT whose delegation has expired spec 5.2
+✓ session.delegation-lifetime  A resource rejects a Session JWT whose delegation lasts more than 24 hours spec 5.2
+✓ session.delegation-typ  A resource rejects a Session JWT whose delegation's typ isn't pap-delegation+jwt spec 5.2
+✓ session.delegation-iss  A resource rejects a Session JWT whose delegation's iss isn't the JWT's iss spec 5.2
+✓ session.delegation-kid  A resource rejects a Session JWT whose delegation's kid names no key in jwks_uri spec 5.2
+✓ session.iat-after-delegation  A resource rejects a Session JWT signed after its delegation's exp spec 5.2
+✓ session.claims  A resource rejects a Session JWT without sub                             spec 5.3
+✓ session.aud  A resource rejects a Session JWT for a different Company identifier         spec 5.3
+✓ session.htm  A resource rejects a Session JWT signed for a different method              spec 5.3
+✓ session.htu  A resource rejects a Session JWT signed for a different URL                 spec 5.3
+✓ session.iat  A resource rejects a Session JWT signed an hour ago                         spec 5.3
+✓ session.ath-without-token  A resource rejects a Session JWT with ath on a request without an access token spec 5.3
+✓ session.invalid-everywhere  Protocol endpoints reject a bad Session header before checking an empty body spec 5.3
+  invalid_session at the conversation endpoint, feedback.
+✓ token.invented  An access token the Company never issued gets 401 invalid_token in WWW-Authenticate spec 7
+✓ token.in-url  An access token in the URL isn't checked as a token                        spec 5.6
+  Answered 404, without checking the token.
+✓ openapi.loads  The OpenAPI description loads                                             spec 7
+  https://haat.localhost/openapi.json: Haat gateway API
+✓ openapi.version  The OpenAPI description declares version 3.0 or 3.1                     spec 7
+  openapi 3.1.0
+- mcp.metadata  The MCP server publishes protected resource metadata                       spec 7
+  poppy.json lists no MCP servers.
+- mcp.authorization-servers  The protected resource metadata's authorization_servers includes the Company's issuer spec 7
+- mcp.no-token  The MCP server answers discovery without a token, or refuses it with a challenge that points to its metadata spec 7
+- mcp.invalid-token  The MCP server refuses an invented access token with invalid_token and points to its metadata spec 7
+✓ feedback.no-session  The feedback endpoint rejects a report without the Session header   spec 9.3
+✓ feedback.accepted  The feedback endpoint accepts a report with a signed-out Session header spec 9.3
+- feedback.alternative-references  An alternative returned for a report names only APIs poppy.json lists spec 9.2
+  The report got no alternative to check.
+✓ feedback.invalid  A malformed or overlong report returns invalid_request                 spec 9.3
+- web.page-headers  The browser-session page can't be cached, framed, or kept as a reference spec 6
+  poppy.json lists no web.browser_session_endpoint.
+- web.page-headers-suggested  The browser-session page sends the headers the guides suggest guides
+- web.join-cookie  The browser-session page sets a cookie that forms on other sites don't send spec 6
+- web.join-cookie-suggested  The join cookie is a __Host- cookie that is Secure, HttpOnly, and SameSite=Strict guides
+- web.authorize  Authorizing the page's code with the Session header returns 204           spec 6
+- web.authorize-reused  Authorizing the same code again returns 400 invalid_request        spec 6
+- web.authorize-unknown  Authorizing a code the endpoint never issued returns 400 invalid_request spec 6
+- web.form-without-cookie  Submitting the form without the join cookie gets an error and sets no cookie spec 6
+- web.form-code-used  Submitting a code a second time gets an error, even when the first attempt failed spec 6
+- web.cookie-code-pairing  Submitting a code with the cookie from another page load gets an error spec 6
+- web.authorize-session  Authorizing a code without a valid Session header returns invalid_session spec 5.3
+- web.page-cookies  Loading the page doesn't change the browser's other cookies            spec 6
+✓ conversations.start  Starting a conversation returns 201 with conversation_id, status, and responder spec 8.3
+  Started cnv_ei8QLZsNpHf2.
+✓ conversations.retry-same-id  Retrying the first message returns the same conversation    spec 8.3
+✓ conversations.message-id-conflict  Reusing a message ID with different content returns message_id_conflict spec 8.3
+✓ conversations.follow-up  A later message returns 202 with status and responder           spec 8.3
+✓ conversations.retry-follow-up  Retrying a later message returns the original response    spec 8.3
+✓ conversations.other-user  Reading another User's conversation returns conversation_not_found spec 8.2
+✓ conversations.empty-message  A message without content returns invalid_request           spec 8.4
+✓ conversations.invalid-message-id  A message ID with characters not allowed returns invalid_request spec 8.2
+✓ conversations.message-id-boundaries  A 256-character message ID is accepted and a 257-character one isn't spec 8.2
+✓ conversations.data-only  A message with only data is accepted                            spec 8.4
+✓ conversations.context-only  A message with only context is accepted and recorded         spec 8.5
+✓ conversations.events-read  Reading events returns conversation_id, events, cursor, has_more, status, and responder spec 8.5
+✓ conversations.events-schema  Events have the fields section 8.5 describes                spec 8.5
+  5 event(s).
+✓ conversations.user-message-recorded  The first message is recorded as an event with role user spec 8.5
+✓ conversations.message-preserved  A message is recorded as it was sent, with its author, text, data, and context spec 8.5
+✓ conversations.retry-not-duplicated  A retried message is recorded only once              spec 8.3
+✓ conversations.event-order  Events have unique IDs, and messages are in the order they were sent spec 8.5
+✓ conversations.state-events  Every change to status or responder has a state event        spec 8.7
+✓ conversations.cursor  A read from a cursor returns only later events, and the right cursor spec 8.5
+✓ conversations.wait  A read with wait=1 returns within about a second when there's nothing new spec 8.5
+  Returned in 564 ms.
+✓ conversations.invalid-wait  A wait that isn't a whole number returns invalid_request     spec 8.13
+✓ conversations.unknown-cursor  An unknown cursor returns invalid_cursor                   spec 8.13
+✓ conversations.cursor-other-conversation  A cursor from another conversation returns invalid_cursor spec 8.13
+✓ conversations.message-id-other-conversation  A message ID from another conversation, with different content, returns message_id_conflict spec 8.3
+✓ conversations.sse  A read that asks for a stream gets SSE events with their IDs, or JSON as usual spec 8.6
+  Streams events.
+✓ conversations.sse-last-event-id  A stream with both cursor and Last-Event-ID starts after Last-Event-ID spec 8.6
+✓ conversations.not-found  An unknown Conversation ID returns conversation_not_found       spec 8.13
+✓ conversations.close  Closing returns 200 with status closed                              spec 8.12
+✓ conversations.close-event  Closing adds a state event with status closed                 spec 8.12
+✓ conversations.close-again  Closing again returns 200 and adds no event                   spec 8.12
+✓ conversations.closed-message  A message to a closed conversation returns conversation_closed spec 8.13
+✓ conversations.closed-handoff  A handoff request to a closed conversation returns conversation_closed spec 8.13
+✓ conversations.direct-closed-parent  A Direct Conversation whose parent is closed returns conversation_closed spec 8.10
+✓ conversations.direct-unknown-parent  A Direct Conversation whose parent doesn't exist returns conversation_not_found spec 8.10
+✓ operations.not-returned  No operations are returned to a Personal Agent that doesn't list the Operations extension Operations 2
+  18 conversation response(s) without operations.
+
+Summary
+  1. Foundation             59 passed, 0 failed, 0 warnings, 3 skipped
+  2. Interfaces             39 passed, 0 failed, 0 warnings, 17 skipped
+  3. Sign-in and accounts   0 passed, 0 failed, 0 warnings, 2 skipped
+  4. Extensions             1 passed, 0 failed, 0 warnings, 0 skipped
+
+Results written to /tmp/haat-conformance/pap/kit/company/.poppy/last-results.json.

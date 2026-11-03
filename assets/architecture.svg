@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 730" width="1100" height="730" role="img" aria-labelledby="t d">
+  <title id="t">Architecture</title>
+  <desc id="d">Personal agents talk Poppy to the Haat gateway, which talks signed Beckn to the ONDC registry, gateway and sellers.</desc>
+  <style>
+    :root { --bg:#ffffff; --ink:#1c2033; --muted:#5b6178; --indigo:#26346f; --marigold:#efa00b; --leaf:#2e7a4b; --teal:#13707f; --card:#f3f5fb; --line:#c9cee0; --on:#ffffff; --red:#b3372f; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#141831; --ink:#e9ecf7; --muted:#a6acc6; --indigo:#8fa2ec; --marigold:#f5b437; --leaf:#5cc489; --teal:#4fc0cf; --card:#1e2344; --line:#3a4170; --on:#0f1430; --red:#ef8178; }
+    }
+    .bg{fill:var(--bg)} .h{font:600 26px "Iowan Old Style","Palatino Linotype",Georgia,serif;fill:var(--ink)}
+    .t{font:600 15px "Segoe UI","Helvetica Neue",Arial,sans-serif;fill:var(--ink)}
+    .s{font:400 13px "Segoe UI","Helvetica Neue",Arial,sans-serif;fill:var(--muted)}
+    .m{font:400 13px ui-monospace,"Cascadia Code",Menlo,Consolas,monospace;fill:var(--ink)}
+    .card{fill:var(--card);stroke:var(--line);stroke-width:1.5}
+    .life{stroke:var(--line);stroke-width:2;stroke-dasharray:4 6}
+    .arrow{stroke:var(--teal);stroke-width:2.2;fill:none;marker-end:url(#ah)}
+    .arrow.back{stroke:var(--indigo);stroke-dasharray:6 5;marker-end:url(#ahb)}
+    .arrow.human{stroke:var(--marigold);marker-end:url(#ahm)}
+    .arrow.bad{stroke:var(--red);marker-end:url(#ahr)}
+    .gate{fill:none;stroke:var(--marigold);stroke-width:2.5}
+    .pill{fill:var(--indigo)} .pilltxt{font:600 13px "Segoe UI",Arial,sans-serif;fill:var(--on)}
+    .good{fill:var(--leaf)} .warn{fill:var(--marigold)} .teal{fill:var(--teal)}
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--teal)"/></marker>
+    <marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--indigo)"/></marker>
+    <marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--marigold)"/></marker>
+    <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--red)"/></marker>
+  </defs>
+  <rect class="bg" width="1100" height="730"/>
+  <text class="h" x="40" y="50" text-anchor="start">Architecture</text>
+  <text class="s" x="40" y="76" text-anchor="start">One gateway, two protocols. Personal agents never see Beckn keys; sellers never see agent keys.</text>
+  <rect class="card" x="40" y="120" width="220" height="440" rx="12"/>
+  <text class="t" x="54" y="144" text-anchor="start">Personal agents</text>
+  <text class="s" x="54" y="164" text-anchor="start">any Poppy client,</text>
+  <text class="s" x="54" y="182" text-anchor="start">e.g. Meta Muse (demo)</text>
+  <text class="s" x="54" y="200" text-anchor="start"></text>
+  <text class="s" x="54" y="218" text-anchor="start">client metadata + JWKS</text>
+  <text class="s" x="54" y="236" text-anchor="start">delegated keys per User</text>
+  <text class="s" x="54" y="254" text-anchor="start">Session JWT per request</text>
+  <text class="s" x="54" y="272" text-anchor="start"></text>
+  <text class="s" x="54" y="290" text-anchor="start">shows summaries,</text>
+  <text class="s" x="54" y="308" text-anchor="start">asks the person,</text>
+  <text class="s" x="54" y="326" text-anchor="start">sends Poppy-Approval</text>
+  <text class="s" x="54" y="344" text-anchor="start"></text>
+  <text class="s" x="54" y="362" text-anchor="start">signs in with PKCE</text>
+  <rect class="card" x="310" y="110" width="480" height="560" rx="16" style="stroke:var(--marigold);stroke-width:2.5"/>
+  <text class="t" x="330" y="140" text-anchor="start">Haat gateway</text>
+  <text class="s" x="450" y="140" text-anchor="start">src/</text>
+  <rect x="330" y="160" width="440" height="122" rx="10" class="card"/>
+  <rect x="330" y="160" width="6" height="122" rx="3" style="fill:var(--teal)"/>
+  <text class="t" x="348" y="182" text-anchor="start">Poppy layer</text>
+  <text class="s" x="760" y="182" text-anchor="end">src/poppy</text>
+  <text class="s" x="348" y="204" text-anchor="start">discovery: poppy.json, OpenAPI</text>
+  <text class="s" x="348" y="224" text-anchor="start">session.ts: Session JWT, ES256/PS384 delegations</text>
+  <text class="s" x="348" y="244" text-anchor="start">operations.ts: approval gate, at most once</text>
+  <text class="s" x="348" y="264" text-anchor="start">conversations.ts: events, cursors, SSE</text>
+  <rect x="330" y="296" width="440" height="122" rx="10" class="card"/>
+  <rect x="330" y="296" width="6" height="122" rx="3" style="fill:var(--marigold)"/>
+  <text class="t" x="348" y="318" text-anchor="start">Commerce</text>
+  <text class="s" x="760" y="318" text-anchor="end">src/commerce, src/lexicon</text>
+  <text class="s" x="348" y="340" text-anchor="start">normalize.ts: Hinglish + Hindi to terms</text>
+  <text class="s" x="348" y="360" text-anchor="start">basket.ts: pack sizes, single seller</text>
+  <text class="s" x="348" y="380" text-anchor="start">service.ts: quote, confirm, status, cancel</text>
+  <text class="s" x="348" y="400" text-anchor="start">assistant.ts: rule-based Company Agent</text>
+  <rect x="330" y="432" width="440" height="82" rx="10" class="card"/>
+  <rect x="330" y="432" width="6" height="82" rx="3" style="fill:var(--leaf)"/>
+  <text class="t" x="348" y="454" text-anchor="start">Sign-in + storage</text>
+  <text class="s" x="760" y="454" text-anchor="end">src/oauth, src/store</text>
+  <text class="s" x="348" y="476" text-anchor="start">server.ts: PKCE, client assertions, tokens</text>
+  <text class="s" x="348" y="496" text-anchor="start">kv.ts: SQLite or bounded memory, caps</text>
+  <rect x="330" y="528" width="440" height="102" rx="10" class="card"/>
+  <rect x="330" y="528" width="6" height="102" rx="3" style="fill:var(--indigo)"/>
+  <text class="t" x="348" y="550" text-anchor="start">Beckn buyer app + ONDC</text>
+  <text class="s" x="760" y="550" text-anchor="end">src/beckn, src/ondc</text>
+  <text class="s" x="348" y="572" text-anchor="start">signing.ts: Ed25519 + BLAKE2b-512</text>
+  <text class="s" x="348" y="592" text-anchor="start">bap.ts: async calls, callback matching</text>
+  <text class="s" x="348" y="612" text-anchor="start">onboarding.ts: subscribe, on_subscribe</text>
+  <rect class="card" x="840" y="120" width="220" height="110" rx="12"/>
+  <text class="t" x="854" y="144" text-anchor="start">Registry</text>
+  <text class="s" x="854" y="164" text-anchor="start">who is who: keys + URLs</text>
+  <text class="s" x="854" y="182" text-anchor="start">signing_public_key lookup</text>
+  <rect class="card" x="840" y="250" width="220" height="90" rx="12"/>
+  <text class="t" x="854" y="274" text-anchor="start">Beckn gateway (BG)</text>
+  <text class="s" x="854" y="294" text-anchor="start">fans search out to sellers</text>
+  <rect class="card" x="840" y="360" width="220" height="140" rx="12"/>
+  <text class="t" x="854" y="384" text-anchor="start">Sellers (BPP)</text>
+  <text class="s" x="854" y="404" text-anchor="start">kirana, dairy, sabzi</text>
+  <text class="s" x="854" y="422" text-anchor="start">answer on_search,</text>
+  <text class="s" x="854" y="440" text-anchor="start">on_select, on_init,</text>
+  <text class="s" x="854" y="458" text-anchor="start">on_confirm, ...</text>
+  <line class="arrow" x1="262" y1="300" x2="306" y2="300"/>
+  <text class="s" x="284" y="290" text-anchor="middle">Poppy</text>
+  <line class="arrow" x1="792" y1="300" x2="836" y2="300"/>
+  <text class="s" x="814" y="290" text-anchor="middle">Beckn</text>
+  <line class="arrow back" x1="838" y1="430" x2="794" y2="430"/>
+  <text class="s" x="816" y="450" text-anchor="middle">on_*</text>
+  <text class="s" x="40" y="705" text-anchor="start">Local development replaces the right column with mock-network/: a registry, a BG and three Varanasi sellers.</text>
+
+</svg>

@@ -1,0 +1,14 @@
+[
+  { "name": "good first issue", "color": "2e7a4b", "description": "Small, well-described, great for a first PR" },
+  { "name": "help wanted", "color": "efa00b", "description": "Maintainer would love help with this" },
+  { "name": "lexicon", "color": "13707f", "description": "Language data: variants, numbers, units" },
+  { "name": "domain-pack", "color": "26346f", "description": "New or improved ONDC domain pack" },
+  { "name": "mock-network", "color": "8fa2ec", "description": "Mock sellers, registry, Beckn gateway" },
+  { "name": "spec", "color": "5b6178", "description": "Personal Agent Protocol coverage" },
+  { "name": "security", "color": "b3372f", "description": "Security-relevant change" },
+  { "name": "docs", "color": "c9cee0", "description": "Documentation" },
+  { "name": "bug", "color": "d73a4a", "description": "Something is wrong" },
+  { "name": "needs-review", "color": "fbca04", "description": "Waiting for a reviewer" },
+  { "name": "breaking", "color": "000000", "description": "Breaking change" },
+  { "name": "rfc", "color": "5319e7", "description": "Design discussion for a big change" }
+]

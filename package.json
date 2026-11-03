@@ -1,0 +1,62 @@
+{
+  "name": "haat-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Let personal AI agents shop on India's open commerce network: a Personal Agent Protocol (Poppy) gateway for ONDC / Beckn sellers, with human approval before every order.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Saurabh Pathak (https://github.com/techsaurabh-394)",
+  "homepage": "https://github.com/techsaurabh-394/haat-gateway#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techsaurabh-394/haat-gateway.git"
+  },
+  "bugs": {
+    "url": "https://github.com/techsaurabh-394/haat-gateway/issues"
+  },
+  "funding": "https://buymeacoffee.com/saurabhdev",
+  "keywords": [
+    "personal-agent-protocol",
+    "poppy",
+    "ondc",
+    "beckn",
+    "ai-agents",
+    "agentic-commerce",
+    "hinglish",
+    "india",
+    "indian-languages",
+    "multilingual",
+    "bhojpuri",
+    "marathi",
+    "bengali",
+    "tamil",
+    "telugu",
+    "gujarati",
+    "kannada",
+    "malayalam",
+    "punjabi",
+    "odia"
+  ],
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "start": "node scripts/dev-up.ts",
+    "demo": "node scripts/demo.ts",
+    "test": "node --test --test-concurrency=1 \"test/**/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json",
+    "check": "npm run typecheck && npm run lint && npm test",
+    "coverage": "node --test --test-concurrency=1 --experimental-test-coverage \"test/**/*.test.ts\"",
+    "lint": "eslint .",
+    "ondc:keygen": "node scripts/ondc/keygen.ts",
+    "serve": "node src/main.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@types/node": "^22.10.0",
+    "eslint": "^9.39.5",
+    "globals": "^17.13.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.72.1"
+  }
+}

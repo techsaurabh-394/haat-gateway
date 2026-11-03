@@ -1,0 +1,54 @@
+name: CI
+on:
+  push: { branches: [main] }
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['22.x', '24.x']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - name: Demo smoke test
+        run: npm run demo -- --yes
+
+  conformance:
+    # The official Personal Agent Protocol validator, over real HTTPS with a local CA.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+      - name: Run the official validator
+        run: sudo -E env "PATH=$PATH" scripts/conformance/run-official-validator.sh
+      - name: Fail on any MUST failure
+        run: |
+          if grep -E "^✗ " /tmp/haat-conformance/results.txt; then exit 1; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: conformance-results
+          path: /tmp/haat-conformance/results.txt
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t haat-gateway .
+      - name: Container starts and is healthy
+        run: |
+          docker run -d --name haat -p 8080:8080 haat-gateway
+          for i in $(seq 1 30); do curl -fs localhost:8080/health && exit 0; sleep 1; done
+          docker logs haat; exit 1

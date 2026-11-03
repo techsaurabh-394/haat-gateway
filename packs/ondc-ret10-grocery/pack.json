@@ -1,0 +1,9 @@
+{
+  "id": "ondc-ret10-grocery",
+  "name": "Grocery",
+  "domain": "ONDC:RET10",
+  "description": "Kirana and grocery: staples, dairy, vegetables, household items.",
+  "lexicon": "lexicon.json",
+  "quote_ttl_sec": 600,
+  "maintainers": ["techsaurabh-394"]
+}

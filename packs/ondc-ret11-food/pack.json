@@ -1,0 +1,9 @@
+{
+  "id": "ondc-ret11-food",
+  "name": "Food and beverages (starter)",
+  "domain": "ONDC:RET11",
+  "description": "Restaurants and ready-to-eat food. Starter pack: the lexicon is intentionally small, and growing it is a good first contribution.",
+  "lexicon": "lexicon.json",
+  "quote_ttl_sec": 300,
+  "maintainers": ["techsaurabh-394"]
+}

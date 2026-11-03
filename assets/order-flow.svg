@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 820" width="1100" height="820" role="img" aria-labelledby="t d">
+  <title id="t">Order sequence</title>
+  <desc id="d">Sequence of Poppy and Beckn messages from discovery to a confirmed order, with the human approval step highlighted.</desc>
+  <style>
+    :root { --bg:#ffffff; --ink:#1c2033; --muted:#5b6178; --indigo:#26346f; --marigold:#efa00b; --leaf:#2e7a4b; --teal:#13707f; --card:#f3f5fb; --line:#c9cee0; --on:#ffffff; --red:#b3372f; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#141831; --ink:#e9ecf7; --muted:#a6acc6; --indigo:#8fa2ec; --marigold:#f5b437; --leaf:#5cc489; --teal:#4fc0cf; --card:#1e2344; --line:#3a4170; --on:#0f1430; --red:#ef8178; }
+    }
+    .bg{fill:var(--bg)} .h{font:600 26px "Iowan Old Style","Palatino Linotype",Georgia,serif;fill:var(--ink)}
+    .t{font:600 15px "Segoe UI","Helvetica Neue",Arial,sans-serif;fill:var(--ink)}
+    .s{font:400 13px "Segoe UI","Helvetica Neue",Arial,sans-serif;fill:var(--muted)}
+    .m{font:400 13px ui-monospace,"Cascadia Code",Menlo,Consolas,monospace;fill:var(--ink)}
+    .card{fill:var(--card);stroke:var(--line);stroke-width:1.5}
+    .life{stroke:var(--line);stroke-width:2;stroke-dasharray:4 6}
+    .arrow{stroke:var(--teal);stroke-width:2.2;fill:none;marker-end:url(#ah)}
+    .arrow.back{stroke:var(--indigo);stroke-dasharray:6 5;marker-end:url(#ahb)}
+    .arrow.human{stroke:var(--marigold);marker-end:url(#ahm)}
+    .arrow.bad{stroke:var(--red);marker-end:url(#ahr)}
+    .gate{fill:none;stroke:var(--marigold);stroke-width:2.5}
+    .pill{fill:var(--indigo)} .pilltxt{font:600 13px "Segoe UI",Arial,sans-serif;fill:var(--on)}
+    .good{fill:var(--leaf)} .warn{fill:var(--marigold)} .teal{fill:var(--teal)}
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--teal)"/></marker>
+    <marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--indigo)"/></marker>
+    <marker id="ahm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--marigold)"/></marker>
+    <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" style="fill:var(--red)"/></marker>
+  </defs>
+  <style>
+    .st{opacity:.18;animation:step 14s infinite}
+    @keyframes step{0%{opacity:.18}3%{opacity:1}100%{opacity:1}}
+    .s0{animation-delay:0.0s}
+    .s1{animation-delay:1.0s}
+    .s2{animation-delay:2.0s}
+    .s3{animation-delay:3.0s}
+    .s4{animation-delay:4.0s}
+    .s5{animation-delay:5.0s}
+    .s6{animation-delay:6.0s}
+    .s7{animation-delay:7.0s}
+    .s8{animation-delay:8.0s}
+    .s9{animation-delay:9.0s}
+    .s10{animation-delay:10.0s}
+    .s11{animation-delay:11.0s}
+    @media (prefers-reduced-motion: reduce){.st{animation:none;opacity:1}}
+  </style>
+  <rect class="bg" width="1100" height="820"/>
+  <text class="h" x="40" y="50" text-anchor="start">One order, end to end</text>
+  <text class="s" x="40" y="76" text-anchor="start">Poppy on the left, Beckn on the right. The order is placed only after the person&#x27;s yes, and only once.</text>
+  <rect class="card" x="20" y="100" width="220" height="56" rx="12"/>
+  <text class="t" x="130" y="124" text-anchor="middle">Personal agent</text>
+  <text class="s" x="130" y="144" text-anchor="middle">acts for the User</text>
+  <line class="life" x1="130" y1="156" x2="130" y2="790"/>
+  <rect class="card" x="310" y="100" width="220" height="56" rx="12"/>
+  <text class="t" x="420" y="124" text-anchor="middle">Haat gateway</text>
+  <text class="s" x="420" y="144" text-anchor="middle">Poppy Company + ONDC buyer app</text>
+  <line class="life" x1="420" y1="156" x2="420" y2="790"/>
+  <rect class="card" x="580" y="100" width="220" height="56" rx="12"/>
+  <text class="t" x="690" y="124" text-anchor="middle">Registry / Beckn gateway</text>
+  <text class="s" x="690" y="144" text-anchor="middle">lookup and search fan-out</text>
+  <line class="life" x1="690" y1="156" x2="690" y2="790"/>
+  <rect class="card" x="850" y="100" width="220" height="56" rx="12"/>
+  <text class="t" x="960" y="124" text-anchor="middle">ONDC seller (BPP)</text>
+  <text class="s" x="960" y="144" text-anchor="middle">e.g. Assi Sabzi Mandi</text>
+  <line class="life" x1="960" y1="156" x2="960" y2="790"/>
+  <g class="st s0">
+    <line class="arrow" x1="136" y1="200" x2="412" y2="200"/>
+  <text class="m" x="275.0" y="192" text-anchor="middle">GET /.well-known/poppy.json</text>
+    <text class="s" x="22" y="205">1</text>
+  </g>
+  <g class="st s1">
+    <line class="arrow" x1="136" y1="252" x2="412" y2="252"/>
+  <text class="m" x="275.0" y="244" text-anchor="middle">GET /api/v1/search?q=2 kilo aata</text>
+  <text class="s" x="275.0" y="270" text-anchor="middle">Session JWT on every request</text>
+    <text class="s" x="22" y="257">2</text>
+  </g>
+  <g class="st s2">
+    <line class="arrow" x1="426" y1="304" x2="682" y2="304"/>
+  <text class="m" x="555.0" y="296" text-anchor="middle">search (Ed25519-signed)</text>
+  <text class="s" x="555.0" y="322" text-anchor="middle">one per item</text>
+    <text class="s" x="22" y="309">3</text>
+  </g>
+  <g class="st s3">
+    <line class="arrow" x1="696" y1="356" x2="952" y2="356"/>
+  <text class="m" x="825.0" y="348" text-anchor="middle">forward to sellers in std:0542</text>
+    <text class="s" x="22" y="361">4</text>
+  </g>
+  <g class="st s4">
+    <line class="arrow back" x1="954" y1="408" x2="428" y2="408"/>
+  <text class="m" x="690.0" y="400" text-anchor="middle">on_search: catalog</text>
+    <text class="s" x="22" y="413">5</text>
+  </g>
+  <g class="st s5">
+    <line class="arrow" x1="136" y1="460" x2="412" y2="460"/>
+  <text class="m" x="275.0" y="452" text-anchor="middle">POST /api/v1/orders (cart)</text>
+    <text class="s" x="22" y="465">6</text>
+  </g>
+  <g class="st s6">
+    <line class="arrow" x1="426" y1="512" x2="952" y2="512"/>
+  <text class="m" x="690.0" y="504" text-anchor="middle">select, then init</text>
+  <text class="s" x="690.0" y="530" text-anchor="middle">price, stock, delivery, payment</text>
+    <text class="s" x="22" y="517">7</text>
+  </g>
+  <g class="st s7">
+    <line class="arrow back" x1="414" y1="564" x2="138" y2="564"/>
+  <text class="m" x="275.0" y="556" text-anchor="middle">403 approval_required + summary</text>
+    <text class="s" x="22" y="569">8</text>
+  </g>
+  <g class="st s8">
+    <rect x="120" y="600" width="20" height="32" rx="4" style="fill:var(--marigold)"/>
+  <text class="t" x="154" y="621" text-anchor="start">Person reads the summary and says yes</text>
+    <text class="s" x="22" y="621">9</text>
+  </g>
+  <g class="st s9">
+    <line class="arrow" x1="136" y1="668" x2="412" y2="668"/>
+  <text class="m" x="275.0" y="660" text-anchor="middle">same POST + Poppy-Approval</text>
+    <text class="s" x="22" y="673">10</text>
+  </g>
+  <g class="st s10">
+    <line class="arrow" x1="426" y1="720" x2="952" y2="720"/>
+  <text class="m" x="690.0" y="712" text-anchor="middle">confirm</text>
+  <text class="s" x="690.0" y="738" text-anchor="middle">exactly once</text>
+    <text class="s" x="22" y="725">11</text>
+  </g>
+  <g class="st s11">
+    <line class="arrow back" x1="414" y1="772" x2="138" y2="772"/>
+  <text class="m" x="275.0" y="764" text-anchor="middle">201 order KKS-1001</text>
+  <text class="s" x="275.0" y="790" text-anchor="middle">retry returns the same order</text>
+    <text class="s" x="22" y="777">12</text>
+  </g>
+  <rect class="gate" x="44" y="537" width="1030" height="212" rx="14"/>
+  <text class="s" x="1060" y="741" text-anchor="end">Operations extension v2: exact terms, at most once</text>
+
+</svg>

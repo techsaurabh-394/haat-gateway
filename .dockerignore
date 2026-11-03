@@ -1,0 +1,11 @@
+node_modules
+.git
+.github
+.ondc
+.poppy
+*.db
+*.db-*
+test
+docs
+assets
+coverage

@@ -1,0 +1,19 @@
+name: New domain pack
+description: Propose support for another ONDC domain.
+labels: [domain-pack]
+body:
+  - type: input
+    id: domain
+    attributes:
+      label: ONDC domain code
+      placeholder: "ONDC:RET12"
+    validations: { required: true }
+  - type: textarea
+    id: why
+    attributes:
+      label: What people buy here, and 10 example products
+    validations: { required: true }
+  - type: input
+    id: maintainer
+    attributes:
+      label: Will you maintain it? (GitHub username)

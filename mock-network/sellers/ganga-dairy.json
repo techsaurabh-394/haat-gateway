@@ -1,0 +1,32 @@
+{
+  "subscriber_id": "gangadairy.bpp.example",
+  "provider": {
+    "id": "P-GANGA-07",
+    "name": "Ganga Dairy",
+    "locality": "Assi Ghat",
+    "gps": "25.2867,83.0060",
+    "area_code": "221005"
+  },
+  "delivery": {
+    "charge": 15,
+    "free_above": 299,
+    "packing": 0,
+    "tat": "PT30M"
+  },
+  "order_prefix": "GD",
+  "items": [
+    {"id": "gd-milk-500ml", "name": "Full Cream Milk 500 ml", "price": 34, "measure": ["millilitre", "500"], "stock": 80, "terms": ["milk"]},
+    {"id": "gd-milk-1l", "name": "Full Cream Milk 1 L", "price": 66, "measure": ["litre", "1"], "stock": 50, "terms": ["milk"]},
+    {"id": "gd-dahi-400g", "name": "Fresh Dahi 400 g", "price": 45, "measure": ["gram", "400"], "stock": 30, "terms": ["curd"]},
+    {"id": "gd-paneer-200g", "name": "Malai Paneer 200 g", "price": 90, "measure": ["gram", "200"], "stock": 25, "terms": ["paneer"]},
+    {"id": "gd-paneer-500g", "name": "Malai Paneer 500 g", "price": 215, "measure": ["gram", "500"], "stock": 10, "terms": ["paneer"]},
+    {"id": "gd-ghee-500ml", "name": "Desi Ghee 500 ml", "price": 330, "measure": ["millilitre", "500"], "stock": 12, "terms": ["ghee"]},
+    {"id": "gd-butter-100g", "name": "White Butter 100 g", "price": 60, "measure": ["gram", "100"], "stock": 20, "terms": ["butter"]},
+    {"id": "gd-buttermilk", "name": "Chaas (Buttermilk) 500 ml", "price": 20, "measure": ["millilitre", "500"], "stock": 40, "terms": ["buttermilk"]},
+    {"id": "gd-cheese", "name": "Cheese Slices 200 g", "price": 120, "measure": ["gram", "200"], "stock": 20, "terms": ["cheese"]},
+    {"id": "gd-cheese-cube", "name": "Processed Cheese Cubes 200 g", "price": 110, "measure": ["gram", "200"], "stock": 10, "terms": ["cheese"]},
+    {"id": "gd-juice", "name": "Mixed Fruit Juice 1 L", "price": 95, "measure": ["litre", "1"], "stock": 20, "terms": ["juice"]},
+    {"id": "gd-water", "name": "Packaged Drinking Water 1 L", "price": 20, "measure": ["litre", "1"], "stock": 100, "terms": ["drinking water"]},
+    {"id": "gd-bread", "name": "Sandwich Bread 400 g", "price": 45, "measure": ["gram", "400"], "stock": 25, "terms": ["bread"]}
+  ]
+}

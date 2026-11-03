@@ -1,0 +1,43 @@
+name: Lexicon addition
+description: Teach Haat how people type a product in your language or region, or review the machine-drafted data for your language.
+labels: [lexicon, good first issue]
+body:
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      description: Only Hindi was written by hand; every other language is machine-drafted and needs native-speaker review.
+      options: [Hindi, Bhojpuri, Marathi, Bengali, Tamil, Telugu, Gujarati, Kannada, Malayalam, Punjabi, Odia, Other]
+    validations: { required: true }
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is this?
+      options: [A missing word, A wrong or unnatural word in the existing data, A word that clashes with another product]
+  - type: input
+    id: term
+    attributes:
+      label: Product (in English, as sellers name it)
+      placeholder: "onion"
+    validations: { required: true }
+  - type: textarea
+    id: variants
+    attributes:
+      label: How people type it
+      description: One per line. Include script and region if useful.
+      placeholder: |
+        pyaz (Hindi, Latin letters)
+        kanda (Marathi)
+        प्याज
+    validations: { required: true }
+  - type: textarea
+    id: sentence
+    attributes:
+      label: A real-looking request using it
+      placeholder: "do kilo kanda aur ek kilo batata"
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Want to open the PR yourself?
+      options:
+        - label: Yes, assign it to me

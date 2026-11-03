@@ -1,0 +1,26 @@
+{
+  "projectName": "haat-gateway",
+  "projectOwner": "techsaurabh-394",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 80,
+  "commit": false,
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "techsaurabh-394",
+      "name": "Saurabh Pathak",
+      "profile": "https://github.com/techsaurabh-394",
+      "contributions": [
+        "code",
+        "doc",
+        "design",
+        "data",
+        "maintenance"
+      ]
+    }
+  ]
+}

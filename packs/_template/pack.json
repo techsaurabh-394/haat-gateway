@@ -1,0 +1,9 @@
+{
+  "id": "ondc-retXX-your-domain",
+  "name": "Your domain name",
+  "domain": "ONDC:RET12",
+  "description": "One sentence: what people buy in this domain.",
+  "lexicon": "lexicon.json",
+  "quote_ttl_sec": 600,
+  "maintainers": ["your-github-username"]
+}

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "languages": ["en", "hi", "hi-Latn"],
+  "entries": [
+    { "term": "samosa", "category": "Snacks", "variants": ["samosa", "samose", "समोसा"] },
+    { "term": "kachori", "category": "Snacks", "variants": ["kachori", "kachauri", "कचौड़ी"] },
+    { "term": "jalebi", "category": "Sweets", "variants": ["jalebi", "jilebi", "जलेबी"] },
+    { "term": "lassi", "category": "Beverages", "variants": ["lassi", "लस्सी"] },
+    { "term": "thali", "category": "Meals", "variants": ["thali", "थाली"] }
+  ],
+  "stopwords": [],
+  "separators": [],
+  "numbers": {},
+  "units": { "plate": "unit", "plates": "unit", "glass": "unit", "kulhad": "unit" }
+}

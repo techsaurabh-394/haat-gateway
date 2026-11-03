@@ -1,0 +1,14 @@
+# Local trial: the gateway plus the built-in mock ONDC network, state kept in a volume.
+#   docker compose up --build
+# Then: curl http://localhost:8080/.well-known/poppy.json
+services:
+  haat:
+    build: .
+    ports: ["8080:8080"]
+    environment:
+      HAAT_NETWORK: mock
+      HAAT_PUBLIC_URL: http://localhost:8080
+    volumes: ["haat-data:/data"]
+    restart: unless-stopped
+volumes:
+  haat-data:
