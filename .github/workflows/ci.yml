@@ -11,7 +11,7 @@ jobs:
       matrix:
         node: ['22.x', '24.x']
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
@@ -27,7 +27,7 @@ jobs:
     # The official Personal Agent Protocol validator, over real HTTPS with a local CA.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
           node-version: '22.x'
@@ -45,7 +45,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker build -t haat-gateway .
       - name: Container starts and is healthy
         run: |
