@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Haat explainer</title>
+<style>
+:root{--bg:#0b1024;--card:#161d47;--card2:#1b2356;--line:#2d3772;--ink:#eef0fb;--muted:#a9b0d3;--indigo:#8fa2ec;--gold:#f5b437;--leaf:#5cc489;--teal:#4fc0cf;--red:#ef8178;--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,"Noto Sans Devanagari",sans-serif;--mono:ui-monospace,Menlo,monospace}
+*{box-sizing:border-box;margin:0}
+html,body{width:1280px;height:720px;overflow:hidden;background:var(--bg);color:var(--ink);font-family:var(--sans)}
+#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:radial-gradient(900px 500px at 20% 0%,#1c2a6b55,transparent),radial-gradient(800px 500px at 100% 100%,#7a4a0855,transparent),var(--bg)}
+#stage:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#2d377288 1.2px,transparent 1.2px);background-size:30px 30px;opacity:.35}
+.scene{position:absolute;inset:0;opacity:0;transition:opacity .6s;pointer-events:none}
+.scene.on{opacity:1}
+.hid{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.show{opacity:1;transform:none}
+.kicker{position:absolute;left:70px;top:54px;font:700 15px var(--mono);letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+.title{position:absolute;left:70px;top:84px;font:700 46px/1.1 var(--serif);letter-spacing:-1px;max-width:1100px}
+.cap{position:absolute;left:0;right:0;bottom:34px;text-align:center;font:500 25px/1.4 var(--sans);color:var(--ink);padding:0 120px;text-shadow:0 2px 12px #000}
+.cap b{color:var(--gold)}
+.bar{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--gold),var(--teal));width:0}
+.node{position:absolute;border-radius:22px;background:var(--card);border:1.5px solid var(--line);padding:18px 22px;box-shadow:0 20px 50px #0008}
+.node h4{font:700 20px var(--serif);margin-bottom:4px}.node small{color:var(--muted);font-size:14px}
+.chip{display:inline-block;padding:4px 12px;margin:4px 6px 0 0;border-radius:99px;font:600 15px var(--mono);background:#4fc0cf22;color:var(--teal);border:1px solid #4fc0cf55}
+.mono{font-family:var(--mono)}
+/* scene 1 */
+#s1{display:grid;place-items:center;text-align:center}
+#s1 .big{font:700 150px/1 var(--serif);color:transparent;-webkit-text-stroke:2px #8fa2ec55;position:absolute;top:60px;left:0;right:0}
+#s1 h1{position:relative;font:700 78px/1.05 var(--serif);letter-spacing:-2px}
+#s1 h1 em{font-style:normal;color:var(--gold)}
+#s1 p{position:relative;margin-top:22px;font-size:26px;color:var(--muted)}
+/* scene 2 problem */
+.agent{left:90px;top:250px;width:290px}.beckn{right:90px;top:250px;width:290px}
+.gap{position:absolute;left:420px;top:285px;width:440px;text-align:center}
+.gap .x{font:700 80px var(--serif);color:var(--red)}
+.pill{display:inline-block;padding:6px 14px;border-radius:99px;border:1px solid var(--line);font:600 15px var(--mono);margin-top:10px;color:var(--indigo)}
+/* scene 3 understand */
+.say{left:70px;top:230px;width:520px;font:600 34px/1.3 var(--mono);color:#0b1024;background:var(--indigo);border-radius:22px;padding:24px 28px;min-height:84px}
+.parse{left:690px;top:215px;width:520px;min-height:300px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px dashed var(--line);font:600 20px var(--mono)}
+.row:last-child{border:0}.row i{font-style:normal;color:var(--muted)}.row b{color:var(--teal)}
+.arrow{position:absolute;left:600px;top:300px;font-size:48px;color:var(--gold)}
+/* scene 4 search */
+.gw{left:70px;top:260px;width:240px;text-align:center;border-color:var(--gold)}
+.sel{width:330px;left:900px}
+.sel .lines{margin-top:8px;font:14px/1.7 var(--mono);color:var(--muted)}
+.sel.best{border-color:var(--leaf);box-shadow:0 0 0 3px #5cc48944,0 20px 50px #0008}
+.badge2{position:absolute;right:-8px;top:-14px;background:var(--leaf);color:#0b1024;font:800 13px var(--sans);padding:4px 12px;border-radius:99px}
+svg.lines{position:absolute;inset:0;pointer-events:none}
+.pkt{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold)}
+/* scene 5 gate */
+.phone{position:absolute;left:90px;top:130px;width:340px;height:520px;border-radius:40px;background:#0e1431;border:2px solid #3a4688;padding:26px 20px;box-shadow:0 40px 80px #000a}
+.phone .hd{font:700 18px var(--serif);padding-bottom:10px;border-bottom:1px solid var(--line)}
+.gate{position:absolute;left:34px;right:34px;top:150px;border:2px solid var(--gold);border-radius:20px;background:#f5b43714;padding:18px}
+.gate b{color:var(--gold);font-size:19px}.gate p{margin:6px 0 14px;color:var(--ink);font-size:15px;line-height:1.5}
+.btns{display:flex;gap:10px}.btns span{flex:1;text-align:center;padding:10px;border-radius:99px;font:800 15px var(--sans)}
+.yes{background:var(--leaf);color:#0b1024;transition:all .25s}.yes.hit{transform:scale(.93);box-shadow:0 0 0 10px #5cc48944}.no{border:1px solid var(--red);color:var(--red)}
+.code{left:520px;top:190px;width:690px;font:15px/1.7 var(--mono);color:var(--muted);white-space:pre}
+.code .k{color:var(--indigo)}.code .g{color:var(--gold)}.code .l{color:var(--leaf)}.code .r{color:var(--red)}
+/* scene 6 once */
+.log{left:70px;top:210px;width:560px;font:16px/2 var(--mono)}
+.log div{padding:2px 0}.log .a{color:var(--gold)}.log .z{color:var(--leaf)}.log .w{color:var(--red)}
+.ord{left:700px;top:210px;width:480px;text-align:center}
+.ord .id{font:700 36px var(--mono);color:var(--leaf);margin:10px 0}
+.count{font:700 80px var(--serif);color:var(--gold)}
+/* scene 7 end */
+#s7{display:grid;place-items:center;text-align:center}
+.stats{display:flex;gap:26px;justify-content:center;margin:36px 0}
+.stats div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 26px}
+.stats b{display:block;font:700 46px var(--serif);color:var(--gold)}.stats span{font-size:14px;color:var(--muted)}
+.url{font:600 28px var(--mono);color:var(--teal)}
+</style></head><body>
+<div id="stage">
+
+<div class="scene" id="s1"><div class="big hid" id="s1a">हाट</div><div style="position:relative"><h1 class="hid" id="s1b">Let AI agents shop<br>on India's open network.<br><em>Only with your yes.</em></h1><p class="hid" id="s1c">How Haat works, in 60 seconds</p></div></div>
+
+<div class="scene" id="s2"><div class="kicker">The problem</div><div class="title hid" id="s2t">Two worlds that cannot talk to each other</div>
+ <div class="node agent hid" id="s2a"><h4>🤖 Personal AI agents</h4><small>Speak Poppy. Reason, plan, ask people for a yes.</small><div><span class="pill">Poppy</span></div></div>
+ <div class="gap hid" id="s2g"><div class="x">✕</div><div class="mono" style="color:var(--muted);font-size:16px">no common language,<br>no safe way to buy</div></div>
+ <div class="node beckn hid" id="s2b"><h4>🏪 ONDC sellers</h4><small>Lakhs of kirana, dairy and food shops on India's open network.</small><div><span class="pill">Beckn</span></div></div>
+</div>
+
+<div class="scene" id="s3"><div class="kicker">Step 1 · Understand</div><div class="title hid" id="s3t">People type the way they talk</div>
+ <div class="node say hid" id="s3a"><span id="typed"></span></div><div class="arrow hid" id="s3ar">→</div>
+ <div class="node parse hid" id="s3b"><h4>Lexicon · data-driven, no model</h4><small>text → search terms and quantities</small><div style="margin-top:12px" id="rows"></div></div>
+</div>
+
+<div class="scene" id="s4"><div class="kicker">Step 2 · Search</div><div class="title hid" id="s4t">Signed search to every seller, then the smartest basket</div>
+ <svg class="lines" id="lines" width="1280" height="720"></svg>
+ <div class="node gw hid" id="s4g"><h4>◆ Haat gateway</h4><small>signed Beckn search<br>Ed25519 · BLAKE2b-512</small></div>
+ <div class="node sel hid" id="s4a" style="top:170px"><h4>Kashi Kirana</h4><div class="lines">Atta 1kg ×2 · ₹110<br>Milk 1L · ₹57<br><b style="color:var(--leaf)">covers 2 of 2 items · ₹197</b></div></div>
+ <div class="node sel hid" id="s4b" style="top:340px"><h4>Ganga Dairy</h4><div class="lines">Milk 1L · ₹60<br>no atta<br><b style="color:var(--red)">covers 1 of 2</b></div></div>
+ <div class="node sel hid" id="s4c" style="top:490px"><h4>Assi Sabzi Mandi</h4><div class="lines">Vegetables only<br><b style="color:var(--red)">covers 0 of 2</b></div></div>
+</div>
+
+<div class="scene" id="s5"><div class="kicker">Step 3 · Ask</div><div class="title hid" id="s5t" style="left:520px;top:84px;max-width:700px;font-size:40px">The gateway stops. A human decides.</div>
+ <div class="phone hid" id="s5p"><div class="hd">Your agent</div>
+  <div class="gate" id="gate"><b>Approve this order?</b><p>Kashi Kirana Store<br>2 × Atta 1 kg · 1 × Milk 1 L<br><b style="color:var(--ink)">₹197 · pay on delivery</b></p><div class="btns"><span class="yes" id="yes">YES</span><span class="no">NO</span></div></div></div>
+ <div class="node code hid" id="s5c"></div>
+</div>
+
+<div class="scene" id="s6"><div class="kicker">Step 4 · Confirm once</div><div class="title hid" id="s6t">Retries, crashes, restarts: still exactly one order</div>
+ <div class="node log hid" id="s6l"></div>
+ <div class="node ord hid" id="s6o"><small>orders placed</small><div class="count" id="cnt">0</div><div class="id" id="oid">—</div><small id="osub">waiting for approval</small></div>
+</div>
+
+<div class="scene" id="s7"><div><h1 class="hid" id="s7a" style="font:700 60px/1.1 var(--serif);letter-spacing:-1.5px">Agents get the whole market.<br><span style="color:var(--gold)">People keep the final say.</span></h1>
+ <div class="stats hid" id="s7b"><div><b>99/99</b><span>official validator checks</span></div><div><b>11</b><span>Indian languages</span></div><div><b>0</b><span>runtime dependencies</span></div><div><b>MIT</b><span>open source</span></div></div>
+ <div class="url hid" id="s7c">github.com/techsaurabh-394/haat-gateway</div></div></div>
+
+<div class="cap hid" id="cap"></div><div class="bar" id="bar"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id),sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const show=(...ids)=>ids.forEach(i=>$(i).classList.add('show'));
+const scene=n=>{document.querySelectorAll('.scene').forEach(s=>s.classList.remove('on'));$('s'+n).classList.add('on')};
+const cap=h=>{const c=$('cap');c.classList.remove('show');setTimeout(()=>{c.innerHTML=h;c.classList.add('show')},250)};
+const TOTAL=58000;
+async function run(){
+ const t0=performance.now();$('bar').style.transition='width '+TOTAL+'ms linear';requestAnimationFrame(()=>$('bar').style.width='100%');
+ /* S1 */ scene(1);await sleep(300);show('s1a');await sleep(500);show('s1b');await sleep(900);show('s1c');cap('A gateway between AI agents and <b>ONDC</b>');await sleep(5000);
+ /* S2 */ scene(2);cap('AI agents speak <b>Poppy</b>. Indian sellers speak <b>Beckn</b>.');show('s2t');await sleep(900);show('s2a');await sleep(900);show('s2b');await sleep(900);show('s2g');await sleep(1500);cap('And nobody wants an agent <b>spending money</b> on its own.');await sleep(3600);
+ /* S3 */ scene(3);cap('<b>Understand.</b> Hinglish, Hindi, Tamil, Bengali and more.');show('s3t','s3a');
+ const q='do kilo aata aur 1 litre doodh',ty=$('typed');for(const ch of q){ty.textContent+=ch;await sleep(55)}await sleep(500);show('s3ar','s3b');
+ const rows=[['aata','wheat flour','2000 g'],['doodh','milk','1000 ml']];for(const [a,b,c] of rows){$('rows').insertAdjacentHTML('beforeend',`<div class="row hid" ><span>"${a}"</span><i>→</i><b>${b} · ${c}</b></div>`);await sleep(80);$('rows').lastChild.classList.add('show');await sleep(1100)}
+ cap('"aata" becomes <b>wheat flour, 2000 g</b>. No language model in the loop.');await sleep(3200);
+ /* S4 */ scene(4);cap('<b>Search.</b> Signed Beckn requests fan out to every seller.');show('s4t');await sleep(600);show('s4g');await sleep(600);
+ const svg=$('lines'),ys=[205,375,525];ys.forEach(y=>svg.insertAdjacentHTML('beforeend',`<path d="M310 320 C 600 320 650 ${y} 900 ${y}" fill="none" stroke="#3a4688" stroke-width="2.5" stroke-dasharray="4 9"/>`));
+ show('s4a','s4b','s4c');
+ for(const y of ys){const p=document.createElement('div');p.className='pkt';$('stage').appendChild(p);p.animate([{left:'310px',top:'312px',opacity:1},{left:'890px',top:(y-8)+'px',opacity:1,offset:.9},{left:'890px',top:(y-8)+'px',opacity:0}],{duration:1500,easing:'ease-in-out',fill:'forwards'});setTimeout(()=>p.remove(),1700)}
+ await sleep(2600);cap('Haat picks the <b>single seller</b> that covers the most of your list.');$('s4a').classList.add('best');$('s4a').insertAdjacentHTML('beforeend','<div class="badge2">BEST BASKET</div>');await sleep(3800);
+ /* S5 */ scene(5);cap('<b>Ask.</b> The gateway refuses to order and asks the person.');show('s5t','s5p');await sleep(900);show('s5c');
+ const lines=[`<span class="k">POST</span> /poppy/message  <span class="g">"yes, order it"</span>`,``,`<span class="r">HTTP 403</span>`,`{ "error": <span class="r">"approval_required"</span>,`,`  "summary": "Kashi Kirana · ₹197",`,`  "revision": <span class="g">7</span>, "expires_in": 600 }`,``,`<span class="k">// the agent cannot self-approve</span>`];
+ const cd=$('s5c');for(const l of lines){cd.innerHTML+=l+"\n";await sleep(420)}await sleep(1200);
+ cap('The person approves <b>one exact revision</b>. Nothing else.');$('yes').classList.add('hit');await sleep(700);cd.innerHTML+=`\n<span class="l">approval recorded · revision 7</span>`;await sleep(2800);
+ /* S6 */ scene(6);cap('<b>Confirm once.</b> The order is placed at most one time.');show('s6t','s6l','s6o');await sleep(800);
+ const L=$('s6l'),add=(c,t)=>{L.insertAdjacentHTML('beforeend',`<div class="${c}">${t}</div>`)};
+ add('a','▸ Beckn confirm sent');await sleep(900);$('cnt').textContent='1';$('oid').textContent='ORD-7F3A91';$('osub').textContent='placed';add('z','✓ order ORD-7F3A91 placed');await sleep(1300);
+ cap('Network drops, client retries, gateway restarts…');add('w','⚡ client retries the same approval');await sleep(1100);add('w','⚡ gateway restarted');await sleep(1100);add('a','▸ approval replayed');await sleep(900);add('z','✓ same order ORD-7F3A91 returned');$('osub').textContent='same order, never a second';await sleep(1500);
+ cap('Unknown outcome? <b>503 Retry-After</b>. Never a guess, never a double order.');add('a','▸ outcome unknown → 503 Retry-After');await sleep(3500);
+ /* S7 */ scene(7);cap('Open source. Early. Honest about what is not done yet.');show('s7a');await sleep(1200);show('s7b');await sleep(1500);show('s7c');await sleep(3500);
+ window.__done=performance.now()-t0;
+}
+window.__start=run;
+if(!location.hash.includes('manual'))run();
+</script></body></html>

@@ -13,6 +13,7 @@
 <meta name="theme-color" content="#0b1024">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/hero.css">
 </head>
 <body>
 <header class="nav"><div class="wrap">
@@ -25,15 +26,33 @@
 
 <main>
 <section class="hero" style="padding-bottom:40px"><div class="wrap">
-  <span class="pill"><span class="dot"></span><b>Open source</b> · Poppy draft 0.3 · 99/99 official validator checks</span>
-  <h1>Let AI agents shop<br>on India's open network.<br><em>Only with your yes.</em></h1>
-  <p class="lead"><b>Haat</b> (हाट, the village market) connects personal AI agents to lakhs of <b>ONDC</b> sellers, understands how people really type (<b>"do kilo aata"</b>), and <b>never places an order without the person's approval</b>.</p>
-  <div class="cta">
-    <a class="btn primary" href="#demo">▶ Try the live demo</a>
-    <a class="btn" href="docs/quickstart.html">Read the docs →</a>
-    <a class="btn" href="https://github.com/techsaurabh-394/haat-gateway">View source</a>
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="bigmark" aria-hidden="true">हाट</div>
+  <div class="floaters" aria-hidden="true"><span style="--x:56%;--y:-2%;--d:0s;--z:1">आटा</span><span style="--x:72%;--y:4%;--d:-2s;--z:2">அரிசி</span><span style="--x:51%;--y:64%;--d:-4s;--z:2">দুধ</span><span style="--x:62%;--y:94%;--d:-1s;--z:1">paneer</span><span style="--x:90%;--y:6%;--d:-3s;--z:2">ਚਾਵਲ</span><span style="--x:93%;--y:78%;--d:-5s;--z:1">pyaz</span><span style="--x:58%;--y:96%;--d:-6s;--z:2">દાળ</span></div>
+  <div class="hero2">
+    <div class="hl">
+      <span class="pill"><span class="dot"></span><b>Open source</b> · Poppy draft 0.3 · 99/99 official validator checks</span>
+      <h1>Let AI agents shop<br>on India's open network.<br><em>Only with your yes.</em></h1>
+      <p class="lead"><b>Haat</b> (हाट, the village market) connects personal AI agents to lakhs of <b>ONDC</b> sellers, understands how people really type, and <b>never places an order without approval</b>.</p>
+      <div class="cta">
+        <a class="btn primary" href="#watch">▶ Watch how it works</a>
+        <a class="btn" href="#demo">Try the live demo</a>
+        <a class="btn" href="https://github.com/techsaurabh-394/haat-gateway">View source</a>
+      </div>
+      <div class="trust"><span>🔐 human approval gate</span><span>1️⃣ exactly-once orders</span><span>🗣️ 11 languages</span></div>
+    </div>
+    <div class="hr"><div class="phonewrap">
+      <div class="ring" aria-hidden="true"></div>
+      <div class="phone" id="phone" role="img" aria-label="Animated example: a request is understood, the person approves the order, and it is placed once">
+        <div class="notch"></div>
+        <div class="phead"><b>Your agent</b><small id="pl">Hinglish</small></div>
+        <div class="pchat" id="pchat"></div>
+        <div class="pfoot"><span>Message your agent…</span><i>↑</i></div>
+      </div>
+      <div class="badge b1">⚡ understood in ms</div>
+      <div class="badge b2">🛡️ nothing sent without yes</div>
+    </div></div>
   </div>
-  <p class="typing" id="typing" aria-live="off"></p>
 
   <div class="scene" aria-hidden="false">
   <svg viewBox="0 0 1100 400" role="img" aria-labelledby="st sd" id="scene">
@@ -143,10 +162,11 @@
 </div></section>
 
 <section id="watch"><div class="wrap">
-  <div class="reveal"><span class="eyebrow">Watch it</span><h2>60 seconds, start to finish.</h2>
-  <p class="sub">Screen recording of the demo above. Hinglish in, approval card, order placed once. No cuts.</p></div>
-  <div class="video reveal"><video controls muted loop playsinline preload="metadata" poster="media/demo-poster.png"><source src="media/demo.mp4" type="video/mp4"><source src="media/demo.webm" type="video/webm"></video></div>
+  <div class="reveal"><span class="eyebrow">Watch it</span><h2>How Haat works, in one minute.</h2>
+  <p class="sub">An animated walkthrough: a Hinglish request is understood, searched across sellers, stopped at the approval gate, and confirmed exactly once.</p></div>
+  <div class="video reveal"><video controls muted loop playsinline preload="metadata" poster="media/explainer-poster.png"><source src="media/explainer.mp4" type="video/mp4"><source src="media/explainer.webm" type="video/webm"></video></div>
 </div></section>
+
 
 <section id="how" class="alt"><div class="wrap">
   <div class="reveal"><span class="eyebrow">How it works</span><h2>A bridge between two protocols.</h2>
@@ -233,5 +253,6 @@
   <div><a href="https://github.com/techsaurabh-394/haat-gateway">GitHub</a><br><a href="https://github.com/techsaurabh-394">Saurabh Pathak</a><br><a href="https://mernstackdev.com">Blog</a><br><a href="https://buymeacoffee.com/saurabhdev">Buy me a coffee</a></div>
 </div></footer>
 <script src="assets/site.js"></script>
+<script src="assets/hero.js"></script>
 </body>
 </html>
