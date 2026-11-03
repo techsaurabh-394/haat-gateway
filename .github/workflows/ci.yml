@@ -36,7 +36,7 @@ jobs:
       - name: Fail on any MUST failure
         run: |
           if grep -E "^✗ " /tmp/haat-conformance/results.txt; then exit 1; fi
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: conformance-results
