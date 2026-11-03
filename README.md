@@ -14,6 +14,10 @@
 
 # Haat gateway
 
+<p align="center"><a href="https://techsaurabh-394.github.io/haat-gateway/"><b>Live demo and docs → techsaurabh-394.github.io/haat-gateway</b></a></p>
+
+<p align="center"><a href="https://techsaurabh-394.github.io/haat-gateway/"><img src="site/media/demo.gif" alt="Haat landing page demo: Hinglish request, approval gate, order placed once" width="80%"></a></p>
+
 **Haat** (हाट, the village market) lets personal AI agents shop from sellers on **ONDC**, India's open commerce network, in the language people actually type, and **never places an order without the person's yes**.
 
 It is a [Personal Agent Protocol](https://personalagentprotocol.org/) ("Poppy") Company on one side and an ONDC/Beckn buyer app on the other. Personal agents speak Poppy (Sierra demonstrated it with Meta's Muse); lakhs of Indian sellers speak Beckn. Haat translates between them.

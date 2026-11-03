@@ -1,0 +1,61 @@
+Haat gateway demo: a personal agent shops on a local ONDC-style network
+gateway http://127.0.0.1:60983 · sellers: Kashi Kirana Store, Ganga Dairy, Assi Sabzi Mandi
+
+1. Discover the Company
+   Haat (local dev) speaks Poppy 0.3; extensions: operations
+
+2. Search in Hinglish
+   query: "2 kilo aata, 1 litre doodh aur 12 ande"
+   understood "aata" → wheat flour (2000 g)
+   understood "doodh" → milk (1000 ml)
+   understood "ande" → eggs (12 unit)
+   9 offers from the network. Best single seller: Kashi Kirana Store
+   - 2 × Whole Wheat Atta 1 kg  ₹110.00  for "aata", exact
+   - 1 × Toned Milk 1 L  ₹62.00  for "doodh", exact
+   ! ande: not sold here
+
+3. Place the order (the gateway asks the human first)
+
+   Haat (local dev) asks for your approval:
+   │ Order from **Kashi Kirana Store**:
+   │ - 2 × Whole Wheat Atta 1 kg: ₹110.00
+   │ - 1 × Toned Milk 1 L: ₹62.00
+   │ - Delivery charges: ₹25.00
+   │ 
+   │ **Total: ₹197.00**, paid to the seller on delivery (cash or UPI).
+   │ Deliver to Saurabh, B-12, Durgakund Road, Lanka, Varanasi 221005, phone ending 3210. Expected in about 45 minutes.
+   │ You can cancel until the order is out for delivery.
+   operation op_…, revision …, expires …
+   ✔ approved (--yes)
+   ✔ order placed KKS-1001 with Kashi Kirana Store, total ₹197.00, payment ON-FULFILLMENT to BPP
+
+4. Retry the same approval (network hiccup simulation)
+   HTTP 201, order KKS-1001 → same order, not placed twice
+
+5. Track it
+   6:37:59 am  Pending
+   6:38:04 am  Packed
+   6:38:08 am  Order-picked-up
+
+6. Same flow as a conversation with the Company Agent (Hindi)
+   │ सबसे अच्छा विकल्प: **Kashi Kirana Store**, Lanka
+   │ - 1 × Sona Masoori Rice 1 kg: ₹72.00 (1 kg के लिए)
+   │ - 2 × Iodised Salt 1 kg: ₹56.00 (2 के लिए)
+   │ सामान का कुल: ₹128.00 (डिलीवरी शुल्क अंतिम कोटेशन में जुड़ेगा)
+   │ 
+   │ अंतिम कोटेशन के लिए `data.delivery` में डिलीवरी विवरण भेजें (नाम, फ़ोन, PIN वाला पता), फिर "order" कहें।
+
+   Haat (local dev) asks for your approval:
+   │ **Kashi Kirana Store** से ऑर्डर:
+   │ - 1 × Sona Masoori Rice 1 kg: ₹72.00
+   │ - 2 × Iodised Salt 1 kg: ₹56.00
+   │ - Delivery charges: ₹25.00
+   │ 
+   │ **कुल: ₹153.00**, डिलीवरी पर विक्रेता को भुगतान (नकद या UPI)।
+   │ डिलीवरी: Saurabh, B-12, Durgakund Road, Lanka, Varanasi 221005, फ़ोन 3210 पर खत्म होने वाला। लगभग 45 मिनट में।
+   │ डिलीवरी के लिए निकलने से पहले तक रद्द किया जा सकता है।
+   operation op_…, revision …, expires …
+   ✔ approved (--yes)
+   │ ऑर्डर हो गया: **KKS-1002** (Kashi Kirana Store)। कुल ₹153.00, डिलीवरी पर भुगतान।
+
+Done. Everything ran locally. No real sellers or money were involved.

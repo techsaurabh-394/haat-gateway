@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Domain packs · Haat docs</title><meta name="description" content="Add a vertical with two JSON files."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="">Architecture</a><a href="protocol-mapping.html" class="">Poppy to Beckn mapping</a><a href="security.html" class="">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="on">Domain packs</a><a href="lexicon.html" class="">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="">Conformance</a><a href="limitations.html" class="">Limitations</a><h5>Project</h5><a href="roadmap.html" class="">Roadmap</a><a href="contributing.html" class="">Contributing</a><a href="changelog.html" class="">Changelog</a><a href="audit.html" class="">Repository audit</a></aside><article class="prose"><h1 id="domain-packs">Domain packs</h1><p>A domain pack teaches Haat one ONDC domain. It is data, not code, so you can add or improve one without writing TypeScript.</p>
+<pre><code class="lang-">packs/
+  ondc-ret10-grocery/
+    pack.json      # what the domain is
+    lexicon.json   # how people ask for things in it</code></pre><h2 id="packjson">pack.json</h2><pre><code class="lang-json">{
+  "id": "ondc-ret10-grocery",
+  "name": "Grocery",
+  "domain": "ONDC:RET10",
+  "description": "Kirana and grocery: staples, dairy, vegetables, household items.",
+  "lexicon": "lexicon.json",
+  "quote_ttl_sec": 600,
+  "maintainers": ["your-github-username"]
+}</code></pre><ul>
+<li><code>domain</code> must look like <code>ONDC:RET10</code>. ONDC retail domains include RET10 (grocery), RET11 (food and beverage), RET12 (fashion), RET13 (beauty and personal care), RET14 (electronics), RET15 (appliances), RET16 (home and kitchen), RET18 (health and wellness). Check the current list in ONDC&#39;s documentation before adding one.</li>
+<li><code>quote_ttl_sec</code> is how long an approval stays valid. Fresh food needs shorter holds than staples.</li>
+</ul>
+<h2 id="lexiconjson">lexicon.json</h2><p>See <a href="lexicon.html">lexicon.md</a> for the format and rules.</p>
+<h2 id="adding-a-pack">Adding a pack</h2><ol>
+<li>Copy <code>packs/_template</code> to <code>packs/ondc-retXX-yourdomain</code>.</li>
+<li>Fill in <code>pack.json</code> and at least 10 lexicon entries.</li>
+<li>Run <code>npm test</code>. <code>test/packs.test.ts</code> validates every pack and rejects a variant claimed by two products.</li>
+<li>Open a pull request using the &quot;New domain pack&quot; issue form first, so others can help.</li>
+</ol>
+<p>Today the gateway routes orders to <code>ONDC:RET10</code>; making the domain selectable per request is tracked in the good first issues.</p>
+
+    <div class="pn"><a href="security.html"><small>← Previous</small>Security model</a><a href="lexicon.html"><small>Next →</small>Language lexicon</a></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/domain-packs.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>

@@ -1,0 +1,112 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Security model · Haat docs</title><meta name="description" content="Sessions, SSRF, approval binding."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="">Architecture</a><a href="protocol-mapping.html" class="">Poppy to Beckn mapping</a><a href="security.html" class="on">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="">Domain packs</a><a href="lexicon.html" class="">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="">Conformance</a><a href="limitations.html" class="">Limitations</a><h5>Project</h5><a href="roadmap.html" class="">Roadmap</a><a href="contributing.html" class="">Contributing</a><a href="changelog.html" class="">Changelog</a><a href="audit.html" class="">Repository audit</a></aside><article class="prose"><h1 id="security-model">Security model</h1><p>Haat sits between AI agents and real purchases, so its first job is to make wrong purchases hard.</p>
+<h2 id="threats-and-defences">Threats and defences</h2><table>
+<thead>
+<tr>
+<th>Threat</th>
+<th>Defence</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Someone impersonates an agent</td>
+<td>Session JWT signed with a delegated key that the agent&#39;s published JWKS vouches for; <code>aud</code>, <code>htm</code>, <code>htu</code>, <code>iat</code> checks</td>
+<td><code>src/poppy/session.ts</code></td>
+</tr>
+<tr>
+<td>A captured request is replayed</td>
+<td><code>jti</code> replay cache within the <code>iat</code> window; JWTs are bound to method and URL</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Agent fetches pointed at internal services (SSRF)</td>
+<td>HTTPS only, no loopback, private or link-local hosts unless dev mode is on; no redirects when fetching client metadata; size and time limits</td>
+<td><code>src/poppy/url-policy.ts</code></td>
+</tr>
+<tr>
+<td>An agent buys without asking</td>
+<td>Every order and cancellation goes through the Operations v2 gate; agents that don&#39;t support it get <code>extension_required</code></td>
+<td><code>src/poppy/operations.ts</code>, <code>src/gateway.ts</code></td>
+</tr>
+<tr>
+<td>Approval reused for different terms</td>
+<td>The approval must name a revision whose cart fingerprint matches the request exactly; otherwise a <strong>new</strong> revision is returned and nothing runs</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Double orders from retries or races</td>
+<td>At most once per operation; concurrent approvals get <code>503</code>; repeated approvals replay the first response</td>
+<td>same</td>
+</tr>
+<tr>
+<td>A prompt-injected agent changes the seller URL</td>
+<td>Seller URLs come only from the registry</td>
+<td><code>src/commerce/service.ts</code></td>
+</tr>
+<tr>
+<td>Forged seller callbacks</td>
+<td>Ed25519 signature verified against the registry key; signer must be <code>context.bpp_id</code>; unknown message IDs are dropped</td>
+<td><code>src/beckn/bap.ts</code></td>
+</tr>
+<tr>
+<td>One user reads another&#39;s orders or conversations</td>
+<td>Orders and conversations are keyed by agent <code>client_id</code> + pairwise User ID</td>
+<td><code>src/commerce/service.ts</code>, <code>src/poppy/conversations.ts</code></td>
+</tr>
+<tr>
+<td>Tokens stolen or replayed</td>
+<td>Opaque tokens stored hashed; access tokens bound to the client (<code>ath</code> in the Session JWT and same-client check); one account per Session; refresh tokens revocable</td>
+<td><code>src/oauth/server.ts</code>, <code>src/poppy/session.ts</code></td>
+</tr>
+<tr>
+<td>Sign-in response swapped or redirected</td>
+<td>PKCE S256 only; exact <code>redirect_uri</code>; <code>iss</code> on every redirect; one-time codes; CSRF cookie on the consent form; errors shown on the page, never redirected to unverified URIs</td>
+<td><code>src/oauth/server.ts</code></td>
+</tr>
+<tr>
+<td>Client impersonation at the token endpoint</td>
+<td><code>private_key_jwt</code> only, <code>aud</code> must be the issuer as a string, short lifetime, <code>jti</code> replay rejected</td>
+<td>same</td>
+</tr>
+<tr>
+<td>More access than the person approved</td>
+<td>Never more scopes than requested; the person can untick scopes; scopes enforced on every account endpoint</td>
+<td>same, <code>src/gateway.ts</code></td>
+</tr>
+<tr>
+<td>Double orders after a crash</td>
+<td>Operation state is saved before the action; an interrupted one answers 503 forever rather than run again</td>
+<td><code>src/poppy/operations.ts</code>, <code>src/store/kv.ts</code></td>
+</tr>
+<tr>
+<td>Storage exhaustion</td>
+<td>Every namespace has a cap; operations refuse new entries when full instead of evicting</td>
+<td><code>src/store/kv.ts</code></td>
+</tr>
+<tr>
+<td>Personal data leaks into logs</td>
+<td>Summaries mask phone numbers; logs are off by default (<code>HAAT_LOG=warn</code>)</td>
+<td><code>src/commerce/service.ts</code></td>
+</tr>
+</tbody></table>
+<h2 id="what-an-approval-does-and-doesnt-prove">What an approval does and doesn&#39;t prove</h2><p>Following Operations section 8.1: an approval proves that a specific agent, in a specific Session, <em>stated</em> that the person approved a specific revision. It can&#39;t prove the person saw it. A Company can revoke agents that lie. Signed user approvals are an open topic in the Poppy spec.</p>
+<h2 id="not-yet-covered">Not yet covered</h2><ul>
+<li>DNS-based SSRF: a public hostname that resolves to a private address is not caught (no DNS pre-resolution yet).</li>
+<li>The development OTP provider must never run in production; Haat refuses to start sign-in without a real provider outside dev mode.</li>
+<li>Mock sellers trust the registry over plain HTTP in dev mode.</li>
+</ul>
+<h2 id="reporting-a-vulnerability">Reporting a vulnerability</h2><p>See <a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/SECURITY.md">SECURITY.md</a>. Please don&#39;t open public issues for vulnerabilities.</p>
+
+    <div class="pn"><a href="protocol-mapping.html"><small>← Previous</small>Poppy to Beckn mapping</a><a href="domain-packs.html"><small>Next →</small>Domain packs</a></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/security.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>

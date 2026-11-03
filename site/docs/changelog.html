@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Changelog · Haat docs</title><meta name="description" content="Release notes."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="">Architecture</a><a href="protocol-mapping.html" class="">Poppy to Beckn mapping</a><a href="security.html" class="">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="">Domain packs</a><a href="lexicon.html" class="">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="">Conformance</a><a href="limitations.html" class="">Limitations</a><h5>Project</h5><a href="roadmap.html" class="">Roadmap</a><a href="contributing.html" class="">Contributing</a><a href="changelog.html" class="on">Changelog</a><a href="audit.html" class="">Repository audit</a></aside><article class="prose"><h1 id="changelog">Changelog</h1><p>All notable changes are documented here. The format follows <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and versions follow <a href="https://semver.org/">Semantic Versioning</a>.</p>
+<h2 id="020---unreleased">[0.2.0] - unreleased</h2><h3 id="added">Added</h3><ul>
+<li>Languages: Bhojpuri, Marathi, Bengali, Tamil, Telugu, Gujarati, Kannada, Malayalam, Punjabi and Odia, each in its own script and in Latin letters, plus number words, units, request words and &quot;and&quot; for each. <strong>Machine-drafted; not yet reviewed by native speakers</strong> (see docs/lexicon.md).</li>
+<li>Grocery lexicon grown from about 30 to 130 products; mock sellers now sell them, so search and basket work in the demo.</li>
+<li>Parser: digits of all Indian scripts, nukta removal in all scripts, zero-width joiner removal, Malayalam chillu normalisation, digit+letter splitting (&quot;2கிலோ&quot;), danda separators, variants stored without stopwords, longest matching variant wins.</li>
+<li>Tests for each language, script digits, number words, units, multi-word-beats-single-word, look-alike products, and a whole-file check that no variant belongs to two products.</li>
+<li>Sign-in: OAuth Direct Sign-In with PKCE, private_key_jwt client assertions (ES256, PS384), refresh, revocation, scopes and scope hints, saved addresses, account-owned orders and conversations, sign-in events in conversations (8.11).</li>
+<li>Poppy section 9: excluded-tasks document and feedback endpoint.</li>
+<li>Server-sent events for conversation events, with Last-Event-ID.</li>
+<li>PS384 delegations; RSA JWK thumbprints.</li>
+<li>Storage: SQLite via node:sqlite or bounded memory, with caps; operations, Sessions, orders and conversations survive restarts.</li>
+<li>ONDC: signed v2 registry lookups, onboarding endpoints, key generation and a subscribe template.</li>
+<li>ESLint, Dockerfile, docker compose, production entry point (<code>npm run serve</code>), CI jobs for lint, the official validator and Docker.</li>
+<li>Hindi README.</li>
+</ul>
+<h3 id="changed">Changed</h3><ul>
+<li>Phonetic key no longer folds <code>e</code> into <code>i</code>, so &quot;tel&quot; (oil) and &quot;til&quot; (sesame) are different words.</li>
+<li>The makhana test now uses a product that is really unknown (&quot;dragon fruit&quot;), since makhana is in the lexicon.</li>
+<li>Conversations are open to agents without the Operations extension; only ordering needs it (spec 3.3, found by the official validator).</li>
+<li>Feedback requires a verified Session header.</li>
+<li>An unknown cursor is <code>invalid_cursor</code> (400); <code>cursor_expired</code> (410) is for dropped events (8.13).</li>
+</ul>
+<h2 id="010---unreleased">[0.1.0] - unreleased</h2><h3 id="added">Added</h3><ul>
+<li>Personal Agent Protocol draft 0.3: discovery, Session header verification with delegated keys, conversations (events, cursors, long polling, idempotent message IDs, handoff, close).</li>
+<li>Operations extension v2 approval gate for orders and cancellations: exact revisions, at most once, 503 when the outcome is unknown.</li>
+<li>Beckn buyer app: Ed25519 and BLAKE2b-512 signing, registry lookups, search fan-out, select, init, confirm, status and cancel.</li>
+<li>Hinglish and Hindi request parsing with a data-driven lexicon; basket builder.</li>
+<li>Grocery (RET10) and starter food (RET11) domain packs.</li>
+<li>Mock network: registry, Beckn gateway and three Varanasi sellers; reference Personal Agent; demo.</li>
+<li>Tests, CI, documentation and diagrams.</li>
+</ul>
+
+    <div class="pn"><a href="contributing.html"><small>← Previous</small>Contributing</a><a href="audit.html"><small>Next →</small>Repository audit</a></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/CHANGELOG.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>

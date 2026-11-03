@@ -1,0 +1,181 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Repository audit · Haat docs</title><meta name="description" content="What not to do, learned the hard way."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="">Architecture</a><a href="protocol-mapping.html" class="">Poppy to Beckn mapping</a><a href="security.html" class="">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="">Domain packs</a><a href="lexicon.html" class="">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="">Conformance</a><a href="limitations.html" class="">Limitations</a><h5>Project</h5><a href="roadmap.html" class="">Roadmap</a><a href="contributing.html" class="">Contributing</a><a href="changelog.html" class="">Changelog</a><a href="audit.html" class="on">Repository audit</a></aside><article class="prose"><h1 id="repository-audit-1-november-2026-updated-for-v02">Repository audit (1 November 2026, updated for v0.2)</h1><p>A full review of what this repository covers, what it doesn&#39;t, and what not to do with it. Re-run the commands at the bottom after big changes.</p>
+<h2 id="coverage-of-a-full-open-source-repository">Coverage of a full open-source repository</h2><table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Status</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Working code with no runtime dependencies</td>
+<td>✅</td>
+<td><code>src/</code>, <code>agent/</code>, <code>mock-network/</code></td>
+</tr>
+<tr>
+<td>Tests: unit + end-to-end over real HTTP</td>
+<td>✅ 126 passing</td>
+<td><code>test/</code></td>
+</tr>
+<tr>
+<td>Official Poppy validator</td>
+<td>✅ 99 passed, 0 failed, 0 warnings (22 skipped: features not offered)</td>
+<td><code>docs/conformance.md</code></td>
+</tr>
+<tr>
+<td>Lint (bug-focused rules)</td>
+<td>✅ clean</td>
+<td><code>eslint.config.js</code></td>
+</tr>
+<tr>
+<td>Line / branch coverage</td>
+<td>✅ 97% / 81% overall (weakest: <code>assistant.ts</code> 81% lines, <code>bap.ts</code> 85%)</td>
+<td><code>npm run coverage</code></td>
+</tr>
+<tr>
+<td>Typecheck in CI, Node 22 and 24</td>
+<td>✅ (never run on GitHub yet)</td>
+<td><code>.github/workflows/ci.yml</code></td>
+</tr>
+<tr>
+<td>Demo smoke test in CI</td>
+<td>✅</td>
+<td>same</td>
+</tr>
+<tr>
+<td>README with demo, diagrams, status, limits</td>
+<td>✅</td>
+<td><code>README.md</code>, <code>assets/</code></td>
+</tr>
+<tr>
+<td>Light/dark, reduced-motion visuals</td>
+<td>✅ checked in a real browser</td>
+<td><code>assets/</code>, <code>scripts/assets/make_diagrams.py</code></td>
+</tr>
+<tr>
+<td>Architecture, protocol mapping, flowcharts</td>
+<td>✅</td>
+<td><code>docs/architecture.md</code>, <code>docs/protocol-mapping.md</code></td>
+</tr>
+<tr>
+<td>Security model and private reporting</td>
+<td>✅</td>
+<td><code>docs/security.md</code>, <code>SECURITY.md</code></td>
+</tr>
+<tr>
+<td>Honest limitations</td>
+<td>✅</td>
+<td><code>docs/limitations.md</code>, <code>docs/going-live.md</code></td>
+</tr>
+<tr>
+<td>CONTRIBUTING with Git workflow</td>
+<td>✅</td>
+<td><code>CONTRIBUTING.md</code></td>
+</tr>
+<tr>
+<td>Code of Conduct, Governance, Roadmap, Changelog, Citation, License</td>
+<td>✅</td>
+<td>root</td>
+</tr>
+<tr>
+<td>Issue forms, PR checklist, CODEOWNERS, labels, Dependabot, funding</td>
+<td>✅</td>
+<td><code>.github/</code></td>
+</tr>
+<tr>
+<td>Welcome bot, all-contributors config</td>
+<td>✅ (the app must be installed)</td>
+<td><code>.github/workflows/welcome.yml</code>, <code>.all-contributorsrc</code></td>
+</tr>
+<tr>
+<td>20 good first issues + creation scripts</td>
+<td>✅</td>
+<td><code>docs/good-first-issues/</code>, <code>scripts/github/</code></td>
+</tr>
+<tr>
+<td>Publish, launch and next-version guides</td>
+<td>✅</td>
+<td><code>docs/PUSH_TO_GITHUB.md</code>, <code>docs/launch.md</code>, <code>docs/CLAUDE_CODE_PROMPT.md</code></td>
+</tr>
+<tr>
+<td>Accidental npm publish blocked</td>
+<td>✅ <code>&quot;private&quot;: true</code></td>
+<td><code>package.json</code></td>
+</tr>
+<tr>
+<td>Persistence, memory limits</td>
+<td>✅ SQLite or bounded memory, caps, crash-safe operations</td>
+<td><code>src/store/kv.ts</code></td>
+</tr>
+<tr>
+<td>OAuth sign-in, SSE, Poppy section 9, PS384</td>
+<td>✅</td>
+<td><code>src/oauth/</code>, <code>src/gateway.ts</code></td>
+</tr>
+<tr>
+<td>Real ONDC connection</td>
+<td>⚠️ tooling done (keys, onboarding endpoints, signed lookup); live subscription needs the owner&#39;s legal entity and ONDC approval</td>
+<td><code>docs/going-live.md</code></td>
+</tr>
+<tr>
+<td>Docker image</td>
+<td>⚠️ written; built only in CI (no Docker where it was written)</td>
+<td><code>Dockerfile</code></td>
+</tr>
+<tr>
+<td>Hindi README</td>
+<td>⚠️ written, needs a native speaker&#39;s review (issue 16)</td>
+<td><code>README.hi.md</code></td>
+</tr>
+<tr>
+<td>Real SMS for sign-in codes</td>
+<td>❌ issue 12</td>
+<td><code>src/oauth/server.ts</code></td>
+</tr>
+</tbody></table>
+<h2 id="fixed-during-this-audit">Fixed during this audit</h2><ul>
+<li>Removed an <strong>unverified claim</strong> that Anthropic&#39;s Claude Duet supports Poppy (README, hero, diagram, code comment, launch post). The sources only show Sierra&#39;s demo with Meta&#39;s Muse.</li>
+<li>Two <strong>timing-dependent</strong> end-to-end tests could fail on a slow CI runner; they now tolerate timing.</li>
+<li>Verifying a Session could make the gateway fetch the same failing URL repeatedly; added a 60-second failure cache, with a test.</li>
+<li>Added <code>&quot;private&quot;: true</code>, <code>.gitattributes</code>, a contributors section, <code>npm run coverage</code>, and a CodeQL step in the publish guide.</li>
+<li>Documented unbounded memory growth, and added a &quot;don&#39;t deploy publicly yet&quot; warning to the README.</li>
+</ul>
+<h2 id="what-not-to-do">What not to do</h2><p><strong>With the code</strong></p>
+<ol>
+<li>Don&#39;t deploy it publicly without <code>HAAT_DB</code>, a real <code>OtpProvider</code> (or <code>HAAT_SIGN_IN=off</code>), and a per-IP rate limit at your proxy.</li>
+<li>Don&#39;t point it at real ONDC endpoints, real sellers, or real payments until <code>docs/going-live.md</code> is worked through, including ONDC policy approval.</li>
+<li>Don&#39;t weaken a check in <code>src/poppy/session.ts</code> or <code>src/poppy/operations.ts</code> to make a test or a demo pass.</li>
+<li>Don&#39;t let a language model decide approvals or see Session JWTs, keys or tokens. The rule-based assistant is deliberate.</li>
+<li>Don&#39;t trust seller URLs, prices or summaries from the agent&#39;s request; they come from the registry and the seller&#39;s own quote.</li>
+<li>Don&#39;t add runtime dependencies casually.</li>
+<li>Don&#39;t commit real phone numbers, addresses, keys or order data, even in tests.</li>
+</ol>
+<p><strong>With claims</strong>
+8. Don&#39;t say &quot;first ever&quot; or &quot;nobody has built this&quot;. Say what you searched and when.
+9. Don&#39;t say &quot;works with ONDC&quot; or &quot;works with Muse&quot;. Say &quot;works with a local mock network&quot; and &quot;follows Poppy draft 0.3&quot;.
+10. Don&#39;t publish numbers you didn&#39;t measure (users, latency, accuracy).
+11. Don&#39;t present the Poppy spec as stable: it went from 0.1 to 0.3 in October 2026.
+12. Don&#39;t imply affiliation with ONDC, Sierra, Meta or the Personal Agent Protocol project.</p>
+<p><strong>With the community</strong>
+13. Don&#39;t announce before CI is green on GitHub and 3 to 5 people have tried a first PR.
+14. Don&#39;t post the same link to many communities at once; read each one&#39;s rules.
+15. Don&#39;t leave first-time contributors waiting; the docs promise a reply within 48 hours.
+16. Don&#39;t merge lexicon changes in a language you can&#39;t read without a second native-speaker review.</p>
+<h2 id="re-run-the-audit">Re-run the audit</h2><pre><code class="lang-bash">npm run check          # typecheck + tests
+npm run coverage       # coverage table
+npm run demo -- --yes  # end-to-end smoke test
+scripts/github/create-issues.sh owner/repo --dry-run</code></pre>
+    <div class="pn"><a href="changelog.html"><small>← Previous</small>Changelog</a><span></span></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/AUDIT.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>

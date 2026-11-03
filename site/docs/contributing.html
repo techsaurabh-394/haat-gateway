@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contributing · Haat docs</title><meta name="description" content="Your first PR in about 10 minutes."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="">Architecture</a><a href="protocol-mapping.html" class="">Poppy to Beckn mapping</a><a href="security.html" class="">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="">Domain packs</a><a href="lexicon.html" class="">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="">Conformance</a><a href="limitations.html" class="">Limitations</a><h5>Project</h5><a href="roadmap.html" class="">Roadmap</a><a href="contributing.html" class="on">Contributing</a><a href="changelog.html" class="">Changelog</a><a href="audit.html" class="">Repository audit</a></aside><article class="prose"><h1 id="contributing-to-haat">Contributing to Haat</h1><p>Thank you for helping personal AI agents work for people across India. You don&#39;t need to know TypeScript to make a useful contribution: language data, domain packs, mock sellers and docs are all JSON or Markdown.</p>
+<h2 id="your-first-pull-request-in-about-10-minutes">Your first pull request in about 10 minutes</h2><ol>
+<li>Pick an issue labelled <a href="https://github.com/techsaurabh-394/haat-gateway/labels/good%20first%20issue"><code>good first issue</code></a> and comment &quot;I&#39;d like to take this&quot;.</li>
+<li>Follow the Git steps below.</li>
+<li>Run <code>npm test</code>.</li>
+<li>Open the pull request and fill in the checklist.</li>
+</ol>
+<p>A maintainer aims to reply within 48 hours. If you&#39;re stuck, ask in the issue or in <a href="https://github.com/techsaurabh-394/haat-gateway/discussions">Discussions</a>; questions are contributions too.</p>
+<h2 id="set-up">Set up</h2><p>You need Node.js 22.18 or newer and Git.</p>
+<pre><code class="lang-bash"># one time: fork on GitHub first, then
+git clone https://github.com/&lt;your-username&gt;/haat-gateway.git
+cd haat-gateway
+git remote add upstream https://github.com/techsaurabh-394/haat-gateway.git
+npm install
+npm test            # everything should pass before you change anything
+npm run demo -- --yes</code></pre><h2 id="every-contribution">Every contribution</h2><pre><code class="lang-bash">git checkout main
+git pull upstream main                       # get the latest
+git checkout -b lexicon/add-bhojpuri-veg     # one branch per change
+# ...make your change...
+npm run check                                # typecheck + lint + tests
+git add -A
+git commit -m "lexicon: add Bhojpuri vegetable names"
+git push origin lexicon/add-bhojpuri-veg     # push to YOUR fork
+# open a Pull Request on GitHub</code></pre><p>If <code>main</code> moves while your PR is open:</p>
+<pre><code class="lang-bash">git fetch upstream
+git rebase upstream/main
+git push --force-with-lease</code></pre><h2 id="what-to-contribute">What to contribute</h2><table>
+<thead>
+<tr>
+<th>You know…</th>
+<th>Good contributions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>How people in your region type shopping lists</td>
+<td>Lexicon variants and tests (<a href="lexicon.html">docs/lexicon.md</a>). <strong>Native-speaker review of Bhojpuri, Marathi, Bengali, Tamil, Telugu, Gujarati, Kannada, Malayalam, Punjabi and Odia is the most wanted help: that data is machine-drafted.</strong></td>
+</tr>
+<tr>
+<td>A product category</td>
+<td>A domain pack (<a href="domain-packs.html">docs/domain-packs.md</a>)</td>
+</tr>
+<tr>
+<td>Local shops</td>
+<td>A mock seller catalog in <code>mock-network/sellers/</code></td>
+</tr>
+<tr>
+<td>TypeScript</td>
+<td>Issues labelled <code>help wanted</code>: spec coverage, persistence, SSE streaming</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>Review <code>src/poppy/session.ts</code> and <code>src/poppy/operations.ts</code> against the spec</td>
+</tr>
+<tr>
+<td>Writing</td>
+<td>Docs, translations of the README, tutorials</td>
+</tr>
+</tbody></table>
+<h2 id="rules-of-the-road">Rules of the road</h2><ul>
+<li><strong>Tests with every behaviour change.</strong> Bug fixes come with a test that failed before the fix.</li>
+<li><strong>Spec references.</strong> Code that implements the Personal Agent Protocol cites the section in a comment (for example <code>// spec 5.3 step 4</code>). If the spec is ambiguous, say what you chose and why.</li>
+<li><strong>No runtime dependencies</strong> without discussion. The gateway handles money-adjacent actions, and a small dependency tree is part of its security.</li>
+<li><strong>Honest docs.</strong> Don&#39;t claim something works against real ONDC or a real agent unless you tested it, and say how.</li>
+<li><strong>Commit messages:</strong> <code>area: what changed</code>, for example <code>poppy: verify PS384 delegations</code> or <code>lexicon: add Marathi dairy terms</code>.</li>
+<li><strong>Personal data:</strong> never commit real phone numbers, addresses or order data, even in tests. Use clearly fake values.</li>
+</ul>
+<h2 id="code-style">Code style</h2><p>TypeScript with only erasable syntax (Node runs it directly): no <code>enum</code>, no parameter properties, no namespaces, and <code>.ts</code> extensions in imports. <code>npm run typecheck</code> and <code>npm run lint</code> must pass. The lint rules target real bugs, such as a forgotten <code>await</code> next to an order. Prefer small functions and plain data.</p>
+<h2 id="credit">Credit</h2><p>Every contributor, code or not, is listed in the README contributors section via the all-contributors bot. Comment <code>@all-contributors please add @username for code, doc, data</code> on a PR.</p>
+<p>By contributing you agree that your work is licensed under the MIT License, and you agree to follow the <a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a>.</p>
+<h2 id="language-data">Language data</h2><ul>
+<li>Edit <code>packs/ondc-ret10-grocery/lexicon.json</code>. One product per entry; a variant may belong to only one product (the tests check exact and phonetic collisions across all languages).</li>
+<li>Write each variant the way people type it, in the language&#39;s own script and in Latin letters. Mark what you are unsure of in the PR description.</li>
+<li>Do not present machine-drafted or unchecked words as verified. If you reviewed a language, say so in the PR so docs/lexicon.md can be updated.</li>
+<li>Add a line to <code>test/lexicon.test.ts</code> for anything that was wrong or ambiguous. Run <code>npm run check</code>.</li>
+</ul>
+
+    <div class="pn"><a href="roadmap.html"><small>← Previous</small>Roadmap</a><a href="changelog.html"><small>Next →</small>Changelog</a></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/CONTRIBUTING.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>

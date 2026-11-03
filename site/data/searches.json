@@ -1,0 +1,213 @@
+[
+  {
+    "lang": "Hinglish",
+    "q": "2 kilo aata, 1 litre doodh aur 12 ande",
+    "status": 200,
+    "understood": [
+      {
+        "raw": "aata",
+        "term": "wheat flour",
+        "quantity": {
+          "value": 2000,
+          "unit": "g"
+        }
+      },
+      {
+        "raw": "doodh",
+        "term": "milk",
+        "quantity": {
+          "value": 1000,
+          "unit": "ml"
+        }
+      },
+      {
+        "raw": "ande",
+        "term": "eggs",
+        "quantity": {
+          "value": 12,
+          "unit": "unit"
+        }
+      }
+    ],
+    "offers": 9,
+    "basket": {
+      "seller": "Kashi Kirana Store",
+      "items": [
+        {
+          "name": "Whole Wheat Atta 1 kg",
+          "count": 2,
+          "total": "110.00"
+        },
+        {
+          "name": "Toned Milk 1 L",
+          "count": 1,
+          "total": "62.00"
+        }
+      ],
+      "missing": [
+        {
+          "term": "eggs",
+          "raw": "ande",
+          "reason": "not sold here"
+        }
+      ]
+    }
+  },
+  {
+    "lang": "हिन्दी",
+    "q": "मुझे 1 किलो चावल और 2 पैकेट नमक चाहिए",
+    "status": 200,
+    "understood": [
+      {
+        "raw": "चावल",
+        "term": "rice",
+        "quantity": {
+          "value": 1000,
+          "unit": "g"
+        }
+      },
+      {
+        "raw": "नमक",
+        "term": "salt",
+        "quantity": {
+          "value": 2,
+          "unit": "unit"
+        }
+      }
+    ],
+    "offers": 4,
+    "basket": {
+      "seller": "Kashi Kirana Store",
+      "items": [
+        {
+          "name": "Sona Masoori Rice 1 kg",
+          "count": 1,
+          "total": "72.00"
+        },
+        {
+          "name": "Iodised Salt 1 kg",
+          "count": 2,
+          "total": "56.00"
+        }
+      ],
+      "missing": []
+    }
+  },
+  {
+    "lang": "தமிழ்",
+    "q": "இரண்டு கிலோ அரிசி மற்றும் 1 லிட்டர் பால்",
+    "status": 200,
+    "understood": [
+      {
+        "raw": "அரிசி",
+        "term": "rice",
+        "quantity": {
+          "value": 2000,
+          "unit": "g"
+        }
+      },
+      {
+        "raw": "பால்",
+        "term": "milk",
+        "quantity": {
+          "value": 1000,
+          "unit": "ml"
+        }
+      }
+    ],
+    "offers": 7,
+    "basket": {
+      "seller": "Kashi Kirana Store",
+      "items": [
+        {
+          "name": "Sona Masoori Rice 1 kg",
+          "count": 2,
+          "total": "144.00"
+        },
+        {
+          "name": "Toned Milk 1 L",
+          "count": 1,
+          "total": "62.00"
+        }
+      ],
+      "missing": []
+    }
+  },
+  {
+    "lang": "বাংলা",
+    "q": "১ কেজি চাল আর আধা কিলো পনির",
+    "status": 200,
+    "understood": [
+      {
+        "raw": "চাল",
+        "term": "rice",
+        "quantity": {
+          "value": 1000,
+          "unit": "g"
+        }
+      },
+      {
+        "raw": "আধা পনির",
+        "term": "paneer"
+      }
+    ],
+    "offers": 5,
+    "basket": {
+      "seller": "Kashi Kirana Store",
+      "items": [
+        {
+          "name": "Sona Masoori Rice 1 kg",
+          "count": 1,
+          "total": "72.00"
+        }
+      ],
+      "missing": [
+        {
+          "term": "paneer",
+          "raw": "আধা পনির",
+          "reason": "not sold here"
+        }
+      ]
+    }
+  },
+  {
+    "lang": "Marathi",
+    "q": "don kilo gavhache pith ani ek litre dudh",
+    "status": 200,
+    "understood": [
+      {
+        "raw": "gavhache pith",
+        "term": "wheat flour",
+        "quantity": {
+          "value": 2000,
+          "unit": "g"
+        }
+      },
+      {
+        "raw": "dudh",
+        "term": "milk",
+        "quantity": {
+          "value": 1000,
+          "unit": "ml"
+        }
+      }
+    ],
+    "offers": 7,
+    "basket": {
+      "seller": "Kashi Kirana Store",
+      "items": [
+        {
+          "name": "Whole Wheat Atta 1 kg",
+          "count": 2,
+          "total": "110.00"
+        },
+        {
+          "name": "Toned Milk 1 L",
+          "count": 1,
+          "total": "62.00"
+        }
+      ],
+      "missing": []
+    }
+  }
+]

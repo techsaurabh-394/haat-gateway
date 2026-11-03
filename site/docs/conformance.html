@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conformance · Haat docs</title><meta name="description" content="The official validator and how to rerun it."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="">Architecture</a><a href="protocol-mapping.html" class="">Poppy to Beckn mapping</a><a href="security.html" class="">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="">Domain packs</a><a href="lexicon.html" class="">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="on">Conformance</a><a href="limitations.html" class="">Limitations</a><h5>Project</h5><a href="roadmap.html" class="">Roadmap</a><a href="contributing.html" class="">Contributing</a><a href="changelog.html" class="">Changelog</a><a href="audit.html" class="">Repository audit</a></aside><article class="prose"><h1 id="conformance-with-the-personal-agent-protocol">Conformance with the Personal Agent Protocol</h1><p>Haat is checked with the <strong>official Company validator</strong> from the Personal Agent Protocol repository (<code>kit/company/validate</code>), not just with its own tests. The validator acts as a test Personal Agent, quotes the spec on every check, and runs against a live deployment.</p>
+<h2 id="latest-run">Latest run</h2><p>Spec repository commit <code>1de1990</code> (30 October 2026), draft 0.3, over real HTTPS with a local certificate authority:</p>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Passed</th>
+<th>Failed</th>
+<th>Warnings</th>
+<th>Skipped</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. Foundation (discovery, Sessions, delegations)</td>
+<td>59</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2. Interfaces (APIs, conversations, streaming, feedback)</td>
+<td>39</td>
+<td>0</td>
+<td>0</td>
+<td>17</td>
+</tr>
+<tr>
+<td>3. Sign-in and accounts</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>4. Extensions (Operations)</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>Every skipped check is for something Haat does not offer: Device Sign-In, Mediated Sign-In, MCP servers, browser join, several domains sharing an issuer, and a feedback alternative (Haat answers feedback with 202). Full output: <a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/conformance/official-validator-results.txt">conformance/official-validator-results.txt</a>.</p>
+<p><strong>What the validator cannot check.</strong> It cannot play a person on a sign-in page, so the interactive Direct Sign-In flow (PKCE, consent, partial scopes, decline, <code>iss</code>) is covered by Haat&#39;s own tests in <code>test/signin.test.ts</code>, not by the validator.</p>
+<h2 id="what-the-first-runs-found">What the first runs found</h2><p>The first run failed one check and warned on another. Both were real:</p>
+<ol>
+<li>Haat refused every conversation from agents without the Operations extension. Spec 3.3 only allows refusing a request that is handled <em>only</em> with an extension. Chatting and searching don&#39;t need it, so conversations are now open to every agent; only the ordering step explains that it needs Operations, and no operation is ever sent to such an agent.</li>
+<li>Feedback was accepted without a Session header. That is allowed, but the spec recommends verifying it, so Haat now requires it.</li>
+<li>A later run found that a Direct Conversation request must check its parent first (<code>conversation_not_found</code>, <code>conversation_closed</code>) before saying the feature isn&#39;t supported.</li>
+</ol>
+<h2 id="rerun-it">Rerun it</h2><pre><code class="lang-bash">sudo scripts/conformance/run-official-validator.sh          # all milestones
+sudo scripts/conformance/run-official-validator.sh foundation</code></pre><p>It needs root for port 443 and an <code>/etc/hosts</code> entry (<code>haat.localhost</code>, <code>agent.localhost</code>), plus <code>git</code>, <code>openssl</code> and Node 22.18+. CI runs it on every push (the <code>conformance</code> job).</p>
+
+    <div class="pn"><a href="going-live.html"><small>← Previous</small>Going live on ONDC</a><a href="limitations.html"><small>Next →</small>Limitations</a></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/conformance.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>

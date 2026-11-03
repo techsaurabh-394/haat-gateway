@@ -1,0 +1,121 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Poppy to Beckn mapping · Haat docs</title><meta name="description" content="How each Poppy call becomes Beckn."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="">Architecture</a><a href="protocol-mapping.html" class="on">Poppy to Beckn mapping</a><a href="security.html" class="">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="">Domain packs</a><a href="lexicon.html" class="">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="">Conformance</a><a href="limitations.html" class="">Limitations</a><h5>Project</h5><a href="roadmap.html" class="">Roadmap</a><a href="contributing.html" class="">Contributing</a><a href="changelog.html" class="">Changelog</a><a href="audit.html" class="">Repository audit</a></aside><article class="prose"><h1 id="protocol-mapping-poppy-to-beckn">Protocol mapping: Poppy to Beckn</h1><p>Haat is a Poppy <strong>Company</strong> (draft 0.3) and a Beckn <strong>BAP</strong> (buyer app) at the same time.</p>
+<table>
+<thead>
+<tr>
+<th>Poppy (Personal Agent side)</th>
+<th>Haat does</th>
+<th>Beckn / ONDC (seller side)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>GET /.well-known/poppy.json</code></td>
+<td>Publishes channels and the <code>operations</code> extension</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Poppy-Session</code> header on every request</td>
+<td>Verifies (5.3); maps <code>sid</code> to Session state and <code>sub</code> to the User</td>
+<td>Never forwarded</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/search?q=…</code></td>
+<td>Lexicon parse, one search per item</td>
+<td><code>search</code> via the gateway; many <code>on_search</code> callbacks collected for a short window</td>
+</tr>
+<tr>
+<td><code>POST /api/v1/orders</code> (no approval)</td>
+<td>Builds a quote</td>
+<td><code>select</code> → <code>on_select</code> (price, stock), <code>init</code> → <code>on_init</code> (delivery, payment terms)</td>
+</tr>
+<tr>
+<td><code>403 approval_required</code> + operation</td>
+<td><code>summary</code> from the seller&#39;s own quote; <code>terms</code> as JSON</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>POST /api/v1/orders</code> + <code>Poppy-Approval</code></td>
+<td>Checks Session, revision, expiry and cart fingerprint</td>
+<td><code>confirm</code> → <code>on_confirm</code>, <strong>once</strong></td>
+</tr>
+<tr>
+<td><code>GET /api/v1/orders/{id}</code></td>
+<td>Owner check by User</td>
+<td><code>status</code> → <code>on_status</code></td>
+</tr>
+<tr>
+<td><code>POST /api/v1/orders/{id}/cancel</code></td>
+<td>Separate operation and approval</td>
+<td><code>cancel</code> → <code>on_cancel</code></td>
+</tr>
+<tr>
+<td>Conversation message with <code>operation</code></td>
+<td>Same gate as the API, owned by the conversation</td>
+<td>as above</td>
+</tr>
+<tr>
+<td>Conversation message with <code>approval</code></td>
+<td>Performs the conversation&#39;s operation</td>
+<td><code>confirm</code></td>
+</tr>
+</tbody></table>
+<h2 id="identity-on-each-side">Identity on each side</h2><pre class="mermaid">flowchart LR
+  subgraph Poppy
+    PA[Personal agent&lt;br/&gt;client_id URL + JWKS] -- Session JWT signed by&lt;br/&gt;a delegated key --&gt; H
+  end
+  H[Haat] -- Authorization: Signature&lt;br/&gt;Ed25519, BLAKE2b-512 digest --&gt; S
+  subgraph ONDC
+    R[(Registry&lt;br/&gt;keys + URLs)]
+    S[Seller BPP]
+  end
+  H -. lookup seller keys and URL .-&gt; R
+  S -. lookup Haat key .-&gt; R</pre><ul>
+<li>The agent&#39;s keys never reach sellers, and Haat&#39;s Beckn key never reaches agents.</li>
+<li>A seller&#39;s URL always comes from the registry, never from the agent&#39;s request.</li>
+<li>Sellers call back only to the <code>bap_uri</code> the registry lists for Haat.</li>
+</ul>
+<h2 id="signed-in-and-signed-out">Signed in and signed out</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>Signed out (Session header only)</th>
+<th>Signed in (Session header + access token)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Orders belong to</td>
+<td>the User ID at this agent</td>
+<td>the account, across Sessions and agents</td>
+</tr>
+<tr>
+<td>Operations belong to</td>
+<td>the Session</td>
+<td>the account (Operations section 3)</td>
+</tr>
+<tr>
+<td>Delivery address</td>
+<td>sent in each order</td>
+<td>sent, or a saved <code>delivery_address_id</code></td>
+</tr>
+<tr>
+<td>Conversations</td>
+<td>the agent + User ID</td>
+<td>the account, once it used the account (8.2)</td>
+</tr>
+</tbody></table>
+<p>Guest orders a User placed through an agent move to the account the first time that User signs in through it.</p>
+<h2 id="payment">Payment</h2><p>v0.1 uses <code>ON-FULFILLMENT</code> payment collected by the seller (cash or UPI on delivery). The agent and Haat never hold money. The approval summary states the amount and the payment method before anything is ordered. Prepaid flows are on the roadmap and need ONDC&#39;s settlement rules to be checked first (<a href="going-live.html">going live</a>).</p>
+
+    <div class="pn"><a href="architecture.html"><small>← Previous</small>Architecture</a><a href="security.html"><small>Next →</small>Security model</a></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/protocol-mapping.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>

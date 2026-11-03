@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roadmap · Haat docs</title><meta name="description" content="What comes next."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="">Architecture</a><a href="protocol-mapping.html" class="">Poppy to Beckn mapping</a><a href="security.html" class="">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="">Domain packs</a><a href="lexicon.html" class="">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="">Conformance</a><a href="limitations.html" class="">Limitations</a><h5>Project</h5><a href="roadmap.html" class="on">Roadmap</a><a href="contributing.html" class="">Contributing</a><a href="changelog.html" class="">Changelog</a><a href="audit.html" class="">Repository audit</a></aside><article class="prose"><h1 id="roadmap">Roadmap</h1><p>Dates are targets, not promises. Each milestone is a GitHub milestone with linked issues.</p>
+<h2 id="v01-works-locally-done">v0.1: works locally (done)</h2><p>Poppy discovery, Sessions and conversations; Operations v2 approval gate; Beckn buyer app; Hinglish lexicon; basket builder; mock network; demo.</p>
+<h2 id="v02-spec-coverage-durability-readiness-done">v0.2: spec coverage, durability, readiness (done)</h2><p>Sign-in (Direct Sign-In, refresh, revocation, scopes, saved addresses), Poppy section 9, SSE streaming, PS384 delegations, SQLite storage with caps and crash-safe operations, lint, Docker, official validator in CI (99 passed, 0 failed), ONDC onboarding tooling, Hindi README.</p>
+<h2 id="v03-real-network">v0.3: real network</h2><ul>
+<li>ONDC pre-production subscription (owner steps in docs/going-live.md)</li>
+<li>Full retail contract fields for RET10, and ONDC log verification</li>
+<li>Issue and grievance management (IGM) basics</li>
+<li>Automatic reconciliation of operations interrupted mid-confirm (Beckn <code>status</code>)</li>
+<li>A real SMS provider behind <code>OtpProvider</code></li>
+</ul>
+<h2 id="v04-reach">v0.4: reach</h2><ul>
+<li>Device Sign-In (4.3) and DPoP-bound tokens (4.5)</li>
+<li>Browser join (section 6) and an MCP API (section 7)</li>
+<li>Native-speaker review of the machine-drafted lexicon for Bhojpuri, Marathi, Bengali, Tamil, Telugu, Gujarati, Kannada, Malayalam, Punjabi and Odia (the data exists since v0.2; review, real-usage variants and more regional words are what is left), then the same languages for the food pack</li>
+<li>Optional local open-weight model for intent detection in conversations, with approvals kept outside the model</li>
+</ul>
+<p>Ideas are welcome in <a href="https://github.com/techsaurabh-394/haat-gateway/discussions/categories/ideas">Discussions</a>.</p>
+
+    <div class="pn"><a href="limitations.html"><small>← Previous</small>Limitations</a><a href="contributing.html"><small>Next →</small>Contributing</a></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/ROADMAP.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>

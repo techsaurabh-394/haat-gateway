@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Architecture · Haat docs</title><meta name="description" content="Three layers and the request lifecycle."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="on">Architecture</a><a href="protocol-mapping.html" class="">Poppy to Beckn mapping</a><a href="security.html" class="">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="">Domain packs</a><a href="lexicon.html" class="">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="">Conformance</a><a href="limitations.html" class="">Limitations</a><h5>Project</h5><a href="roadmap.html" class="">Roadmap</a><a href="contributing.html" class="">Contributing</a><a href="changelog.html" class="">Changelog</a><a href="audit.html" class="">Repository audit</a></aside><article class="prose"><h1 id="architecture">Architecture</h1><p><img src="../assets/architecture.svg" alt="Architecture" loading="lazy"></p>
+<p>Haat has three layers. Each one depends only on the one below it.</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Folder</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Poppy</td>
+<td><code>src/poppy</code></td>
+<td>Everything a Personal Agent sees: discovery, Session verification, the approval gate, conversations</td>
+</tr>
+<tr>
+<td>Commerce</td>
+<td><code>src/commerce</code>, <code>src/lexicon</code></td>
+<td>Understanding requests, building baskets, turning them into quotes and orders, the Company Agent</td>
+</tr>
+<tr>
+<td>Beckn</td>
+<td><code>src/beckn</code></td>
+<td>Signed messages to and from the ONDC network</td>
+</tr>
+</tbody></table>
+<p><code>src/gateway.ts</code> wires them to HTTP routes. <code>src/util/http.ts</code> is a 150-line router on <code>node:http</code>, so the project has no runtime dependencies to audit.</p>
+<h2 id="request-lifecycle">Request lifecycle</h2><pre class="mermaid">flowchart LR
+  A[Personal agent request] --&gt; B{Poppy-Session valid?}
+  B -- no --&gt; X[400 invalid_session]
+  B -- yes --&gt; C{Route}
+  C -- search --&gt; D[Lexicon parse] --&gt; E[Beckn search fan-out] --&gt; F[Basket] --&gt; R[200]
+  C -- order or cancel --&gt; G{Approval header matches&lt;br/&gt;an exact, unexpired revision&lt;br/&gt;for this Session?}
+  G -- no --&gt; H[select + init quote] --&gt; I[403 approval_required&lt;br/&gt;operation + summary]
+  G -- yes --&gt; J{Already performed?}
+  J -- yes --&gt; K[Replay first response]
+  J -- no --&gt; L[Beckn confirm or cancel] --&gt; M[201 / 200]
+  L -. outcome unknown .-&gt; N[503 Retry-After]</pre><h2 id="why-a-gateway-and-not-an-mcp-server">Why a gateway and not an MCP server</h2><p>ONDC MCP servers already exist. They give an agent tools, but each agent then has to implement Beckn signing, registry trust, and its own idea of when to buy. Poppy moves the decision point to the Company: the Company says which actions need approval and guarantees at most once. Putting that in one audited gateway means every Poppy agent gets the same safety without trusting each agent&#39;s tool use.</p>
+<h2 id="the-company-agent">The Company Agent</h2><p><code>src/commerce/assistant.ts</code> answers conversations. It is rule-based on purpose: replies are deterministic, testable, and no language model ever touches keys, Session JWTs or the approval step. A local open-weight model for intent detection is on the <a href="roadmap.html">roadmap</a>; the approval logic would stay outside the model.</p>
+<pre class="mermaid">stateDiagram-v2
+  [*] --&gt; Listening
+  Listening --&gt; Basket: shopping text
+  Basket --&gt; NeedsDelivery: "order", no address yet
+  NeedsDelivery --&gt; Quoted: data.delivery received
+  Basket --&gt; Quoted: "order", address known
+  Quoted --&gt; Ordered: message.approval matches revision
+  Quoted --&gt; Quoted: cart changed, new revision
+  Ordered --&gt; Ordered: "status"
+  Ordered --&gt; CancelQuoted: "cancel"
+  CancelQuoted --&gt; Cancelled: approval</pre><h2 id="data-that-is-not-code">Data that is not code</h2><ul>
+<li><code>packs/&lt;domain&gt;/pack.json</code> and <code>lexicon.json</code>: domains and language data, validated at startup (<code>src/commerce/packs.ts</code>).</li>
+<li><code>mock-network/sellers/*.json</code>: mock seller catalogs.</li>
+<li><code>scripts/assets/make_diagrams.py</code>: source of the diagrams in <code>assets/</code>.</li>
+</ul>
+
+    <div class="pn"><a href="quickstart.html"><small>← Previous</small>Quickstart and API</a><a href="protocol-mapping.html"><small>Next →</small>Poppy to Beckn mapping</a></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/architecture.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>

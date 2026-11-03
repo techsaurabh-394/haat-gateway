@@ -1,0 +1,208 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quickstart and API · Haat docs</title><meta name="description" content="Run it, call it, approve an order."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="on">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="">Architecture</a><a href="protocol-mapping.html" class="">Poppy to Beckn mapping</a><a href="security.html" class="">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="">Domain packs</a><a href="lexicon.html" class="">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="">Conformance</a><a href="limitations.html" class="">Limitations</a><h5>Project</h5><a href="roadmap.html" class="">Roadmap</a><a href="contributing.html" class="">Contributing</a><a href="changelog.html" class="">Changelog</a><a href="audit.html" class="">Repository audit</a></aside><article class="prose"><h1 id="quickstart-and-api">Quickstart and API</h1><h2 id="requirements">Requirements</h2><p>Node.js 22.18 or newer. That release runs TypeScript files directly, so there is no build step. Check with <code>node --version</code>.</p>
+<h2 id="run">Run</h2><pre><code class="lang-bash">npm install          # TypeScript and Node types, for `npm run typecheck` only
+npm run demo         # full story, you approve in the terminal
+npm run demo -- --yes
+npm start            # gateway on http://127.0.0.1:8080 plus the mock network, until Ctrl+C
+npm test             # 126 tests
+npm run lint
+npm run check        # typecheck + lint + tests (what CI runs)
+npm run serve        # production entry (src/main.ts), configured by environment variables
+docker compose up --build</code></pre><p>Environment variables: see <code>.env.example</code>. The most useful: <code>HAAT_DB</code> (a SQLite file; without it state is in memory and lost on restart), <code>HAAT_PORT</code>, <code>HAAT_PUBLIC_URL</code>, and <code>HAAT_LOG</code> (<code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>silent</code>).</p>
+<h2 id="talking-to-the-gateway">Talking to the gateway</h2><p>Every API and conversation request needs a <code>Poppy-Session</code> header: a JWT the Personal Agent signs for that exact request (Poppy draft 0.3, section 5.2). Plain <code>curl</code> can&#39;t make one, so use the reference agent in <code>agent/personal-agent.ts</code>:</p>
+<pre><code class="lang-ts">import { PersonalAgent } from './agent/personal-agent.ts';
+
+const agent = await new PersonalAgent({ name: 'My agent' }).start(); // serves agent.json + jwks.json
+const company = await agent.discover('http://127.0.0.1:8080');
+const sid = agent.newSession();
+
+const search = await agent.call(company, sid, 'GET', '/api/v1/search?q=' + encodeURIComponent('2 kilo atta aur 1 litre doodh'));
+const b = search.body.suggested_basket;
+
+const order = await agent.callWithApproval(company, sid, 'POST', '/api/v1/orders', {
+  bpp_id: b.bpp_id,
+  provider_id: b.provider_id,
+  items: b.items.map((i) =&gt; ({ id: i.id, count: i.count })),
+  delivery: { name: 'Asha', phone: '9876543210', address: { city: 'Varanasi', state: 'Uttar Pradesh', area_code: '221005' } },
+}, async (op) =&gt; {
+  console.log(op.summary);          // show this to the person
+  return true;                      // only if they said yes
+});</code></pre><h2 id="signing-in">Signing in</h2><pre><code class="lang-ts">import { personSignsIn } from './agent/personal-agent.ts';
+
+// In real use the person opens this URL in their browser. personSignsIn plays that part locally.
+await agent.signIn(company, ['orders:read', 'orders:write', 'addresses'], (url) =&gt;
+  personSignsIn(url, { phone: '9876543210', otp: '123456' }), // the development code; never in production
+);
+await agent.call(company, sid, 'GET', '/api/v1/orders', { signedIn: true });
+await agent.signOut(company);</code></pre><p>Signed in, orders belong to the account (visible from every Session and agent of that person), and <code>delivery_address_id</code> can replace <code>delivery</code> when ordering.</p>
+<h2 id="endpoints">Endpoints</h2><table>
+<thead>
+<tr>
+<th>Method and path</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>GET /.well-known/poppy.json</code></td>
+<td>Discovery document (draft 0.3)</td>
+</tr>
+<tr>
+<td><code>GET /.well-known/oauth-protected-resource</code></td>
+<td><code>404</code>: no OAuth issuer, signed-out Sessions only</td>
+</tr>
+<tr>
+<td><code>GET /openapi.json</code></td>
+<td>OpenAPI 3.1 description of the API</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/search?q=…&amp;city=std:0542</code></td>
+<td>Parse the list, search the network, suggest a single-seller basket</td>
+</tr>
+<tr>
+<td><code>POST /api/v1/orders</code></td>
+<td>Place an order. First answer: <code>403 approval_required</code> with an operation</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/orders</code></td>
+<td>This User&#39;s orders</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/orders/{id}</code></td>
+<td>Live status from the seller</td>
+</tr>
+<tr>
+<td><code>POST /api/v1/orders/{id}/cancel</code></td>
+<td>Cancel, also behind approval</td>
+</tr>
+<tr>
+<td><code>POST /poppy/conversations</code></td>
+<td>Start a conversation with the Company Agent</td>
+</tr>
+<tr>
+<td><code>POST /poppy/conversations/{id}/messages</code></td>
+<td>Send a message (<code>?wait=10</code> holds for the reply)</td>
+</tr>
+<tr>
+<td><code>GET /poppy/conversations/{id}/events</code></td>
+<td>Read events (<code>cursor</code>, <code>wait</code>)</td>
+</tr>
+<tr>
+<td><code>POST /poppy/conversations/{id}/handoff</code></td>
+<td>Ask for a person (none available yet; says so)</td>
+</tr>
+<tr>
+<td><code>POST /poppy/conversations/{id}/close</code></td>
+<td>Close</td>
+</tr>
+<tr>
+<td><code>POST /beckn/on_*</code></td>
+<td>Signed callbacks from sellers</td>
+</tr>
+<tr>
+<td><code>GET /health</code></td>
+<td>Liveness and loaded packs</td>
+</tr>
+<tr>
+<td><code>GET /.well-known/oauth-protected-resource</code>, <code>GET /.well-known/oauth-authorization-server</code></td>
+<td>Sign-in discovery</td>
+</tr>
+<tr>
+<td><code>GET</code>, <code>POST /oauth/authorize</code>; <code>POST /oauth/token</code>; <code>POST /oauth/revoke</code></td>
+<td>Direct Sign-In, tokens, sign-out</td>
+</tr>
+<tr>
+<td><code>GET</code>, <code>POST /api/v1/account/addresses</code>; <code>DELETE /api/v1/account/addresses/{id}</code></td>
+<td>Saved addresses (scope <code>addresses</code>)</td>
+</tr>
+<tr>
+<td><code>GET /poppy/excluded-tasks.json</code>, <code>POST /poppy/feedback</code></td>
+<td>Task coverage (section 9)</td>
+</tr>
+<tr>
+<td><code>GET /ondc-site-verification.html</code>, <code>POST {callback}/on_subscribe</code></td>
+<td>ONDC onboarding (ONDC mode)</td>
+</tr>
+</tbody></table>
+<h2 id="errors-you-will-see">Errors you will see</h2><table>
+<thead>
+<tr>
+<th>Status</th>
+<th><code>error</code></th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>400</td>
+<td><code>invalid_session</code></td>
+<td>Session header missing or failed verification; <code>error_description</code> says which check</td>
+</tr>
+<tr>
+<td>401</td>
+<td><code>invalid_token</code> (in <code>WWW-Authenticate</code>)</td>
+<td>The access token is unknown, expired or revoked: refresh, or continue signed out</td>
+</tr>
+<tr>
+<td>401</td>
+<td>no error code</td>
+<td>The request needs the account: sign in with the <code>scope</code> in the challenge</td>
+</tr>
+<tr>
+<td>403</td>
+<td><code>insufficient_scope</code></td>
+<td>The token lacks a scope; sign in again for it</td>
+</tr>
+<tr>
+<td>403</td>
+<td><code>approval_required</code></td>
+<td>Show <code>operation.summary</code>, then repeat the same request with <code>Poppy-Approval</code></td>
+</tr>
+<tr>
+<td>403</td>
+<td><code>extension_required</code></td>
+<td>The agent&#39;s client metadata does not list <code>operations</code> version <code>2</code></td>
+</tr>
+<tr>
+<td>404</td>
+<td><code>unknown_seller</code>, <code>order_not_found</code></td>
+<td>Seller not in the registry, or the order belongs to another User</td>
+</tr>
+<tr>
+<td>409</td>
+<td><code>seller_&lt;code&gt;</code></td>
+<td>The seller refused (out of stock <code>40002</code>, too late to cancel <code>50001</code>)</td>
+</tr>
+<tr>
+<td>409</td>
+<td><code>message_id_conflict</code>, <code>conversation_closed</code></td>
+<td>Conversation rules (Poppy 8.3, 8.12)</td>
+</tr>
+<tr>
+<td>400 / 410</td>
+<td><code>invalid_cursor</code> / <code>cursor_expired</code></td>
+<td>A cursor from elsewhere, or for events no longer kept (8.13)</td>
+</tr>
+<tr>
+<td>429</td>
+<td><code>rate_limited</code></td>
+<td>Wait for <code>Retry-After</code></td>
+</tr>
+<tr>
+<td>503</td>
+<td><code>operation_in_progress</code></td>
+<td>The outcome is not known yet; send the <strong>same</strong> approval again after <code>Retry-After</code></td>
+</tr>
+</tbody></table>
+
+    <div class="pn"><span></span><a href="architecture.html"><small>Next →</small>Architecture</a></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/quickstart.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>

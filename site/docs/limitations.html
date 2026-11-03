@@ -1,0 +1,94 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Limitations · Haat docs</title><meta name="description" content="What it does not do, plainly."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="">Architecture</a><a href="protocol-mapping.html" class="">Poppy to Beckn mapping</a><a href="security.html" class="">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="">Domain packs</a><a href="lexicon.html" class="">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="">Conformance</a><a href="limitations.html" class="on">Limitations</a><h5>Project</h5><a href="roadmap.html" class="">Roadmap</a><a href="contributing.html" class="">Contributing</a><a href="changelog.html" class="">Changelog</a><a href="audit.html" class="">Repository audit</a></aside><article class="prose"><h1 id="limitations-stated-plainly">Limitations, stated plainly</h1><p>This is v0.2. Here is what it does <strong>not</strong> do, so nobody is surprised.</p>
+<h2 id="not-live-on-ondc">Not live on ONDC</h2><p>All ordering has run only against the mock network in this repository. The onboarding pieces (keys, signed <code>request_id</code>, site verification, <code>on_subscribe</code>, signed v2 lookup) follow ONDC&#39;s official documents and reference code, and are tested against themselves, but <strong>have not been run against ONDC&#39;s registry</strong>. Going live needs things only the owner can do: a legal entity, whitelisting on ONDC&#39;s portal, a filled-in subscribe request checked against ONDC&#39;s SwaggerHub spec, and ONDC&#39;s approval of an agent-facing buyer app. See <a href="going-live.html">going-live.md</a>.</p>
+<p>The retail contract is partial: many optional fields, tags, <code>@ondc/org/*</code> extensions, settlement details, and issue and grievance management (IGM) are not implemented.</p>
+<h2 id="poppy-coverage">Poppy coverage</h2><table>
+<thead>
+<tr>
+<th>Spec area</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Discovery (3)</td>
+<td>Done, with issuer</td>
+</tr>
+<tr>
+<td>Direct Sign-In, refresh, revocation (4.1, 4.2, 4.4, 4.6, 4.7)</td>
+<td>Done; checked by Haat&#39;s tests and the validator&#39;s metadata and assertion checks</td>
+</tr>
+<tr>
+<td>Device Sign-In (4.3)</td>
+<td>Not implemented</td>
+</tr>
+<tr>
+<td>DPoP-bound access tokens (4.5)</td>
+<td>Not implemented (Bearer only; allowed by the spec)</td>
+</tr>
+<tr>
+<td>Tokens for one service (<code>resource</code>, RFC 8707)</td>
+<td>Not needed: one service</td>
+</tr>
+<tr>
+<td>Session header (5.2, 5.3)</td>
+<td>Done, ES256 and PS384 delegations</td>
+</tr>
+<tr>
+<td>Operator signatures / Web Bot Auth (5.3)</td>
+<td>Not implemented (SHOULD, on the agent side)</td>
+</tr>
+<tr>
+<td>Web browsing join (6)</td>
+<td>Not implemented</td>
+</tr>
+<tr>
+<td>APIs (7)</td>
+<td>OpenAPI done; MCP API not implemented</td>
+</tr>
+<tr>
+<td>Conversations (8)</td>
+<td>Done, including SSE; text-delta streaming, Direct Conversations (8.10) and a staffed handoff are not</td>
+</tr>
+<tr>
+<td>Task coverage (9)</td>
+<td>Done</td>
+</tr>
+<tr>
+<td>Operations extension v2</td>
+<td>Done for API and conversations</td>
+</tr>
+<tr>
+<td>Mediated Sign-In extension</td>
+<td>Not implemented</td>
+</tr>
+</tbody></table>
+<h2 id="sign-in">Sign-in</h2><ul>
+<li>Accounts are identified by a mobile number with a one-time code. <strong>Sending real codes needs an SMS provider</strong>: implement <code>OtpProvider</code> in <code>src/oauth/server.ts</code>. The built-in provider is a development stand-in that accepts a fixed code, says so on the page, and refuses to start outside dev mode.</li>
+<li>No account settings page yet (disconnecting an agent from the Company&#39;s side).</li>
+</ul>
+<h2 id="language-understanding">Language understanding</h2><ul>
+<li>The grocery lexicon covers 130 products in Hindi and ten more Indian languages (Bhojpuri, Marathi, Bengali, Tamil, Telugu, Gujarati, Kannada, Malayalam, Punjabi, Odia), each in its own script and in Latin letters. <strong>Only Hindi was written by hand; the other languages are machine-drafted and have not been reviewed by native speakers</strong>, so some words will be wrong or unnatural. Everything not in the lexicon is searched with the raw words. See <a href="lexicon.html">lexicon.md</a>.</li>
+<li>Dialects, mixed-language sentences beyond simple lists, brands, and pack sizes inside text are not understood.</li>
+<li>Phonetic matching is a heuristic, tested on the variants in <code>test/lexicon.test.ts</code>, not on real user logs.</li>
+</ul>
+<h2 id="operations-and-scale">Operations and scale</h2><ul>
+<li>Single process. SQLite (<code>node:sqlite</code>, marked experimental by Node) suits one instance; several instances need a shared store.</li>
+<li>An operation interrupted by a crash in the middle of &quot;confirm&quot; answers <code>503</code> until someone reconciles it with the seller. That is safe (never a double order) but needs an operator; automatic reconciliation through Beckn <code>status</code> is on the roadmap.</li>
+<li>Memory mode is bounded, but evicted state is lost; use SQLite (<code>HAAT_DB</code>) for anything real.</li>
+<li>Outbound fetches of agent metadata are limited (HTTPS, no private addresses, no redirects, size and time limits, failure cache), but hostnames are not DNS-pinned before connecting.</li>
+</ul>
+<h2 id="numbers">Numbers</h2><p>The test count and the validator results are what the commands reported when they were last run (see CHANGELOG.md). Nothing has been benchmarked, including language understanding, and none of this has run against real ONDC.</p>
+
+    <div class="pn"><a href="conformance.html"><small>← Previous</small>Conformance</a><a href="roadmap.html"><small>Next →</small>Roadmap</a></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/limitations.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>

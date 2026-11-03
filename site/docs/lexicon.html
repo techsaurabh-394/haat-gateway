@@ -1,0 +1,103 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Language lexicon · Haat docs</title><meta name="description" content="How Indian languages are understood."><meta name="theme-color" content="#0b1024">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"></head><body>
+<header class="nav"><div class="wrap"><a class="brand" href="../"><i>◆</i>Haat <span style="font-weight:400;color:var(--muted);font-size:18px">docs</span></a>
+<nav><a href="../#demo">Live demo</a><a href="../#features">Features</a><a href="./">Docs</a><a class="btn sm primary" href="https://github.com/techsaurabh-394/haat-gateway">★ GitHub</a></nav></div></header>
+<div class="wrap docs"><aside class="side"><a href="./" class="">Overview</a><h5>Start</h5><a href="quickstart.html" class="">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="">Architecture</a><a href="protocol-mapping.html" class="">Poppy to Beckn mapping</a><a href="security.html" class="">Security model</a><h5>Extend</h5><a href="domain-packs.html" class="">Domain packs</a><a href="lexicon.html" class="on">Language lexicon</a><h5>Ship</h5><a href="going-live.html" class="">Going live on ONDC</a><a href="conformance.html" class="">Conformance</a><a href="limitations.html" class="">Limitations</a><h5>Project</h5><a href="roadmap.html" class="">Roadmap</a><a href="contributing.html" class="">Contributing</a><a href="changelog.html" class="">Changelog</a><a href="audit.html" class="">Repository audit</a></aside><article class="prose"><h1 id="the-lexicon-hinglish-and-ten-more-indian-languages">The lexicon (Hinglish and ten more Indian languages)</h1><p><img src="../assets/hinglish-pipeline.svg" alt="Hinglish pipeline" loading="lazy"></p>
+<p>People in India type shopping lists in English, in Hindi written in Latin letters (&quot;Hinglish&quot;), in their own script, and in mixtures. Sellers list products in English. The lexicon bridges that.</p>
+<h2 id="coverage">Coverage</h2><p>The grocery pack (<code>packs/ondc-ret10-grocery/lexicon.json</code>) has <strong>130 products</strong> (grains, pulses, dry fruits, vegetables, fruits, spices, oils, dairy, snacks, beverages, household) and variants for these languages, each in its own script <strong>and</strong> in Latin letters:</p>
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Code</th>
+<th>Language</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hindi</td>
+<td><code>hi</code>, <code>hi-Latn</code></td>
+<td>Gujarati</td>
+<td><code>gu</code>, <code>gu-Latn</code></td>
+</tr>
+<tr>
+<td>Bhojpuri</td>
+<td><code>bho</code>, <code>bho-Latn</code></td>
+<td>Kannada</td>
+<td><code>kn</code>, <code>kn-Latn</code></td>
+</tr>
+<tr>
+<td>Marathi</td>
+<td><code>mr</code>, <code>mr-Latn</code></td>
+<td>Malayalam</td>
+<td><code>ml</code>, <code>ml-Latn</code></td>
+</tr>
+<tr>
+<td>Bengali</td>
+<td><code>bn</code>, <code>bn-Latn</code></td>
+<td>Punjabi</td>
+<td><code>pa</code>, <code>pa-Latn</code></td>
+</tr>
+<tr>
+<td>Tamil</td>
+<td><code>ta</code>, <code>ta-Latn</code></td>
+<td>Odia</td>
+<td><code>or</code>, <code>or-Latn</code></td>
+</tr>
+<tr>
+<td>Telugu</td>
+<td><code>te</code>, <code>te-Latn</code></td>
+<td>English</td>
+<td><code>en</code></td>
+</tr>
+</tbody></table>
+<p>Each language also has number words (1 to 10, half, one-and-a-half, two-and-a-half), units (kilo, litre, gram, dozen, packet, piece), request words to ignore (such as &quot;I want&quot; and &quot;please give&quot;) and the word for &quot;and&quot;.</p>
+<h2 id="not-verified-by-native-speakers">Not verified by native speakers</h2><p><strong>Hindi was written by hand. The data for every other language was drafted by a machine (an AI model) and has not been reviewed by native speakers.</strong> Expect wrong or unnatural words, missing regional names, and spellings people do not really use. The tests check that the parser behaves consistently on this data; they do not prove the words are right. The Latin-letter spellings are guesses at how people type, not observed usage.</p>
+<p>If you speak one of these languages, please review it: fix a variant, add what your family says, and remove what nobody says. See <a href="contributing.html">CONTRIBUTING.md</a>. Until a language has been reviewed, treat it as a starting point.</p>
+<p>Also note: Bhojpuri shares many product words with Hindi, so its own list is short and mostly adds regional words (for example <em>chaur</em> for rice and <em>chura</em> for flattened rice). A word that several languages use for different products can be listed under only one product; such clashes were resolved by hand and are listed below.</p>
+<h2 id="format">Format</h2><pre><code class="lang-json">{
+  "entries": [
+    { "term": "milk", "category": "Dairy", "variants": ["milk", "doodh", "dudh", "dood", "दूध"] }
+  ],
+  "stopwords": ["mujhe", "chahiye", "मुझे"],
+  "separators": ["aur", "and", "और"],
+  "numbers": { "do": 2, "aadha": 0.5, "दो": 2 },
+  "units": { "kilo": "kg", "litre": "l", "packet": "unit", "दर्जन": "dozen" }
+}</code></pre><ul>
+<li><code>term</code> is what sellers are searched for. Keep it in plain English, the way catalogs name things.</li>
+<li><code>variants</code> are ways people actually type it. Add what you see in real messages, not every possible spelling.</li>
+<li>One product per entry. A variant may belong to only one term (the tests enforce this).</li>
+</ul>
+<h2 id="how-matching-works">How matching works</h2><ol>
+<li>Text is lowercased and normalised. Digits of every Indian script (२ ২ ௨ ౨ ૨ ೨ ൨ ੨ ୨) become ASCII digits, nukta signs are removed in all scripts, zero-width joiners are removed, and Malayalam chillu letters are written one way. A digit stuck to a unit (&quot;2கிலோ&quot;) is split.</li>
+<li>The text is split into items on separators (<code>aur</code>, <code>and</code>, <code>ani</code>, <code>ebong</code>, <code>,</code>, the danda <code>।</code>, …).</li>
+<li>Quantities are read: digits or number words, then a unit. A number word counts only if something follows it, so the &quot;do&quot; in &quot;atta de do&quot; (give) is ignored.</li>
+<li>Stopwords are dropped. Variants are stored without stopwords too, so &quot;sarson ka tel&quot; and &quot;sarson tel&quot; meet.</li>
+<li>Latin-letter words are matched through a phonetic key: repeated letters collapse, <code>ee</code>→<code>i</code>, <code>oo</code>→<code>u</code>, aspiration is dropped (<code>dh</code>→<code>d</code>). Words in Indian scripts are compared as written (after normalisation). The <strong>longest</strong> matching variant wins, so &quot;thengai ennai&quot; (coconut oil) beats &quot;ennai&quot; (oil).</li>
+<li>No match? The raw words are searched as-is, so nothing is lost.</li>
+</ol>
+<h2 id="lessons-pinned-by-tests">Lessons pinned by tests</h2><ul>
+<li>Dropping a final vowel made <strong>makhana</strong> (fox nuts) equal <strong>makhan</strong> (butter). That rule was removed, and a regression test keeps it out.</li>
+<li>&quot;do&quot; is both &quot;two&quot; and &quot;give&quot;; position decides.</li>
+<li>The phonetic key used to turn <code>e</code> into <code>i</code>. That made Latin &quot;tel&quot; (oil) equal &quot;til&quot; (sesame), so the rule was removed and <code>til</code>/<code>tel</code> are tested apart.</li>
+</ul>
+<h2 id="known-ambiguities-and-limits">Known ambiguities and limits</h2><ul>
+<li>&quot;chai&quot; is tea in Hindi but &quot;want&quot; in Bengali. It is kept as tea; Bengali &quot;want&quot; words that clash are left out of the stopwords.</li>
+<li>&quot;arai&quot; is half in Tamil but two-and-a-half in Bengali; Bengali two-and-a-half is spelled &quot;arhai&quot; instead.</li>
+<li>The phonetic key drops the <code>h</code> of <code>gh</code>, so Latin &quot;ghol&quot; (Bengali buttermilk) sounds like &quot;gul&quot; (jaggery). Bengali buttermilk is listed in Bengali script only.</li>
+<li>The same word can mean different things in different languages or regions. The tests only catch clashes inside this file; clashes with words people really type but that are not listed here are unknown.</li>
+<li>Compound dishes, brands and pack sizes in text (&quot;Aashirvaad 5 kg&quot;) are not understood; unknown words are searched as written.</li>
+<li>The test <code>no variant is claimed by two products</code> checks both exact spellings and the phonetic key across the whole file, for all languages.</li>
+</ul>
+<h2 id="contributing-language-data">Contributing language data</h2><p>The best contributions come from how <em>your</em> family and neighbourhood type. Use the &quot;Lexicon addition&quot; issue form or open a PR that adds variants and a test line in <code>test/lexicon.test.ts</code>. <strong>Native-speaker review of every non-Hindi language is the most useful contribution right now.</strong></p>
+
+    <div class="pn"><a href="domain-packs.html"><small>← Previous</small>Domain packs</a><a href="going-live.html"><small>Next →</small>Going live on ONDC</a></div>
+    <p style="margin-top:30px"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/lexicon.md">Edit this page on GitHub</a></p></article></div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length)mermaid.run({nodes});
+document.querySelectorAll('.prose pre:not(.mermaid)').forEach(p=>{const b=document.createElement('button');b.className='btn sm copy';b.textContent='Copy';b.onclick=async()=>{await navigator.clipboard.writeText(p.innerText);b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};p.appendChild(b)});
+</script></body></html>
