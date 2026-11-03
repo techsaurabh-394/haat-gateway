@@ -109,7 +109,7 @@ export async function verifyAuthorizationHeader(
   if (p.expires < nowSec - skewSec) return { ok: false, reason: 'signature expired' };
   const pubB64 = await lookup(p.subscriberId, p.uniqueKeyId);
   if (!pubB64) return { ok: false, reason: `no registry key for ${p.subscriberId}|${p.uniqueKeyId}` };
-  let ok = false;
+  let ok: boolean;
   try {
     ok = verify(null, Buffer.from(signingString(p.created, p.expires, body)), ed25519PublicKeyFromB64(pubB64), Buffer.from(p.signature, 'base64'));
   } catch {
