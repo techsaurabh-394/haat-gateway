@@ -1,0 +1,83 @@
+/* polish v1: mobile fixes + professional finish (loaded last) */
+
+/* ---- scroll progress + nav ---- */
+.progress{position:fixed;left:0;top:0;height:3px;width:100%;z-index:80;transform-origin:0 50%;transform:scaleX(var(--p,0));background:linear-gradient(90deg,var(--teal),var(--indigo),var(--gold));pointer-events:none}
+.nav{transition:background .25s,box-shadow .25s}
+.nav.scrolled{background:rgba(11,16,36,.88);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.brand i{display:inline-block;background:linear-gradient(135deg,var(--gold),#ffd98a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-right:6px}
+
+/* ---- hero finish ---- */
+.hero{background-image:radial-gradient(rgba(143,162,236,.13) 1px,transparent 1.2px);background-size:28px 28px;-webkit-mask-image:none}
+.hero2 h1 em{font-style:normal;background:linear-gradient(100deg,#ffd98a,var(--gold) 40%,#ff9d4d 70%,#ffd98a);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 6s linear infinite}
+@keyframes sheen{to{background-position:-220% 0}}
+.pill{backdrop-filter:blur(8px);box-shadow:0 6px 24px rgba(0,0,0,.25);flex-wrap:wrap;max-width:100%;border-radius:999px}
+.hero .lead{font-size:clamp(16px,1.6vw,19px);max-width:560px}
+.cta .btn.primary{position:relative;overflow:hidden;background:linear-gradient(180deg,#ffc650,var(--gold))}
+.cta .btn.primary:after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 4.5s ease-in-out infinite}
+@keyframes shine{0%,60%{left:-70%}100%{left:130%}}
+.cta .btn:not(.primary){background:rgba(22,29,71,.5);backdrop-filter:blur(6px)}
+.cta .btn:not(.primary):hover{border-color:var(--indigo);background:rgba(143,162,236,.12)}
+.trust span{border-style:solid;background:rgba(22,29,71,.5);backdrop-filter:blur(6px);border-radius:999px}
+.phone{box-shadow:0 60px 100px rgba(0,0,0,.65),0 0 0 1px rgba(143,162,236,.18),0 0 80px rgba(143,162,236,.12),inset 0 0 0 7px #0b1024,inset 0 1px 0 rgba(255,255,255,.14)}
+
+/* ---- protocol strip ---- */
+.proto{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px;margin-top:40px;color:var(--muted);font-size:13px;letter-spacing:.04em}
+.proto>span:first-child{text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;font-weight:700;color:var(--indigo)}
+.proto b{font:600 13px var(--mono);padding:7px 14px;border-radius:10px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(27,35,86,.8),rgba(22,29,71,.6));color:var(--ink);transition:.2s}
+.proto b:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+
+/* ---- stats ---- */
+.stats{gap:16px}
+.stat{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(27,35,86,.75),rgba(22,29,71,.5));backdrop-filter:blur(8px);transition:transform .25s,border-color .25s}
+.stat:before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.7}
+.stat:hover{transform:translateY(-4px);border-color:var(--indigo)}
+.stat b{background:linear-gradient(180deg,#ffe3a6,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;font-size:clamp(30px,3.4vw,42px)}
+
+/* ---- section headings ---- */
+.eyebrow{display:inline-flex;align-items:center;gap:10px}
+.eyebrow:before{content:"";width:28px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--teal),transparent)}
+section h2{background:linear-gradient(180deg,#fff,#c9d0f5);-webkit-background-clip:text;background-clip:text;color:transparent;text-wrap:balance}
+section.alt{background:linear-gradient(180deg,rgba(16,22,58,.9),rgba(13,19,48,.9));box-shadow:inset 0 1px 0 rgba(143,162,236,.1),inset 0 -1px 0 rgba(143,162,236,.08)}
+
+/* ---- feature cards: gradient border + pointer glow ---- */
+.feat{background:linear-gradient(180deg,rgba(27,35,86,.9),rgba(22,29,71,.9))}
+.feat:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(320px circle at var(--gx,50%) var(--gy,0%),rgba(245,180,55,.14),transparent 60%)}
+.feat:hover:before{opacity:1}
+.feat .ic{background:linear-gradient(135deg,rgba(143,162,236,.28),rgba(79,192,207,.12));box-shadow:inset 0 0 0 1px rgba(143,162,236,.25)}
+.fstep{transition:transform .25s,border-color .25s}
+.fstep:hover{transform:translateY(-4px);border-color:var(--gold)}
+.status .box{background:linear-gradient(180deg,rgba(27,35,86,.9),rgba(22,29,71,.9))}
+.status .yes{box-shadow:inset 3px 0 0 var(--leaf)}.status .not{box-shadow:inset 3px 0 0 var(--gold)}
+
+/* ---- footer ---- */
+footer{position:relative;margin-top:30px;background:linear-gradient(180deg,transparent,rgba(5,8,26,.7))}
+footer:before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--indigo),var(--gold),var(--indigo),transparent);opacity:.6}
+footer a{transition:color .2s}footer a:hover{color:var(--gold);text-decoration:none}
+
+/* keep floating word chips inside the top hero area (they drifted over the scene and stats) */
+.floaters{bottom:auto;height:640px}
+
+/* ---- focus + selection ---- */
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+::selection{background:rgba(245,180,55,.35)}
+
+/* ---- MOBILE (fixes the squeezed two-column hero) ---- */
+@media(max-width:900px){
+  .hero2{grid-template-columns:minmax(0,1fr)!important;gap:34px}
+  .hero{padding-top:44px}
+  .hr{display:flex;justify-content:center}
+  .phonewrap{padding:10px 0;max-width:100%}
+  .phone{width:min(310px,86vw);height:500px}
+  .bigmark{font-size:220px;right:-8%;top:20px}
+  .hero2 h1{letter-spacing:-1px}
+  .cta .btn{flex:1 1 100%;justify-content:center}
+  .proto{margin-top:30px}
+}
+@media(max-width:480px){
+  .pill{font-size:12.5px;padding:7px 12px;border-radius:16px;line-height:1.35}
+  .hero2 h1{font-size:clamp(32px,9.6vw,44px)}
+  .trust span{font-size:12.5px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:last-child{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){.hero2 h1 em,.cta .btn.primary:after{animation:none!important}}
