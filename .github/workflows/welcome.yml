@@ -7,10 +7,13 @@ permissions:
   pull-requests: write
 jobs:
   welcome:
+    # bots (Dependabot etc.) do not need a welcome message
+    if: github.actor != 'dependabot[bot]' && github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/first-interaction@v3
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-message: "Thanks for opening your first issue in Haat! A maintainer aims to reply within 48 hours. If you'd like to work on it yourself, say so and we'll help."
-          pr-message: "Thanks for your first pull request to Haat! Please make sure `npm run check` passes. A maintainer will review within 48 hours."
+          # v3 renamed inputs from hyphens to underscores (repo-token -> repo_token, etc.)
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_message: "Thanks for opening your first issue in Haat! A maintainer aims to reply within 48 hours. If you'd like to work on it yourself, say so and we'll help."
+          pr_message: "Thanks for your first pull request to Haat! Please make sure `npm run check` passes. A maintainer will review within 48 hours."
