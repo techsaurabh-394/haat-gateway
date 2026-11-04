@@ -43,10 +43,16 @@ function fixHref(href: string, srcPath: string): string {
 function render(p: Page): string {
   const md = readFileSync(join(ROOT, p.src), 'utf8');
   const r = new marked.Renderer();
-  r.heading = (text, level, raw) => `<h${level} id="${slugify(raw)}">${text}</h${level}>`;
-  r.link = (href, title, text) => `<a href="${fixHref(href, p.src)}"${title ? ` title="${esc(title)}"` : ''}>${text}</a>`;
-  r.image = (href, _t, text) => `<img src="${fixHref(href, p.src)}" alt="${esc(text)}" loading="lazy">`;
-  r.code = (code, lang) => lang === 'mermaid' ? `<pre class="mermaid">${esc(code)}</pre>` : `<pre><code class="lang-${lang ?? ''}">${esc(code)}</code></pre>`;
+  // marked >= 13 passes a single token object to renderer functions and exposes
+  // `this.parser` for rendering inline children.
+  r.heading = function ({ tokens, depth, text }) {
+    return `<h${depth} id="${slugify(text)}">${this.parser.parseInline(tokens)}</h${depth}>`;
+  };
+  r.link = function ({ href, title, tokens }) {
+    return `<a href="${fixHref(href, p.src)}"${title ? ` title="${esc(title)}"` : ''}>${this.parser.parseInline(tokens)}</a>`;
+  };
+  r.image = ({ href, text }) => `<img src="${fixHref(href, p.src)}" alt="${esc(text)}" loading="lazy">`;
+  r.code = ({ text, lang }) => lang === 'mermaid' ? `<pre class="mermaid">${esc(text)}</pre>` : `<pre><code class="lang-${lang ?? ''}">${esc(text)}</code></pre>`;
   const html = marked.parse(md, { renderer: r, gfm: true }) as string;
   const i = pages.indexOf(p);
   const prev = pages[i - 1], next = pages[i + 1];
