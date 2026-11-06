@@ -261,13 +261,16 @@ export class Commerce {
     return this.kv
       .list<string>('user_orders', `${userKey}\n`, 200)
       .map((r) => this.kv.get<StoredOrder>('orders', r.value))
-      .filter((o): o is StoredOrder => !!o);
+      // Ignore index entries left behind for orders that now belong to someone else.
+      .filter((o): o is StoredOrder => !!o && o.userKey === userKey);
   }
 
   /** Moves a User's orders to an account after sign-in, so they show up across Sessions and agents. */
   adoptOrders(fromUserKey: string, toUserKey: string): void {
-    for (const o of this.ordersOf(fromUserKey)) {
-      this.saveOrder({ ...o, userKey: toUserKey });
+    for (const r of this.kv.list<string>('user_orders', `${fromUserKey}\n`, 200)) {
+      const o = this.kv.get<StoredOrder>('orders', r.value);
+      if (o && o.userKey === fromUserKey) this.saveOrder({ ...o, userKey: toUserKey });
+      this.kv.delete('user_orders', r.key); // drop the guest index entry
     }
   }
 
