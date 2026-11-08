@@ -227,6 +227,39 @@ export class ApprovalGate<C> {
     return { kind: 'approval_required', operation: await this.requote(rec, req) };
   }
 
+  /**
+   * Read-only view of an operation for an approval link: its state and the terms of one revision
+   * (the latest unless given). Returns undefined unless `ownerKey` owns the operation.
+   */
+  inspect(operationId: string, ownerKey: string, revision?: string): { state: OpRecord<C>['state']; operation?: Operation; current: boolean; expired: boolean; result?: StoredResponse } | undefined {
+    const rec = this.get(operationId);
+    if (!rec || rec.ownerKey !== ownerKey) return undefined;
+    const rev = rec.revisions[revision ?? rec.latestRevision ?? ''];
+    return {
+      state: rec.state,
+      ...(rev ? { operation: rev.operation } : {}),
+      current: !!rev && rev.revision === rec.latestRevision,
+      expired: !rev || rev.expiresAtMs <= this.now(),
+      ...(rec.result ? { result: rec.result } : {}),
+    };
+  }
+
+  /**
+   * Performs an operation the person approved through a channel the agent is not part of (for
+   * example a WhatsApp link), instead of through a `Poppy-Approval` header. Same checks as handle():
+   * the owner matches, and only the LATEST revision, unexpired, is performed, at most once.
+   * Returns null when nothing may be performed.
+   */
+  async approveStored(approval: Approval, ownerKey: string, perform: (c: C, operationId: string) => Promise<StoredResponse>): Promise<GateResult | null> {
+    const rec = this.get(approval.operation_id);
+    if (!rec || rec.ownerKey !== ownerKey) return null;
+    if (rec.state === 'performed') return { kind: 'performed', response: rec.result!, replayed: true };
+    if (rec.state === 'performing') return { kind: 'in_progress', retryAfterSec: 2 };
+    const rev = rec.revisions[approval.revision];
+    if (!rev || rev.revision !== rec.latestRevision || rev.expiresAtMs <= this.now()) return null;
+    return this.perform(rec, rev, perform);
+  }
+
   /** Latest operation for an owner's action, if any (used by conversations). */
   pending(ownerKey: string, actionKey: string): Operation | undefined {
     const id = this.kv.get<string>(NS_ACTION, `${ownerKey}\n${actionKey}`);

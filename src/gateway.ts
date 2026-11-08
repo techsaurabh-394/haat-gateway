@@ -19,6 +19,9 @@ import { ApprovalGate, parseApprovalHeader, type GateResult } from './poppy/oper
 import { ClientResolver, SessionError, SessionVerifier, type FetchJson, type VerifiedSession } from './poppy/session.ts';
 import { openStore, StoreFullError, type KV } from './store/kv.ts';
 import { randomId } from './util/b64.ts';
+import { ApprovalLinks } from './whatsapp/links.ts';
+import type { MessageProvider } from './whatsapp/provider.ts';
+import { registerApprovalPages, sendApprovalLink, sendResultResponse } from './whatsapp/routes.ts';
 import { HttpError, Router, json, startServer, closeServer, type Req, type Res, type TlsOptions } from './util/http.ts';
 import { logger } from './util/log.ts';
 
@@ -47,6 +50,8 @@ export type GatewayConfig = {
   performTimeoutMs?: number;
   /** How long a Beckn request waits for the seller's callback, ms (default 6000). */
   becknTimeoutMs?: number;
+  /** Where WhatsApp approval messages are sent. Without it the WhatsApp endpoints answer 404. */
+  whatsapp?: { provider: MessageProvider };
   /** Pre-opened store (tests share one across restarts). */
   kv?: KV;
   /** Real ONDC: signed v2 registry lookups, and the onboarding endpoints the registry calls. */
@@ -267,7 +272,7 @@ export function createGateway(config: GatewayConfig): Gateway {
       ? json(200, { resource, authorization_servers: [issuer], scopes_supported: Object.keys(SCOPES), bearer_methods_supported: ['header'] }, { 'cache-control': 'public, max-age=300' })
       : json(404, { error: 'not_found', error_description: 'no OAuth issuer: signed-out Sessions only' }),
   );
-  router.on('GET', '/openapi.json', () => json(200, openapi(base, signIn ? issuer : undefined), { 'cache-control': 'public, max-age=300' }));
+  router.on('GET', '/openapi.json', () => json(200, openapi(base, signIn ? issuer : undefined, !!config.whatsapp), { 'cache-control': 'public, max-age=300' }));
   router.on('GET', '/health', () => json(200, { ok: true, protocol_version: '0.3', packs: [...commerce.packs.keys()], sign_in: signIn, durable: !!config.dbPath }));
   oauth?.routes(router);
 
@@ -288,6 +293,21 @@ export function createGateway(config: GatewayConfig): Gateway {
     log.info(`feedback: ${JSON.stringify(b.task)}`);
     return { status: 202, text: '' };
   });
+
+  // --- WhatsApp approvals: the link goes to the person's verified phone, never to the agent ---
+  if (config.whatsapp) {
+    const waDeps = { gate, commerce, links: new ApprovalLinks(kv), provider: config.whatsapp.provider, base };
+    registerApprovalPages(router, waDeps);
+    router.on('POST', '/api/v1/operations/:id/whatsapp', async (req) => {
+      const ctx = await context(req);
+      requireOperationsApi(ctx.s);
+      // Only a signed-in account has a verified phone. The agent cannot choose where it is sent.
+      const t = requireScope(ctx.token, 'orders:write');
+      const phone = oauth?.account(t.accountId)?.phone;
+      if (!phone || !ctx.accountKey) return json(403, { error: 'sign_in_required', error_description: 'WhatsApp approval needs a signed-in account with a verified phone' });
+      return sendResultResponse(await sendApprovalLink(waDeps, { operationId: req.params.id!, ownerKey: ctx.ownerKey, userKey: ctx.userKey, phone }));
+    });
+  }
 
   // --- API (section 7) ---
   router.on('GET', '/api/v1/search', async (req) => {

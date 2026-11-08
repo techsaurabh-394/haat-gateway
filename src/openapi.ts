@@ -1,5 +1,5 @@
 /** OpenAPI 3.1 description, listed in poppy.json under `apis` (spec section 7). */
-export function openapi(publicUrl: string, issuer?: string): Record<string, unknown> {
+export function openapi(publicUrl: string, issuer?: string, whatsapp = false): Record<string, unknown> {
   const session = { $ref: '#/components/parameters/PoppySession' };
   const err = (d: string) => ({ description: d, content: { 'application/json': { schema: { $ref: '#/components/schemas/Error' } } } });
   return {
@@ -52,6 +52,20 @@ export function openapi(publicUrl: string, issuer?: string): Record<string, unkn
             },
             '/api/v1/account/addresses/{id}': {
               delete: { operationId: 'deleteAddress', summary: 'Delete a saved address', parameters: [session, { name: 'id', in: 'path', required: true, schema: { type: 'string' } }], security: [{ poppy: ['addresses'] }], responses: { '204': { description: 'Deleted' } } },
+            },
+          }
+        : {}),
+      ...(whatsapp && issuer
+        ? {
+            '/api/v1/operations/{id}/whatsapp': {
+              post: {
+                operationId: 'sendApprovalToWhatsApp',
+                summary: "Send an operation's approval summary to the signed-in person's own WhatsApp, with a single-use approve link",
+                description: 'The message goes to the verified phone of the signed-in account; the agent cannot choose the number and never sees the link. Approving through the link goes through the same approval gate. Poll the order afterwards, or repeat the original request with the Poppy-Approval header: it replays the same order and never places a second one.',
+                parameters: [session, { name: 'id', in: 'path', required: true, schema: { type: 'string' } }],
+                security: [{ poppy: ['orders:write'] }],
+                responses: { '202': { description: 'Sent' }, '403': err('sign_in_required'), '404': err('operation_not_found'), '409': err('operation_not_pending or operation_expired'), '429': err('too_many_sends'), '502': err('whatsapp_unavailable') },
+              },
             },
           }
         : {}),
