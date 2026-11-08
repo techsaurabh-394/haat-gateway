@@ -40,7 +40,8 @@ The retail contract is partial: many optional fields, tags, `@ondc/org/*` extens
 ## Operations and scale
 
 - Single process. SQLite (`node:sqlite`, marked experimental by Node) suits one instance; several instances need a shared store.
-- An operation interrupted by a crash in the middle of "confirm" answers `503` until someone reconciles it with the seller. That is safe (never a double order) but needs an operator; automatic reconciliation through Beckn `status` is on the roadmap.
+- When the seller's answer to `confirm` is missing (timeout, connection reset, a 5xx without a NACK, or a crash mid-confirm), the operation answers `503` and confirm is never sent again. A late `on_confirm` settles it automatically, also after a restart, because each confirm is recorded on disk before it is sent. If the seller never answers, it stays unresolved until an operator checks with the seller: `gate.unresolved()` and `commerce.pendingConfirms()` list these cases, but there is no operator command or Beckn `status` reconciliation yet (status needs an order id, which a missing `on_confirm` never gave us).
+- Cancellation does not yet get the same treatment: a cancel whose outcome is unknown is reported as failed. Sending cancel twice is harmless, so this is lower priority.
 - Memory mode is bounded, but evicted state is lost; use SQLite (`HAAT_DB`) for anything real.
 - Outbound fetches of agent metadata are limited (HTTPS, no private addresses, no redirects, size and time limits, failure cache), but hostnames are not DNS-pinned before connecting.
 

@@ -9,20 +9,26 @@
  */
 import type { BapClient} from '../beckn/bap.ts';
 import { BecknError } from '../beckn/bap.ts';
+import type { BecknOutcome } from '../beckn/bap.ts';
 import type { RegistryClient } from '../beckn/registry.ts';
 import type { Address, BecknEnvelope, Order } from '../beckn/types.ts';
 import { Lexicon, formatQuantity, measureToBase, type Term } from '../lexicon/normalize.ts';
 import { buildBasket, round2, type Basket, type Offer } from './basket.ts';
 import type { Pack } from './packs.ts';
 import { MemoryKV, type KV } from '../store/kv.ts';
+import { OutcomeUnknownError } from '../poppy/operations.ts';
+import { randomUUID } from 'node:crypto';
 
 export class CommerceError extends Error {
   code: string;
   status: number;
-  constructor(code: string, message: string, status = 400) {
+  /** For Beckn calls: whether the seller may have acted (see BecknOutcome). */
+  outcome?: BecknOutcome;
+  constructor(code: string, message: string, status = 400, outcome?: BecknOutcome) {
     super(message);
     this.code = code;
     this.status = status;
+    if (outcome) this.outcome = outcome;
   }
 }
 
@@ -66,6 +72,27 @@ export type SearchResult = {
   offers: Offer[];
   basket: Basket | null;
 };
+
+/**
+ * Written BEFORE each confirm is sent, keyed by transaction_id, so a late or post-restart
+ * on_confirm can be matched to the exact message we sent and to the operation that sent it.
+ */
+export type PendingConfirm = {
+  operationId?: string;
+  userKey: string;
+  bppId: string;
+  bppUri: string;
+  messageId: string;
+  providerName: string;
+  sentAt: string;
+};
+
+/** What a late on_confirm proved. */
+export type LateConfirm =
+  | { operationId?: string; outcome: 'confirmed'; order: StoredOrder }
+  | { operationId?: string; outcome: 'rejected'; error: string };
+
+const PENDING_NS = 'confirm_pending';
 
 const PHONE_RE = /^[6-9]\d{9}$/;
 const PIN_RE = /^[1-9]\d{5}$/;
@@ -225,22 +252,78 @@ export class Commerce {
     return { summary, terms, ttlSec: pack.quote_ttl_sec, context: { cart, bppUri, transactionId, order, providerName, total } };
   }
 
-  async confirm(userKey: string, q: QuoteContext, domain = this.defaultDomain): Promise<StoredOrder> {
-    const env = await this.call('confirm', { order: q.order }, { domain, bpp_id: q.cart.bpp_id, bpp_uri: q.bppUri, transaction_id: q.transactionId });
-    const order = env.message.order;
-    if (!order?.id) throw new CommerceError('seller_error', 'seller did not return an order id', 502);
-    const stored: StoredOrder = {
-      id: order.id,
+  async confirm(userKey: string, q: QuoteContext, domain = this.defaultDomain, operationId?: string): Promise<StoredOrder> {
+    const messageId = randomUUID();
+    const pending: PendingConfirm = {
+      ...(operationId ? { operationId } : {}),
       userKey,
       bppId: q.cart.bpp_id,
       bppUri: q.bppUri,
-      transactionId: q.transactionId,
+      messageId,
       providerName: q.providerName,
+      sentAt: new Date().toISOString(),
+    };
+    // Written BEFORE sending, so a late or post-restart on_confirm can be matched to this attempt.
+    this.kv.set(PENDING_NS, q.transactionId, pending, this.orderTtlSec);
+    let env: BecknEnvelope;
+    try {
+      env = await this.call('confirm', { order: q.order }, { domain, bpp_id: q.cart.bpp_id, bpp_uri: q.bppUri, transaction_id: q.transactionId, message_id: messageId });
+    } catch (e) {
+      // Only a proven "no order" frees the approval. Anything else (timeout, reset, 5xx, or an
+      // error we do not recognise) may hide an order the seller already created.
+      if (e instanceof CommerceError && (e.outcome === 'not_sent' || e.outcome === 'rejected')) {
+        this.kv.delete(PENDING_NS, q.transactionId);
+        throw e;
+      }
+      throw new OutcomeUnknownError(`confirm outcome unknown: ${(e as Error).message}`);
+    }
+    const order = env.message.order;
+    // The seller answered without an order id: we cannot tell whether an order exists, so the
+    // pending record stays for reconciliation.
+    if (!order?.id) throw new OutcomeUnknownError('seller answered confirm without an order id');
+    this.kv.delete(PENDING_NS, q.transactionId);
+    return this.recordConfirmed(userKey, q.cart.bpp_id, q.bppUri, q.transactionId, q.providerName, order);
+  }
+
+  private recordConfirmed(userKey: string, bppId: string, bppUri: string, transactionId: string, providerName: string, order: Order): StoredOrder {
+    const stored: StoredOrder = {
+      id: order.id!,
+      userKey,
+      bppId,
+      bppUri,
+      transactionId,
+      providerName,
       order,
       createdAt: new Date().toISOString(),
     };
     this.saveOrder(stored);
     return stored;
+  }
+
+  /**
+   * Handles an on_confirm that arrived after we stopped waiting (timeout or restart). The BAP has
+   * already verified the signature and that the signer is context.bpp_id. It must also answer the
+   * exact message we sent, from the seller we sent it to. Returns undefined when it matches nothing.
+   */
+  lateConfirm(env: BecknEnvelope): LateConfirm | undefined {
+    const transactionId = env.context.transaction_id;
+    const p = this.kv.get<PendingConfirm>(PENDING_NS, transactionId);
+    if (!p || p.messageId !== env.context.message_id || p.bppId !== env.context.bpp_id) return undefined;
+    const base = p.operationId ? { operationId: p.operationId } : {};
+    if (env.error) {
+      this.kv.delete(PENDING_NS, transactionId);
+      return { ...base, outcome: 'rejected', error: env.error.message ?? env.error.code ?? 'seller refused confirm' };
+    }
+    const order = env.message.order;
+    if (!order?.id) return undefined; // still no proof either way; keep waiting
+    this.kv.delete(PENDING_NS, transactionId);
+    const stored = this.recordConfirmed(p.userKey, p.bppId, p.bppUri, transactionId, p.providerName, order);
+    return { ...base, outcome: 'confirmed', order: stored };
+  }
+
+  /** Confirms still waiting for the seller's answer (for operators). */
+  pendingConfirms(limit = 100): Array<{ transactionId: string } & PendingConfirm> {
+    return this.kv.list<PendingConfirm>(PENDING_NS, '', limit).map((r) => ({ transactionId: r.key, ...r.value }));
   }
 
   saveOrder(o: StoredOrder): void {
@@ -302,18 +385,18 @@ export class Commerce {
     return o;
   }
 
-  private async call(action: 'select' | 'init' | 'confirm' | 'status' | 'cancel', message: object, ctx: { domain: string; bpp_id: string; bpp_uri: string; transaction_id?: string }): Promise<BecknEnvelope> {
+  private async call(action: 'select' | 'init' | 'confirm' | 'status' | 'cancel', message: object, ctx: { domain: string; bpp_id: string; bpp_uri: string; transaction_id?: string; message_id?: string }): Promise<BecknEnvelope> {
     let envs: BecknEnvelope[];
     try {
       envs = await this.bap.request(action, message, { context: ctx, target: ctx.bpp_uri });
     } catch (e) {
       if (e instanceof BecknError) {
-        throw new CommerceError(e.code === 'timeout' ? 'seller_timeout' : 'seller_unreachable', e.message, e.code === 'timeout' ? 504 : 502);
+        throw new CommerceError(e.code === 'timeout' ? 'seller_timeout' : 'seller_unreachable', e.message, e.code === 'timeout' ? 504 : 502, e.outcome);
       }
       throw e;
     }
     const env = envs[0]!;
-    if (env.error) throw new CommerceError(`seller_${env.error.code}`, env.error.message ?? 'seller returned an error', 409);
+    if (env.error) throw new CommerceError(`seller_${env.error.code}`, env.error.message ?? 'seller returned an error', 409, 'rejected');
     return env;
   }
 
