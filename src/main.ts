@@ -8,6 +8,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { startGateway } from './gateway.ts';
 import { ONDC_REGISTRY } from './ondc/onboarding.ts';
+import { ConsoleWhatsAppProvider, WhatsAppCloudProvider, type MessageProvider } from './whatsapp/provider.ts';
 
 const env = (k: string, fallback?: string): string => {
   const v = process.env[k] ?? fallback;
@@ -20,10 +21,27 @@ const port = Number(process.env.HAAT_PORT ?? 8080);
 const host = process.env.HAAT_HOST ?? '127.0.0.1';
 const tls = process.env.HAAT_TLS_KEY ? { key: readFileSync(env('HAAT_TLS_KEY')), cert: readFileSync(env('HAAT_TLS_CERT')) } : undefined;
 
+/**
+ * WhatsApp approvals. With HAAT_WHATSAPP_TOKEN set, messages go through the WhatsApp Business
+ * Cloud API (needs a Meta business account and an approved template, see docs/whatsapp.md).
+ * Without it: the mock network prints messages to the console; ONDC mode has no WhatsApp.
+ */
+function whatsappProvider(dev: boolean): MessageProvider | undefined {
+  if (process.env.HAAT_WHATSAPP_TOKEN) {
+    return new WhatsAppCloudProvider({
+      accessToken: env('HAAT_WHATSAPP_TOKEN'),
+      phoneNumberId: env('HAAT_WHATSAPP_PHONE_NUMBER_ID'),
+      template: env('HAAT_WHATSAPP_TEMPLATE'),
+      language: process.env.HAAT_WHATSAPP_LANGUAGE,
+    });
+  }
+  return dev ? new ConsoleWhatsAppProvider() : undefined;
+}
+
 if (network === 'mock') {
   const { startNetwork } = await import('../mock-network/network.ts');
   // HAAT_PUBLIC_URL must be the address clients use: poppy.json's domain has to match it (spec 3.1).
-  const net = await startNetwork({ gatewayPort: port, gatewayPublicUrl: process.env.HAAT_PUBLIC_URL, stageSec: 30, extraGatewayConfig: { dbPath: process.env.HAAT_DB, host } });
+  const net = await startNetwork({ gatewayPort: port, gatewayPublicUrl: process.env.HAAT_PUBLIC_URL, stageSec: 30, extraGatewayConfig: { dbPath: process.env.HAAT_DB, host, whatsapp: { provider: whatsappProvider(true)! } } });
   console.log(`Haat (mock network) on ${net.gatewayUrl}. Not connected to real ONDC.`);
 } else if (network === 'ondc') {
   const envName = env('HAAT_ONDC_ENV', 'preprod') as keyof typeof ONDC_REGISTRY;
@@ -47,6 +65,7 @@ if (network === 'mock') {
       city: env('HAAT_CITY', 'std:0542'),
       packsDir: join(import.meta.dirname, '..', 'packs'),
       dbPath: env('HAAT_DB'),
+      ...(whatsappProvider(false) ? { whatsapp: { provider: whatsappProvider(false)! } } : {}),
       // A real OTP provider is required outside dev mode; Haat refuses to start without one.
       signIn: { enabled: process.env.HAAT_SIGN_IN === 'on' },
       ondc: {

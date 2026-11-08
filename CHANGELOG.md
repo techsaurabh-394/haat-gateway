@@ -4,6 +4,9 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+### Added
+- **WhatsApp approvals.** `POST /api/v1/operations/{id}/whatsapp` sends the approval summary to the signed-in account's verified phone with a single-use link; opening it shows the terms and a POST approves through the same gate. Tokens are stored hashed, tied to one revision and owner, limited to 3 sends per operation. `ApprovalGate.inspect()` and `approveStored()`, `MessageProvider` with mock, console and WhatsApp Cloud API providers, `docs/whatsapp.md`. The Cloud API provider is not verified against the live API (needs a Meta business account and an approved template).
+
 ### Fixed
 - **One approval could confirm an order twice.** When a seller ACKed `confirm` but its `on_confirm` arrived after the timeout (or the request was cut off after it was sent), the approval gate treated it as a definite failure, set the operation back to `pending`, and sent `confirm` again when the agent retried the same approval. Now:
   - Beckn failures carry an outcome: `not_sent`, `rejected` or `unknown`. Only `not_sent` and `rejected` free an approval for reuse.
