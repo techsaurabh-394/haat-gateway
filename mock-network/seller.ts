@@ -40,6 +40,8 @@ export type SellerOptions = {
   callbackDelayMs?: number;
   /** Seconds per fulfilment stage (Pending -> Packed -> Order-picked-up -> Order-delivered). */
   stageSec?: number;
+  /** Test hook: delay before on_confirm only, ms (simulates a seller that answers late). */
+  confirmDelayMs?: number;
 };
 
 export function sellerRouter(opts: SellerOptions): Router {
@@ -47,6 +49,7 @@ export function sellerRouter(opts: SellerOptions): Router {
   const stock = new Map(file.items.map((i) => [i.id, i.stock]));
   const orders = new Map<string, StoredOrder>();
   let seq = 1000;
+  let confirmsReceived = 0;
   const stageSec = opts.stageSec ?? 20;
 
   const catalogItem = (i: SellerFile['items'][number]): CatalogItem => ({
@@ -101,7 +104,7 @@ export function sellerRouter(opts: SellerOptions): Router {
         body,
         signal: AbortSignal.timeout(5000),
       }).catch((e: Error) => log.warn(`on_${action} to ${req.context.bap_uri} failed: ${e.message}`));
-    }, opts.callbackDelayMs ?? 30);
+    }, action === 'confirm' && opts.confirmDelayMs !== undefined ? opts.confirmDelayMs : (opts.callbackDelayMs ?? 30));
   };
 
   const handlers: Record<BecknAction, (env: BecknEnvelope) => void> = {
@@ -144,7 +147,13 @@ export function sellerRouter(opts: SellerOptions): Router {
       });
     },
     confirm: (env) => {
+      confirmsReceived++;
       const order = env.message.order!;
+      // Idempotent per transaction, as a well-behaved seller app should be: a repeated confirm
+      // gets the order it already created, never a second one.
+      for (const o of orders.values()) {
+        if (o.transactionId === env.context.transaction_id && o.order.state !== 'Cancelled') return respond('confirm', env, { order: o.order });
+      }
       const q = quoteFor(order.items);
       if ('error' in q) return respond('confirm', env, { order }, q.error);
       if (order.quote && order.quote.price.value !== q.quote.price.value) {
@@ -195,6 +204,8 @@ export function sellerRouter(opts: SellerOptions): Router {
   const r = new Router();
   // Test hook: how many orders this seller has confirmed (proves "at most once" across restarts).
   r.on('GET', '/_debug/orders', () => json(200, { confirmed: orders.size, ids: [...orders.keys()] }));
+  // Test hook: how many confirm requests arrived (proves the gateway did not re-send confirm).
+  r.on('GET', '/_debug/confirms', () => json(200, { received: confirmsReceived }));
   for (const action of Object.keys(handlers) as BecknAction[]) {
     r.on('POST', `/${action}`, async (req) => {
       const v = await verifyAuthorizationHeader(req.headers.authorization, req.rawBody, registry.keyLookup());

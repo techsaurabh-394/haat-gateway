@@ -31,18 +31,45 @@ export type BapOptions = {
   timeoutMs?: number;
 };
 
+/**
+ * What we know about a failed call, which decides whether it may be retried:
+ *   - not_sent: the request never reached the other side (connection refused, DNS failure);
+ *   - rejected: the other side answered and refused it (a Beckn NACK, an HTTP 4xx, or an error callback);
+ *   - unknown:  it may have been received and acted on (timeout, reset, 5xx without a NACK, no callback).
+ * For `confirm`, only not_sent and rejected prove that no order exists.
+ */
+export type BecknOutcome = 'not_sent' | 'rejected' | 'unknown';
+
 export class BecknError extends Error {
   code: string;
-  constructor(code: string, message: string) {
+  outcome: BecknOutcome;
+  constructor(code: string, message: string, outcome: BecknOutcome = 'unknown') {
     super(message);
     this.code = code;
+    this.outcome = outcome;
   }
 }
+
+/** Errors from fetch() that prove the request body was never delivered. */
+const NOT_SENT_CODES = new Set(['ECONNREFUSED', 'ENOTFOUND', 'EAI_AGAIN', 'EHOSTUNREACH', 'ENETUNREACH']);
+
+function fetchFailureOutcome(e: unknown): BecknOutcome {
+  const code = (e as { cause?: { code?: unknown } })?.cause?.code;
+  return typeof code === 'string' && NOT_SENT_CODES.has(code) ? 'not_sent' : 'unknown';
+}
+
+/** A verified callback that matched no waiting request (late, or after a restart). */
+export type UnmatchedCallbackHandler = (callback: BecknCallback, env: BecknEnvelope) => void | Promise<void>;
 
 export class BapClient {
   opts: BapOptions;
   waiters = new Map<string, Waiter>();
   timeoutMs: number;
+  /**
+   * Called for callbacks that are correctly signed but no longer have a waiter, for example an
+   * on_confirm that arrives after the timeout or after a restart.
+   */
+  onUnmatched?: UnmatchedCallbackHandler;
 
   constructor(opts: BapOptions) {
     this.opts = opts;
@@ -98,15 +125,20 @@ export class BapClient {
       signal: AbortSignal.timeout(5000),
     }).catch((e: Error) => {
       this.cancel(context.message_id);
-      throw new BecknError('network_error', `${action} to ${target} failed: ${e.message}`);
+      const outcome = fetchFailureOutcome(e);
+      throw new BecknError(outcome === 'not_sent' ? 'not_sent' : 'network_error', `${action} to ${target} failed: ${e.message}`, outcome);
     });
     const ack = (await res.json().catch(() => null)) as { message?: { ack?: { status?: string } }; error?: { code?: string; message?: string } } | null;
     if (!res.ok || ack?.message?.ack?.status !== 'ACK') {
       this.cancel(context.message_id);
-      throw new BecknError(ack?.error?.code ?? 'nack', `${action} was not acknowledged: ${ack?.error?.message ?? res.status}`);
+      // A NACK or a 4xx is a refusal. A 5xx without a NACK (a proxy error, a crash) may hide a
+      // request the seller already processed, so it counts as unknown.
+      const rejected = ack?.message?.ack?.status === 'NACK' || (res.status >= 400 && res.status < 500);
+      throw new BecknError(ack?.error?.code ?? 'nack', `${action} was not acknowledged: ${ack?.error?.message ?? res.status}`, rejected ? 'rejected' : 'unknown');
     }
     const responses = await done;
-    if (!collect && responses.length === 0) throw new BecknError('timeout', `no ${'on_' + action} within ${wait} ms`);
+    // The seller ACKed and may have acted; only its callback is missing.
+    if (!collect && responses.length === 0) throw new BecknError('timeout', `no ${'on_' + action} within ${wait} ms`, 'unknown');
     return responses;
   }
 
@@ -137,7 +169,14 @@ export class BapClient {
     const w = this.waiters.get(env.context.message_id);
     if (!w || w.transactionId !== env.context.transaction_id || `on_${w.action}` !== callback) {
       log.info(`late or unknown ${callback} ${env.context.message_id}`);
-      return { status: 200, body: ACK }; // late callbacks are acknowledged and dropped
+      if (this.onUnmatched) {
+        try {
+          await this.onUnmatched(callback, env);
+        } catch (e) {
+          log.warn(`handling late ${callback} failed: ${(e as Error).message}`);
+        }
+      }
+      return { status: 200, body: ACK }; // acknowledged; handed to onUnmatched, never matched to a new request
     }
     w.responses.push(env);
     if (!w.collect) {

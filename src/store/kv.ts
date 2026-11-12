@@ -36,7 +36,7 @@ export type KVLimits = { defaultMax: number; perNamespace?: Record<string, numbe
 export const DEFAULT_LIMITS: KVLimits = {
   defaultMax: 50_000,
   perNamespace: { jti: 200_000, conv: 20_000, msgseen: 200_000, ratelimit: 20_000 },
-  noEvict: ['ops', 'op_action'],
+  noEvict: ['ops', 'op_action', 'confirm_pending'],
 };
 
 type Entry = { v: string; exp: number; updated: number };
