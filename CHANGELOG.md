@@ -5,6 +5,12 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 ## [Unreleased]
 
 ### Added
+- **Fuzz tests** (`test/fuzz.test.ts`): seeded random and mutated input for the language parser (all domain packs) and the `Poppy-Approval` header parser. Checks: never throws, quantities are finite and positive, normalising is idempotent, any header string round-trips, mutated headers never produce an approval that was not in the text, pathological 100k-character input stays fast.
+
+### Fixed
+- **"0 kilo atta" ordered a pack of atta.** A zero quantity was kept, and the basket rounds quantities up to at least one pack. The parser now drops an item with a zero quantity. Found by the fuzz tests.
+
+### Added
 - **Chaos seller** in the mock network. `startNetwork({ sellerChaos: { seed, silentRate, slowRate, slowMs, duplicateRate, badSignatureRate } })` makes the mock sellers answer `confirm`/`cancel` slowly, twice, with a forged signature first, or never. Runs are seeded (`mulberry32`) so a failure replays. `/_debug/chaos` shows how much chaos was injected. `test/chaos-seller.test.ts` checks that one approval never places more than one order, `confirm` is never sent twice, and a silent seller leaves the approval unresolved (503), under fixed and seeded mixed chaos. This is a test against the local mock network, not against real ONDC sellers.
 
 ### Added

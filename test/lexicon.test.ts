@@ -217,3 +217,9 @@ test('every ONDC grocery term in the mock sellers exists in the lexicon', () => 
     for (const i of d.items) for (const t of i.terms) assert.ok(known.has(t), `${i.id}: unknown term ${t}`);
   }
 });
+
+test('a zero quantity drops the item instead of ordering a pack (found by fuzzing)', () => {
+  assert.deepEqual(terms('0 kilo atta'), []);
+  assert.deepEqual(terms('0 litre doodh'), []);
+  assert.deepEqual(terms('0 atta aur 1 litre doodh'), [['milk', '1000ml']]);
+});
