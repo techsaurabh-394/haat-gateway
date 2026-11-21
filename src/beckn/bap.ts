@@ -70,6 +70,8 @@ export class BapClient {
    * on_confirm that arrives after the timeout or after a restart.
    */
   onUnmatched?: UnmatchedCallbackHandler;
+  /** Observer for operators: how each seller call ended and how long the seller took. Never throws into the caller. */
+  onResult?: (info: { action: BecknAction; bppId?: string; result: 'answered' | 'silent' | 'rejected'; ms: number }) => void;
 
   constructor(opts: BapOptions) {
     this.opts = opts;
@@ -108,6 +110,16 @@ export class BapClient {
     const target = (opts.target ?? this.opts.gatewayUrl).replace(/\/$/, '') + '/' + action;
     const collect = opts.collect ?? false;
     const wait = collect ? (opts.windowMs ?? 1500) : this.timeoutMs;
+    const started = Date.now();
+    const bppId = opts.context?.bpp_id;
+    const report = (result: 'answered' | 'silent' | 'rejected') => {
+      if (collect || !this.onResult) return;
+      try {
+        this.onResult({ action, ...(bppId ? { bppId } : {}), result, ms: Date.now() - started });
+      } catch {
+        /* observers must never break an order */
+      }
+    };
 
     const done = new Promise<BecknEnvelope[]>((resolve) => {
       const timer = setTimeout(() => {
@@ -134,11 +146,16 @@ export class BapClient {
       // A NACK or a 4xx is a refusal. A 5xx without a NACK (a proxy error, a crash) may hide a
       // request the seller already processed, so it counts as unknown.
       const rejected = ack?.message?.ack?.status === 'NACK' || (res.status >= 400 && res.status < 500);
+      if (rejected) report('rejected');
       throw new BecknError(ack?.error?.code ?? 'nack', `${action} was not acknowledged: ${ack?.error?.message ?? res.status}`, rejected ? 'rejected' : 'unknown');
     }
     const responses = await done;
     // The seller ACKed and may have acted; only its callback is missing.
-    if (!collect && responses.length === 0) throw new BecknError('timeout', `no ${'on_' + action} within ${wait} ms`, 'unknown');
+    if (!collect && responses.length === 0) {
+      report('silent');
+      throw new BecknError('timeout', `no ${'on_' + action} within ${wait} ms`, 'unknown');
+    }
+    report('answered');
     return responses;
   }
 

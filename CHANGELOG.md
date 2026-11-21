@@ -5,6 +5,10 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 ## [Unreleased]
 
 ### Added
+- **Operator endpoints.** `GET /healthz` (liveness) and `GET /readyz` (store read-back) are open and reveal nothing. `GET /metrics` (Prometheus text) and `GET /ops/overview` (stuck operations, pending confirms, per-seller answer rate and speed) need `HAAT_OPS_TOKEN` as a Bearer token, are off (404) without it, and use a constant-time compare. Labels use route patterns and status classes only. The overview carries no user keys, phone numbers, addresses or order contents. See `docs/operations.md`. No new dependencies.
+- `Router.observe` and `BapClient.onResult` hooks; observer errors never break a request or an order.
+
+### Added
 - **Fuzz tests** (`test/fuzz.test.ts`): seeded random and mutated input for the language parser (all domain packs) and the `Poppy-Approval` header parser. Checks: never throws, quantities are finite and positive, normalising is idempotent, any header string round-trips, mutated headers never produce an approval that was not in the text, pathological 100k-character input stays fast.
 
 ### Fixed

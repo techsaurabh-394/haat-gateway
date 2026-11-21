@@ -19,6 +19,8 @@ const env = (k: string, fallback?: string): string => {
 const network = process.env.HAAT_NETWORK ?? 'mock';
 const port = Number(process.env.HAAT_PORT ?? 8080);
 const host = process.env.HAAT_HOST ?? '127.0.0.1';
+/** Operator endpoints (/metrics, /ops/overview) are off unless HAAT_OPS_TOKEN is set. */
+const opsConfig = process.env.HAAT_OPS_TOKEN ? { opsToken: process.env.HAAT_OPS_TOKEN } : {};
 const tls = process.env.HAAT_TLS_KEY ? { key: readFileSync(env('HAAT_TLS_KEY')), cert: readFileSync(env('HAAT_TLS_CERT')) } : undefined;
 
 /**
@@ -41,7 +43,7 @@ function whatsappProvider(dev: boolean): MessageProvider | undefined {
 if (network === 'mock') {
   const { startNetwork } = await import('../mock-network/network.ts');
   // HAAT_PUBLIC_URL must be the address clients use: poppy.json's domain has to match it (spec 3.1).
-  const net = await startNetwork({ gatewayPort: port, gatewayPublicUrl: process.env.HAAT_PUBLIC_URL, stageSec: 30, extraGatewayConfig: { dbPath: process.env.HAAT_DB, host, whatsapp: { provider: whatsappProvider(true)! } } });
+  const net = await startNetwork({ gatewayPort: port, gatewayPublicUrl: process.env.HAAT_PUBLIC_URL, stageSec: 30, extraGatewayConfig: { dbPath: process.env.HAAT_DB, host, ...opsConfig, whatsapp: { provider: whatsappProvider(true)! } } });
   console.log(`Haat (mock network) on ${net.gatewayUrl}. Not connected to real ONDC.`);
 } else if (network === 'ondc') {
   const envName = env('HAAT_ONDC_ENV', 'preprod') as keyof typeof ONDC_REGISTRY;
@@ -65,6 +67,7 @@ if (network === 'mock') {
       city: env('HAAT_CITY', 'std:0542'),
       packsDir: join(import.meta.dirname, '..', 'packs'),
       dbPath: env('HAAT_DB'),
+      ...opsConfig,
       ...(whatsappProvider(false) ? { whatsapp: { provider: whatsappProvider(false)! } } : {}),
       // A real OTP provider is required outside dev mode; Haat refuses to start without one.
       signIn: { enabled: process.env.HAAT_SIGN_IN === 'on' },

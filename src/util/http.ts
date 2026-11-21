@@ -26,7 +26,7 @@ export type Res = {
 
 export type Handler = (req: Req) => Promise<Res> | Res;
 
-type Route = { method: string; re: RegExp; keys: string[]; handler: Handler };
+type Route = { method: string; path: string; re: RegExp; keys: string[]; handler: Handler };
 
 /** Throw from a handler to return a JSON error response. */
 export class HttpError extends Error {
@@ -66,6 +66,8 @@ export function cookie(headers: IncomingHttpHeaders, name: string): string | und
 
 export class Router {
   routes: Route[] = [];
+  /** Called once per finished request with the route pattern (never the raw URL), status and duration. */
+  observe?: (info: { method: string; route: string; status: number; ms: number }) => void;
 
   on(method: string, path: string, handler: Handler): this {
     const keys: string[] = [];
@@ -75,7 +77,7 @@ export class Router {
         keys.push(k);
         return '/([^/]+)';
       });
-    this.routes.push({ method, re: new RegExp('^' + pattern + '/?$'), keys, handler });
+    this.routes.push({ method, path, re: new RegExp('^' + pattern + '/?$'), keys, handler });
     return this;
   }
 
@@ -123,6 +125,16 @@ export async function startServer(
   tls?: TlsOptions,
 ): Promise<{ server: Server; port: number; url: string }> {
   const handler = async (req: IncomingMessage, res: ServerResponse) => {
+    const started = performance.now();
+    let routeName = 'unmatched';
+    res.on('close', () => {
+      if (!router.observe) return;
+      try {
+        router.observe({ method: req.method ?? 'GET', route: routeName, status: res.statusCode, ms: performance.now() - started });
+      } catch {
+        /* observers must never break a request */
+      }
+    });
     const send = async (r: Res) => {
       if (r.stream) {
         res.writeHead(r.status, { 'cache-control': 'no-store', ...(r.headers ?? {}) });
@@ -149,6 +161,7 @@ export async function startServer(
       const found = router.match(method, url.pathname);
       if (found === null) return send(json(404, { error: 'not_found' }));
       if (found === 'method') return send(json(405, { error: 'method_not_allowed' }));
+      routeName = found.route.path;
       const rawBody = method === 'GET' || method === 'HEAD' ? Buffer.alloc(0) : await readBody(req);
       let body: unknown = undefined;
       const ctype = String(req.headers['content-type'] ?? '');
