@@ -42,7 +42,36 @@ export type SellerOptions = {
   stageSec?: number;
   /** Test hook: delay before on_confirm only, ms (simulates a seller that answers late). */
   confirmDelayMs?: number;
+  /** "Chaos seller": a misbehaving seller for tests. Seeded, so a failing run can be replayed. */
+  chaos?: ChaosOptions;
 };
+
+export type ChaosOptions = {
+  seed: number;
+  /** Chance (0..1) that a callback is never sent, though the request was ACKed. */
+  silentRate?: number;
+  /** Chance that a callback is delayed by about slowMs (0.5x to 1.5x). */
+  slowRate?: number;
+  slowMs?: number;
+  /** Chance that a callback is delivered twice. */
+  duplicateRate?: number;
+  /** Chance that a forged callback (wrong signature) arrives before the real one. */
+  badSignatureRate?: number;
+  /** Which actions misbehave. Default: confirm and cancel, the irreversible ones. */
+  actions?: BecknAction[];
+};
+
+/** Small seeded PRNG (mulberry32), so chaos runs are reproducible. */
+export function mulberry32(seed: number): () => number {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
 export function sellerRouter(opts: SellerOptions): Router {
   const { file, key, registry } = opts;
@@ -94,17 +123,38 @@ export function sellerRouter(opts: SellerOptions): Router {
     return 'Order-delivered';
   };
 
+  const chaos = opts.chaos;
+  const rand = chaos ? mulberry32(chaos.seed) : Math.random;
+  const chaosCounts = { slow: 0, duplicated: 0, badSignature: 0, silent: 0 };
+  const chaosActions: BecknAction[] = chaos?.actions ?? ['confirm', 'cancel'];
+
   const respond = (action: BecknAction, req: BecknEnvelope, message: object, error?: { code: string; message: string }) => {
     const context = { ...req.context, action: `on_${action}` as const, bpp_id: file.subscriber_id, bpp_uri: opts.url, timestamp: new Date().toISOString() };
     const body = JSON.stringify({ context, message, ...(error ? { error: { type: 'DOMAIN-ERROR', ...error } } : {}) });
-    setTimeout(() => {
+    let delay = action === 'confirm' && opts.confirmDelayMs !== undefined ? opts.confirmDelayMs : (opts.callbackDelayMs ?? 30);
+    let copies = 1;
+    let tamper = false;
+    if (chaos && chaosActions.includes(action)) {
+      // Every roll is drawn in a fixed order so a seed always replays the same behaviour.
+      const rolls = [rand(), rand(), rand(), rand(), rand()] as const;
+      if (rolls[0] < (chaos.silentRate ?? 0)) { chaosCounts.silent++; return; } // ACKed, never answers
+      if (rolls[1] < (chaos.slowRate ?? 0)) { chaosCounts.slow++; delay += Math.round((chaos.slowMs ?? 1500) * (0.5 + rolls[4])); }
+      if (rolls[2] < (chaos.duplicateRate ?? 0)) { chaosCounts.duplicated++; copies = 2; }
+      if (rolls[3] < (chaos.badSignatureRate ?? 0)) { chaosCounts.badSignature++; tamper = true; }
+    }
+    const send = (corrupt: boolean) => {
+      const authorization = createAuthorizationHeader(key, corrupt ? body + ' ' : body); // signs different bytes than are sent
       fetch(`${req.context.bap_uri.replace(/\/$/, '')}/on_${action}`, {
         method: 'POST',
-        headers: { 'content-type': 'application/json', authorization: createAuthorizationHeader(key, body) },
+        headers: { 'content-type': 'application/json', authorization },
         body,
         signal: AbortSignal.timeout(5000),
       }).catch((e: Error) => log.warn(`on_${action} to ${req.context.bap_uri} failed: ${e.message}`));
-    }, action === 'confirm' && opts.confirmDelayMs !== undefined ? opts.confirmDelayMs : (opts.callbackDelayMs ?? 30));
+    };
+    setTimeout(() => {
+      if (tamper) send(true); // a forged answer first; the genuine one follows
+      for (let i = 0; i < copies; i++) send(false);
+    }, delay);
   };
 
   const handlers: Record<BecknAction, (env: BecknEnvelope) => void> = {
@@ -206,6 +256,7 @@ export function sellerRouter(opts: SellerOptions): Router {
   r.on('GET', '/_debug/orders', () => json(200, { confirmed: orders.size, ids: [...orders.keys()] }));
   // Test hook: how many confirm requests arrived (proves the gateway did not re-send confirm).
   r.on('GET', '/_debug/confirms', () => json(200, { received: confirmsReceived }));
+  r.on('GET', '/_debug/chaos', () => json(200, chaosCounts));
   for (const action of Object.keys(handlers) as BecknAction[]) {
     r.on('POST', `/${action}`, async (req) => {
       const v = await verifyAuthorizationHeader(req.headers.authorization, req.rawBody, registry.keyLookup());

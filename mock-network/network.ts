@@ -17,7 +17,7 @@ import { startGateway, type GatewayConfig } from '../src/gateway.ts';
 import { closeServer, type TlsOptions } from '../src/util/http.ts';
 import { startRegistry } from './registry.ts';
 import { startBecknGateway } from './beckn-gateway.ts';
-import { loadSeller, startSeller } from './seller.ts';
+import { loadSeller, startSeller, type ChaosOptions } from './seller.ts';
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const ROOT = join(here, '..');
@@ -49,6 +49,8 @@ export type NetworkOptions = {
   extraGatewayConfig?: Partial<GatewayConfig>;
   /** Test hook: the mock sellers send on_confirm after this many ms (simulates a late answer). */
   sellerConfirmDelayMs?: number;
+  /** Test hook: make every mock seller misbehave (slow, duplicate, forged or silent callbacks). */
+  sellerChaos?: ChaosOptions;
   /** Serve the gateway over HTTPS at this public URL (for example https://haat.localhost). */
   gatewayPublicUrl?: string;
   tls?: TlsOptions;
@@ -80,7 +82,7 @@ export async function startNetwork(opts: NetworkOptions = {}) {
   const regClient = () => new RegistryClient(registryUrl, 2000);
   const bg = await startBecknGateway(bgKey, regClient(), bgPort!);
   const sellers = await Promise.all(sellerFiles.map((f, i) =>
-    startSeller({ key: sellerKeys[i]!, file: f, registry: regClient(), url: `http://127.0.0.1:${sellerPorts[i]}`, stageSec: opts.stageSec ?? 20, confirmDelayMs: opts.sellerConfirmDelayMs }, sellerPorts[i]!),
+    startSeller({ key: sellerKeys[i]!, file: f, registry: regClient(), url: `http://127.0.0.1:${sellerPorts[i]}`, stageSec: opts.stageSec ?? 20, confirmDelayMs: opts.sellerConfirmDelayMs, chaos: opts.sellerChaos }, sellerPorts[i]!),
   ));
   const gwConfig = {
     publicUrl: gatewayUrl,
