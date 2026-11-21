@@ -20,6 +20,8 @@ import { ClientResolver, SessionError, SessionVerifier, type FetchJson, type Ver
 import { openStore, StoreFullError, type KV } from './store/kv.ts';
 import { randomId } from './util/b64.ts';
 import { ApprovalLinks } from './whatsapp/links.ts';
+import { Metrics, SellerStats } from './ops/metrics.ts';
+import { registerOps } from './ops/routes.ts';
 import type { MessageProvider } from './whatsapp/provider.ts';
 import { registerApprovalPages, sendApprovalLink, sendResultResponse } from './whatsapp/routes.ts';
 import { HttpError, Router, json, startServer, closeServer, type Req, type Res, type TlsOptions } from './util/http.ts';
@@ -52,6 +54,8 @@ export type GatewayConfig = {
   becknTimeoutMs?: number;
   /** Where WhatsApp approval messages are sent. Without it the WhatsApp endpoints answer 404. */
   whatsapp?: { provider: MessageProvider };
+  /** Secret for GET /metrics and GET /ops/overview. Without it those endpoints answer 404. */
+  opsToken?: string;
   /** Pre-opened store (tests share one across restarts). */
   kv?: KV;
   /** Real ONDC: signed v2 registry lookups, and the onboarding endpoints the registry calls. */
@@ -74,6 +78,7 @@ export type Gateway = {
   poppyJson: Record<string, unknown>;
   audience: string;
   kv: KV;
+  metrics: Metrics;
   feedback: () => Array<Record<string, unknown>>;
 };
 
@@ -133,6 +138,13 @@ export function createGateway(config: GatewayConfig): Gateway {
   });
   const commerce = new Commerce({ bap, registry, packs, searchWindowMs: config.searchWindowMs, kv });
   const gate = new ApprovalGate<GateContext>({ performTimeoutMs: config.performTimeoutMs, kv });
+  const metrics = new Metrics();
+  const sellerStats = new SellerStats();
+  bap.onResult = (i) => {
+    metrics.inc('haat_seller_calls_total', 'Calls to sellers by action and result.', { action: i.action, result: i.result });
+    metrics.observe('haat_seller_answer_seconds', 'How long sellers take to answer, by action.', i.ms / 1000, { action: i.action });
+    if (i.bppId) sellerStats.record(i.bppId, i.result, i.ms);
+  };
   const conversations = new ConversationStore(kv);
   // A seller's answer that arrives after we stopped waiting still decides an unknown outcome:
   // an order id settles the operation (approvals replay it), an explicit error releases it.
@@ -264,6 +276,11 @@ export function createGateway(config: GatewayConfig): Gateway {
   };
 
   const router = new Router();
+  router.observe = (i) => {
+    metrics.inc('haat_http_requests_total', 'HTTP requests by route pattern and status class.', { route: i.route, status: `${Math.floor(i.status / 100)}xx` });
+    metrics.observe('haat_http_request_seconds', 'HTTP request duration by route pattern.', i.ms / 1000, { route: i.route });
+  };
+  registerOps({ router, ...(config.opsToken ? { token: config.opsToken } : {}), kv, gate, commerce, metrics, sellers: sellerStats, startedAt: Date.now() });
 
   // --- Discovery (section 3) ---
   router.on('GET', '/.well-known/poppy.json', () => json(200, poppyJson, { 'cache-control': 'public, max-age=300' }));
@@ -628,7 +645,7 @@ export function createGateway(config: GatewayConfig): Gateway {
     return json(r.status, r.body);
   });
 
-  return { router, config, commerce, sessions, gate, conversations, oauth, poppyJson, audience, kv, feedback: () => [...feedbackLog] };
+  return { router, config, commerce, sessions, gate, conversations, oauth, poppyJson, audience, kv, metrics, feedback: () => [...feedbackLog] };
 }
 
 export async function startGateway(
