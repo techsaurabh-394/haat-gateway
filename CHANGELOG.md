@@ -5,6 +5,9 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 ## [Unreleased]
 
 ### Added
+- **Chaos seller** in the mock network. `startNetwork({ sellerChaos: { seed, silentRate, slowRate, slowMs, duplicateRate, badSignatureRate } })` makes the mock sellers answer `confirm`/`cancel` slowly, twice, with a forged signature first, or never. Runs are seeded (`mulberry32`) so a failure replays. `/_debug/chaos` shows how much chaos was injected. `test/chaos-seller.test.ts` checks that one approval never places more than one order, `confirm` is never sent twice, and a silent seller leaves the approval unresolved (503), under fixed and seeded mixed chaos. This is a test against the local mock network, not against real ONDC sellers.
+
+### Added
 - **WhatsApp approvals.** `POST /api/v1/operations/{id}/whatsapp` sends the approval summary to the signed-in account's verified phone with a single-use link; opening it shows the terms and a POST approves through the same gate. Tokens are stored hashed, tied to one revision and owner, limited to 3 sends per operation. `ApprovalGate.inspect()` and `approveStored()`, `MessageProvider` with mock, console and WhatsApp Cloud API providers, `docs/whatsapp.md`. The Cloud API provider is not verified against the live API (needs a Meta business account and an approved template).
 
 ### Fixed
