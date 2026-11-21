@@ -20,7 +20,11 @@ const network = process.env.HAAT_NETWORK ?? 'mock';
 const port = Number(process.env.HAAT_PORT ?? 8080);
 const host = process.env.HAAT_HOST ?? '127.0.0.1';
 /** Operator endpoints (/metrics, /ops/overview) are off unless HAAT_OPS_TOKEN is set. */
-const opsConfig = process.env.HAAT_OPS_TOKEN ? { opsToken: process.env.HAAT_OPS_TOKEN } : {};
+const opsConfig = {
+  ...(process.env.HAAT_OPS_TOKEN ? { opsToken: process.env.HAAT_OPS_TOKEN } : {}),
+  // Signs approval receipts. Without it a key is created once and kept in the database.
+  ...(process.env.HAAT_RECEIPT_KEY ? { receiptKeyB64: process.env.HAAT_RECEIPT_KEY } : {}),
+};
 const tls = process.env.HAAT_TLS_KEY ? { key: readFileSync(env('HAAT_TLS_KEY')), cert: readFileSync(env('HAAT_TLS_CERT')) } : undefined;
 
 /**

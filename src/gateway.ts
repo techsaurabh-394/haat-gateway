@@ -21,6 +21,7 @@ import { openStore, StoreFullError, type KV } from './store/kv.ts';
 import { randomId } from './util/b64.ts';
 import { ApprovalLinks } from './whatsapp/links.ts';
 import { Metrics, SellerStats } from './ops/metrics.ts';
+import { buildPayload, loadReceiptKey, signReceipt } from './receipts/receipts.ts';
 import { registerOps } from './ops/routes.ts';
 import type { MessageProvider } from './whatsapp/provider.ts';
 import { registerApprovalPages, sendApprovalLink, sendResultResponse } from './whatsapp/routes.ts';
@@ -56,6 +57,8 @@ export type GatewayConfig = {
   whatsapp?: { provider: MessageProvider };
   /** Secret for GET /metrics and GET /ops/overview. Without it those endpoints answer 404. */
   opsToken?: string;
+  /** Ed25519 private key (base64 seed) that signs approval receipts. Without it, a key is created once and kept in the store. */
+  receiptKeyB64?: string;
   /** Pre-opened store (tests share one across restarts). */
   kv?: KV;
   /** Real ONDC: signed v2 registry lookups, and the onboarding endpoints the registry calls. */
@@ -276,6 +279,7 @@ export function createGateway(config: GatewayConfig): Gateway {
   };
 
   const router = new Router();
+  const receiptKey = loadReceiptKey(kv, config.receiptKeyB64);
   router.observe = (i) => {
     metrics.inc('haat_http_requests_total', 'HTTP requests by route pattern and status class.', { route: i.route, status: `${Math.floor(i.status / 100)}xx` });
     metrics.observe('haat_http_request_seconds', 'HTTP request duration by route pattern.', i.ms / 1000, { route: i.route });
@@ -327,6 +331,22 @@ export function createGateway(config: GatewayConfig): Gateway {
   }
 
   // --- API (section 7) ---
+  router.on('GET', '/.well-known/haat-receipt-keys.json', () =>
+    json(200, { issuer: base, keys: [{ kid: receiptKey.kid, alg: 'Ed25519', public_key: receiptKey.publicKeyB64 }] }, { 'cache-control': 'public, max-age=300' }),
+  );
+  // The owner's signed record of what they approved. Not available before an approval happened.
+  router.on('GET', '/api/v1/operations/:id/receipt', async (req) => {
+    const ctx = await context(req);
+    requireOperationsApi(ctx.s);
+    if (ctx.token) requireScope(ctx.token, 'orders:read');
+    const found = gate.approvalOf(req.params.id!, ctx.ownerKey);
+    if (!found) return json(404, { error: 'receipt_not_found', error_description: 'no approved operation with that id for this account or session' });
+    const receipt = signReceipt(receiptKey, buildPayload({ issuer: base, operationId: req.params.id!, actionKey: found.actionKey, state: found.state, approval: found.approval }));
+    // `approved` is NOT signed and is not part of the receipt: it is the full text, handed back to
+    // its owner only, to be revealed in a dispute and checked with verifyApprovedText().
+    return json(200, { ...receipt, approved: { summary: found.approval.operation.summary, terms: found.approval.operation.terms ?? null } });
+  });
+
   router.on('GET', '/api/v1/search', async (req) => {
     await context(req);
     return guarded(async () => {

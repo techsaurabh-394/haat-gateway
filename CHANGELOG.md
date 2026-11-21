@@ -5,6 +5,9 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 ## [Unreleased]
 
 ### Added
+- **Signed approval receipts.** `GET /api/v1/operations/{id}/receipt` returns an Ed25519-signed record of what the person approved: operation, revision, time, channel (`header` or WhatsApp `link`), SHA-256 hashes of the exact summary and terms shown, and the commercial terms without the delivery address. The full text comes back unsigned to its owner only, and `verifyApprovedText` checks it against the hashes. `GET /.well-known/haat-receipt-keys.json` publishes the key; `HAAT_RECEIPT_KEY` pins it, else one is created and stored. The gate now records the approval in the same save that precedes the action (`OpRecord.approval`). Receipts are evidence from Haat, not an independent notary; no key rotation yet. See `docs/receipts.md`.
+
+### Added
 - **Operator endpoints.** `GET /healthz` (liveness) and `GET /readyz` (store read-back) are open and reveal nothing. `GET /metrics` (Prometheus text) and `GET /ops/overview` (stuck operations, pending confirms, per-seller answer rate and speed) need `HAAT_OPS_TOKEN` as a Bearer token, are off (404) without it, and use a constant-time compare. Labels use route patterns and status classes only. The overview carries no user keys, phone numbers, addresses or order contents. See `docs/operations.md`. No new dependencies.
 - `Router.observe` and `BapClient.onResult` hooks; observer errors never break a request or an order.
 
