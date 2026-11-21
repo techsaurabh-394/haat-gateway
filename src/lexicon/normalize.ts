@@ -160,6 +160,8 @@ export class Lexicon {
       words.push(t);
     }
     if (words.length === 0) return null;
+    // "0 kilo atta" means the person does not want it. Never turn that into a pack in the basket.
+    if (quantity !== undefined && !(quantity.value > 0)) return null;
     const raw = words.join(' ');
     const match = this.match(words);
     return match
