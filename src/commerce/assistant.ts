@@ -203,9 +203,9 @@ export class Assistant {
         const q = await this.commerce.quote(cart, locale);
         return { summary: q.summary, terms: q.terms, ttlSec: q.ttlSec, context: { kind: 'order', quote: q.context } };
       },
-      perform: async (ctx) => {
+      perform: async (ctx, operationId) => {
         if (ctx.kind !== 'order') throw new Error('wrong operation kind');
-        const o = await this.commerce.confirm(userKey, ctx.quote);
+        const o = await this.commerce.confirm(userKey, ctx.quote, undefined, operationId);
         return { status: 201, body: this.commerce.summarizeOrder(o) };
       },
     });

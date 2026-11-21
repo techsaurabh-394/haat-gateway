@@ -2,6 +2,23 @@
 
 All notable changes are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+- **One approval could confirm an order twice.** When a seller ACKed `confirm` but its `on_confirm` arrived after the timeout (or the request was cut off after it was sent), the approval gate treated it as a definite failure, set the operation back to `pending`, and sent `confirm` again when the agent retried the same approval. Now:
+  - Beckn failures carry an outcome: `not_sent`, `rejected` or `unknown`. Only `not_sent` and `rejected` free an approval for reuse.
+  - `perform` throws `OutcomeUnknownError` for an unknown outcome; the operation stays `performing` and answers `503 Retry-After`, and confirm is never sent again. Any error in `confirm` that is not a proven `not_sent` or `rejected` counts as unknown.
+  - Every confirm is written to `confirm_pending` (not evictable) before it is sent. A late `on_confirm` that answers that exact message from that exact seller settles the operation (later approvals replay the order) or, if the seller rejected it, releases it.
+  - Late callbacks are handed to `BapClient.onUnmatched` instead of being dropped.
+  - A seller answer to `confirm` without an order id is now unknown, not a failure.
+- The mock seller is idempotent per `transaction_id` for `confirm`.
+
+### Added
+- `ApprovalGate.settle()`, `release()` and `unresolved()`; `Commerce.lateConfirm()` and `pendingConfirms()`.
+- `becknTimeoutMs` gateway option; `sellerConfirmDelayMs` and `/_debug/confirms` test hooks in the mock network.
+- Tests: unknown outcomes in the gate, and an end-to-end test with a late `on_confirm` across a gateway restart.
+- `AGENTS.md`: rules for coding agents working in this repository.
+
 ## [0.2.0] - unreleased
 
 ### Added

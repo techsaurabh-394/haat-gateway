@@ -11,6 +11,18 @@
 import { b64u, randomId, sha256, stableJson } from '../util/b64.ts';
 import { DEFAULT_LIMITS, MemoryKV, type KV } from '../store/kv.ts';
 
+/**
+ * Thrown by `perform` when the action may or may not have taken effect (for example, the seller
+ * acknowledged `confirm` but its answer never arrived). The gate never performs the operation
+ * again; it answers "in progress" until the real outcome is recorded with settle() or release().
+ */
+export class OutcomeUnknownError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'OutcomeUnknownError';
+  }
+}
+
 export type Operation = {
   operation_id: string;
   revision: string;
@@ -109,6 +121,8 @@ export type OpRecord<C> = {
   performedRevision?: string;
   latestRevision?: string;
   keepUntilMs: number;
+  /** Set while the outcome is unknown: when that started and why. Cleared by settle()/release(). */
+  unknown?: { sinceMs: number; reason: string };
 };
 
 export type Quote<C> = {
@@ -129,7 +143,12 @@ export type GateRequest<C> = {
   fingerprint: string;
   approval: Approval | null;
   quote: () => Promise<Quote<C>>;
-  perform: (context: C) => Promise<StoredResponse>;
+  /**
+   * Carries out exactly the approved terms. Throw OutcomeUnknownError when the result is not
+   * known (the operation then stays 'performing'); any other error means "definitely did not
+   * happen" and the approval can be used again.
+   */
+  perform: (context: C, operationId: string) => Promise<StoredResponse>;
 };
 
 export type GateResult =
@@ -243,26 +262,39 @@ export class ApprovalGate<C> {
     return operation;
   }
 
-  private async perform(rec: OpRecord<C>, rev: Revision<C>, perform: (c: C) => Promise<StoredResponse>): Promise<GateResult> {
+  private async perform(rec: OpRecord<C>, rev: Revision<C>, perform: (c: C, operationId: string) => Promise<StoredResponse>): Promise<GateResult> {
+    const id = rec.operationId;
     rec.state = 'performing';
     rec.performedRevision = rev.revision;
     this.save(rec); // persisted BEFORE the action, so a crash leaves "performing", never "pending"
-    const task = perform(rev.context).then(
+    const task = perform(rev.context, id).then(
       (response) => {
-        rec.state = 'performed';
-        rec.result = response;
-        this.save(rec);
+        const cur = this.get(id) ?? rec;
+        cur.state = 'performed';
+        cur.result = response;
+        delete cur.unknown;
+        this.save(cur);
         return response;
       },
       (err: unknown) => {
+        // Re-read: settle() may have recorded the real outcome while we were waiting.
+        const cur = this.get(id) ?? rec;
+        if (cur.state !== 'performing') throw err;
+        if (err instanceof OutcomeUnknownError) {
+          // It may have happened. Never perform again; answer 503 until settle()/release().
+          cur.unknown = { sinceMs: this.now(), reason: err.message };
+          this.save(cur);
+          throw err;
+        }
         // A definite failure: nothing was performed, so the operation can be approved again.
-        rec.state = 'pending';
-        rec.performedRevision = undefined;
-        this.save(rec);
+        cur.state = 'pending';
+        cur.performedRevision = undefined;
+        delete cur.unknown;
+        this.save(cur);
         throw err;
       },
-    ).finally(() => this.inflight.delete(rec.operationId));
-    this.inflight.set(rec.operationId, task);
+    ).finally(() => this.inflight.delete(id));
+    this.inflight.set(id, task);
     let timer: NodeJS.Timeout | undefined;
     const timeout = new Promise<'timeout'>((resolve) => {
       timer = setTimeout(() => resolve('timeout'), this.performTimeoutMs);
@@ -274,8 +306,50 @@ export class ApprovalGate<C> {
         return { kind: 'in_progress', retryAfterSec: 3 };
       }
       return { kind: 'performed', response: winner, replayed: false };
+    } catch (err) {
+      if (err instanceof OutcomeUnknownError) return { kind: 'in_progress', retryAfterSec: 5 };
+      throw err;
     } finally {
       clearTimeout(timer);
     }
+  }
+
+  /**
+   * Records that an operation whose outcome was unknown DID take effect (for example, a late
+   * on_confirm arrived with the order). Later approvals replay `response`. Returns false when the
+   * operation is not waiting for an outcome, so it can never skip the approval flow.
+   */
+  settle(operationId: string, response: StoredResponse): boolean {
+    const rec = this.get(operationId);
+    if (!rec || rec.state !== 'performing') return false;
+    rec.state = 'performed';
+    rec.result = response;
+    delete rec.unknown;
+    this.save(rec);
+    return true;
+  }
+
+  /**
+   * Records that an operation whose outcome was unknown did NOT take effect (the seller refused
+   * it). The approval can be used again. Returns false when the operation is not waiting.
+   */
+  release(operationId: string): boolean {
+    const rec = this.get(operationId);
+    if (!rec || rec.state !== 'performing') return false;
+    rec.state = 'pending';
+    rec.performedRevision = undefined;
+    delete rec.unknown;
+    this.save(rec);
+    return true;
+  }
+
+  /** Operations stuck with an unknown outcome, oldest first (for operators and reconciliation). */
+  unresolved(limit = 100): Array<OpRecord<C>> {
+    return this.kv
+      .list<OpRecord<C>>(NS, '', 10_000)
+      .map((r) => r.value)
+      .filter((r) => r.state === 'performing' && !this.inflight.has(r.operationId))
+      .sort((a, b) => (a.unknown?.sinceMs ?? 0) - (b.unknown?.sinceMs ?? 0))
+      .slice(0, limit);
   }
 }

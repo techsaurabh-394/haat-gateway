@@ -45,6 +45,8 @@ export type GatewayConfig = {
   /** Test hook: resolve client metadata without HTTP. */
   fetchJson?: FetchJson;
   performTimeoutMs?: number;
+  /** How long a Beckn request waits for the seller's callback, ms (default 6000). */
+  becknTimeoutMs?: number;
   /** Pre-opened store (tests share one across restarts). */
   kv?: KV;
   /** Real ONDC: signed v2 registry lookups, and the onboarding endpoints the registry calls. */
@@ -122,10 +124,20 @@ export function createGateway(config: GatewayConfig): Gateway {
     registry,
     domain: 'ONDC:RET10',
     city: config.city,
+    timeoutMs: config.becknTimeoutMs,
   });
   const commerce = new Commerce({ bap, registry, packs, searchWindowMs: config.searchWindowMs, kv });
   const gate = new ApprovalGate<GateContext>({ performTimeoutMs: config.performTimeoutMs, kv });
   const conversations = new ConversationStore(kv);
+  // A seller's answer that arrives after we stopped waiting still decides an unknown outcome:
+  // an order id settles the operation (approvals replay it), an explicit error releases it.
+  bap.onUnmatched = (callback, env) => {
+    if (callback !== 'on_confirm') return;
+    const late = commerce.lateConfirm(env);
+    if (!late?.operationId) return;
+    if (late.outcome === 'confirmed') gate.settle(late.operationId, { status: 201, body: commerce.summarizeOrder(late.order) });
+    else gate.release(late.operationId);
+  };
   if (signIn && !config.signIn?.otp && !config.devInsecure) {
     throw new Error('Sign-in needs a real OtpProvider outside dev mode (the development code must never run in production).');
   }
@@ -321,9 +333,9 @@ export function createGateway(config: GatewayConfig): Gateway {
           const q = await commerce.quote(cart, locale(req));
           return { summary: q.summary, terms: q.terms, ttlSec: q.ttlSec, context: { kind: 'order', quote: q.context } };
         },
-        perform: async (c) => {
+        perform: async (c, operationId) => {
           if (c.kind !== 'order') throw new Error('wrong operation kind');
-          const o = await commerce.confirm(ctx.userKey, c.quote);
+          const o = await commerce.confirm(ctx.userKey, c.quote, undefined, operationId);
           return { status: 201, body: commerce.summarizeOrder(o) };
         },
       });

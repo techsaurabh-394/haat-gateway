@@ -47,6 +47,8 @@ export type NetworkOptions = {
   stageSec?: number;
   searchWindowMs?: number;
   extraGatewayConfig?: Partial<GatewayConfig>;
+  /** Test hook: the mock sellers send on_confirm after this many ms (simulates a late answer). */
+  sellerConfirmDelayMs?: number;
   /** Serve the gateway over HTTPS at this public URL (for example https://haat.localhost). */
   gatewayPublicUrl?: string;
   tls?: TlsOptions;
@@ -78,7 +80,7 @@ export async function startNetwork(opts: NetworkOptions = {}) {
   const regClient = () => new RegistryClient(registryUrl, 2000);
   const bg = await startBecknGateway(bgKey, regClient(), bgPort!);
   const sellers = await Promise.all(sellerFiles.map((f, i) =>
-    startSeller({ key: sellerKeys[i]!, file: f, registry: regClient(), url: `http://127.0.0.1:${sellerPorts[i]}`, stageSec: opts.stageSec ?? 20 }, sellerPorts[i]!),
+    startSeller({ key: sellerKeys[i]!, file: f, registry: regClient(), url: `http://127.0.0.1:${sellerPorts[i]}`, stageSec: opts.stageSec ?? 20, confirmDelayMs: opts.sellerConfirmDelayMs }, sellerPorts[i]!),
   ));
   const gwConfig = {
     publicUrl: gatewayUrl,
