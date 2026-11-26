@@ -13,7 +13,7 @@ import type { BecknOutcome } from '../beckn/bap.ts';
 import type { RegistryClient } from '../beckn/registry.ts';
 import type { Address, BecknEnvelope, Order } from '../beckn/types.ts';
 import { Lexicon, formatQuantity, measureToBase, type Term } from '../lexicon/normalize.ts';
-import { buildBasket, round2, type Basket, type Offer } from './basket.ts';
+import { buildBasket, round2, type Basket, type Offer, type ReliabilityLookup } from './basket.ts';
 import type { Pack } from './packs.ts';
 import { MemoryKV, type KV } from '../store/kv.ts';
 import { OutcomeUnknownError } from '../poppy/operations.ts';
@@ -132,6 +132,9 @@ export class Commerce {
   /** Orders are kept this long after their last update, seconds. */
   orderTtlSec = 180 * 24 * 3600;
 
+  /** Set by the gateway: how reliably each seller has answered. Only breaks exact ties. */
+  reliability?: ReliabilityLookup;
+
   constructor(opts: { bap: BapClient; registry: RegistryClient; packs: Pack[]; defaultDomain?: string; searchWindowMs?: number; kv?: KV }) {
     this.kv = opts.kv ?? new MemoryKV();
     this.bap = opts.bap;
@@ -169,7 +172,7 @@ export class Commerce {
     );
     const offers: Offer[] = [];
     for (const { t, envs } of responses) for (const env of envs) offers.push(...this.offersFrom(env, t.term));
-    return { query, terms, offers, basket: buildBasket(terms, offers) };
+    return { query, terms, offers, basket: buildBasket(terms, offers, this.reliability) };
   }
 
   private offersFrom(env: BecknEnvelope, term: string): Offer[] {

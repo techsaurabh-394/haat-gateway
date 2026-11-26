@@ -143,7 +143,8 @@ export function createGateway(config: GatewayConfig): Gateway {
   const commerce = new Commerce({ bap, registry, packs, searchWindowMs: config.searchWindowMs, kv });
   const gate = new ApprovalGate<GateContext>({ performTimeoutMs: config.performTimeoutMs, kv });
   const metrics = new Metrics();
-  const sellerStats = new SellerStats();
+  const sellerStats = new SellerStats(500, kv);
+  commerce.reliability = (id) => sellerStats.reliability(id);
   bap.onResult = (i) => {
     metrics.inc('haat_seller_calls_total', 'Calls to sellers by action and result.', { action: i.action, result: i.result });
     metrics.observe('haat_seller_answer_seconds', 'How long sellers take to answer, by action.', i.ms / 1000, { action: i.action });
@@ -153,6 +154,7 @@ export function createGateway(config: GatewayConfig): Gateway {
   // A seller's answer that arrives after we stopped waiting still decides an unknown outcome:
   // an order id settles the operation (approvals replay it), an explicit error releases it.
   bap.onUnmatched = (callback, env) => {
+    if (env.context?.bpp_id) sellerStats.recordLate(env.context.bpp_id);
     if (callback !== 'on_confirm') return;
     const late = commerce.lateConfirm(env);
     if (!late?.operationId) return;

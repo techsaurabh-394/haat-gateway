@@ -8,13 +8,14 @@ made. Nothing is added for show.
 1. **How many of the wanted items the seller covers.** More is better.
 2. **The items total**, as a tie-break between sellers that cover the same number.
 
-If two sellers tie on both, the one whose answer arrived first is picked, and the explanation says
-it was a tie.
+If two sellers tie on both, the one that has answered Haat's requests more reliably is picked (see
+[seller reliability](seller-reliability.md)); if that is no help either, the one whose answer arrived
+first is picked. The explanation says which of these happened.
 
 ## What is NOT compared
 
-Delivery fee, distance, delivery time and seller reliability. The delivery fee is only known at the
-final quote, and the mock sellers send no delivery time. Every explanation ends with this list
+Delivery fee, distance and delivery time. The delivery fee is only known at the final quote, and
+the mock sellers send no delivery time. Every explanation ends with this list
 (`why.not_compared`), in English and Hindi, so nobody reads a reason into the choice that is not there.
 
 ## Where it shows up
@@ -26,7 +27,8 @@ final quote, and the mock sellers send no delivery time. Every explanation ends 
   with the same text, and `data.why`. With no search yet it is treated as an ordinary message and no
   explanation is invented.
 
-`reason` is one of `only_seller`, `covers_most`, `cheapest_among_equal`, `same_total_first_answer`.
+`reason` is one of `only_seller`, `covers_most`, `cheapest_among_equal`, `same_total_more_reliable`,
+`same_total_first_answer`. `reliability` shows the chosen seller's label when there is enough history.
 `versus` is one of `covers_less`, `costs_more`, `cheaper_but_covers_less`, `same_total`.
 
 ## Example (local mock network)
@@ -40,4 +42,3 @@ Not considered: delivery fee, distance, delivery time, seller reliability.
 The explanation carries no phone number, address or token. It is built from the offers list, which
 the search response already shows.
 
-Seller reliability scores (roadmap) will add a third input later. Until then, the text says it is not used.

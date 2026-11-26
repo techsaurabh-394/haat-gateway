@@ -57,14 +57,14 @@ test('every explanation, in both languages, states what was not compared', () =>
   const b = buildBasket([term('rice')], [...shop('A', [['rice', 90]]), ...shop('B', [['rice', 70]])])!;
   assert.deepEqual(b.why!.not_compared, NOT_COMPARED);
   for (const x of NOT_COMPARED) assert.ok(explainWhy(b).includes(x), x);
-  assert.match(explainWhy(b, 'hi-IN'), /डिलीवरी शुल्क, दूरी, डिलीवरी समय और विक्रेता की विश्वसनीयता नहीं देखी गई/);
+  assert.match(explainWhy(b, 'hi-IN'), /डिलीवरी शुल्क, दूरी और डिलीवरी समय नहीं देखे गए/);
   assert.match(explainWhy(b, 'hi-IN'), /सबसे कम/);
 });
 
 test('the explanation never mentions things that were not compared as reasons', () => {
   const b = buildBasket([term('rice')], [...shop('A', [['rice', 90]]), ...shop('B', [['rice', 70]])])!;
   const body = explainWhy(b).split('\nNot considered:')[0]!;
-  for (const x of ['nearest', 'closest', 'fastest', 'trusted', 'reliable', 'rated']) assert.ok(!body.includes(x), x);
+  for (const x of ['nearest', 'closest', 'fastest', 'trusted', 'rated']) assert.ok(!body.includes(x), x);
 });
 
 // ---- over HTTP on the mock network ----

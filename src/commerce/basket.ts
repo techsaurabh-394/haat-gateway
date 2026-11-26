@@ -28,6 +28,10 @@ export type Offer = {
 
 export type BasketLine = { term: string; raw: string; offer: Offer; count: number; lineTotal: number; fit: string };
 
+export type ReliabilityLabel = 'reliable' | 'mixed' | 'unreliable' | 'not_enough_data';
+/** How often a seller answered Haat's own calls over its recent calls. A label, not a quality score. */
+export type Reliability = { label: ReliabilityLabel; calls: number; answer_rate: number | null; avg_ms: number | null; slow: boolean };
+
 export type Basket = {
   bppId: string;
   bppUri: string;
@@ -44,7 +48,8 @@ export type WhyReason =
   | 'only_seller' // only one seller had any of the wanted items
   | 'covers_most' // covers strictly more of the list than every other seller
   | 'cheapest_among_equal' // same coverage as others, lowest items total
-  | 'same_total_first_answer'; // same coverage and the same total as another seller; the first to answer won
+  | 'same_total_first_answer' // same coverage and the same total as another seller; the first to answer won
+  | 'same_total_more_reliable'; // same coverage and total; this seller answered Haat more reliably
 
 export type WhyAlternative = {
   provider_name: string;
@@ -52,6 +57,7 @@ export type WhyAlternative = {
   items_total: number;
   /** How this seller compared with the chosen one. */
   versus: 'covers_less' | 'costs_more' | 'cheaper_but_covers_less' | 'same_total';
+  reliability?: ReliabilityLabel;
 };
 
 export type Why = {
@@ -63,9 +69,12 @@ export type Why = {
   alternatives: WhyAlternative[];
   /** What this choice does not take into account. Always present. */
   not_compared: string[];
+  /** The chosen seller's own label, when one was available. Shown even when it did not decide anything. */
+  reliability?: Reliability;
+  /** Sellers skipped only because of a worse reliability label (never when they covered more or cost less). */
 };
 
-export const NOT_COMPARED = ['delivery fee', 'distance', 'delivery time', 'seller reliability'];
+export const NOT_COMPARED = ['delivery fee', 'distance', 'delivery time'];
 
 function chooseCount(want: Quantity | undefined, offer: Offer): { count: number; waste: number } | null {
   if (!want) return { count: 1, waste: 0 };
@@ -83,7 +92,11 @@ function chooseCount(want: Quantity | undefined, offer: Offer): { count: number;
   return { count, waste: count * pack.value - want.value };
 }
 
-export function buildBasket(terms: Term[], offers: Offer[]): Basket | null {
+/** Optional: how reliable each seller (by bpp id) has been. Used ONLY to break an exact tie. */
+export type ReliabilityLookup = (bppId: string) => Reliability;
+const RANK: Record<ReliabilityLabel, number> = { reliable: 3, mixed: 2, not_enough_data: 2, unreliable: 1 };
+
+export function buildBasket(terms: Term[], offers: Offer[], reliability?: ReliabilityLookup): Basket | null {
   const byProvider = new Map<string, Offer[]>();
   for (const o of offers) {
     const k = `${o.bppId}|${o.providerId}`;
@@ -131,27 +144,32 @@ export function buildBasket(terms: Term[], offers: Offer[]): Basket | null {
   for (const basket of all) {
     if (!best || basket.lines.length > best.lines.length || (basket.lines.length === best.lines.length && basket.itemsTotal < best.itemsTotal)) {
       best = basket;
+    } else if (reliability && basket.lines.length === best.lines.length && basket.itemsTotal === best.itemsTotal && RANK[reliability(basket.bppId).label] > RANK[reliability(best.bppId).label]) {
+      best = basket; // an exact tie on coverage AND total: the seller that answers us more reliably
     }
   }
-  if (best) best.why = explain(best, all, terms.length);
+  if (best) best.why = explain(best, all, terms.length, reliability);
   return best;
 }
 
-function explain(best: Basket, all: Basket[], wanted: number): Why {
+function explain(best: Basket, all: Basket[], wanted: number, reliability?: ReliabilityLookup): Why {
   const others = all.filter((o) => o !== best);
   const sameCover = others.filter((o) => o.lines.length === best.lines.length);
   let reason: WhyReason;
   if (others.length === 0) reason = 'only_seller';
   else if (sameCover.length === 0) reason = 'covers_most';
-  else if (sameCover.some((o) => o.itemsTotal === best.itemsTotal)) reason = 'same_total_first_answer';
+  else if (sameCover.some((o) => o.itemsTotal === best.itemsTotal)) {
+    const tied = sameCover.filter((o) => o.itemsTotal === best.itemsTotal);
+    reason = reliability && tied.some((o) => RANK[reliability(o.bppId).label] < RANK[reliability(best.bppId).label]) ? 'same_total_more_reliable' : 'same_total_first_answer';
+  }
   else reason = 'cheapest_among_equal';
   const versus = (o: Basket): WhyAlternative['versus'] =>
     o.lines.length < best.lines.length ? (o.itemsTotal < best.itemsTotal ? 'cheaper_but_covers_less' : 'covers_less') : o.itemsTotal === best.itemsTotal ? 'same_total' : 'costs_more';
   const alternatives = others
     .sort((a, b) => b.lines.length - a.lines.length || a.itemsTotal - b.itemsTotal)
     .slice(0, 3)
-    .map((o) => ({ provider_name: o.providerName, covered: o.lines.length, items_total: o.itemsTotal, versus: versus(o) }));
-  return { reason, covered: best.lines.length, wanted, sellers_compared: all.length, alternatives, not_compared: NOT_COMPARED };
+    .map((o) => ({ provider_name: o.providerName, covered: o.lines.length, items_total: o.itemsTotal, versus: versus(o), ...(reliability ? { reliability: reliability(o.bppId).label } : {}) }));
+  return { reason, covered: best.lines.length, wanted, sellers_compared: all.length, alternatives, not_compared: NOT_COMPARED, ...(reliability ? { reliability: reliability(best.bppId) } : {}) };
 }
 
 const inrText = (n: number) => `₹${Number.isInteger(n) ? n : n.toFixed(2)}`;
@@ -175,19 +193,25 @@ export function explainWhy(b: Basket, locale?: string): string {
         only_seller: `सिर्फ़ ${b.providerName} के पास आपकी सूची की चीज़ें मिलीं (${cover}).`,
         covers_most: `${b.providerName} आपकी सूची की सबसे ज़्यादा चीज़ें देता है (${cover}) — ${w.sellers_compared} विक्रेताओं में से।`,
         cheapest_among_equal: `${w.sellers_compared} विक्रेताओं में ${b.providerName} और बाकी बराबर चीज़ें (${cover}) देते हैं, पर इसका सामान का कुल सबसे कम है (${inrText(b.itemsTotal)}).`,
+        same_total_more_reliable: `${b.providerName} और दूसरे विक्रेता की चीज़ें और कुल बराबर हैं (${cover}, ${inrText(b.itemsTotal)}); इसने हमारे अनुरोधों का जवाब ज़्यादा भरोसेमंद ढंग से दिया, इसलिए यह चुना गया।`,
         same_total_first_answer: `${b.providerName} और दूसरे विक्रेता की चीज़ें और कुल बराबर हैं (${cover}, ${inrText(b.itemsTotal)}); जिसने पहले जवाब दिया, वह चुना गया।`,
       }[w.reason]
     : {
         only_seller: `${b.providerName} was the only seller with items from your list (${cover}).`,
         covers_most: `${b.providerName} covers the most of your list (${cover}) among ${w.sellers_compared} sellers.`,
         cheapest_among_equal: `${w.sellers_compared} sellers cover the same ${cover}; ${b.providerName} has the lowest items total (${inrText(b.itemsTotal)}).`,
+        same_total_more_reliable: `${b.providerName} and another seller tie on items covered and total (${cover}, ${inrText(b.itemsTotal)}); ${b.providerName} has answered Haat's requests more reliably, so it was picked.`,
         same_total_first_answer: `${b.providerName} and another seller tie on items covered and total (${cover}, ${inrText(b.itemsTotal)}); the one that answered first was picked.`,
       }[w.reason];
+  const r = w.reliability;
+  const relLine = !r || r.label === 'not_enough_data' ? '' : hi
+    ? `\n${b.providerName} ने हाल के ${r.calls} अनुरोधों में से ${Math.round((r.answer_rate ?? 0) * 100)}% का जवाब दिया${r.slow ? ' (जवाब धीमे आते हैं)' : ''}। यह सिर्फ़ यही बताता है कि वह हमें जवाब देता है, डिलीवरी या गुणवत्ता नहीं।`
+    : `\n${b.providerName} answered ${Math.round((r.answer_rate ?? 0) * 100)}% of Haat's last ${r.calls} requests${r.slow ? ' (slowly)' : ''}. That says only that it answers us, not anything about delivery or quality.`;
   const other = list.length ? (hi ? `\nदूसरे: ${list.join('; ')}.` : `\nOthers: ${list.join('; ')}.`) : '';
   const caveat = hi
-    ? `\nइसमें डिलीवरी शुल्क, दूरी, डिलीवरी समय और विक्रेता की विश्वसनीयता नहीं देखी गई।`
+    ? `\nइसमें डिलीवरी शुल्क, दूरी और डिलीवरी समय नहीं देखे गए।`
     : `\nNot considered: ${w.not_compared.join(', ')}.`;
-  return head + other + caveat;
+  return head + relLine + other + caveat;
 }
 
 export function round2(n: number): number {
