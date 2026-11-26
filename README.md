@@ -33,7 +33,7 @@ Poppy was announced on 6 October 2026 by Sierra and Meta as an open standard for
 
 When I searched (1 November 2026), I found Poppy SDKs and gateways, and separate ONDC MCP servers, but nothing connecting Poppy to ONDC or Beckn. That is a search result, not proof; if you know of related work, please open a discussion.
 
-## What works today (v0.2)
+## What works today
 
 | Area | What it does |
 | --- | --- |
@@ -49,10 +49,14 @@ When I searched (1 November 2026), I found Poppy SDKs and gateways, and separate
 | Storage | SQLite (`node:sqlite`, no dependency) or bounded memory; caps on every namespace |
 | Beckn buyer app | Ed25519 + BLAKE2b-512 signing, registry lookups (mock or **signed ONDC v2**), search fan-out, select, init, confirm, status, cancel |
 | ONDC onboarding | Key generation, signed `request_id`, `/ondc-site-verification.html`, `/on_subscribe` (AES-256-ECB over X25519), subscribe template, following ONDC's official reference code |
+| WhatsApp approvals | The exact approval summary goes to the signed-in account's verified phone with a **single-use link**. Opening it approves nothing; one tap on the page does, through the same gate ([details](docs/whatsapp.md)) |
+| Signed receipts | Every approval produces an Ed25519-signed receipt (what was approved, which revision, when, which channel, hashes of the exact text) that anyone can check with Haat's public key ([details](docs/receipts.md)) |
+| Operations | `/healthz`, `/readyz`, plus token-protected Prometheus `/metrics` and `/ops/overview` for stuck orders and seller health ([details](docs/operations.md)) |
 | Deploy | Dockerfile (no `npm install` needed), docker compose, `.env.example` |
 
 **Verified:**
-- 126 automated tests (unit and end to end over real HTTP), all passing; lint and typecheck clean.
+- 200 automated tests (unit and end to end over real HTTP), all passing; lint and typecheck clean (`npm run check`, 25 November 2026).
+- A **chaos seller** in the mock network answers slowly, twice, with a forged signature, or never; tests prove one approval never places two orders. Seeded **fuzz tests** hammer the language parser and the approval header.
 - The **official Personal Agent Protocol validator**, run over real HTTPS: **99 checks passed, 0 failed, 0 warnings**. The 22 skipped checks are for features Haat doesn't offer (MCP, browser join, Device and Mediated Sign-In). See the [results](docs/conformance/official-validator-results.txt), and reproduce with `scripts/conformance/run-official-validator.sh`.
 
 **Not done:** a live connection to ONDC (needs your legal entity, whitelisting and ONDC's approval), a real SMS provider for sign-in codes, a staffed handoff. See [limitations](docs/limitations.md).
@@ -88,6 +92,7 @@ More detail: [architecture](docs/architecture.md) and the [Poppy to Beckn mappin
 - [Security model](docs/security.md)
 - [Limitations, stated plainly](docs/limitations.md)
 - [Domain packs](docs/domain-packs.md) and the [language lexicon](docs/lexicon.md)
+- [WhatsApp approvals](docs/whatsapp.md), [signed receipts](docs/receipts.md) and [operating Haat](docs/operations.md)
 - [Going live on ONDC](docs/going-live.md): step by step, with what is unverified
 - [Conformance](docs/conformance.md): the official validator, how to rerun it
 - [Roadmap](ROADMAP.md)
@@ -106,7 +111,7 @@ Everyone who helps is credited here, for code, docs, language data and reviews (
 
 ## Project status
 
-Early (v0.2). The Poppy spec is a draft that changes quickly (0.1 to 0.3 in October 2026), so expect breaking changes. Nothing here has touched a real seller or real money. Before any public deployment, read [going live](docs/going-live.md): sign-in needs a real SMS provider, and ONDC needs your registration.
+Early (v0.2 plus unreleased features, see the [changelog](CHANGELOG.md)). The Poppy spec is a draft that changes quickly (0.1 to 0.3 in October 2026), so expect breaking changes. Nothing here has touched a real seller or real money. Before any public deployment, read [going live](docs/going-live.md): sign-in needs a real SMS provider, and ONDC needs your registration.
 
 ## Author
 

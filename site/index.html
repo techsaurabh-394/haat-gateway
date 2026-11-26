@@ -112,7 +112,7 @@
 <section style="padding-top:40px;padding-bottom:40px"><div class="wrap">
   <div class="metrics reveal">
     <div class="metric"><div class="n"><span data-n="99">0</span><small>/99</small></div><p>Official Poppy validator checks passed, zero warnings</p></div>
-    <div class="metric"><div class="n"><span data-n="126">0</span></div><p>Automated tests across signing, sessions and orders</p></div>
+    <div class="metric"><div class="n"><span data-n="200">0</span></div><p>Automated tests across signing, sessions, chaos and fuzzing</p></div>
     <div class="metric"><div class="n"><span data-n="11">0</span></div><p>Indian languages, native script and Latin spellings</p></div>
     <div class="metric"><div class="n"><span data-n="0">0</span></div><p>Runtime dependencies. A tiny surface to audit</p></div>
   </div>
@@ -197,6 +197,9 @@
     <div class="feat reveal"><div class="ico"><svg><use href="#i-basket"/></svg></div><h3>Smart baskets</h3><p>Picks the single seller that covers most of the list and says clearly what is missing.</p></div>
     <div class="feat reveal"><div class="ico ind"><svg><use href="#i-pkg"/></svg></div><h3>Zero runtime deps</h3><p>Node 22.18+ runs TypeScript directly. SQLite via <code>node:sqlite</code>. No build step.</p></div>
     <div class="feat reveal"><div class="ico grn"><svg><use href="#i-blocks"/></svg></div><h3>Domain packs</h3><p>Grocery and food today. Add a vertical with two JSON files, no TypeScript needed.</p></div>
+    <div class="feat reveal"><div class="ico"><svg><use href="#i-chat"/></svg></div><h3>WhatsApp approvals</h3><p>The exact summary arrives on the account's verified phone. A single-use link; opening it approves nothing, one tap does.</p></div>
+    <div class="feat reveal"><div class="ico ind"><svg><use href="#i-badge"/></svg></div><h3>Signed receipts</h3><p>An Ed25519 receipt proves what was approved and when, without the delivery address. Anyone can verify it.</p></div>
+    <div class="feat reveal"><div class="ico grn"><svg><use href="#i-clock"/></svg></div><h3>Tested against chaos</h3><p>A mock seller that goes silent, answers twice or forges signatures. One approval still never places two orders.</p></div>
   </div>
 </div></section>
 
@@ -292,7 +295,8 @@
     <div class="box yes reveal"><h3>Shipped in v0.2 <span class="badge">Available</span></h3><ul>
       <li><svg><use href="#i-check"/></svg>Full order flow on a local mock ONDC network</li>
       <li><svg><use href="#i-check"/></svg>Official Poppy validator: 99 passed, 0 failed</li>
-      <li><svg><use href="#i-check"/></svg>126 tests, lint and typecheck clean</li>
+      <li><svg><use href="#i-check"/></svg>200 tests, lint and typecheck clean</li>
+      <li><svg><use href="#i-check"/></svg>WhatsApp approvals, signed receipts, chaos-seller and fuzz tests, ops endpoints</li>
       <li><svg><use href="#i-check"/></svg>ONDC onboarding pieces following official reference code</li></ul></div>
     <div class="box not reveal"><h3>On the roadmap <span class="badge">Next</span></h3><ul>
       <li><svg><use href="#i-dash"/></svg>Live ONDC connection (legal entity, whitelisting, approval)</li>

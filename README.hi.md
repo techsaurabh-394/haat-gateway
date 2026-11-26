@@ -26,7 +26,7 @@
 - **ONDC buyer app:** Ed25519 हस्ताक्षर, registry lookup, search, select, init, confirm, status, cancel, और ONDC onboarding की तैयारी।
 - **स्थानीय नेटवर्क:** नकली registry, gateway और वाराणसी के तीन विक्रेता, ताकि सब कुछ ऑफ़लाइन चले।
 
-**जाँचा गया:** 126 स्वचालित टेस्ट, सभी पास। Poppy के **आधिकारिक validator** में 99 जाँचें पास, 0 असफल, 0 चेतावनी ([परिणाम](docs/conformance/official-validator-results.txt))। **अभी नहीं:** असली ONDC से जुड़ाव (इसके लिए आपकी कानूनी इकाई और ONDC की मंज़ूरी चाहिए), असली SMS OTP।
+**जाँचा गया:** 200 स्वचालित टेस्ट, सभी पास। Poppy के **आधिकारिक validator** में 99 जाँचें पास, 0 असफल, 0 चेतावनी ([परिणाम](docs/conformance/official-validator-results.txt))। **अभी नहीं:** असली ONDC से जुड़ाव (इसके लिए आपकी कानूनी इकाई और ONDC की मंज़ूरी चाहिए), असली SMS OTP।
 
 ## एक मिनट में चलाएँ
 
