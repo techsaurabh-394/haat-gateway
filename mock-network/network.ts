@@ -51,6 +51,8 @@ export type NetworkOptions = {
   sellerConfirmDelayMs?: number;
   /** Test hook: make every mock seller misbehave (slow, duplicate, forged or silent callbacks). */
   sellerChaos?: ChaosOptions;
+  /** Test hook: multiply every item's stock (the sellers refuse orders once an item sells out). Used by the load test. */
+  stockMultiplier?: number;
   /** Serve the gateway over HTTPS at this public URL (for example https://haat.localhost). */
   gatewayPublicUrl?: string;
   tls?: TlsOptions;
@@ -67,6 +69,9 @@ export async function startNetwork(opts: NetworkOptions = {}) {
   const bapKey = key('haat.bap.example');
   const bgKey = key('gateway.bg.example');
   const sellerFiles = ['kashi-kirana.json', 'ganga-dairy.json', 'assi-sabzi.json'].map((f) => loadSeller(join(here, 'sellers', f)));
+  if (opts.stockMultiplier && opts.stockMultiplier !== 1) {
+    for (const f of sellerFiles) for (const it of f.items) it.stock = Math.round(it.stock * opts.stockMultiplier);
+  }
   const sellerKeys = sellerFiles.map((f) => key(f.subscriber_id));
 
   const subscribers: Subscriber[] = [
