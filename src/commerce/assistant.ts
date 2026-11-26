@@ -9,7 +9,7 @@ import { ApprovalGate, type Approval, type Operation } from '../poppy/operations
 import type { Conversation, ConversationStore, Message } from '../poppy/conversations.ts';
 import { normalizeText } from '../lexicon/normalize.ts';
 import { CommerceError, describeBasket, validateCart, type CartRequest, type Delivery, type QuoteContext, type SearchResult } from './service.ts';
-import type { Basket } from './basket.ts';
+import { explainWhy, type Basket } from './basket.ts';
 import type { StoredOrder , Commerce} from './service.ts';
 import type { OAuthServer, TokenInfo } from '../oauth/server.ts';
 
@@ -28,6 +28,7 @@ const ORDER_RE = /\b(order|place|confirm|book|buy|checkout|kar ?do|kardo|karo|ma
 const STATUS_RE = /\b(status|track|kahan|kaha|where|kab|when)\b|कहाँ|कब|स्थिति/;
 const CANCEL_RE = /\b(cancel|radd|band karo|mat bhejo)\b|रद्द|कैंसल/;
 const MY_ORDERS_RE = /\b(my orders|mere orders|order history|purane orders?|pichhle orders?)\b|मेरे ऑर्डर/;
+const WHY_RE = /\b(why|kyun|kyu|kyon|kisliye|kis liye)\b.*\b(seller|shop|dukan|dukaan|this|yeh|ye|isi|isse)\b|\b(seller|shop|dukan)\b.*\b(why|kyun|kyu)\b|क्यों.*(दुकान|विक्रेता|यही)|(दुकान|विक्रेता).*क्यों/;
 const HELLO_RE = /^(hi|hello|namaste|namaskar|hey|नमस्ते)\b/;
 
 function hindi(c: Conversation): boolean {
@@ -92,6 +93,7 @@ export class Assistant {
           ? 'नमस्ते! क्या मंगवाना है? जैसे: "2 किलो आटा और 1 लीटर दूध"'
           : 'Namaste! Tell me what to get, for example "2 kilo atta aur 1 litre doodh".');
       }
+      if (WHY_RE.test(text) && mem.search?.basket) return this.why(c, mem.search.basket);
       if (MY_ORDERS_RE.test(text)) return await this.myOrders(c, auth);
       if (CANCEL_RE.test(text)) return auth.operations ? await this.proposeCancel(c, userKey) : this.noOperations(c);
       if (STATUS_RE.test(text) && mem.lastOrderId) return await this.status(c, userKey);
@@ -140,6 +142,11 @@ export class Assistant {
         },
       },
     });
+  }
+
+  private why(c: Conversation, b: Basket): void {
+    const locale = c.context.locale as string | undefined;
+    this.store.companyMessage(c, { text: explainWhy(b, locale), data: { why: b.why } });
   }
 
   private async myOrders(c: Conversation, auth: AuthContext): Promise<void> {

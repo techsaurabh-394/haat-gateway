@@ -10,6 +10,7 @@ import { RegistryClient } from './beckn/registry.ts';
 import { CALLBACKS, type BecknCallback } from './beckn/types.ts';
 import { Assistant, type AuthContext, type GateContext } from './commerce/assistant.ts';
 import { loadPacks } from './commerce/packs.ts';
+import { explainWhy } from './commerce/basket.ts';
 import { Commerce, CommerceError, validateCart, type Delivery } from './commerce/service.ts';
 import { openapi } from './openapi.ts';
 import { decryptChallenge, signRequestId, siteVerificationHtml } from './ondc/onboarding.ts';
@@ -365,6 +366,7 @@ export function createGateway(config: GatewayConfig): Gateway {
           items: r.basket.lines.map((l) => ({ id: l.offer.itemId, count: l.count, name: l.offer.name, line_total: l.lineTotal.toFixed(2), for: l.raw, fit: l.fit })),
           missing: r.basket.missing,
           items_total: r.basket.itemsTotal.toFixed(2),
+          why: r.basket.why && { ...r.basket.why, text: explainWhy(r.basket, locale(req)), text_hi: explainWhy(r.basket, 'hi') },
         },
       });
     });

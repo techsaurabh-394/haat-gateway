@@ -1,6 +1,6 @@
 # Limitations, stated plainly
 
-This is v0.2. Performance numbers (see `docs/load-test.md`) come from the local mock network on one machine, not from real ONDC sellers. Here is what it does **not** do, so nobody is surprised.
+This is v0.2. Seller choice compares items covered and items total only; it ignores delivery fee, distance, delivery time and reliability (see `docs/why-this-seller.md`). Performance numbers (see `docs/load-test.md`) come from the local mock network on one machine, not from real ONDC sellers. Here is what it does **not** do, so nobody is surprised.
 
 ## Not live on ONDC
 
