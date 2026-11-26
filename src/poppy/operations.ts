@@ -123,6 +123,16 @@ export type OpRecord<C> = {
   keepUntilMs: number;
   /** Set while the outcome is unknown: when that started and why. Cleared by settle()/release(). */
   unknown?: { sinceMs: number; reason: string };
+  /** What the person approved, written in the same save that precedes the action. Never removed. */
+  approval?: ApprovalFacts;
+};
+
+/** The facts of one approval: which exact terms, when, and through which channel. */
+export type ApprovalFacts = {
+  at: string;
+  revision: string;
+  channel: 'header' | 'link';
+  operation: Operation;
 };
 
 export type Quote<C> = {
@@ -203,7 +213,7 @@ export class ApprovalGate<C> {
         // Check 3: a revision we returned, unexpired, and the request asks for exactly it.
         const rev = rec.revisions[req.approval.revision];
         if (rev && rev.expiresAtMs > this.now() && rev.fingerprint === req.fingerprint) {
-          return this.perform(rec, rev, req.perform);
+          return this.perform(rec, rev, req.perform, 'header');
         }
         // Check 3 failed: perform nothing, return a NEW revision for what the request asks.
         return { kind: 'approval_required', operation: await this.requote(rec, req, req.approval.revision) };
@@ -257,7 +267,14 @@ export class ApprovalGate<C> {
     if (rec.state === 'performing') return { kind: 'in_progress', retryAfterSec: 2 };
     const rev = rec.revisions[approval.revision];
     if (!rev || rev.revision !== rec.latestRevision || rev.expiresAtMs <= this.now()) return null;
-    return this.perform(rec, rev, perform);
+    return this.perform(rec, rev, perform, 'link');
+  }
+
+  /** The recorded approval facts of an operation, for its owner only. */
+  approvalOf(operationId: string, ownerKey: string): { state: OpRecord<C>['state']; approval: ApprovalFacts; actionKey: string } | undefined {
+    const rec = this.get(operationId);
+    if (!rec || rec.ownerKey !== ownerKey || !rec.approval) return undefined;
+    return { state: rec.state, approval: rec.approval, actionKey: rec.actionKey };
   }
 
   /** Latest operation for an owner's action, if any (used by conversations). */
@@ -295,10 +312,13 @@ export class ApprovalGate<C> {
     return operation;
   }
 
-  private async perform(rec: OpRecord<C>, rev: Revision<C>, perform: (c: C, operationId: string) => Promise<StoredResponse>): Promise<GateResult> {
+  private async perform(rec: OpRecord<C>, rev: Revision<C>, perform: (c: C, operationId: string) => Promise<StoredResponse>, channel: ApprovalFacts['channel']): Promise<GateResult> {
     const id = rec.operationId;
     rec.state = 'performing';
     rec.performedRevision = rev.revision;
+    // Recorded in the same save that precedes the action. If a definite failure frees the
+    // operation for another try, the next approval replaces this one.
+    rec.approval = { at: new Date(this.now()).toISOString(), revision: rev.revision, channel, operation: rev.operation };
     this.save(rec); // persisted BEFORE the action, so a crash leaves "performing", never "pending"
     const task = perform(rev.context, id).then(
       (response) => {

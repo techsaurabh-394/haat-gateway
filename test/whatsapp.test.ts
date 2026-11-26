@@ -9,6 +9,7 @@ import { PersonalAgent, personSignsIn, type Company } from '../agent/personal-ag
 import { MockWhatsAppProvider, WhatsAppCloudProvider, whatsappNumber } from '../src/whatsapp/provider.ts';
 import { ApprovalLinks } from '../src/whatsapp/links.ts';
 import { MemoryKV } from '../src/store/kv.ts';
+import { verifyReceipt } from '../src/receipts/receipts.ts';
 
 const PHONE = '9123456780';
 const OTP = '123456';
@@ -195,4 +196,19 @@ test('Cloud API request shape and phone normalisation', async () => {
   assert.equal(params[1].text, 'https://haat.example/approve/abc');
   const bad = new WhatsAppCloudProvider({ accessToken: 't', phoneNumberId: '1', template: 'x', fetchImpl: (async () => new Response(JSON.stringify({ error: { message: 'nope' } }), { status: 400 })) as unknown as typeof fetch });
   await assert.rejects(bad.send({ to: '919876543210', summary: 's', link: 'l', expiresAt: 'e' }), /nope/);
+});
+
+test('an approval through the link yields a signed receipt with channel "link"', async () => {
+  const { sid, op } = await newOperation('1 litre doodh');
+  assert.equal((await agent.call(company, sid, 'GET', `/api/v1/operations/${op.operation_id}/receipt`, { signedIn: true })).status, 404, 'no receipt before the tap');
+  await sendLink(sid, op.operation_id);
+  const token = tokenOf(wa.outbox.at(-1)!.link);
+  assert.equal((await approve(token)).status, 200);
+
+  const r = await agent.call(company, sid, 'GET', `/api/v1/operations/${op.operation_id}/receipt`, { signedIn: true });
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.equal(r.body.payload.channel, 'link');
+  assert.equal(r.body.payload.revision, op.revision);
+  const keys = (await (await fetch(`${net.gatewayUrl}/.well-known/haat-receipt-keys.json`)).json()) as { keys: Array<{ public_key: string }> };
+  assert.equal(verifyReceipt(r.body, keys.keys[0]!.public_key).ok, true);
 });
