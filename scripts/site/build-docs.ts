@@ -20,6 +20,7 @@ const pages: Page[] = [
   { slug: 'whatsapp', src: 'docs/whatsapp.md', title: 'WhatsApp approvals', blurb: 'Approve with one tap on a single-use link.', group: 'Understand' },
   { slug: 'receipts', src: 'docs/receipts.md', title: 'Signed receipts', blurb: 'Proof of exactly what was approved.', group: 'Understand' },
   { slug: 'operations', src: 'docs/operations.md', title: 'Operating Haat', blurb: 'Health, metrics and stuck orders.', group: 'Ship' },
+  { slug: 'load-test', src: 'docs/load-test.md', title: 'Load test', blurb: 'Measured latency, and the no-double-order check under load.', group: 'Ship' },
   { slug: 'going-live', src: 'docs/going-live.md', title: 'Going live on ONDC', blurb: 'Step by step, with what is unverified.', group: 'Ship' },
   { slug: 'conformance', src: 'docs/conformance.md', title: 'Conformance', blurb: 'The official validator and how to rerun it.', group: 'Ship' },
   { slug: 'limitations', src: 'docs/limitations.md', title: 'Limitations', blurb: 'What it does not do, plainly.', group: 'Ship' },

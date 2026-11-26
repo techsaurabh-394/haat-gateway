@@ -5,6 +5,9 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 ## [Unreleased]
 
 ### Added
+- **Load test.** `npm run loadtest` runs the full order flow (search, approval request, place, retry the same approval) with many concurrent workers on the local mock network and prints p50/p95/p99 latencies. It fails if any order id repeats, a retried approval does not replay the same order, or the three mock sellers' own order count (`/_debug/orders`) differs from the orders the gateway reported. Measured with 1,000 orders each: 10 workers 48.2 full flows/s (whole flow p50 205 ms, p95 218 ms) and 50 workers 78.2 flows/s (p50 612 ms with a 500 ms search window), zero duplicates and zero failures. These are numbers for a local mock network on one machine, not for real ONDC. `NetworkOptions.stockMultiplier` is a test hook for it. See `docs/load-test.md`.
+
+### Added
 - **Signed approval receipts.** `GET /api/v1/operations/{id}/receipt` returns an Ed25519-signed record of what the person approved: operation, revision, time, channel (`header` or WhatsApp `link`), SHA-256 hashes of the exact summary and terms shown, and the commercial terms without the delivery address. The full text comes back unsigned to its owner only, and `verifyApprovedText` checks it against the hashes. `GET /.well-known/haat-receipt-keys.json` publishes the key; `HAAT_RECEIPT_KEY` pins it, else one is created and stored. The gate now records the approval in the same save that precedes the action (`OpRecord.approval`). Receipts are evidence from Haat, not an independent notary; no key rotation yet. See `docs/receipts.md`.
 
 ### Added

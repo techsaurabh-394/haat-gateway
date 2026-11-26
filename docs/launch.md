@@ -16,7 +16,7 @@ r/developersIndia (read the rules and use the right flair or weekly thread), DEV
 
 > Personal AI agents can now talk to businesses through a new open standard, the Personal Agent Protocol (Sierra demoed it with Meta's Muse). Small Indian sellers won't implement it one by one, so I built **Haat**: an open-source gateway that lets those agents shop from sellers on ONDC, understands "do kilo aata aur ek litre doodh", and never places an order without the person's explicit yes (and never twice).
 >
-> It runs fully offline against a mock network of three Varanasi shops, has 200 tests, and passes the protocol's official validator (99 checks, 0 failures). It is **not** connected to real ONDC yet; that's the next milestone, and the docs list exactly what's unverified.
+> It runs fully offline against a mock network of three Varanasi shops, has 202 tests, and passes the protocol's official validator (99 checks, 0 failures). It is **not** connected to real ONDC yet; that's the next milestone, and the docs list exactly what's unverified.
 >
 > Looking for contributors, especially people who can teach it how their language spells groceries. 20 good first issues are open. github.com/techsaurabh-394/haat-gateway
 
