@@ -45,7 +45,7 @@ When I searched (1 November 2026), I found Poppy SDKs and gateways, and separate
 | Conversations | Events, cursors, long polling, **server-sent events with `Last-Event-ID`**, idempotent message IDs, handoff, close, sign-in events (8.11), operations in messages |
 | Task coverage | Excluded-tasks document and feedback endpoint (section 9) |
 | Indian languages | 130 grocery products in Hindi, Bhojpuri, Marathi, Bengali, Tamil, Telugu, Gujarati, Kannada, Malayalam, Punjabi and Odia, in each script and in Latin letters ("2 kilo aata", "दो किलो आटा", "இரண்டு கிலோ அரிசி", "aadha kilo paneer"). Only Hindi was written by hand; the rest is machine-drafted and **needs native-speaker review** ([details](docs/lexicon.md)) |
-| Basket | Pack sizes that waste least, and the single seller covering most of the list, with an honest **"why this seller?"** in English and Hindi that also lists what was *not* compared ([details](docs/why-this-seller.md)) |
+| Basket | Pack sizes that waste least, and the single seller covering most of the list, with an honest **"why this seller?"** in English and Hindi that also lists what was *not* compared ([details](docs/why-this-seller.md)). A seller's reliability label (how often it answers Haat) is shown openly and only breaks exact ties ([details](docs/seller-reliability.md)) |
 | Storage | SQLite (`node:sqlite`, no dependency) or bounded memory; caps on every namespace |
 | Beckn buyer app | Ed25519 + BLAKE2b-512 signing, registry lookups (mock or **signed ONDC v2**), search fan-out, select, init, confirm, status, cancel |
 | ONDC onboarding | Key generation, signed `request_id`, `/ondc-site-verification.html`, `/on_subscribe` (AES-256-ECB over X25519), subscribe template, following ONDC's official reference code |
@@ -55,7 +55,7 @@ When I searched (1 November 2026), I found Poppy SDKs and gateways, and separate
 | Deploy | Dockerfile (no `npm install` needed), docker compose, `.env.example` |
 
 **Verified:**
-- 212 automated tests (unit and end to end over real HTTP), all passing; lint and typecheck clean (`npm run check`, 25 November 2026).
+- 228 automated tests (unit and end to end over real HTTP), all passing; lint and typecheck clean (`npm run check`, 25 November 2026).
 - A **load test** (`npm run loadtest`, [results](docs/load-test.md)): 1,000 orders at 50 concurrent workers on the local mock network, 78 full order flows per second, 0 duplicate orders, and the mock sellers' own count matched the gateway's. Local mock network on one laptop, not real ONDC.
 - A **chaos seller** in the mock network answers slowly, twice, with a forged signature, or never; tests prove one approval never places two orders. Seeded **fuzz tests** hammer the language parser and the approval header.
 - The **official Personal Agent Protocol validator**, run over real HTTPS: **99 checks passed, 0 failed, 0 warnings**. The 22 skipped checks are for features Haat doesn't offer (MCP, browser join, Device and Mediated Sign-In). See the [results](docs/conformance/official-validator-results.txt), and reproduce with `scripts/conformance/run-official-validator.sh`.
@@ -93,7 +93,7 @@ More detail: [architecture](docs/architecture.md) and the [Poppy to Beckn mappin
 - [Security model](docs/security.md)
 - [Limitations, stated plainly](docs/limitations.md)
 - [Domain packs](docs/domain-packs.md) and the [language lexicon](docs/lexicon.md)
-- [WhatsApp approvals](docs/whatsapp.md), [signed receipts](docs/receipts.md), [operating Haat](docs/operations.md) the [load test](docs/load-test.md) and [why this seller](docs/why-this-seller.md)
+- [WhatsApp approvals](docs/whatsapp.md), [signed receipts](docs/receipts.md), [operating Haat](docs/operations.md) the [load test](docs/load-test.md), [why this seller](docs/why-this-seller.md) and [seller reliability](docs/seller-reliability.md)
 - [Going live on ONDC](docs/going-live.md): step by step, with what is unverified
 - [Conformance](docs/conformance.md): the official validator, how to rerun it
 - [Roadmap](ROADMAP.md)

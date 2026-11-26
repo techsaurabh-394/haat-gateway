@@ -27,7 +27,8 @@ Serve the gateway over HTTPS in production; the token travels in a header.
 - `pending_confirms`: confirms sent to a seller that has not answered. Fields: transaction id,
   operation id, seller id and name, sent time, age.
 - `sellers`: per seller, how many calls were answered, silent or rejected, the answer rate and the
-  average answer time. Kept in memory, so it resets on restart. Bounded to 500 sellers.
+  average answer time, `late` answers and a `reliability` label ([details](seller-reliability.md)).
+  Kept in the store, so it survives a restart when `HAAT_DB` is set. Bounded to 500 sellers.
 
 The overview never contains user or owner keys, phone numbers, addresses, order contents or
 tokens. A test checks this.
