@@ -5,6 +5,9 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 ## [Unreleased]
 
 ### Added
+- **"Why this seller?"** Every suggested basket now carries `why`: the reason (`only_seller`, `covers_most`, `cheapest_among_equal`, `same_total_first_answer`), how many items it covers out of how many were wanted, up to 3 alternatives and how each compared, and ready-made English and Hindi text. It is built from the comparison `buildBasket` really made (items covered, then items total) and always lists what was not compared: delivery fee, distance, delivery time, seller reliability. Also answers "why this seller?" / "yeh dukan kyun?" in conversations; no explanation is invented when nothing has been searched. See `docs/why-this-seller.md`.
+
+### Added
 - **Load test.** `npm run loadtest` runs the full order flow (search, approval request, place, retry the same approval) with many concurrent workers on the local mock network and prints p50/p95/p99 latencies. It fails if any order id repeats, a retried approval does not replay the same order, or the three mock sellers' own order count (`/_debug/orders`) differs from the orders the gateway reported. Measured with 1,000 orders each: 10 workers 48.2 full flows/s (whole flow p50 205 ms, p95 218 ms) and 50 workers 78.2 flows/s (p50 612 ms with a 500 ms search window), zero duplicates and zero failures. These are numbers for a local mock network on one machine, not for real ONDC. `NetworkOptions.stockMultiplier` is a test hook for it. See `docs/load-test.md`.
 
 ### Added

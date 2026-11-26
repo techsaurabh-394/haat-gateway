@@ -34,7 +34,7 @@ docker:`git clone https://github.com/techsaurabh-394/haat-gateway.git
 cd haat-gateway
 cp .env.example .env
 docker compose up --build`,
-test:`npm run check       # typecheck + lint + 202 tests
+test:`npm run check       # typecheck + lint + 212 tests
 scripts/conformance/run-official-validator.sh   # official Poppy validator`};
 let qk='node';const code=$('#code');
 const setQ=k=>{qk=k;if(code)code.textContent=Q[k];$$('[data-q]').forEach(b=>b.classList.toggle('on',b.dataset.q===k))};

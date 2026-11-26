@@ -17,6 +17,7 @@ const pages: Page[] = [
   { slug: 'security', src: 'docs/security.md', title: 'Security model', blurb: 'Sessions, SSRF, approval binding.', group: 'Understand' },
   { slug: 'domain-packs', src: 'docs/domain-packs.md', title: 'Domain packs', blurb: 'Add a vertical with two JSON files.', group: 'Extend' },
   { slug: 'lexicon', src: 'docs/lexicon.md', title: 'Language lexicon', blurb: 'How Indian languages are understood.', group: 'Extend' },
+  { slug: 'why-this-seller', src: 'docs/why-this-seller.md', title: 'Why this seller?', blurb: 'An honest reason for every basket.', group: 'Understand' },
   { slug: 'whatsapp', src: 'docs/whatsapp.md', title: 'WhatsApp approvals', blurb: 'Approve with one tap on a single-use link.', group: 'Understand' },
   { slug: 'receipts', src: 'docs/receipts.md', title: 'Signed receipts', blurb: 'Proof of exactly what was approved.', group: 'Understand' },
   { slug: 'operations', src: 'docs/operations.md', title: 'Operating Haat', blurb: 'Health, metrics and stuck orders.', group: 'Ship' },
