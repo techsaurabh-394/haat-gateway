@@ -194,12 +194,15 @@
     <div class="feat reveal"><div class="ico ind"><svg><use href="#i-key"/></svg></div><h3>Beckn buyer app</h3><p>Ed25519 + BLAKE2b-512 signing, signed ONDC v2 registry lookups, search through cancel.</p></div>
     <div class="feat reveal"><div class="ico grn"><svg><use href="#i-badge"/></svg></div><h3>Poppy conformant</h3><p>Official validator over real HTTPS: 99 passed, 0 failed. Direct Sign-In with PKCE.</p></div>
     <div class="feat reveal"><div class="ico"><svg><use href="#i-stream"/></svg></div><h3>Conversations and SSE</h3><p>Cursors, long polling, server-sent events with <code>Last-Event-ID</code>, idempotent message IDs.</p></div>
-    <div class="feat reveal"><div class="ico"><svg><use href="#i-basket"/></svg></div><h3>Smart baskets</h3><p>Picks the single seller that covers most of the list and says clearly what is missing.</p></div>
+    <div class="feat reveal"><div class="ico"><svg><use href="#i-basket"/></svg></div><h3>Smart baskets</h3><p>Picks the single seller that covers most of the list, the pack sizes that waste least, and says clearly what is missing.</p></div>
     <div class="feat reveal"><div class="ico ind"><svg><use href="#i-pkg"/></svg></div><h3>Zero runtime deps</h3><p>Node 22.18+ runs TypeScript directly. SQLite via <code>node:sqlite</code>. No build step.</p></div>
     <div class="feat reveal"><div class="ico grn"><svg><use href="#i-blocks"/></svg></div><h3>Domain packs</h3><p>Grocery and food today. Add a vertical with two JSON files, no TypeScript needed.</p></div>
     <div class="feat reveal"><div class="ico"><svg><use href="#i-chat"/></svg></div><h3>WhatsApp approvals</h3><p>The exact summary arrives on the account's verified phone. A single-use link; opening it approves nothing, one tap does.</p></div>
     <div class="feat reveal"><div class="ico ind"><svg><use href="#i-badge"/></svg></div><h3>Signed receipts</h3><p>An Ed25519 receipt proves what was approved and when, without the delivery address. Anyone can verify it.</p></div>
     <div class="feat reveal"><div class="ico grn"><svg><use href="#i-clock"/></svg></div><h3>Tested against chaos</h3><p>A mock seller that goes silent, answers twice or forges signatures. One approval still never places two orders.</p></div>
+    <div class="feat reveal"><div class="ico ind"><svg><use href="#i-search"/></svg></div><h3>Why this seller?</h3><p>Every basket explains itself: most items covered, then lowest total. It also lists what was <em>not</em> compared. English and Hindi.</p></div>
+    <div class="feat reveal"><div class="ico grn"><svg><use href="#i-stream"/></svg></div><h3>Open reliability label</h3><p>How often a seller answers Haat, shown plainly. It only breaks exact ties, so a flaky seller still wins if it covers more or costs less.</p></div>
+    <div class="feat reveal"><div class="ico"><svg><use href="#i-clock"/></svg></div><h3>Load tested</h3><p>1,000 orders at 50 concurrent workers on the local mock network: 78 full flows a second, 0 duplicate orders. <a href="docs/load-test.html">See the method and limits</a>.</p></div>
   </div>
 </div></section>
 
@@ -292,11 +295,12 @@
     <p class="sub">Haat is production-grade in its guarantees and pre-production in its connections. Here is exactly where it stands.</p>
   </div>
   <div class="status">
-    <div class="box yes reveal"><h3>Shipped in v0.2 <span class="badge">Available</span></h3><ul>
+    <div class="box yes reveal"><h3>Built and tested <span class="badge">Available</span></h3><ul>
       <li><svg><use href="#i-check"/></svg>Full order flow on a local mock ONDC network</li>
       <li><svg><use href="#i-check"/></svg>Official Poppy validator: 99 passed, 0 failed</li>
       <li><svg><use href="#i-check"/></svg>228 tests, lint and typecheck clean</li>
       <li><svg><use href="#i-check"/></svg>WhatsApp approvals, signed receipts, chaos-seller and fuzz tests, ops endpoints</li>
+      <li><svg><use href="#i-check"/></svg>"Why this seller?" explanations, an open seller reliability label, a load test with measured numbers</li>
       <li><svg><use href="#i-check"/></svg>ONDC onboarding pieces following official reference code</li></ul></div>
     <div class="box not reveal"><h3>On the roadmap <span class="badge">Next</span></h3><ul>
       <li><svg><use href="#i-dash"/></svg>Live ONDC connection (legal entity, whitelisting, approval)</li>
