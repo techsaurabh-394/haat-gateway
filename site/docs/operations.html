@@ -1,0 +1,83 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operating Haat · Haat docs</title><meta name="description" content="Health, metrics and stuck orders."><meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/landing.css"><link rel="stylesheet" href="../assets/docs.css"></head><body id="top" class="docs-body">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#0d1015"/><path d="M6 11h10l-1.6 5H7.6z" fill="#e0600f"/><path d="M16 11h10l-1.6 5H17.6z" fill="#f6a56b"/><path d="M8.5 16h15v8.5a1 1 0 0 1-1 1h-13a1 1 0 0 1-1-1z" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M14 25.5v-4.5h4v4.5" fill="none" stroke="#fff" stroke-width="1.8"/></symbol>
+<symbol id="i-gh" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4-4"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 16v-4.5M12 8h.01"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12.5-7.5z"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+<symbol id="i-blocks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></symbol>
+<symbol id="i-ship" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+</defs></svg>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap wide">
+  <button class="side-btn" aria-label="Open documentation menu" aria-controls="side" aria-expanded="false"><svg><use href="#i-menu"/></svg></button>
+  <a class="brand" href="../" aria-label="Haat home"><svg class="mark"><use href="#mark"/></svg>Haat <span class="tagdocs">Docs</span></a>
+  <nav aria-label="Primary"><a href="../#product">Product</a><a href="../#demo">Live demo</a><a href="../#security">Security</a><a href="./" class="cur">Docs</a></nav>
+  <div class="right"><a class="gh" href="https://github.com/techsaurabh-394/haat-gateway"><svg><use href="#i-gh"/></svg><span>GitHub</span></a><a class="btn sm primary" href="quickstart.html">Get started</a></div>
+</div></header>
+<div class="wrap wide docs-grid"><aside class="side" id="side" aria-label="Documentation">
+  <label class="search"><svg><use href="#i-search"/></svg><input id="q" type="search" placeholder="Search docs" autocomplete="off"><kbd>/</kbd></label>
+  <a href="./" class=""><svg><use href="#i-home"/></svg>Overview</a>
+  <h5>Start</h5><a href="quickstart.html" class="" data-k="quickstart and api run it, call it, approve an order.">Quickstart and API</a><h5>Understand</h5><a href="architecture.html" class="" data-k="architecture three layers and the request lifecycle.">Architecture</a><a href="protocol-mapping.html" class="" data-k="poppy to beckn mapping how each poppy call becomes beckn.">Poppy to Beckn mapping</a><a href="security.html" class="" data-k="security model sessions, ssrf, approval binding.">Security model</a><a href="whatsapp.html" class="" data-k="whatsapp approvals approve with one tap on a single-use link.">WhatsApp approvals</a><a href="receipts.html" class="" data-k="signed receipts proof of exactly what was approved.">Signed receipts</a><h5>Extend</h5><a href="domain-packs.html" class="" data-k="domain packs add a vertical with two json files.">Domain packs</a><a href="lexicon.html" class="" data-k="language lexicon how indian languages are understood.">Language lexicon</a><h5>Ship</h5><a href="operations.html" class="on" data-k="operating haat health, metrics and stuck orders.">Operating Haat</a><a href="going-live.html" class="" data-k="going live on ondc step by step, with what is unverified.">Going live on ONDC</a><a href="conformance.html" class="" data-k="conformance the official validator and how to rerun it.">Conformance</a><a href="limitations.html" class="" data-k="limitations what it does not do, plainly.">Limitations</a><h5>Project</h5><a href="roadmap.html" class="" data-k="roadmap what comes next.">Roadmap</a><a href="contributing.html" class="" data-k="contributing your first pr in about 10 minutes.">Contributing</a><a href="changelog.html" class="" data-k="changelog release notes.">Changelog</a><a href="audit.html" class="" data-k="repository audit what not to do, learned the hard way.">Repository audit</a>
+  <div class="side-foot"><a href="https://github.com/techsaurabh-394/haat-gateway"><svg><use href="#i-gh"/></svg>GitHub</a><a href="../#demo"><svg><use href="#i-play"/></svg>Live demo</a></div>
+  </aside><main class="doc" id="main"><header class="doc-head">
+    <div class="crumbs"><a href="./">Docs</a><svg><use href="#i-chev"/></svg><span>Ship</span></div>
+    <h1>Operating Haat</h1><p class="doc-lead">Health, metrics and stuck orders.</p>
+    <div class="meta"><span><svg><use href="#i-clock"/></svg>2 min read</span><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/operations.md"><svg><use href="#i-edit"/></svg>Edit on GitHub</a></div></header><article class="prose"><p>Four endpoints help an operator see whether the gateway is healthy and chase stuck orders.</p>
+<div class="table"><table><thead><tr><th>Endpoint</th><th>Auth</th><th>Purpose</th></tr></thead><tbody><tr><td><code>GET /healthz</code></td><td>none</td><td>Liveness. The process answers. Returns only <code>ok</code> and <code>uptime_s</code>.</td></tr><tr><td><code>GET /readyz</code></td><td>none</td><td>Readiness. Writes and reads back a probe in the store. 200 or 503.</td></tr><tr><td><code>GET /metrics</code></td><td>operator token</td><td>Prometheus text format.</td></tr><tr><td><code>GET /ops/overview</code></td><td>operator token</td><td>Stuck operations, pending confirms, seller health (JSON).</td></tr></tbody></table></div><h2 id="turning-on-metrics-and-opsoverview"><a class="anchor" href="#turning-on-metrics-and-opsoverview" aria-label="Link to this section">#</a>Turning on /metrics and /ops/overview</h2><p>Set a long random secret:</p>
+<div class="code"><div class="code-h"><span>text</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-">export HAAT_OPS_TOKEN=&quot;$(openssl rand -hex 32)&quot;</code></pre></div><p>Send it as <code>Authorization: Bearer &lt;token&gt;</code>. Without <code>HAAT_OPS_TOKEN</code> both endpoints answer 404
+(the feature is off). A missing or wrong token gets 401. The token is compared in constant time.
+Serve the gateway over HTTPS in production; the token travels in a header.</p>
+<h2 id="what-the-overview-shows"><a class="anchor" href="#what-the-overview-shows" aria-label="Link to this section">#</a>What the overview shows</h2><ul>
+<li><code>unresolved_operations</code>: approved operations whose outcome is unknown (seller ACKed but no
+<code>on_confirm</code>). These answer 503 to the agent and are never retried automatically. Fields:
+operation id, action, since when, age, reason.</li>
+<li><code>pending_confirms</code>: confirms sent to a seller that has not answered. Fields: transaction id,
+operation id, seller id and name, sent time, age.</li>
+<li><code>sellers</code>: per seller, how many calls were answered, silent or rejected, the answer rate and the
+average answer time. Kept in memory, so it resets on restart. Bounded to 500 sellers.</li>
+</ul>
+<p>The overview never contains user or owner keys, phone numbers, addresses, order contents or
+tokens. A test checks this.</p>
+<h2 id="metrics"><a class="anchor" href="#metrics" aria-label="Link to this section">#</a>Metrics</h2><div class="table"><table><thead><tr><th>Metric</th><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>haat_operations_unresolved</code></td><td>gauge</td><td>Operations with an unknown outcome. Alert when above 0 for a while.</td></tr><tr><td><code>haat_oldest_unresolved_seconds</code></td><td>gauge</td><td>Age of the oldest one.</td></tr><tr><td><code>haat_confirms_pending</code></td><td>gauge</td><td>Confirms awaiting a seller answer.</td></tr><tr><td><code>haat_uptime_seconds</code></td><td>gauge</td><td>Seconds since start.</td></tr><tr><td><code>haat_seller_calls_total{action,result}</code></td><td>counter</td><td><code>result</code> is <code>answered</code>, <code>silent</code> or <code>rejected</code>. Search fan-out is not counted.</td></tr><tr><td><code>haat_seller_answer_seconds</code></td><td>histogram</td><td>Seller answer time by action.</td></tr><tr><td><code>haat_http_requests_total{route,status}</code></td><td>counter</td><td>Route is the pattern (<code>/api/v1/orders/:id</code>), status is the class (<code>2xx</code>).</td></tr><tr><td><code>haat_http_request_seconds</code></td><td>histogram</td><td>Request time by route pattern.</td></tr></tbody></table></div><p>Labels come from fixed sets (route patterns, status classes, actions), never from raw URLs or
+user input, so the number of series stays bounded. Unknown paths are grouped as <code>unmatched</code>.</p>
+<h2 id="suggested-alerts"><a class="anchor" href="#suggested-alerts" aria-label="Link to this section">#</a>Suggested alerts</h2><ul>
+<li><code>haat_operations_unresolved &gt; 0</code> for 10 minutes: a seller never confirmed. Contact the seller or
+check the order with <code>status</code>; do not re-send confirm.</li>
+<li><code>rate(haat_seller_calls_total{result=&quot;silent&quot;}[15m])</code> high for one seller in <code>/ops/overview</code>.</li>
+<li><code>/readyz</code> not 200: the store is failing.</li>
+</ul>
+<h2 id="limits"><a class="anchor" href="#limits" aria-label="Link to this section">#</a>Limits</h2><ul>
+<li>Counters and seller health are in memory and reset on restart. The unresolved and pending lists
+come from the store, so they survive restarts.</li>
+<li>This is a JSON and text interface. There is no web dashboard yet.</li>
+</ul>
+</article><nav class="pager" aria-label="Previous and next">
+    <a class="prev" href="receipts.html"><small>Previous</small><b>Signed receipts</b></a>
+    <a class="next" href="going-live.html"><small>Next</small><b>Going live on ONDC</b></a></nav></main><aside class="toc" aria-label="On this page"><h5>On this page</h5><a href="#turning-on-metrics-and-opsoverview" class="d2">Turning on /metrics and /ops/overview</a><a href="#what-the-overview-shows" class="d2">What the overview shows</a><a href="#metrics" class="d2">Metrics</a><a href="#suggested-alerts" class="d2">Suggested alerts</a><a href="#limits" class="d2">Limits</a>
+    <div class="toc-foot"><a href="https://github.com/techsaurabh-394/haat-gateway/blob/main/docs/operations.md"><svg><use href="#i-edit"/></svg>Edit this page</a><a href="https://github.com/techsaurabh-394/haat-gateway/issues/new/choose"><svg><use href="#i-chat"/></svg>Give feedback</a><a href="#top"><svg><use href="#i-up"/></svg>Back to top</a></div></aside></div>
+<footer class="doc-footer"><div class="wrap wide"><span>© 2026 Saurabh Pathak · MIT License</span><span>Rendered from the Markdown in <a href="https://github.com/techsaurabh-394/haat-gateway/tree/main/docs">docs/</a>. Independent project, not affiliated with ONDC, Sierra, Meta or the Personal Agent Protocol project.</span></div></footer>
+<div class="scrim" hidden></div>
+<script src="../assets/docs.js"></script>
+<script type="module">
+const nodes=[...document.querySelectorAll('pre.mermaid')];
+if(nodes.length){const {default:mermaid}=await import('https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs');
+mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'Inter, system-ui, sans-serif',primaryColor:'#fdf0e6',primaryBorderColor:'#e0600f',primaryTextColor:'#0d1015',lineColor:'#9aa0ab',secondaryColor:'#eef0fb',tertiaryColor:'#f4f2ed',noteBkgColor:'#fff8f2',noteBorderColor:'#f3c7a6'}});
+mermaid.run({nodes});}
+</script></body></html>

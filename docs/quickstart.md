@@ -11,7 +11,7 @@ npm install          # TypeScript and Node types, for `npm run typecheck` only
 npm run demo         # full story, you approve in the terminal
 npm run demo -- --yes
 npm start            # gateway on http://127.0.0.1:8080 plus the mock network, until Ctrl+C
-npm test             # 126 tests
+npm test             # 200 tests
 npm run lint
 npm run check        # typecheck + lint + tests (what CI runs)
 npm run serve        # production entry (src/main.ts), configured by environment variables
