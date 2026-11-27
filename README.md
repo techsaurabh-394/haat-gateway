@@ -55,7 +55,7 @@ When I searched (1 November 2026), I found Poppy SDKs and gateways, and separate
 | Deploy | Dockerfile (no `npm install` needed), docker compose, `.env.example` |
 
 **Verified:**
-- 233 automated tests (unit and end to end over real HTTP), all passing; lint and typecheck clean (`npm run check`, 25 November 2026).
+- 235 automated tests (unit and end to end over real HTTP), all passing; lint and typecheck clean (`npm run check`, 25 November 2026).
 - A **load test** (`npm run loadtest`, [results](docs/load-test.md)): 1,000 orders at 50 concurrent workers on the local mock network, 78 full order flows per second, 0 duplicate orders, and the mock sellers' own count matched the gateway's. Local mock network on one laptop, not real ONDC.
 - A **chaos seller** in the mock network answers slowly, twice, with a forged signature, or never; tests prove one approval never places two orders. Seeded **fuzz tests** hammer the language parser and the approval header.
 - The **official Personal Agent Protocol validator**, run over real HTTPS: **99 checks passed, 0 failed, 0 warnings**. The 22 skipped checks are for features Haat doesn't offer (MCP, browser join, Device and Mediated Sign-In). See the [results](docs/conformance/official-validator-results.txt), and reproduce with `scripts/conformance/run-official-validator.sh`.
@@ -96,6 +96,7 @@ More detail: [architecture](docs/architecture.md) and the [Poppy to Beckn mappin
 - [Security model](docs/security.md)
 - [Limitations, stated plainly](docs/limitations.md)
 - [Domain packs](docs/domain-packs.md) and the [language lexicon](docs/lexicon.md)
+- [Parser benchmark](docs/benchmark.md) and the [lexicon dataset](dataset/README.md) (review a language, no coding needed)
 - [WhatsApp approvals](docs/whatsapp.md), [signed receipts](docs/receipts.md), [operating Haat](docs/operations.md) the [load test](docs/load-test.md), [why this seller](docs/why-this-seller.md) and [seller reliability](docs/seller-reliability.md)
 - [Going live on ONDC](docs/going-live.md): step by step, with what is unverified
 - [Conformance](docs/conformance.md): the official validator, how to rerun it

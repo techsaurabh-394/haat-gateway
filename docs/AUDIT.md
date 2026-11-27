@@ -7,7 +7,7 @@ A full review of what this repository covers, what it doesn't, and what not to d
 | Area | Status | Where |
 | --- | --- | --- |
 | Working code with no runtime dependencies | ✅ | `src/`, `agent/`, `mock-network/` |
-| Tests: unit + end-to-end over real HTTP | ✅ 233 passing | `test/` |
+| Tests: unit + end-to-end over real HTTP | ✅ 235 passing | `test/` |
 | Official Poppy validator | ✅ 99 passed, 0 failed, 0 warnings (22 skipped: features not offered) | `docs/conformance.md` |
 | Lint (bug-focused rules) | ✅ clean | `eslint.config.js` |
 | Line / branch coverage | ✅ 97% / 81% overall (weakest: `assistant.ts` 81% lines, `bap.ts` 85%) | `npm run coverage` |

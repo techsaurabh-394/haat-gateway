@@ -47,4 +47,4 @@ The retail contract is partial: many optional fields, tags, `@ondc/org/*` extens
 
 ## Numbers
 
-The test count and the validator results are what the commands reported when they were last run (see CHANGELOG.md). Nothing has been benchmarked, including language understanding, and none of this has run against real ONDC.
+The test count and the validator results are what the commands reported when they were last run (see CHANGELOG.md). Language understanding is measured only on a small, maintainer-written phrase set (204 phrases, 96.1% exact, mostly Hinglish; see [benchmark](benchmark.md)), which is an upper bound, not real-customer accuracy. None of this has run against real ONDC.

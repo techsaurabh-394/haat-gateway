@@ -17,6 +17,7 @@ const pages: Page[] = [
   { slug: 'protocol-mapping', src: 'docs/protocol-mapping.md', title: 'Poppy to Beckn mapping', blurb: 'How each Poppy call becomes Beckn.', group: 'Understand' },
   { slug: 'security', src: 'docs/security.md', title: 'Security model', blurb: 'Sessions, SSRF, approval binding.', group: 'Understand' },
   { slug: 'domain-packs', src: 'docs/domain-packs.md', title: 'Domain packs', blurb: 'Add a vertical with two JSON files.', group: 'Extend' },
+  { slug: 'benchmark', src: 'docs/benchmark.md', title: 'Parser benchmark', blurb: 'Measured accuracy, with its caveats.', group: 'Extend' },
   { slug: 'lexicon', src: 'docs/lexicon.md', title: 'Language lexicon', blurb: 'How Indian languages are understood.', group: 'Extend' },
   { slug: 'why-this-seller', src: 'docs/why-this-seller.md', title: 'Why this seller?', blurb: 'An honest reason for every basket.', group: 'Understand' },
   { slug: 'seller-reliability', src: 'docs/seller-reliability.md', title: 'Seller reliability', blurb: 'An open label, and its one small job.', group: 'Understand' },

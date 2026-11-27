@@ -44,6 +44,8 @@
     "start": "node scripts/dev-up.ts",
     "demo": "node scripts/demo.ts",
     "loadtest": "node scripts/loadtest.ts",
+    "benchmark": "node scripts/benchmark.ts",
+    "export:lexicon": "node scripts/export-lexicon.ts",
     "test": "node --test --test-concurrency=1 \"test/**/*.test.ts\"",
     "typecheck": "tsc -p tsconfig.json",
     "check": "npm run typecheck && npm run lint && npm test",
