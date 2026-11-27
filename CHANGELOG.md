@@ -5,6 +5,9 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 ## [Unreleased]
 
 ### Added
+- **MCP server.** `node src/mcp/main.ts` speaks the Model Context Protocol over stdio (no new dependencies): tools `search_groceries` (Hindi, Hinglish and other languages), `place_order` and `order_status`. The person approves every order through MCP elicitation, the client's own dialog; the model cannot approve, and a client without elicitation can never place an order. Declining orders nothing. It runs on the local mock network unless `HAAT_URL` is set. See `docs/mcp.md`.
+
+### Added
 - **Seller reliability.** Each seller gets a label (`reliable`, `mixed`, `unreliable`, `not_enough_data`) from how often it answered Haat's own direct calls over its last 50 calls, plus `slow` and a count of `late` answers. It is shown in the "why this seller?" explanation and in `/ops/overview`, and it breaks an exact tie on items covered AND items total, nothing more: an unreliable seller still wins when it covers more or costs less. It cannot see cancellations by the seller, quality or delivery, and the text says so. History is now persisted in the store (it used to reset on restart); a rejection is not held against a seller; searches are not counted (nobody can say who stayed silent). `seller reliability` is no longer listed under "not compared". See `docs/seller-reliability.md`.
 
 ### Added
