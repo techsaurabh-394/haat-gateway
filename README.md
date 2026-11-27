@@ -55,7 +55,7 @@ When I searched (1 November 2026), I found Poppy SDKs and gateways, and separate
 | Deploy | Dockerfile (no `npm install` needed), docker compose, `.env.example` |
 
 **Verified:**
-- 228 automated tests (unit and end to end over real HTTP), all passing; lint and typecheck clean (`npm run check`, 25 November 2026).
+- 233 automated tests (unit and end to end over real HTTP), all passing; lint and typecheck clean (`npm run check`, 25 November 2026).
 - A **load test** (`npm run loadtest`, [results](docs/load-test.md)): 1,000 orders at 50 concurrent workers on the local mock network, 78 full order flows per second, 0 duplicate orders, and the mock sellers' own count matched the gateway's. Local mock network on one laptop, not real ONDC.
 - A **chaos seller** in the mock network answers slowly, twice, with a forged signature, or never; tests prove one approval never places two orders. Seeded **fuzz tests** hammer the language parser and the approval header.
 - The **official Personal Agent Protocol validator**, run over real HTTPS: **99 checks passed, 0 failed, 0 warnings**. The 22 skipped checks are for features Haat doesn't offer (MCP, browser join, Device and Mediated Sign-In). See the [results](docs/conformance/official-validator-results.txt), and reproduce with `scripts/conformance/run-official-validator.sh`.
@@ -73,6 +73,8 @@ npm run demo       # interactive: you approve the order in your terminal
 
 You need Node.js 22.18 or newer (TypeScript runs natively, no build step). `npm run demo -- --yes` approves automatically, `npm start` keeps a local network running, `npm run check` runs typecheck, lint and tests. With Docker: `docker compose up --build`.
 
+**Try it from Claude (MCP):** `claude mcp add haat -- node /path/to/haat-gateway/src/mcp/main.ts`, then ask "order 2 kilo aata and 1 litre doodh". Your client shows the approval dialog; nothing is ordered unless you accept. Details in [docs/mcp.md](docs/mcp.md).
+
 ## How it works
 
 <p align="center"><img src="assets/order-flow.svg" alt="Sequence diagram from discovery to a confirmed order" width="100%"></p>
@@ -88,6 +90,7 @@ More detail: [architecture](docs/architecture.md) and the [Poppy to Beckn mappin
 ## Documentation
 
 - [Quickstart and API](docs/quickstart.md)
+- [Use it from Claude or any MCP client](docs/mcp.md)
 - [Architecture](docs/architecture.md), with Mermaid flowcharts
 - [Protocol mapping: Poppy to Beckn](docs/protocol-mapping.md)
 - [Security model](docs/security.md)

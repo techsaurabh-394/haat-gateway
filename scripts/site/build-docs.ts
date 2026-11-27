@@ -12,6 +12,7 @@ const GH = `${REPO}/blob/main/`;
 type Page = { slug: string; src: string; title: string; blurb: string; group: string };
 const pages: Page[] = [
   { slug: 'quickstart', src: 'docs/quickstart.md', title: 'Quickstart and API', blurb: 'Run it, call it, approve an order.', group: 'Start' },
+  { slug: 'mcp', src: 'docs/mcp.md', title: 'Use it from Claude (MCP)', blurb: 'Add Haat to your AI app, type an order, approve.', group: 'Start' },
   { slug: 'architecture', src: 'docs/architecture.md', title: 'Architecture', blurb: 'Three layers and the request lifecycle.', group: 'Understand' },
   { slug: 'protocol-mapping', src: 'docs/protocol-mapping.md', title: 'Poppy to Beckn mapping', blurb: 'How each Poppy call becomes Beckn.', group: 'Understand' },
   { slug: 'security', src: 'docs/security.md', title: 'Security model', blurb: 'Sessions, SSRF, approval binding.', group: 'Understand' },
