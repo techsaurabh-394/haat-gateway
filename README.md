@@ -71,7 +71,7 @@ npm install        # dev tools only (TypeScript); there are no runtime dependenc
 npm run demo       # interactive: you approve the order in your terminal
 ```
 
-You need Node.js 22.18 or newer (TypeScript runs natively, no build step). `npm run demo -- --yes` approves automatically, `npm start` keeps a local network running, `npm run check` runs typecheck, lint and tests. With Docker: `docker compose up --build`.
+You need Node.js 22.18 or newer (TypeScript runs natively, no build step). `npm run demo -- --yes` approves automatically, `npm start` keeps a local network running, `npm run check` runs typecheck, lint and tests. With Docker: `docker compose up --build`, or without cloning: `docker run -p 8080:8080 ghcr.io/techsaurabh-394/haat-gateway` (published on each version tag; runs the local mock network).
 
 **Try it from Claude (MCP):** `claude mcp add haat -- node /path/to/haat-gateway/src/mcp/main.ts`, then ask "order 2 kilo aata and 1 litre doodh". Your client shows the approval dialog; nothing is ordered unless you accept. Details in [docs/mcp.md](docs/mcp.md).
 

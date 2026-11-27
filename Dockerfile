@@ -12,6 +12,7 @@ WORKDIR /app
 COPY package.json ./
 COPY src ./src
 COPY packs ./packs
+COPY agent ./agent
 COPY mock-network ./mock-network
 
 RUN mkdir -p /data && chown node:node /data
