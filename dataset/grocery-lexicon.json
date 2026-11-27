@@ -1,0 +1,6199 @@
+{
+ "name": "haat-grocery-lexicon",
+ "version": 1,
+ "licence": "MIT",
+ "source": "https://github.com/techsaurabh-394/haat-gateway/tree/main/packs/ondc-ret10-grocery",
+ "products": 130,
+ "groups": {
+  "latin": {
+   "covers": "English plus every language typed in Latin letters (Hinglish, Tanglish, ...)",
+   "variants": 1189,
+   "reviewed": false,
+   "reviewers": [],
+   "note": "Hinglish spellings were hand-written; other languages typed in Latin letters are machine-drafted. No native-speaker review yet."
+  },
+  "devanagari": {
+   "covers": "Hindi, Marathi, Bhojpuri (Devanagari script)",
+   "variants": 309,
+   "reviewed": false,
+   "reviewers": [],
+   "note": "Hindi entries were hand-written by the maintainer; Marathi and Bhojpuri are machine-drafted. No native-speaker review yet."
+  },
+  "bengali": {
+   "covers": "Bengali",
+   "variants": 163,
+   "reviewed": false,
+   "reviewers": [],
+   "note": "Not reviewed by a native speaker yet."
+  },
+  "gurmukhi": {
+   "covers": "Punjabi",
+   "variants": 150,
+   "reviewed": false,
+   "reviewers": [],
+   "note": "Not reviewed by a native speaker yet."
+  },
+  "gujarati": {
+   "covers": "Gujarati",
+   "variants": 168,
+   "reviewed": false,
+   "reviewers": [],
+   "note": "Not reviewed by a native speaker yet."
+  },
+  "odia": {
+   "covers": "Odia",
+   "variants": 130,
+   "reviewed": false,
+   "reviewers": [],
+   "note": "Not reviewed by a native speaker yet."
+  },
+  "tamil": {
+   "covers": "Tamil",
+   "variants": 174,
+   "reviewed": false,
+   "reviewers": [],
+   "note": "Not reviewed by a native speaker yet."
+  },
+  "telugu": {
+   "covers": "Telugu",
+   "variants": 168,
+   "reviewed": false,
+   "reviewers": [],
+   "note": "Not reviewed by a native speaker yet."
+  },
+  "kannada": {
+   "covers": "Kannada",
+   "variants": 166,
+   "reviewed": false,
+   "reviewers": [],
+   "note": "Not reviewed by a native speaker yet."
+  },
+  "malayalam": {
+   "covers": "Malayalam",
+   "variants": 151,
+   "reviewed": false,
+   "reviewers": [],
+   "note": "Not reviewed by a native speaker yet."
+  }
+ },
+ "entries": [
+  {
+   "term": "wheat flour",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "atta",
+     "aata",
+     "aataa",
+     "ata",
+     "gehun ka atta",
+     "gehu atta",
+     "chakki atta",
+     "flour",
+     "wheat flour",
+     "gehun ke ata",
+     "gavhache pith",
+     "gahu pith",
+     "gomer atta",
+     "godhumai maavu",
+     "kothumai maavu",
+     "godhuma pindi",
+     "ghau no lot",
+     "ghau lot",
+     "lot",
+     "godhi hittu",
+     "gothambu podi",
+     "gothambu maavu",
+     "kanak da atta",
+     "gahama ata"
+    ],
+    "devanagari": [
+     "आटा",
+     "गेहूं का आटा",
+     "गव्हाचे पीठ",
+     "गव्हाचं पीठ"
+    ],
+    "bengali": [
+     "গমের আটা",
+     "আটা"
+    ],
+    "tamil": [
+     "கோதுமை மாவு"
+    ],
+    "telugu": [
+     "గోధుమ పిండి"
+    ],
+    "gujarati": [
+     "ઘઉંનો લોટ",
+     "ઘઉં લોટ",
+     "લોટ"
+    ],
+    "kannada": [
+     "ಗೋಧಿ ಹಿಟ್ಟು",
+     "ಗೋಧಿಹಿಟ್ಟು"
+    ],
+    "malayalam": [
+     "ഗോതമ്പ് പൊടി",
+     "ഗോതമ്പ് മാവ്"
+    ],
+    "gurmukhi": [
+     "ਕਣਕ ਦਾ ਆਟਾ",
+     "ਆਟਾ"
+    ],
+    "odia": [
+     "ଗହମ ଅଟା",
+     "ଅଟା"
+    ]
+   }
+  },
+  {
+   "term": "rice",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "rice",
+     "chawal",
+     "chaawal",
+     "chaval",
+     "chaul",
+     "basmati",
+     "chaur",
+     "tandul",
+     "chal",
+     "arisi",
+     "biyyam",
+     "chokha",
+     "akki",
+     "ari",
+     "chaula"
+    ],
+    "devanagari": [
+     "चावल",
+     "बासमती",
+     "चउर",
+     "तांदूळ"
+    ],
+    "bengali": [
+     "চাল"
+    ],
+    "tamil": [
+     "அரிசி"
+    ],
+    "telugu": [
+     "బియ్యం"
+    ],
+    "gujarati": [
+     "ચોખા"
+    ],
+    "kannada": [
+     "ಅಕ್ಕಿ"
+    ],
+    "malayalam": [
+     "അരി"
+    ],
+    "gurmukhi": [
+     "ਚੌਲ",
+     "ਚਾਵਲ"
+    ],
+    "odia": [
+     "ଚାଉଳ"
+    ]
+   }
+  },
+  {
+   "term": "gram flour",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "besan",
+     "baisan",
+     "gram flour",
+     "kadalai maavu",
+     "senaga pindi",
+     "chana no lot",
+     "kadle hittu",
+     "kadlehittu",
+     "kadala maavu",
+     "kadala podi"
+    ],
+    "devanagari": [
+     "बेसन"
+    ],
+    "bengali": [
+     "বেসন"
+    ],
+    "tamil": [
+     "கடலை மாவு"
+    ],
+    "telugu": [
+     "శనగ పిండి"
+    ],
+    "gujarati": [
+     "ચણાનો લોટ",
+     "બેસન"
+    ],
+    "kannada": [
+     "ಕಡಲೆ ಹಿಟ್ಟು",
+     "ಕಡಲೆಹಿಟ್ಟು"
+    ],
+    "malayalam": [
+     "കടല മാവ്",
+     "കടലപ്പൊടി"
+    ],
+    "gurmukhi": [
+     "ਬੇਸਣ"
+    ],
+    "odia": [
+     "ବେସନ"
+    ]
+   }
+  },
+  {
+   "term": "semolina",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "sooji",
+     "suji",
+     "rava",
+     "semolina",
+     "ravaa",
+     "ravai",
+     "ravva",
+     "ravo",
+     "rave"
+    ],
+    "devanagari": [
+     "सूजी",
+     "रवा"
+    ],
+    "bengali": [
+     "সুজি"
+    ],
+    "tamil": [
+     "ரவை"
+    ],
+    "telugu": [
+     "రవ్వ"
+    ],
+    "gujarati": [
+     "સોજી",
+     "રવો"
+    ],
+    "kannada": [
+     "ರವೆ",
+     "ಸೂಜಿ"
+    ],
+    "malayalam": [
+     "റവ"
+    ],
+    "gurmukhi": [
+     "ਸੂਜੀ"
+    ],
+    "odia": [
+     "ସୁଜି"
+    ]
+   }
+  },
+  {
+   "term": "flattened rice",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "poha",
+     "chivda",
+     "flattened rice",
+     "chura",
+     "chiura",
+     "pohe",
+     "chire",
+     "aval",
+     "atukulu",
+     "pauva",
+     "avalakki"
+    ],
+    "devanagari": [
+     "पोहा",
+     "चूड़ा",
+     "चिउड़ा",
+     "पोहे"
+    ],
+    "bengali": [
+     "চিড়ে",
+     "চিঁড়ে"
+    ],
+    "tamil": [
+     "அவல்"
+    ],
+    "malayalam": [
+     "അവൽ"
+    ],
+    "telugu": [
+     "అటుకులు"
+    ],
+    "gujarati": [
+     "પૌવા"
+    ],
+    "kannada": [
+     "ಅವಲಕ್ಕಿ"
+    ],
+    "gurmukhi": [
+     "ਪੋਹਾ"
+    ],
+    "odia": [
+     "ଚୁଡ଼ା"
+    ]
+   }
+  },
+  {
+   "term": "maida",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "maida",
+     "moyda",
+     "maida maavu",
+     "maida pindi",
+     "mendo"
+    ],
+    "devanagari": [
+     "मैदा"
+    ],
+    "bengali": [
+     "ময়দা"
+    ],
+    "tamil": [
+     "மைதா",
+     "மைதா மாவு"
+    ],
+    "telugu": [
+     "మైదా"
+    ],
+    "gujarati": [
+     "મેંદો"
+    ],
+    "kannada": [
+     "ಮೈದಾ"
+    ],
+    "malayalam": [
+     "മൈദ"
+    ],
+    "gurmukhi": [
+     "ਮੈਦਾ"
+    ],
+    "odia": [
+     "ମଇଦା"
+    ]
+   }
+  },
+  {
+   "term": "rice flour",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "chawal ka atta",
+     "chawal atta",
+     "tandulache pith",
+     "chaler gura",
+     "arisi maavu",
+     "biyyam pindi",
+     "chokha no lot",
+     "akki hittu",
+     "ari podi",
+     "chawal da atta",
+     "chaula gunda"
+    ],
+    "devanagari": [
+     "चावल का आटा",
+     "तांदळाचे पीठ"
+    ],
+    "bengali": [
+     "চালের গুঁড়ো"
+    ],
+    "tamil": [
+     "அரிசி மாவு"
+    ],
+    "telugu": [
+     "బియ్యం పిండి"
+    ],
+    "gujarati": [
+     "ચોખાનો લોટ"
+    ],
+    "kannada": [
+     "ಅಕ್ಕಿ ಹಿಟ್ಟು"
+    ],
+    "malayalam": [
+     "അരിപ്പൊടി"
+    ],
+    "gurmukhi": [
+     "ਚਾਵਲ ਦਾ ਆਟਾ"
+    ],
+    "odia": [
+     "ଚାଉଳ ଗୁଣ୍ଡ"
+    ]
+   }
+  },
+  {
+   "term": "broken wheat",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "dalia",
+     "daliya",
+     "godhumai rava",
+     "godhuma rava",
+     "dalio",
+     "godhi rave",
+     "gothambu rava"
+    ],
+    "devanagari": [
+     "दलिया"
+    ],
+    "bengali": [
+     "দালিয়া"
+    ],
+    "tamil": [
+     "கோதுமை ரவை"
+    ],
+    "telugu": [
+     "గోధుమ రవ్వ"
+    ],
+    "gujarati": [
+     "ડલિયા"
+    ],
+    "kannada": [
+     "ಗೋಧಿ ರವೆ"
+    ],
+    "malayalam": [
+     "ഗോതമ്പ് റവ"
+    ],
+    "gurmukhi": [
+     "ਦਲੀਆ"
+    ],
+    "odia": [
+     "ଦଲିଆ"
+    ]
+   }
+  },
+  {
+   "term": "oats",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "oats"
+    ],
+    "devanagari": [
+     "ओट्स"
+    ],
+    "bengali": [
+     "ওটস"
+    ],
+    "tamil": [
+     "ஓட்ஸ்"
+    ],
+    "telugu": [
+     "ఓట్స్"
+    ],
+    "gujarati": [
+     "ઓટ્સ"
+    ],
+    "kannada": [
+     "ಓಟ್ಸ್"
+    ],
+    "malayalam": [
+     "ഓട്സ്"
+    ],
+    "gurmukhi": [
+     "ਓਟਸ"
+    ],
+    "odia": [
+     "ଓଟସ"
+    ]
+   }
+  },
+  {
+   "term": "sago",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "sabudana",
+     "sabudaana",
+     "sabu dana",
+     "sabudane",
+     "sagu",
+     "javvarisi",
+     "saggubiyyam",
+     "sabbakki",
+     "chowwari"
+    ],
+    "devanagari": [
+     "साबूदाना",
+     "साबुदाणा"
+    ],
+    "bengali": [
+     "সাগু"
+    ],
+    "tamil": [
+     "ஜவ்வரிசி"
+    ],
+    "telugu": [
+     "సగ్గుబియ్యం"
+    ],
+    "gujarati": [
+     "સાબુદાણા"
+    ],
+    "kannada": [
+     "ಸಬ್ಬಕ್ಕಿ"
+    ],
+    "malayalam": [
+     "ചൗവ്വരി"
+    ],
+    "gurmukhi": [
+     "ਸਾਬੂਦਾਣਾ"
+    ],
+    "odia": [
+     "ସାଗୁ"
+    ]
+   }
+  },
+  {
+   "term": "puffed rice",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "murmura",
+     "kurmura",
+     "puffed rice",
+     "kurmure",
+     "muri",
+     "pori",
+     "murmuralu",
+     "mamra",
+     "mandakki",
+     "malar",
+     "murmure"
+    ],
+    "devanagari": [
+     "मुरमुरा",
+     "कुरमुरे"
+    ],
+    "bengali": [
+     "মুড়ি"
+    ],
+    "odia": [
+     "ମୁଢ଼ି"
+    ],
+    "tamil": [
+     "பொரி"
+    ],
+    "telugu": [
+     "మరమరాలు"
+    ],
+    "gujarati": [
+     "મમરા"
+    ],
+    "kannada": [
+     "ಮಂಡಕ್ಕಿ"
+    ],
+    "malayalam": [
+     "മലർ"
+    ],
+    "gurmukhi": [
+     "ਮੁਰਮੁਰੇ"
+    ]
+   }
+  },
+  {
+   "term": "jaggery",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "gud",
+     "gur",
+     "jaggery",
+     "gul",
+     "vellam",
+     "bellam",
+     "gol",
+     "bella",
+     "sharkkara",
+     "guda"
+    ],
+    "devanagari": [
+     "गुड़",
+     "गूळ"
+    ],
+    "bengali": [
+     "গুড়"
+    ],
+    "tamil": [
+     "வெல்லம்"
+    ],
+    "telugu": [
+     "బెల్లం"
+    ],
+    "gujarati": [
+     "ગોળ"
+    ],
+    "kannada": [
+     "ಬೆಲ್ಲ"
+    ],
+    "malayalam": [
+     "ശർക്കര"
+    ],
+    "gurmukhi": [
+     "ਗੁੜ"
+    ],
+    "odia": [
+     "ଗୁଡ଼"
+    ]
+   }
+  },
+  {
+   "term": "vermicelli",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "seviyan",
+     "sevai",
+     "vermicelli",
+     "shevaya",
+     "semai",
+     "semiya",
+     "seviya",
+     "shavige"
+    ],
+    "devanagari": [
+     "सेवई",
+     "शेवया"
+    ],
+    "bengali": [
+     "সেমাই"
+    ],
+    "odia": [
+     "ସେମାଇ"
+    ],
+    "tamil": [
+     "சேமியா"
+    ],
+    "telugu": [
+     "సేమియా"
+    ],
+    "malayalam": [
+     "സേമിയ"
+    ],
+    "gujarati": [
+     "સેવિયા"
+    ],
+    "kannada": [
+     "ಶ್ಯಾವಿಗೆ"
+    ],
+    "gurmukhi": [
+     "ਸੇਵੀਆਂ"
+    ]
+   }
+  },
+  {
+   "term": "noodles",
+   "category": "Snacks",
+   "variants": {
+    "latin": [
+     "noodles",
+     "chowmein"
+    ],
+    "devanagari": [
+     "नूडल्स"
+    ],
+    "bengali": [
+     "নুডলস"
+    ],
+    "tamil": [
+     "நூடுல்ஸ்"
+    ],
+    "telugu": [
+     "నూడుల్స్"
+    ],
+    "gujarati": [
+     "નૂડલ્સ"
+    ],
+    "kannada": [
+     "ನೂಡಲ್ಸ್"
+    ],
+    "malayalam": [
+     "നൂഡിൽസ്"
+    ],
+    "gurmukhi": [
+     "ਨੂਡਲਜ਼"
+    ],
+    "odia": [
+     "ନୁଡୁଲ୍ସ"
+    ]
+   }
+  },
+  {
+   "term": "sattu",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "sattu",
+     "satua",
+     "chhatu"
+    ],
+    "devanagari": [
+     "सत्तू",
+     "सतुआ"
+    ],
+    "bengali": [
+     "ছাতু"
+    ]
+   }
+  },
+  {
+   "term": "ragi",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "ragi",
+     "nachni",
+     "finger millet",
+     "marua",
+     "kezhvaragu",
+     "ragulu",
+     "mandia"
+    ],
+    "devanagari": [
+     "रागी",
+     "नाचनी",
+     "नाचणी"
+    ],
+    "bengali": [
+     "রাগি",
+     "মারুয়া"
+    ],
+    "tamil": [
+     "கேழ்வரகு",
+     "ராகி"
+    ],
+    "telugu": [
+     "రాగులు"
+    ],
+    "gujarati": [
+     "રાગી"
+    ],
+    "kannada": [
+     "ರಾಗಿ"
+    ],
+    "malayalam": [
+     "റാഗി"
+    ],
+    "gurmukhi": [
+     "ਰਾਗੀ"
+    ],
+    "odia": [
+     "ମଣ୍ଡିଆ"
+    ]
+   }
+  },
+  {
+   "term": "bajra",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "bajra",
+     "bajri",
+     "kambu",
+     "sajjalu",
+     "sajje",
+     "kambam"
+    ],
+    "devanagari": [
+     "बाजरा",
+     "बाजरी"
+    ],
+    "bengali": [
+     "বাজরা"
+    ],
+    "tamil": [
+     "கம்பு"
+    ],
+    "telugu": [
+     "సజ్జలు"
+    ],
+    "gujarati": [
+     "બાજરી"
+    ],
+    "kannada": [
+     "ಸಜ್ಜೆ"
+    ],
+    "malayalam": [
+     "ബജ്റ"
+    ],
+    "gurmukhi": [
+     "ਬਾਜਰਾ"
+    ],
+    "odia": [
+     "ବାଜରା"
+    ]
+   }
+  },
+  {
+   "term": "jowar",
+   "category": "Foodgrains",
+   "variants": {
+    "latin": [
+     "jowar",
+     "jwar",
+     "jwari",
+     "cholam",
+     "jonnalu",
+     "juvar",
+     "jolada"
+    ],
+    "devanagari": [
+     "ज्वार",
+     "जवार",
+     "ज्वारी"
+    ],
+    "bengali": [
+     "জোয়ার"
+    ],
+    "tamil": [
+     "சோளம்"
+    ],
+    "malayalam": [
+     "ചോളം"
+    ],
+    "telugu": [
+     "జొన్నలు"
+    ],
+    "gujarati": [
+     "જુવાર"
+    ],
+    "kannada": [
+     "ಜೋಳ"
+    ],
+    "gurmukhi": [
+     "ਜਵਾਰ"
+    ],
+    "odia": [
+     "ଜୁଆର"
+    ]
+   }
+  },
+  {
+   "term": "toor dal",
+   "category": "Pulses",
+   "variants": {
+    "latin": [
+     "toor dal",
+     "tur dal",
+     "arhar dal",
+     "arhar",
+     "arhar ke dal",
+     "turichi dal",
+     "thuvaram paruppu",
+     "tuvaram paruppu",
+     "kandi pappu",
+     "kandipappu",
+     "tuver dal",
+     "tuvar dal",
+     "togari bele",
+     "tuvara parippu",
+     "thuvara parippu",
+     "harada dali"
+    ],
+    "devanagari": [
+     "तूर दाल",
+     "अरहर दाल",
+     "अरहर के दाल",
+     "तूर डाळ",
+     "तुरीची डाळ"
+    ],
+    "bengali": [
+     "অড়হর ডাল",
+     "অরহর ডাল"
+    ],
+    "tamil": [
+     "துவரம் பருப்பு"
+    ],
+    "telugu": [
+     "కందిపప్పు",
+     "కంది పప్పు"
+    ],
+    "gujarati": [
+     "તુવેર દાળ",
+     "તુવેરની દાળ"
+    ],
+    "kannada": [
+     "ತೊಗರಿ ಬೇಳೆ"
+    ],
+    "malayalam": [
+     "തുവര പരിപ്പ്"
+    ],
+    "gurmukhi": [
+     "ਅਰਹਰ ਦਾਲ",
+     "ਤੂਰ ਦਾਲ"
+    ],
+    "odia": [
+     "ହରଡ଼ ଡାଲି"
+    ]
+   }
+  },
+  {
+   "term": "moong dal",
+   "category": "Pulses",
+   "variants": {
+    "latin": [
+     "moong dal",
+     "mung dal",
+     "moong",
+     "moong ke dal",
+     "moog dal",
+     "mug dal",
+     "paasi paruppu",
+     "pasi paruppu",
+     "pesara pappu",
+     "pesarapappu",
+     "mag ni dal",
+     "mag dal",
+     "hesaru bele",
+     "cherupayar parippu",
+     "muga dali"
+    ],
+    "devanagari": [
+     "मूंग दाल",
+     "मूग डाळ"
+    ],
+    "bengali": [
+     "মুগ ডাল",
+     "মুগডাল"
+    ],
+    "tamil": [
+     "பாசிப்பருப்பு",
+     "பாசி பருப்பு"
+    ],
+    "telugu": [
+     "పెసర పప్పు",
+     "పెసరపప్పు"
+    ],
+    "gujarati": [
+     "મગની દાળ",
+     "મગ દાળ"
+    ],
+    "kannada": [
+     "ಹೆಸರು ಬೇಳೆ"
+    ],
+    "malayalam": [
+     "ചെറുപയർ പരിപ്പ്"
+    ],
+    "gurmukhi": [
+     "ਮੂੰਗ ਦਾਲ"
+    ],
+    "odia": [
+     "ମୁଗ ଡାଲି"
+    ]
+   }
+  },
+  {
+   "term": "masoor dal",
+   "category": "Pulses",
+   "variants": {
+    "latin": [
+     "masoor dal",
+     "masoor",
+     "masur dal",
+     "mysore paruppu",
+     "masoor pappu",
+     "masur ni dal",
+     "masoor bele",
+     "masoor parippu",
+     "masura dali"
+    ],
+    "devanagari": [
+     "मसूर दाल",
+     "मसूर डाळ"
+    ],
+    "bengali": [
+     "মসুর ডাল",
+     "মুসুর ডাল"
+    ],
+    "tamil": [
+     "மைசூர் பருப்பு"
+    ],
+    "telugu": [
+     "మసూర్ పప్పు"
+    ],
+    "gujarati": [
+     "મસૂર દાળ"
+    ],
+    "kannada": [
+     "ಮಸೂರ್ ಬೇಳೆ"
+    ],
+    "malayalam": [
+     "മസൂർ പരിപ്പ്"
+    ],
+    "gurmukhi": [
+     "ਮਸਰ ਦਾਲ",
+     "ਮਸੂਰ ਦਾਲ"
+    ],
+    "odia": [
+     "ମସୁର ଡାଲି"
+    ]
+   }
+  },
+  {
+   "term": "chana dal",
+   "category": "Pulses",
+   "variants": {
+    "latin": [
+     "chana dal",
+     "chane ki dal",
+     "chana ke dal",
+     "harbhara dal",
+     "cholar dal",
+     "chholar dal",
+     "kadalai paruppu",
+     "senaga pappu",
+     "chana ni dal",
+     "kadle bele",
+     "kadlebele",
+     "kadala parippu",
+     "chane di dal",
+     "chana dali"
+    ],
+    "devanagari": [
+     "चना दाल",
+     "चणा डाळ",
+     "हरभरा डाळ"
+    ],
+    "bengali": [
+     "ছোলার ডাল",
+     "ছোলা ডাল"
+    ],
+    "tamil": [
+     "கடலைப் பருப்பு",
+     "கடலை பருப்பு"
+    ],
+    "telugu": [
+     "శనగ పప్పు",
+     "శనగపప్పు"
+    ],
+    "gujarati": [
+     "ચણા દાળ",
+     "ચણાની દાળ"
+    ],
+    "kannada": [
+     "ಕಡಲೆ ಬೇಳೆ",
+     "ಕಡಲೆಬೇಳೆ"
+    ],
+    "malayalam": [
+     "കടല പരിപ്പ്",
+     "കടലപ്പരിപ്പ്"
+    ],
+    "gurmukhi": [
+     "ਛੋਲੇ ਦੀ ਦਾਲ",
+     "ਚਣੇ ਦੀ ਦਾਲ"
+    ],
+    "odia": [
+     "ଚଣା ଡାଲି"
+    ]
+   }
+  },
+  {
+   "term": "urad dal",
+   "category": "Pulses",
+   "variants": {
+    "latin": [
+     "urad dal",
+     "urad",
+     "udad dal",
+     "urad ke dal",
+     "udid dal",
+     "kalai dal",
+     "biuli dal",
+     "ulundu paruppu",
+     "ulutham paruppu",
+     "minapappu",
+     "minapa pappu",
+     "adad dal",
+     "adad ni dal",
+     "uddina bele",
+     "uzhunnu parippu",
+     "biri dali"
+    ],
+    "devanagari": [
+     "उड़द दाल",
+     "उड़द",
+     "उडीद डाळ"
+    ],
+    "bengali": [
+     "মাষকলাই ডাল",
+     "কলাই ডাল"
+    ],
+    "tamil": [
+     "உளுத்தம் பருப்பு",
+     "உளுந்து"
+    ],
+    "telugu": [
+     "మినపప్పు",
+     "మినప పప్పు"
+    ],
+    "gujarati": [
+     "અડદ દાળ",
+     "અડદની દાળ"
+    ],
+    "kannada": [
+     "ಉದ್ದಿನ ಬೇಳೆ"
+    ],
+    "malayalam": [
+     "ഉഴുന്ന് പരിപ്പ്"
+    ],
+    "gurmukhi": [
+     "ਉੜਦ ਦਾਲ",
+     "ਮਾਂਹ ਦੀ ਦਾਲ"
+    ],
+    "odia": [
+     "ବିରି ଡାଲି"
+    ]
+   }
+  },
+  {
+   "term": "dal",
+   "category": "Pulses",
+   "variants": {
+    "latin": [
+     "dal",
+     "daal",
+     "dhal",
+     "lentils",
+     "paruppu",
+     "pappu",
+     "bele",
+     "parippu",
+     "dali"
+    ],
+    "devanagari": [
+     "दाल",
+     "डाळ"
+    ],
+    "bengali": [
+     "ডাল"
+    ],
+    "tamil": [
+     "பருப்பு"
+    ],
+    "telugu": [
+     "పప్పు"
+    ],
+    "gujarati": [
+     "દાળ"
+    ],
+    "kannada": [
+     "ಬೇಳೆ"
+    ],
+    "malayalam": [
+     "പരിപ്പ്"
+    ],
+    "gurmukhi": [
+     "ਦਾਲ"
+    ],
+    "odia": [
+     "ଡାଲି"
+    ]
+   }
+  },
+  {
+   "term": "rajma",
+   "category": "Pulses",
+   "variants": {
+    "latin": [
+     "rajma",
+     "rajma beans"
+    ],
+    "devanagari": [
+     "राजमा"
+    ],
+    "bengali": [
+     "রাজমা"
+    ],
+    "tamil": [
+     "ராஜ்மா"
+    ],
+    "telugu": [
+     "రాజ్మా"
+    ],
+    "gujarati": [
+     "રાજમા"
+    ],
+    "kannada": [
+     "ರಾಜ್ಮಾ"
+    ],
+    "malayalam": [
+     "രാജ്മ"
+    ],
+    "gurmukhi": [
+     "ਰਾਜਮਾਂਹ",
+     "ਰਾਜਮਾ"
+    ],
+    "odia": [
+     "ରାଜମା"
+    ]
+   }
+  },
+  {
+   "term": "chickpeas",
+   "category": "Pulses",
+   "variants": {
+    "latin": [
+     "chana",
+     "chane",
+     "kabuli chana",
+     "chole",
+     "chhole",
+     "chickpeas",
+     "kabuli chola",
+     "chhola",
+     "kondai kadalai",
+     "kondakadalai",
+     "kabuli senagalu",
+     "senagalu",
+     "chola",
+     "kadale kalu",
+     "kadala"
+    ],
+    "devanagari": [
+     "चना",
+     "काबुली चना",
+     "छोले",
+     "काबुली चणा"
+    ],
+    "bengali": [
+     "কাবুলি ছোলা",
+     "ছোলা"
+    ],
+    "tamil": [
+     "கொண்டைக்கடலை",
+     "கொண்டை கடலை"
+    ],
+    "telugu": [
+     "సెనగలు"
+    ],
+    "gujarati": [
+     "કાબુલી ચણા",
+     "ચણા"
+    ],
+    "kannada": [
+     "ಕಡಲೆಕಾಳು"
+    ],
+    "malayalam": [
+     "കടല"
+    ],
+    "gurmukhi": [
+     "ਛੋਲੇ"
+    ],
+    "odia": [
+     "ଚଣା"
+    ]
+   }
+  },
+  {
+   "term": "peanuts",
+   "category": "Pulses",
+   "variants": {
+    "latin": [
+     "moongfali",
+     "mungfali",
+     "peanut",
+     "peanuts",
+     "groundnut",
+     "shengdana",
+     "shengdane",
+     "chinabadam",
+     "china badam",
+     "verkadalai",
+     "nilakadalai",
+     "verusenaga",
+     "palli",
+     "pallilu",
+     "singdana",
+     "kadlekai",
+     "shenga",
+     "nilakkadala",
+     "kappalandi"
+    ],
+    "devanagari": [
+     "मूंगफली",
+     "शेंगदाणे"
+    ],
+    "bengali": [
+     "চিনাবাদাম"
+    ],
+    "odia": [
+     "ଚିନାବାଦାମ"
+    ],
+    "tamil": [
+     "வேர்க்கடலை",
+     "நிலக்கடலை"
+    ],
+    "telugu": [
+     "వేరుశెనగ",
+     "పల్లీలు"
+    ],
+    "gujarati": [
+     "સીંગદાણા",
+     "સિંગદાણા"
+    ],
+    "kannada": [
+     "ಕಡಲೆಕಾಯಿ",
+     "ಶೇಂಗಾ"
+    ],
+    "malayalam": [
+     "നിലക്കടല",
+     "കപ്പലണ്ടി"
+    ],
+    "gurmukhi": [
+     "ਮੂੰਗਫਲੀ"
+    ]
+   }
+  },
+  {
+   "term": "almonds",
+   "category": "Dry Fruits",
+   "variants": {
+    "latin": [
+     "badam",
+     "almond",
+     "almonds",
+     "kathbadam",
+     "badham"
+    ],
+    "devanagari": [
+     "बादाम",
+     "बदाम"
+    ],
+    "bengali": [
+     "কাঠবাদাম"
+    ],
+    "tamil": [
+     "பாதாம்"
+    ],
+    "telugu": [
+     "బాదం"
+    ],
+    "gujarati": [
+     "બદામ"
+    ],
+    "kannada": [
+     "ಬಾದಾಮಿ"
+    ],
+    "malayalam": [
+     "ബദാം"
+    ],
+    "gurmukhi": [
+     "ਬਦਾਮ"
+    ],
+    "odia": [
+     "ବାଦାମ"
+    ]
+   }
+  },
+  {
+   "term": "cashew nuts",
+   "category": "Dry Fruits",
+   "variants": {
+    "latin": [
+     "kaju",
+     "cashew",
+     "cashews",
+     "mundhiri",
+     "jeedipappu",
+     "godambi",
+     "andipparuppu",
+     "kashuvandi"
+    ],
+    "devanagari": [
+     "काजू"
+    ],
+    "bengali": [
+     "কাজু"
+    ],
+    "tamil": [
+     "முந்திரி"
+    ],
+    "telugu": [
+     "జీడిపప్పు"
+    ],
+    "gujarati": [
+     "કાજુ"
+    ],
+    "kannada": [
+     "ಗೋಡಂಬಿ"
+    ],
+    "malayalam": [
+     "അണ്ടിപ്പരിപ്പ്"
+    ],
+    "gurmukhi": [
+     "ਕਾਜੂ"
+    ],
+    "odia": [
+     "କାଜୁ"
+    ]
+   }
+  },
+  {
+   "term": "raisins",
+   "category": "Dry Fruits",
+   "variants": {
+    "latin": [
+     "kishmish",
+     "raisin",
+     "raisins",
+     "manuka",
+     "kismis",
+     "unakka munthiri"
+    ],
+    "devanagari": [
+     "किशमिश",
+     "मनुका"
+    ],
+    "bengali": [
+     "কিশমিশ"
+    ],
+    "tamil": [
+     "உலர் திராட்சை"
+    ],
+    "telugu": [
+     "ఎండు ద్రాక్ష",
+     "కిస్మిస్"
+    ],
+    "gujarati": [
+     "કિસમિસ"
+    ],
+    "kannada": [
+     "ಒಣ ದ್ರಾಕ್ಷಿ"
+    ],
+    "malayalam": [
+     "ഉണക്കമുന്തിരി"
+    ],
+    "gurmukhi": [
+     "ਕਿਸ਼ਮਿਸ਼"
+    ],
+    "odia": [
+     "କିସମିସ"
+    ]
+   }
+  },
+  {
+   "term": "dates",
+   "category": "Dry Fruits",
+   "variants": {
+    "latin": [
+     "khajoor",
+     "khajur",
+     "dates",
+     "khejur",
+     "pericham pazham",
+     "kharjuram",
+     "kharjura",
+     "khajuri"
+    ],
+    "devanagari": [
+     "खजूर"
+    ],
+    "bengali": [
+     "খেজুর"
+    ],
+    "tamil": [
+     "பேரீச்சம்பழம்",
+     "பேரீச்சை"
+    ],
+    "telugu": [
+     "ఖర్జూరం"
+    ],
+    "gujarati": [
+     "ખજૂર"
+    ],
+    "kannada": [
+     "ಖರ್ಜೂರ"
+    ],
+    "malayalam": [
+     "ഈന്തപ്പഴം"
+    ],
+    "gurmukhi": [
+     "ਖਜੂਰ"
+    ],
+    "odia": [
+     "ଖଜୁରୀ"
+    ]
+   }
+  },
+  {
+   "term": "makhana",
+   "category": "Dry Fruits",
+   "variants": {
+    "latin": [
+     "makhana",
+     "makhane",
+     "phool makhana",
+     "makhna",
+     "thamarai vithai"
+    ],
+    "devanagari": [
+     "मखाना",
+     "मखाने"
+    ],
+    "bengali": [
+     "মাখানা"
+    ],
+    "tamil": [
+     "தாமரை விதை"
+    ],
+    "telugu": [
+     "తామర గింజలు",
+     "మఖానా"
+    ],
+    "gujarati": [
+     "મખાના"
+    ],
+    "kannada": [
+     "ಮಖಾನಾ"
+    ],
+    "malayalam": [
+     "മഖാന"
+    ],
+    "gurmukhi": [
+     "ਮਖਾਣੇ"
+    ],
+    "odia": [
+     "ମଖାନା"
+    ]
+   }
+  },
+  {
+   "term": "sesame seeds",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "til",
+     "sesame",
+     "sesame seeds",
+     "teel",
+     "ellu",
+     "nuvvulu",
+     "tal"
+    ],
+    "devanagari": [
+     "तिल",
+     "तीळ"
+    ],
+    "bengali": [
+     "তিল"
+    ],
+    "tamil": [
+     "எள்"
+    ],
+    "telugu": [
+     "నువ్వులు"
+    ],
+    "gujarati": [
+     "તલ"
+    ],
+    "kannada": [
+     "ಎಳ್ಳು"
+    ],
+    "malayalam": [
+     "എള്ള്"
+    ],
+    "gurmukhi": [
+     "ਤਿਲ"
+    ],
+    "odia": [
+     "ତିଳ"
+    ]
+   }
+  },
+  {
+   "term": "mustard oil",
+   "category": "Oils",
+   "variants": {
+    "latin": [
+     "mustard oil",
+     "sarson ka tel",
+     "sarso tel",
+     "sarson tel",
+     "kachi ghani",
+     "sarso ke tel",
+     "mohri tel",
+     "sarser tel",
+     "shorshe tel",
+     "sorsher tel",
+     "kadugu ennai",
+     "avala nune",
+     "sarsav tel",
+     "sasive enne",
+     "kadugu enna",
+     "sarhon da tel",
+     "sorisa tela"
+    ],
+    "devanagari": [
+     "सरसों का तेल",
+     "मोहरी तेल",
+     "मोहरीचे तेल"
+    ],
+    "bengali": [
+     "সরিষার তেল",
+     "সর্ষের তেল"
+    ],
+    "tamil": [
+     "கடுகு எண்ணெய்"
+    ],
+    "telugu": [
+     "ఆవాల నూనె"
+    ],
+    "gujarati": [
+     "સરસવનું તેલ",
+     "સરસવ તેલ"
+    ],
+    "kannada": [
+     "ಸಾಸಿವೆ ಎಣ್ಣೆ"
+    ],
+    "malayalam": [
+     "കടുക് എണ്ണ"
+    ],
+    "gurmukhi": [
+     "ਸਰ੍ਹੋਂ ਦਾ ਤੇਲ",
+     "ਸਰ੍ਹੋਂ ਤੇਲ"
+    ],
+    "odia": [
+     "ସୋରିଷ ତେଲ"
+    ]
+   }
+  },
+  {
+   "term": "cooking oil",
+   "category": "Oils",
+   "variants": {
+    "latin": [
+     "oil",
+     "tel",
+     "refined",
+     "refined oil",
+     "cooking oil",
+     "tela",
+     "ennai",
+     "nune",
+     "enne",
+     "enna"
+    ],
+    "devanagari": [
+     "तेल"
+    ],
+    "bengali": [
+     "তেল"
+    ],
+    "odia": [
+     "ତେଲ"
+    ],
+    "tamil": [
+     "எண்ணெய்",
+     "எண்ணை"
+    ],
+    "telugu": [
+     "నూనె"
+    ],
+    "kannada": [
+     "ತೇಲ",
+     "ಎಣ್ಣೆ"
+    ],
+    "malayalam": [
+     "എണ്ണ"
+    ],
+    "gurmukhi": [
+     "ਤੇਲ"
+    ],
+    "gujarati": [
+     "તેલ"
+    ]
+   }
+  },
+  {
+   "term": "sunflower oil",
+   "category": "Oils",
+   "variants": {
+    "latin": [
+     "sunflower oil",
+     "suraj mukhi tel",
+     "surajmukhi tel",
+     "suryaphul tel",
+     "surjomukhi tel",
+     "sooriyakanthi ennai",
+     "sunflower nune",
+     "suryamukhi tel",
+     "suryakanti enne",
+     "suryakanthi enna",
+     "suryamukhi tela"
+    ],
+    "devanagari": [
+     "सूरजमुखी तेल",
+     "सूर्यफूल तेल"
+    ],
+    "bengali": [
+     "সূর্যমুখী তেল",
+     "সানফ্লাওয়ার তেল"
+    ],
+    "tamil": [
+     "சூரியகாந்தி எண்ணெய்"
+    ],
+    "telugu": [
+     "పొద్దుతిరుగుడు నూనె"
+    ],
+    "gujarati": [
+     "સૂર્યમુખી તેલ"
+    ],
+    "kannada": [
+     "ಸೂರ್ಯಕಾಂತಿ ಎಣ್ಣೆ"
+    ],
+    "malayalam": [
+     "സൂര്യകാന്തി എണ്ണ"
+    ],
+    "gurmukhi": [
+     "ਸੂਰਜਮੁਖੀ ਤੇਲ"
+    ],
+    "odia": [
+     "ସୂର୍ଯ୍ୟମୁଖୀ ତେଲ"
+    ]
+   }
+  },
+  {
+   "term": "coconut oil",
+   "category": "Oils",
+   "variants": {
+    "latin": [
+     "coconut oil",
+     "nariyal tel",
+     "narial ka tel",
+     "khobra tel",
+     "khobrel",
+     "narkel tel",
+     "thengai ennai",
+     "kobbari nune",
+     "nariyel nu tel",
+     "tengina enne",
+     "velichenna",
+     "nadia tela"
+    ],
+    "devanagari": [
+     "नारियल तेल",
+     "खोबरेल तेल"
+    ],
+    "bengali": [
+     "নারকেল তেল"
+    ],
+    "tamil": [
+     "தேங்காய் எண்ணெய்",
+     "தேங்காய் எண்ணை"
+    ],
+    "telugu": [
+     "కొబ్బరి నూనె"
+    ],
+    "gujarati": [
+     "નાળિયેર તેલ",
+     "નારિયેળ તેલ"
+    ],
+    "kannada": [
+     "ತೆಂಗಿನ ಎಣ್ಣೆ",
+     "ಕೊಬ್ಬರಿ ಎಣ್ಣೆ"
+    ],
+    "malayalam": [
+     "വെളിച്ചെണ്ണ"
+    ],
+    "gurmukhi": [
+     "ਨਾਰੀਅਲ ਤੇਲ"
+    ],
+    "odia": [
+     "ନଡ଼ିଆ ତେଲ"
+    ]
+   }
+  },
+  {
+   "term": "groundnut oil",
+   "category": "Oils",
+   "variants": {
+    "latin": [
+     "groundnut oil",
+     "peanut oil",
+     "moongfali tel",
+     "shengdana tel",
+     "chinabadam tel",
+     "kadalai ennai",
+     "nilakadalai ennai",
+     "palli nune",
+     "singtel",
+     "singdana tel",
+     "shenga enne",
+     "kadlekai enne",
+     "kappalandi enna",
+     "chinabadam tela"
+    ],
+    "devanagari": [
+     "मूंगफली तेल",
+     "मूंगफली का तेल",
+     "शेंगदाणा तेल"
+    ],
+    "bengali": [
+     "বাদাম তেল",
+     "চিনাবাদামের তেল"
+    ],
+    "tamil": [
+     "கடலை எண்ணெய்",
+     "நிலக்கடலை எண்ணெய்"
+    ],
+    "telugu": [
+     "వేరుశెనగ నూనె"
+    ],
+    "gujarati": [
+     "સીંગતેલ",
+     "સિંગતેલ",
+     "સીંગદાણા તેલ"
+    ],
+    "kannada": [
+     "ಶೇಂಗಾ ಎಣ್ಣೆ",
+     "ಕಡಲೆಕಾಯಿ ಎಣ್ಣೆ"
+    ],
+    "malayalam": [
+     "കപ്പലണ്ടി എണ്ണ"
+    ],
+    "gurmukhi": [
+     "ਮੂੰਗਫਲੀ ਤੇਲ"
+    ],
+    "odia": [
+     "ଚିନାବାଦାମ ତେଲ"
+    ]
+   }
+  },
+  {
+   "term": "sesame oil",
+   "category": "Oils",
+   "variants": {
+    "latin": [
+     "til ka tel",
+     "til tel",
+     "sesame oil",
+     "til ke tel",
+     "tilache tel",
+     "tiler tel",
+     "nallennai",
+     "nallenai",
+     "gingelly oil",
+     "nuvvula nune",
+     "tal nu tel",
+     "ellu enne",
+     "ellenna",
+     "nallenna",
+     "til da tel",
+     "tila tela"
+    ],
+    "devanagari": [
+     "तिल का तेल",
+     "तिळाचे तेल",
+     "तीळ तेल"
+    ],
+    "bengali": [
+     "তিলের তেল"
+    ],
+    "tamil": [
+     "நல்லெண்ணெய்"
+    ],
+    "telugu": [
+     "నువ్వుల నూనె"
+    ],
+    "gujarati": [
+     "તલનું તેલ",
+     "તલ તેલ"
+    ],
+    "kannada": [
+     "ಎಳ್ಳೆಣ್ಣೆ",
+     "ಎಳ್ಳು ಎಣ್ಣೆ"
+    ],
+    "malayalam": [
+     "എള്ളെണ്ണ"
+    ],
+    "gurmukhi": [
+     "ਤਿਲ ਦਾ ਤੇਲ"
+    ],
+    "odia": [
+     "ତିଳ ତେଲ"
+    ]
+   }
+  },
+  {
+   "term": "ghee",
+   "category": "Dairy",
+   "variants": {
+    "latin": [
+     "ghee",
+     "ghi",
+     "desi ghee",
+     "ghiu",
+     "tup",
+     "tupa",
+     "nei",
+     "nemyu",
+     "neyyi",
+     "tuppa",
+     "ghia"
+    ],
+    "devanagari": [
+     "घी",
+     "घिउ",
+     "तूप"
+    ],
+    "bengali": [
+     "ঘি"
+    ],
+    "tamil": [
+     "நெய்"
+    ],
+    "malayalam": [
+     "നെയ്യ്"
+    ],
+    "telugu": [
+     "నెయ్యి"
+    ],
+    "gujarati": [
+     "ઘી"
+    ],
+    "kannada": [
+     "ತುಪ್ಪ"
+    ],
+    "gurmukhi": [
+     "ਘਿਓ",
+     "ਘੀ"
+    ],
+    "odia": [
+     "ଘିଅ"
+    ]
+   }
+  },
+  {
+   "term": "milk",
+   "category": "Dairy",
+   "variants": {
+    "latin": [
+     "milk",
+     "doodh",
+     "dudh",
+     "dood",
+     "paal",
+     "pal",
+     "paalu",
+     "palu",
+     "haalu",
+     "halu",
+     "dudha"
+    ],
+    "devanagari": [
+     "दूध"
+    ],
+    "bengali": [
+     "দুধ"
+    ],
+    "tamil": [
+     "பால்"
+    ],
+    "malayalam": [
+     "പാൽ"
+    ],
+    "telugu": [
+     "పాలు"
+    ],
+    "gujarati": [
+     "દૂધ"
+    ],
+    "kannada": [
+     "ಹಾಲು"
+    ],
+    "gurmukhi": [
+     "ਦੁੱਧ",
+     "ਦੁਧ"
+    ],
+    "odia": [
+     "ଦୁଧ",
+     "କ୍ଷୀର"
+    ]
+   }
+  },
+  {
+   "term": "curd",
+   "category": "Dairy",
+   "variants": {
+    "latin": [
+     "curd",
+     "dahi",
+     "yogurt",
+     "doi",
+     "thayir",
+     "tayir",
+     "perugu",
+     "dahin",
+     "mosaru"
+    ],
+    "devanagari": [
+     "दही"
+    ],
+    "bengali": [
+     "দই"
+    ],
+    "tamil": [
+     "தயிர்"
+    ],
+    "malayalam": [
+     "തൈര്"
+    ],
+    "telugu": [
+     "పెరుగు"
+    ],
+    "gujarati": [
+     "દહીં"
+    ],
+    "kannada": [
+     "ಮೊಸರು"
+    ],
+    "gurmukhi": [
+     "ਦਹੀਂ",
+     "ਦਹੀ"
+    ],
+    "odia": [
+     "ଦହି"
+    ]
+   }
+  },
+  {
+   "term": "buttermilk",
+   "category": "Dairy",
+   "variants": {
+    "latin": [
+     "chaas",
+     "chhaas",
+     "buttermilk",
+     "mattha",
+     "taak",
+     "mor",
+     "moru",
+     "majjiga",
+     "majjige",
+     "ghola"
+    ],
+    "devanagari": [
+     "छाछ",
+     "छास",
+     "मट्ठा",
+     "ताक"
+    ],
+    "bengali": [
+     "ঘোল"
+    ],
+    "tamil": [
+     "மோர்"
+    ],
+    "malayalam": [
+     "മോര്"
+    ],
+    "telugu": [
+     "మజ్జిగ"
+    ],
+    "gujarati": [
+     "છાશ"
+    ],
+    "kannada": [
+     "ಮಜ್ಜಿಗೆ"
+    ],
+    "gurmukhi": [
+     "ਛਾਹ",
+     "ਲੱਸੀ"
+    ],
+    "odia": [
+     "ଘୋଳ"
+    ]
+   }
+  },
+  {
+   "term": "cheese",
+   "category": "Dairy",
+   "variants": {
+    "latin": [
+     "cheese"
+    ],
+    "devanagari": [
+     "चीज़",
+     "चीज"
+    ],
+    "bengali": [
+     "চিজ"
+    ],
+    "tamil": [
+     "சீஸ்"
+    ],
+    "telugu": [
+     "చీజ్"
+    ],
+    "gujarati": [
+     "ચીઝ"
+    ],
+    "kannada": [
+     "ಚೀಸ್"
+    ],
+    "malayalam": [
+     "ചീസ്"
+    ],
+    "gurmukhi": [
+     "ਚੀਜ਼"
+    ],
+    "odia": [
+     "ଚିଜ୍"
+    ]
+   }
+  },
+  {
+   "term": "paneer",
+   "category": "Dairy",
+   "variants": {
+    "latin": [
+     "paneer",
+     "panir",
+     "cottage cheese"
+    ],
+    "devanagari": [
+     "पनीर"
+    ],
+    "bengali": [
+     "পনির"
+    ],
+    "tamil": [
+     "பன்னீர்",
+     "பனீர்"
+    ],
+    "telugu": [
+     "పనీర్"
+    ],
+    "gujarati": [
+     "પનીર"
+    ],
+    "kannada": [
+     "ಪನೀರ್"
+    ],
+    "malayalam": [
+     "പനീർ"
+    ],
+    "gurmukhi": [
+     "ਪਨੀਰ"
+    ],
+    "odia": [
+     "ପନିର"
+    ]
+   }
+  },
+  {
+   "term": "butter",
+   "category": "Dairy",
+   "variants": {
+    "latin": [
+     "butter",
+     "makhan",
+     "makkhan",
+     "loni",
+     "vennai",
+     "venna",
+     "benne",
+     "lahuni"
+    ],
+    "devanagari": [
+     "मक्खन",
+     "लोणी"
+    ],
+    "bengali": [
+     "মাখন"
+    ],
+    "tamil": [
+     "வெண்ணெய்"
+    ],
+    "telugu": [
+     "వెన్న"
+    ],
+    "malayalam": [
+     "വെണ്ണ"
+    ],
+    "gujarati": [
+     "માખણ"
+    ],
+    "kannada": [
+     "ಬೆಣ್ಣೆ"
+    ],
+    "gurmukhi": [
+     "ਮੱਖਣ"
+    ],
+    "odia": [
+     "ଲହୁଣୀ"
+    ]
+   }
+  },
+  {
+   "term": "tea",
+   "category": "Beverages",
+   "variants": {
+    "latin": [
+     "tea",
+     "chai patti",
+     "chai",
+     "chaypatti",
+     "chaha",
+     "cha",
+     "chaya"
+    ],
+    "devanagari": [
+     "चाय",
+     "चाय पत्ती",
+     "चहा"
+    ],
+    "bengali": [
+     "চা"
+    ],
+    "gujarati": [
+     "ચા"
+    ],
+    "odia": [
+     "ଚା"
+    ],
+    "tamil": [
+     "டீ",
+     "தேநீர்",
+     "டீத்தூள்"
+    ],
+    "telugu": [
+     "టీ",
+     "టీ పొడి",
+     "చాయ్"
+    ],
+    "kannada": [
+     "ಚಹಾ"
+    ],
+    "malayalam": [
+     "ചായ",
+     "ചായപ്പൊടി"
+    ],
+    "gurmukhi": [
+     "ਚਾਹ",
+     "ਚਾਹ ਪੱਤੀ"
+    ]
+   }
+  },
+  {
+   "term": "green tea",
+   "category": "Beverages",
+   "variants": {
+    "latin": [
+     "green tea"
+    ],
+    "devanagari": [
+     "ग्रीन टी"
+    ],
+    "bengali": [
+     "গ্রিন টি"
+    ],
+    "tamil": [
+     "கிரீன் டீ"
+    ],
+    "telugu": [
+     "గ్రీన్ టీ"
+    ],
+    "gujarati": [
+     "ગ્રીન ટી"
+    ],
+    "kannada": [
+     "ಗ್ರೀನ್ ಟೀ"
+    ],
+    "malayalam": [
+     "ഗ്രീൻ ടീ"
+    ],
+    "gurmukhi": [
+     "ਗ੍ਰੀਨ ਟੀ"
+    ],
+    "odia": [
+     "ଗ୍ରୀନ୍ ଟି"
+    ]
+   }
+  },
+  {
+   "term": "coffee",
+   "category": "Beverages",
+   "variants": {
+    "latin": [
+     "coffee",
+     "kofi",
+     "kaapi",
+     "kaafi"
+    ],
+    "devanagari": [
+     "कॉफी",
+     "कॉफ़ी"
+    ],
+    "bengali": [
+     "কফি"
+    ],
+    "tamil": [
+     "காபி",
+     "காப்பி"
+    ],
+    "telugu": [
+     "కాఫీ"
+    ],
+    "gujarati": [
+     "કોફી"
+    ],
+    "kannada": [
+     "ಕಾಫಿ"
+    ],
+    "malayalam": [
+     "കാപ്പി"
+    ],
+    "gurmukhi": [
+     "ਕੌਫੀ",
+     "ਕਾਫੀ"
+    ],
+    "odia": [
+     "କଫି"
+    ]
+   }
+  },
+  {
+   "term": "cold drink",
+   "category": "Beverages",
+   "variants": {
+    "latin": [
+     "cold drink",
+     "colddrink",
+     "soft drink",
+     "cool drink"
+    ],
+    "devanagari": [
+     "कोल्ड ड्रिंक"
+    ],
+    "bengali": [
+     "কোল্ড ড্রিংক"
+    ],
+    "tamil": [
+     "கூல் டிரிங்க்ஸ்",
+     "கூல்ட்ரிங்ஸ்"
+    ],
+    "telugu": [
+     "కూల్ డ్రింక్"
+    ],
+    "gujarati": [
+     "કોલ્ડ ડ્રિંક"
+    ],
+    "kannada": [
+     "ಕೂಲ್ ಡ್ರಿಂಕ್ಸ್"
+    ],
+    "malayalam": [
+     "കോൾഡ് ഡ്രിങ്ക്"
+    ],
+    "gurmukhi": [
+     "ਕੋਲਡ ਡਰਿੰਕ"
+    ],
+    "odia": [
+     "କୋଲଡ୍ରିଙ୍କ୍"
+    ]
+   }
+  },
+  {
+   "term": "juice",
+   "category": "Beverages",
+   "variants": {
+    "latin": [
+     "juice"
+    ],
+    "devanagari": [
+     "जूस",
+     "ज्यूस"
+    ],
+    "bengali": [
+     "জুস"
+    ],
+    "tamil": [
+     "ஜூஸ்",
+     "பழச்சாறு"
+    ],
+    "telugu": [
+     "జ్యూస్"
+    ],
+    "gujarati": [
+     "જ્યુસ"
+    ],
+    "kannada": [
+     "ಜ್ಯೂಸ್"
+    ],
+    "malayalam": [
+     "ജ്യൂസ്"
+    ],
+    "gurmukhi": [
+     "ਜੂਸ"
+    ],
+    "odia": [
+     "ଜୁସ୍"
+    ]
+   }
+  },
+  {
+   "term": "drinking water",
+   "category": "Beverages",
+   "variants": {
+    "latin": [
+     "mineral water",
+     "water bottle",
+     "drinking water",
+     "pani bottle",
+     "paani bottle",
+     "jol bottle",
+     "jaler bottle",
+     "thanneer bottle",
+     "neellu bottle",
+     "neeru bottle",
+     "vellam bottle"
+    ],
+    "devanagari": [
+     "पानी की बोतल",
+     "पानी बोतल",
+     "पाण्याची बाटली"
+    ],
+    "bengali": [
+     "জলের বোতল",
+     "মিনারেল ওয়াটার"
+    ],
+    "tamil": [
+     "தண்ணீர் பாட்டில்",
+     "மினரல் வாட்டர்"
+    ],
+    "telugu": [
+     "నీళ్ల బాటిల్",
+     "మినరల్ వాటర్"
+    ],
+    "gujarati": [
+     "પાણીની બોટલ",
+     "મિનરલ વોટર"
+    ],
+    "kannada": [
+     "ನೀರಿನ ಬಾಟಲ್",
+     "ಮಿನರಲ್ ವಾಟರ್"
+    ],
+    "malayalam": [
+     "വെള്ളം കുപ്പി",
+     "മിനറൽ വാട്ടർ"
+    ],
+    "gurmukhi": [
+     "ਪਾਣੀ ਦੀ ਬੋਤਲ"
+    ],
+    "odia": [
+     "ପାଣି ବୋତଲ"
+    ]
+   }
+  },
+  {
+   "term": "sugar",
+   "category": "Staples",
+   "variants": {
+    "latin": [
+     "sugar",
+     "cheeni",
+     "chini",
+     "shakkar",
+     "sakhar",
+     "sakkarai",
+     "sarkkarai",
+     "seeni",
+     "panchadara",
+     "khand",
+     "sakkare",
+     "panchasara"
+    ],
+    "devanagari": [
+     "चीनी",
+     "शक्कर",
+     "साखर"
+    ],
+    "bengali": [
+     "চিনি"
+    ],
+    "odia": [
+     "ଚିନି"
+    ],
+    "tamil": [
+     "சர்க்கரை",
+     "சீனி"
+    ],
+    "telugu": [
+     "పంచదార"
+    ],
+    "gujarati": [
+     "ખાંડ"
+    ],
+    "gurmukhi": [
+     "ਖੰਡ",
+     "ਚੀਨੀ"
+    ],
+    "kannada": [
+     "ಸಕ್ಕರೆ"
+    ],
+    "malayalam": [
+     "പഞ്ചസാര"
+    ]
+   }
+  },
+  {
+   "term": "salt",
+   "category": "Staples",
+   "variants": {
+    "latin": [
+     "salt",
+     "namak",
+     "meeth",
+     "mith",
+     "nun",
+     "noon",
+     "uppu",
+     "mithu",
+     "loon",
+     "luna"
+    ],
+    "devanagari": [
+     "नमक",
+     "मीठ"
+    ],
+    "bengali": [
+     "নুন",
+     "লবণ"
+    ],
+    "tamil": [
+     "உப்பு"
+    ],
+    "telugu": [
+     "ఉప్పు"
+    ],
+    "kannada": [
+     "ಉಪ್ಪು"
+    ],
+    "malayalam": [
+     "ഉപ്പ്"
+    ],
+    "gujarati": [
+     "મીઠું"
+    ],
+    "gurmukhi": [
+     "ਲੂਣ",
+     "ਨਮਕ"
+    ],
+    "odia": [
+     "ଲୁଣ"
+    ]
+   }
+  },
+  {
+   "term": "honey",
+   "category": "Staples",
+   "variants": {
+    "latin": [
+     "shahad",
+     "madhu",
+     "honey",
+     "madh",
+     "modhu",
+     "mou",
+     "thaen",
+     "tene",
+     "jenu",
+     "mahu"
+    ],
+    "devanagari": [
+     "शहद",
+     "मधु",
+     "मध"
+    ],
+    "gujarati": [
+     "મધ"
+    ],
+    "bengali": [
+     "মধু",
+     "মৌ"
+    ],
+    "tamil": [
+     "தேன்"
+    ],
+    "malayalam": [
+     "തേൻ"
+    ],
+    "telugu": [
+     "తేనె"
+    ],
+    "kannada": [
+     "ಜೇನು",
+     "ಜೇನುತುಪ್ಪ"
+    ],
+    "gurmukhi": [
+     "ਸ਼ਹਿਦ"
+    ],
+    "odia": [
+     "ମହୁ"
+    ]
+   }
+  },
+  {
+   "term": "tamarind",
+   "category": "Staples",
+   "variants": {
+    "latin": [
+     "imli",
+     "tamarind",
+     "chinch",
+     "tetul",
+     "puli",
+     "chintapandu",
+     "amli",
+     "hunase",
+     "valanpuli",
+     "tentuli"
+    ],
+    "devanagari": [
+     "इमली",
+     "चिंच"
+    ],
+    "bengali": [
+     "তেঁতুল"
+    ],
+    "tamil": [
+     "புளி"
+    ],
+    "malayalam": [
+     "പുളി",
+     "വാളൻപുളി"
+    ],
+    "telugu": [
+     "చింతపండు"
+    ],
+    "gujarati": [
+     "આમલી"
+    ],
+    "kannada": [
+     "ಹುಣಸೆ",
+     "ಹುಣಸೆಹಣ್ಣು"
+    ],
+    "gurmukhi": [
+     "ਇਮਲੀ"
+    ],
+    "odia": [
+     "ତେନ୍ତୁଳି"
+    ]
+   }
+  },
+  {
+   "term": "onion",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "onion",
+     "pyaz",
+     "pyaaz",
+     "pyaj",
+     "kanda",
+     "pyaaj",
+     "kande",
+     "peyaj",
+     "piyaj",
+     "vengayam",
+     "ullipaya",
+     "ullipayalu",
+     "dungri",
+     "dungli",
+     "eerulli",
+     "ullagaddi",
+     "savala",
+     "ulli",
+     "piaja"
+    ],
+    "devanagari": [
+     "प्याज",
+     "पियाज",
+     "कांदा",
+     "कांदे"
+    ],
+    "bengali": [
+     "পেঁয়াজ"
+    ],
+    "tamil": [
+     "வெங்காயம்"
+    ],
+    "telugu": [
+     "ఉల్లిపాయ",
+     "ఉల్లిపాయలు"
+    ],
+    "gujarati": [
+     "ડુંગળી"
+    ],
+    "kannada": [
+     "ಈರುಳ್ಳಿ",
+     "ಉಳ್ಳಾಗಡ್ಡಿ"
+    ],
+    "malayalam": [
+     "സവാള",
+     "ഉള്ളി"
+    ],
+    "gurmukhi": [
+     "ਪਿਆਜ਼",
+     "ਪਿਆਜ"
+    ],
+    "odia": [
+     "ପିଆଜ"
+    ]
+   }
+  },
+  {
+   "term": "potato",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "potato",
+     "aloo",
+     "alu",
+     "aaloo",
+     "batata",
+     "urulaikizhangu",
+     "urulai kizhangu",
+     "bangaladumpa",
+     "bataka",
+     "bateta",
+     "alugadde",
+     "urulakizhangu"
+    ],
+    "devanagari": [
+     "आलू",
+     "बटाटा"
+    ],
+    "bengali": [
+     "আলু"
+    ],
+    "odia": [
+     "ଆଳୁ"
+    ],
+    "tamil": [
+     "உருளைக்கிழங்கு",
+     "உருளை கிழங்கு"
+    ],
+    "telugu": [
+     "బంగాళదుంప",
+     "ఆలూ"
+    ],
+    "gujarati": [
+     "બટાકા",
+     "બટેટા"
+    ],
+    "kannada": [
+     "ಆಲೂಗಡ್ಡೆ"
+    ],
+    "malayalam": [
+     "ഉരുളക്കിഴങ്ങ്"
+    ],
+    "gurmukhi": [
+     "ਆਲੂ"
+    ]
+   }
+  },
+  {
+   "term": "tomato",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "tomato",
+     "tamatar",
+     "tamaatar",
+     "thakkali",
+     "tamata",
+     "tameta",
+     "tamato"
+    ],
+    "devanagari": [
+     "टमाटर",
+     "टोमॅटो"
+    ],
+    "bengali": [
+     "টমেটো"
+    ],
+    "tamil": [
+     "தக்காளி"
+    ],
+    "malayalam": [
+     "തക്കാളി"
+    ],
+    "telugu": [
+     "టమాటా",
+     "టమోటా"
+    ],
+    "gujarati": [
+     "ટમેટા",
+     "ટામેટા"
+    ],
+    "kannada": [
+     "ಟೊಮೇಟೊ",
+     "ಟೊಮ್ಯಾಟೊ"
+    ],
+    "gurmukhi": [
+     "ਟਮਾਟਰ"
+    ],
+    "odia": [
+     "ଟମାଟୋ"
+    ]
+   }
+  },
+  {
+   "term": "cauliflower",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "gobhi",
+     "gobi",
+     "phool gobhi",
+     "phulgobhi",
+     "cauliflower",
+     "phool kobi",
+     "phul kobi",
+     "phulkobi",
+     "fulkobi",
+     "phulkopi",
+     "fulkopi",
+     "kolipookku",
+     "kolipuvvu",
+     "flower",
+     "hoovakosu",
+     "hukosu",
+     "phulakobi"
+    ],
+    "devanagari": [
+     "गोभी",
+     "फूल गोभी",
+     "फूलगोभी",
+     "फुलकोबी",
+     "फ्लॉवर"
+    ],
+    "bengali": [
+     "ফুলকপি"
+    ],
+    "tamil": [
+     "காலிஃபிளவர்",
+     "காலிபிளவர்"
+    ],
+    "telugu": [
+     "కాలీఫ్లవర్",
+     "కాలిఫ్లవర్"
+    ],
+    "gujarati": [
+     "ફ્લાવર",
+     "ફૂલકોબી"
+    ],
+    "kannada": [
+     "ಹೂಕೋಸು"
+    ],
+    "malayalam": [
+     "കോളിഫ്ലവർ"
+    ],
+    "gurmukhi": [
+     "ਫੁੱਲ ਗੋਭੀ"
+    ],
+    "odia": [
+     "ଫୁଲକୋବି"
+    ]
+   }
+  },
+  {
+   "term": "cabbage",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "patta gobhi",
+     "patta gobi",
+     "band gobhi",
+     "bandh gobhi",
+     "cabbage",
+     "kobi",
+     "kobee",
+     "patta kobi",
+     "bandhakopi",
+     "badhakopi",
+     "muttaikose",
+     "kosu",
+     "kobij",
+     "ele kosu",
+     "bandha kobi"
+    ],
+    "devanagari": [
+     "पत्ता गोभी",
+     "बंद गोभी",
+     "कोबी",
+     "पत्ताकोबी"
+    ],
+    "bengali": [
+     "বাঁধাকপি",
+     "বাধাকপি"
+    ],
+    "tamil": [
+     "முட்டைகோஸ்",
+     "முட்டை கோஸ்"
+    ],
+    "telugu": [
+     "క్యాబేజీ",
+     "క్యాబేజి"
+    ],
+    "gujarati": [
+     "કોબી",
+     "કોબીજ"
+    ],
+    "kannada": [
+     "ಎಲೆಕೋಸು",
+     "ಎಲೆ ಕೋಸು"
+    ],
+    "malayalam": [
+     "കാബേജ്",
+     "കോസ്"
+    ],
+    "gurmukhi": [
+     "ਬੰਦ ਗੋਭੀ"
+    ],
+    "odia": [
+     "ବନ୍ଧାକୋବି"
+    ]
+   }
+  },
+  {
+   "term": "brinjal",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "baingan",
+     "baigan",
+     "brinjal",
+     "eggplant",
+     "bhanta",
+     "bhata",
+     "vangi",
+     "vange",
+     "begun",
+     "kathirikai",
+     "kathrikai",
+     "vankaya",
+     "ringan",
+     "badanekai",
+     "vazhuthananga",
+     "vazhutananga",
+     "baigana"
+    ],
+    "devanagari": [
+     "बैंगन",
+     "भंटा",
+     "भांटा",
+     "वांगी",
+     "वांगं"
+    ],
+    "bengali": [
+     "বেগুন"
+    ],
+    "tamil": [
+     "கத்தரிக்காய்",
+     "கத்திரிக்காய்"
+    ],
+    "telugu": [
+     "వంకాయ",
+     "వంకాయలు"
+    ],
+    "gujarati": [
+     "રીંગણ",
+     "રિંગણ"
+    ],
+    "kannada": [
+     "ಬದನೆಕಾಯಿ"
+    ],
+    "malayalam": [
+     "വഴുതനങ്ങ"
+    ],
+    "gurmukhi": [
+     "ਬੈਂਗਣ"
+    ],
+    "odia": [
+     "ବାଇଗଣ"
+    ]
+   }
+  },
+  {
+   "term": "okra",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "bhindi",
+     "bindi",
+     "okra",
+     "ladies finger",
+     "lady finger",
+     "bhendi",
+     "dherosh",
+     "dharosh",
+     "vendakkai",
+     "vendaikai",
+     "bendakaya",
+     "bhinda",
+     "bhindo",
+     "bendekayi",
+     "vendakka"
+    ],
+    "devanagari": [
+     "भिंडी",
+     "भेंडी"
+    ],
+    "bengali": [
+     "ঢেঁড়শ"
+    ],
+    "tamil": [
+     "வெண்டைக்காய்"
+    ],
+    "telugu": [
+     "బెండకాయ"
+    ],
+    "gujarati": [
+     "ભીંડા",
+     "ભીંડો"
+    ],
+    "kannada": [
+     "ಬೆಂಡೆಕಾಯಿ"
+    ],
+    "malayalam": [
+     "വെണ്ടക്ക"
+    ],
+    "gurmukhi": [
+     "ਭਿੰਡੀ"
+    ],
+    "odia": [
+     "ଭେଣ୍ଡି"
+    ]
+   }
+  },
+  {
+   "term": "spinach",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "palak",
+     "spinach",
+     "palong",
+     "palong shak",
+     "palak keerai",
+     "pasalai keerai",
+     "palakura",
+     "palak soppu",
+     "palak cheera",
+     "cheera",
+     "palak saga"
+    ],
+    "devanagari": [
+     "पालक"
+    ],
+    "bengali": [
+     "পালং",
+     "পালং শাক"
+    ],
+    "tamil": [
+     "பாலக் கீரை",
+     "பசலைக்கீரை"
+    ],
+    "telugu": [
+     "పాలకూర"
+    ],
+    "gujarati": [
+     "પાલક"
+    ],
+    "kannada": [
+     "ಪಾಲಕ್ ಸೊಪ್ಪು",
+     "ಪಾಲಕ್"
+    ],
+    "malayalam": [
+     "പാലക് ചീര",
+     "ചീര"
+    ],
+    "gurmukhi": [
+     "ਪਾਲਕ"
+    ],
+    "odia": [
+     "ପାଳଙ୍ଗ ଶାଗ"
+    ]
+   }
+  },
+  {
+   "term": "green peas",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "matar",
+     "mutter",
+     "green peas",
+     "peas",
+     "vatana",
+     "vatane",
+     "motorshuti",
+     "matarshuti",
+     "pattani",
+     "pachai pattani",
+     "batani",
+     "pachi batani",
+     "matara"
+    ],
+    "devanagari": [
+     "मटर",
+     "वाटाणा",
+     "मटार"
+    ],
+    "bengali": [
+     "মটরশুঁটি",
+     "মটরশুটি"
+    ],
+    "tamil": [
+     "பட்டாணி",
+     "பச்சை பட்டாணி"
+    ],
+    "telugu": [
+     "బఠాణీ",
+     "బటాని"
+    ],
+    "gujarati": [
+     "વટાણા"
+    ],
+    "kannada": [
+     "ಬಟಾಣಿ",
+     "ಹಸಿರು ಬಟಾಣಿ"
+    ],
+    "malayalam": [
+     "പട്ടാണി"
+    ],
+    "gurmukhi": [
+     "ਮਟਰ"
+    ],
+    "odia": [
+     "ମଟର"
+    ]
+   }
+  },
+  {
+   "term": "carrot",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "gajar",
+     "carrot",
+     "gajor"
+    ],
+    "devanagari": [
+     "गाजर"
+    ],
+    "bengali": [
+     "গাজর"
+    ],
+    "tamil": [
+     "கேரட்"
+    ],
+    "telugu": [
+     "క్యారెట్"
+    ],
+    "gujarati": [
+     "ગાજર"
+    ],
+    "kannada": [
+     "ಕ್ಯಾರೆಟ್",
+     "ಗಜ್ಜರಿ"
+    ],
+    "malayalam": [
+     "കാരറ്റ്",
+     "കാരട്ട്"
+    ],
+    "gurmukhi": [
+     "ਗਾਜਰ"
+    ],
+    "odia": [
+     "ଗାଜର"
+    ]
+   }
+  },
+  {
+   "term": "cucumber",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "kheera",
+     "khira",
+     "cucumber",
+     "kakdi",
+     "sasha",
+     "shosha",
+     "vellarikai",
+     "dosakaya",
+     "dosakayi",
+     "kakadi",
+     "southekayi",
+     "vellarikka",
+     "kakudi"
+    ],
+    "devanagari": [
+     "खीरा",
+     "काकडी"
+    ],
+    "bengali": [
+     "শসা"
+    ],
+    "tamil": [
+     "வெள்ளரிக்காய்"
+    ],
+    "telugu": [
+     "దోసకాయ"
+    ],
+    "gujarati": [
+     "કાકડી"
+    ],
+    "kannada": [
+     "ಸೌತೆಕಾಯಿ"
+    ],
+    "malayalam": [
+     "വെള്ളരിക്ക",
+     "കുക്കുമ്പർ"
+    ],
+    "gurmukhi": [
+     "ਖੀਰਾ"
+    ],
+    "odia": [
+     "କାକୁଡ଼ି"
+    ]
+   }
+  },
+  {
+   "term": "green chilli",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "hari mirch",
+     "hari mirchi",
+     "green chilli",
+     "green chili",
+     "hirvi mirchi",
+     "kancha lanka",
+     "kacha lanka",
+     "pachai milagai",
+     "pachi mirchi",
+     "mirapakaya",
+     "lili marchi",
+     "lila marcha",
+     "pachamulaku"
+    ],
+    "devanagari": [
+     "हरी मिर्च",
+     "हिरवी मिरची"
+    ],
+    "bengali": [
+     "কাঁচা লঙ্কা",
+     "কাঁচালঙ্কা",
+     "কাঁচা লংকা"
+    ],
+    "tamil": [
+     "பச்சை மிளகாய்"
+    ],
+    "telugu": [
+     "పచ్చి మిర్చి",
+     "మిరపకాయ"
+    ],
+    "gujarati": [
+     "લીલા મરચા",
+     "લીલું મરચું"
+    ],
+    "kannada": [
+     "ಹಸಿರು ಮೆಣಸಿನಕಾಯಿ",
+     "ಹಸಿ ಮೆಣಸಿನಕಾಯಿ",
+     "ಮೆಣಸಿನಕಾಯಿ"
+    ],
+    "malayalam": [
+     "പച്ചമുളക്",
+     "പച്ച മുളക്"
+    ],
+    "gurmukhi": [
+     "ਹਰੀ ਮਿਰਚ"
+    ],
+    "odia": [
+     "କଞ୍ଚା ଲଙ୍କା"
+    ]
+   }
+  },
+  {
+   "term": "coriander leaves",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "dhaniya patta",
+     "hara dhaniya",
+     "coriander leaves",
+     "coriander",
+     "dhaniya",
+     "kothimbir",
+     "kothambir",
+     "dhone pata",
+     "dhonepata",
+     "kothamalli",
+     "kothimeera",
+     "kothmir",
+     "kothambari",
+     "kottambari soppu",
+     "malliyila"
+    ],
+    "devanagari": [
+     "धनिया",
+     "हरा धनिया",
+     "धनिया पत्ता",
+     "कोथिंबीर"
+    ],
+    "bengali": [
+     "ধনেপাতা",
+     "ধনে পাতা"
+    ],
+    "tamil": [
+     "கொத்தமல்லி",
+     "கொத்தமல்லி இலை"
+    ],
+    "telugu": [
+     "కొత్తిమీర"
+    ],
+    "gujarati": [
+     "કોથમીર"
+    ],
+    "kannada": [
+     "ಕೊತ್ತಂಬರಿ ಸೊಪ್ಪು",
+     "ಕೊತ್ತಂಬರಿ"
+    ],
+    "malayalam": [
+     "മല്ലിയില"
+    ],
+    "gurmukhi": [
+     "ਧਨੀਆ",
+     "ਹਰਾ ਧਨੀਆ"
+    ],
+    "odia": [
+     "ଧନିଆ ପତ୍ର"
+    ]
+   }
+  },
+  {
+   "term": "ginger",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "adrak",
+     "ginger",
+     "aale",
+     "ada",
+     "inji",
+     "allam",
+     "adu",
+     "shunti"
+    ],
+    "devanagari": [
+     "अदरक",
+     "आले",
+     "आलं"
+    ],
+    "bengali": [
+     "আদা"
+    ],
+    "odia": [
+     "ଅଦା"
+    ],
+    "tamil": [
+     "இஞ்சி"
+    ],
+    "malayalam": [
+     "ഇഞ്ചി"
+    ],
+    "telugu": [
+     "అల్లం"
+    ],
+    "gujarati": [
+     "આદુ"
+    ],
+    "kannada": [
+     "ಶುಂಠಿ"
+    ],
+    "gurmukhi": [
+     "ਅਦਰਕ"
+    ]
+   }
+  },
+  {
+   "term": "garlic",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "lahsun",
+     "lasan",
+     "garlic",
+     "lasun",
+     "roshun",
+     "roshon",
+     "poondu",
+     "vellulli",
+     "bellulli",
+     "veluthulli",
+     "rasun"
+    ],
+    "devanagari": [
+     "लहसुन",
+     "लसूण"
+    ],
+    "bengali": [
+     "রসুন"
+    ],
+    "tamil": [
+     "பூண்டு"
+    ],
+    "telugu": [
+     "వెల్లుల్లి"
+    ],
+    "gujarati": [
+     "લસણ"
+    ],
+    "kannada": [
+     "ಬೆಳ್ಳುಳ್ಳಿ"
+    ],
+    "malayalam": [
+     "വെളുത്തുള്ളി"
+    ],
+    "gurmukhi": [
+     "ਲਸਣ"
+    ],
+    "odia": [
+     "ରସୁଣ"
+    ]
+   }
+  },
+  {
+   "term": "lemon",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "nimbu",
+     "lemon",
+     "lime",
+     "limbu",
+     "lebu",
+     "nebu",
+     "elumichai",
+     "nimma",
+     "nimmakaya",
+     "nimbe",
+     "nimbehannu",
+     "naranga",
+     "cheru naranga",
+     "lembu"
+    ],
+    "devanagari": [
+     "नींबू",
+     "लिंबू"
+    ],
+    "gujarati": [
+     "લીંબુ"
+    ],
+    "bengali": [
+     "লেবু"
+    ],
+    "tamil": [
+     "எலுமிச்சை"
+    ],
+    "telugu": [
+     "నిమ్మకాయ",
+     "నిమ్మ"
+    ],
+    "kannada": [
+     "ನಿಂಬೆ",
+     "ನಿಂಬೆಹಣ್ಣು"
+    ],
+    "malayalam": [
+     "നാരങ്ങ",
+     "ചെറുനാരങ്ങ"
+    ],
+    "gurmukhi": [
+     "ਨਿੰਬੂ"
+    ],
+    "odia": [
+     "ଲେମ୍ବୁ"
+    ]
+   }
+  },
+  {
+   "term": "capsicum",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "shimla mirch",
+     "simla mirch",
+     "capsicum",
+     "bell pepper",
+     "dhobli mirchi",
+     "simla mirchi",
+     "kyapsikam",
+     "kudai milagai",
+     "dodda menasinakayi"
+    ],
+    "devanagari": [
+     "शिमला मिर्च",
+     "ढोबळी मिरची",
+     "शिमला मिरची"
+    ],
+    "bengali": [
+     "ক্যাপসিকাম"
+    ],
+    "tamil": [
+     "குடைமிளகாய்",
+     "கேப்சிகம்"
+    ],
+    "telugu": [
+     "క్యాప్సికమ్",
+     "సిమ్లా మిర్చి"
+    ],
+    "gujarati": [
+     "કેપ્સિકમ",
+     "શિમલા મરચા"
+    ],
+    "kannada": [
+     "ದೊಣ್ಣೆ ಮೆಣಸಿನಕಾಯಿ",
+     "ಕ್ಯಾಪ್ಸಿಕಂ"
+    ],
+    "malayalam": [
+     "കാപ്സിക്കം"
+    ],
+    "gurmukhi": [
+     "ਸ਼ਿਮਲਾ ਮਿਰਚ"
+    ],
+    "odia": [
+     "କ୍ୟାପସିକମ୍"
+    ]
+   }
+  },
+  {
+   "term": "bottle gourd",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "lauki",
+     "louki",
+     "ghiya",
+     "bottle gourd",
+     "lauka",
+     "dudhi",
+     "doodhi",
+     "lau",
+     "suraikkai",
+     "sorakaya",
+     "sorekayi",
+     "chorakka"
+    ],
+    "devanagari": [
+     "लौकी",
+     "घिया",
+     "लौका",
+     "दुधी",
+     "दुधी भोपळा"
+    ],
+    "gujarati": [
+     "દૂધી"
+    ],
+    "bengali": [
+     "লাউ"
+    ],
+    "odia": [
+     "ଲାଉ"
+    ],
+    "tamil": [
+     "சுரைக்காய்"
+    ],
+    "telugu": [
+     "సొరకాయ"
+    ],
+    "kannada": [
+     "ಸೋರೆಕಾಯಿ"
+    ],
+    "malayalam": [
+     "ചുരയ്ക്ക"
+    ],
+    "gurmukhi": [
+     "ਲੌਕੀ",
+     "ਘੀਆ"
+    ]
+   }
+  },
+  {
+   "term": "bitter gourd",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "karela",
+     "bitter gourd",
+     "karaila",
+     "karle",
+     "korola",
+     "uchhe",
+     "paavakkai",
+     "pavakkai",
+     "kakarakaya",
+     "haagalakayi",
+     "pavakka",
+     "kalara"
+    ],
+    "devanagari": [
+     "करेला",
+     "करैला",
+     "कारले"
+    ],
+    "bengali": [
+     "করলা",
+     "উচ্ছে"
+    ],
+    "tamil": [
+     "பாகற்காய்",
+     "பாவக்காய்"
+    ],
+    "telugu": [
+     "కాకరకాయ"
+    ],
+    "gujarati": [
+     "કારેલા"
+    ],
+    "kannada": [
+     "ಹಾಗಲಕಾಯಿ"
+    ],
+    "malayalam": [
+     "പാവയ്ക്ക"
+    ],
+    "gurmukhi": [
+     "ਕਰੇਲਾ"
+    ],
+    "odia": [
+     "କଲରା"
+    ]
+   }
+  },
+  {
+   "term": "pumpkin",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "kaddu",
+     "kadoo",
+     "pumpkin",
+     "kohda",
+     "bhopla",
+     "kumro",
+     "kumra",
+     "poosanikai",
+     "gummadikaya",
+     "kolu",
+     "kumbalakayi",
+     "mathanga",
+     "kakharu"
+    ],
+    "devanagari": [
+     "कद्दू",
+     "कोहड़ा",
+     "भोपळा"
+    ],
+    "bengali": [
+     "কুমড়ো",
+     "মিষ্টি কুমড়ো"
+    ],
+    "tamil": [
+     "பூசணிக்காய்",
+     "பூசணி"
+    ],
+    "telugu": [
+     "గుమ్మడికాయ"
+    ],
+    "gujarati": [
+     "કોળું",
+     "કોળુ"
+    ],
+    "kannada": [
+     "ಕುಂಬಳಕಾಯಿ"
+    ],
+    "malayalam": [
+     "മത്തങ്ങ"
+    ],
+    "gurmukhi": [
+     "ਕੱਦੂ"
+    ],
+    "odia": [
+     "କଖାରୁ"
+    ]
+   }
+  },
+  {
+   "term": "radish",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "mooli",
+     "muli",
+     "radish",
+     "mula",
+     "mulo",
+     "mullangi"
+    ],
+    "devanagari": [
+     "मूली",
+     "मुळा"
+    ],
+    "gujarati": [
+     "મૂળા"
+    ],
+    "odia": [
+     "ମୂଳା"
+    ],
+    "bengali": [
+     "মুলো"
+    ],
+    "tamil": [
+     "முள்ளங்கி"
+    ],
+    "telugu": [
+     "ముల్లంగి"
+    ],
+    "kannada": [
+     "ಮೂಲಂಗಿ"
+    ],
+    "malayalam": [
+     "മുള്ളങ്കി"
+    ],
+    "gurmukhi": [
+     "ਮੂਲੀ"
+    ]
+   }
+  },
+  {
+   "term": "beetroot",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "beetroot",
+     "chukandar",
+     "beet"
+    ],
+    "devanagari": [
+     "बीटरूट",
+     "चुकंदर",
+     "बीट"
+    ],
+    "bengali": [
+     "বিট"
+    ],
+    "gujarati": [
+     "બીટ"
+    ],
+    "tamil": [
+     "பீட்ரூட்"
+    ],
+    "telugu": [
+     "బీట్రూట్"
+    ],
+    "kannada": [
+     "ಬೀಟ್ರೂಟ್"
+    ],
+    "malayalam": [
+     "ബീറ്റ്റൂട്ട്"
+    ],
+    "gurmukhi": [
+     "ਚੁਕੰਦਰ"
+    ],
+    "odia": [
+     "ବିଟ୍ରୁଟ୍"
+    ]
+   }
+  },
+  {
+   "term": "drumstick",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "sahjan",
+     "saijan",
+     "drumstick",
+     "shevga",
+     "sajna",
+     "sojne",
+     "murungakkai",
+     "munaga",
+     "munagakaya",
+     "saragva",
+     "nugge kayi",
+     "muringakka",
+     "sajana"
+    ],
+    "devanagari": [
+     "सहजन",
+     "सहजना",
+     "शेवगा"
+    ],
+    "bengali": [
+     "সজনে",
+     "সজনা"
+    ],
+    "tamil": [
+     "முருங்கைக்காய்"
+    ],
+    "telugu": [
+     "మునగకాయ"
+    ],
+    "gujarati": [
+     "સરગવો"
+    ],
+    "kannada": [
+     "ನುಗ್ಗೆಕಾಯಿ"
+    ],
+    "malayalam": [
+     "മുരിങ്ങക്ക"
+    ],
+    "gurmukhi": [
+     "ਸੁਹਾਂਜਣਾ"
+    ],
+    "odia": [
+     "ସଜନା"
+    ]
+   }
+  },
+  {
+   "term": "ridge gourd",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "turai",
+     "tori",
+     "ridge gourd",
+     "dodka",
+     "jhinge",
+     "peerkangai",
+     "beerakaya",
+     "turia",
+     "heerekayi",
+     "peechinga"
+    ],
+    "devanagari": [
+     "तोरई",
+     "दोडका"
+    ],
+    "bengali": [
+     "ঝিঙে"
+    ],
+    "tamil": [
+     "பீர்க்கங்காய்"
+    ],
+    "telugu": [
+     "బీరకాయ"
+    ],
+    "gujarati": [
+     "તુરિયા"
+    ],
+    "kannada": [
+     "ಹೀರೇಕಾಯಿ"
+    ],
+    "malayalam": [
+     "പീച്ചിങ്ങ"
+    ],
+    "gurmukhi": [
+     "ਤੋਰੀ"
+    ]
+   }
+  },
+  {
+   "term": "french beans",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "french beans",
+     "beans",
+     "farasbi",
+     "sim",
+     "fansi"
+    ],
+    "devanagari": [
+     "फ्रेंच बीन्स",
+     "बीन्स",
+     "फरसबी"
+    ],
+    "bengali": [
+     "শিম",
+     "বিন্স"
+    ],
+    "tamil": [
+     "பீன்ஸ்"
+    ],
+    "telugu": [
+     "బీన్స్",
+     "చిక్కుడు"
+    ],
+    "gujarati": [
+     "ફણસી"
+    ],
+    "kannada": [
+     "ಬೀನ್ಸ್"
+    ],
+    "malayalam": [
+     "ബീൻസ്"
+    ],
+    "gurmukhi": [
+     "ਫਲੀਆਂ"
+    ],
+    "odia": [
+     "ବିନ୍ସ"
+    ]
+   }
+  },
+  {
+   "term": "curry leaves",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "curry patta",
+     "kadi patta",
+     "kadhi patta",
+     "kadipatta",
+     "curry pata",
+     "karuvepillai",
+     "karivepaku",
+     "limda",
+     "karibevu",
+     "kariveppila"
+    ],
+    "devanagari": [
+     "करी पत्ता",
+     "कढ़ी पत्ता",
+     "कढीपत्ता"
+    ],
+    "bengali": [
+     "কারি পাতা"
+    ],
+    "tamil": [
+     "கறிவேப்பிலை"
+    ],
+    "telugu": [
+     "కరివేపాకు"
+    ],
+    "gujarati": [
+     "લીમડો",
+     "મીઠો લીમડો"
+    ],
+    "kannada": [
+     "ಕರಿಬೇವು"
+    ],
+    "malayalam": [
+     "കറിവേപ്പില"
+    ],
+    "gurmukhi": [
+     "ਕੜੀ ਪੱਤਾ"
+    ]
+   }
+  },
+  {
+   "term": "mint",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "pudina",
+     "pudhina",
+     "mint",
+     "pudino"
+    ],
+    "devanagari": [
+     "पुदीना",
+     "पुदिना"
+    ],
+    "bengali": [
+     "পুদিনা"
+    ],
+    "tamil": [
+     "புதினா"
+    ],
+    "telugu": [
+     "పుదీనా"
+    ],
+    "gujarati": [
+     "ફુદીનો"
+    ],
+    "kannada": [
+     "ಪುದೀನ"
+    ],
+    "malayalam": [
+     "പുതിന"
+    ],
+    "gurmukhi": [
+     "ਪੁਦੀਨਾ"
+    ],
+    "odia": [
+     "ପୁଦିନା"
+    ]
+   }
+  },
+  {
+   "term": "mushroom",
+   "category": "Vegetables",
+   "variants": {
+    "latin": [
+     "mushroom",
+     "khumb",
+     "alimbi",
+     "kalan",
+     "anabe",
+     "koon"
+    ],
+    "devanagari": [
+     "मशरूम",
+     "खुंब",
+     "आळिंबी"
+    ],
+    "bengali": [
+     "মাশরুম"
+    ],
+    "tamil": [
+     "காளான்"
+    ],
+    "telugu": [
+     "పుట్టగొడుగులు",
+     "పుట్టగొడుగు"
+    ],
+    "gujarati": [
+     "મશરૂમ"
+    ],
+    "kannada": [
+     "ಅಣಬೆ"
+    ],
+    "malayalam": [
+     "കൂൺ"
+    ],
+    "gurmukhi": [
+     "ਖੁੰਬ"
+    ],
+    "odia": [
+     "ଛତୁ"
+    ]
+   }
+  },
+  {
+   "term": "banana",
+   "category": "Fruits",
+   "variants": {
+    "latin": [
+     "kela",
+     "banana",
+     "keli",
+     "kola",
+     "vazhaipazham",
+     "vazhappazham",
+     "arati pandu",
+     "aratipandu",
+     "bale hannu",
+     "balehannu",
+     "vazhapazham",
+     "kadali"
+    ],
+    "devanagari": [
+     "केला",
+     "केळी",
+     "केळे"
+    ],
+    "bengali": [
+     "কলা"
+    ],
+    "tamil": [
+     "வாழைப்பழம்"
+    ],
+    "telugu": [
+     "అరటిపండు",
+     "అరటి పండు"
+    ],
+    "gujarati": [
+     "કેળા"
+    ],
+    "kannada": [
+     "ಬಾಳೆಹಣ್ಣು"
+    ],
+    "malayalam": [
+     "വാഴപ്പഴം",
+     "പഴം"
+    ],
+    "gurmukhi": [
+     "ਕੇਲਾ"
+    ],
+    "odia": [
+     "କଦଳୀ"
+    ]
+   }
+  },
+  {
+   "term": "apple",
+   "category": "Fruits",
+   "variants": {
+    "latin": [
+     "apple",
+     "seb",
+     "safarchand",
+     "aappil",
+     "safarjan",
+     "sebu",
+     "seu"
+    ],
+    "devanagari": [
+     "सेब",
+     "सफरचंद"
+    ],
+    "bengali": [
+     "আপেল"
+    ],
+    "tamil": [
+     "ஆப்பிள்"
+    ],
+    "telugu": [
+     "ఆపిల్",
+     "యాపిల్"
+    ],
+    "gujarati": [
+     "સફરજન"
+    ],
+    "kannada": [
+     "ಸೇಬು"
+    ],
+    "malayalam": [
+     "ആപ്പിൾ"
+    ],
+    "gurmukhi": [
+     "ਸੇਬ"
+    ],
+    "odia": [
+     "ସେଉ"
+    ]
+   }
+  },
+  {
+   "term": "mango",
+   "category": "Fruits",
+   "variants": {
+    "latin": [
+     "aam",
+     "mango",
+     "amba",
+     "aamba",
+     "am",
+     "maambazham",
+     "mambazham",
+     "mamidi",
+     "mamidipandu",
+     "keri",
+     "mavinahannu",
+     "manga",
+     "maanga",
+     "amb"
+    ],
+    "devanagari": [
+     "आम",
+     "आंबा"
+    ],
+    "odia": [
+     "ଆମ୍ବ"
+    ],
+    "bengali": [
+     "আম"
+    ],
+    "tamil": [
+     "மாம்பழம்"
+    ],
+    "telugu": [
+     "మామిడిపండు",
+     "మామిడి"
+    ],
+    "gujarati": [
+     "કેરી"
+    ],
+    "kannada": [
+     "ಮಾವಿನಹಣ್ಣು"
+    ],
+    "malayalam": [
+     "മാങ്ങ"
+    ],
+    "gurmukhi": [
+     "ਅੰਬ"
+    ]
+   }
+  },
+  {
+   "term": "orange",
+   "category": "Fruits",
+   "variants": {
+    "latin": [
+     "santra",
+     "santara",
+     "orange",
+     "komola",
+     "kamala",
+     "narinja",
+     "kittale"
+    ],
+    "devanagari": [
+     "संतरा",
+     "नारंगी",
+     "संत्रे",
+     "संत्री"
+    ],
+    "bengali": [
+     "কমলা",
+     "কমলালেবু"
+    ],
+    "tamil": [
+     "ஆரஞ்சு",
+     "ஆரஞ்சு பழம்"
+    ],
+    "telugu": [
+     "నారింజ",
+     "ఆరెంజ్"
+    ],
+    "gujarati": [
+     "સંતરા",
+     "નારંગી"
+    ],
+    "kannada": [
+     "ಕಿತ್ತಳೆ",
+     "ಕಿತ್ತಳೆ ಹಣ್ಣು"
+    ],
+    "malayalam": [
+     "ഓറഞ്ച്"
+    ],
+    "gurmukhi": [
+     "ਸੰਤਰਾ"
+    ],
+    "odia": [
+     "କମଳା"
+    ]
+   }
+  },
+  {
+   "term": "grapes",
+   "category": "Fruits",
+   "variants": {
+    "latin": [
+     "angoor",
+     "angur",
+     "grapes",
+     "draksha",
+     "thiratchai",
+     "draksh",
+     "draakshi",
+     "munthiri",
+     "angura"
+    ],
+    "devanagari": [
+     "अंगूर",
+     "द्राक्षे",
+     "द्राक्ष"
+    ],
+    "bengali": [
+     "আঙুর"
+    ],
+    "tamil": [
+     "திராட்சை"
+    ],
+    "telugu": [
+     "ద్రాక్ష"
+    ],
+    "gujarati": [
+     "દ્રાક્ષ"
+    ],
+    "kannada": [
+     "ದ್ರಾಕ್ಷಿ"
+    ],
+    "malayalam": [
+     "മുന്തിരി"
+    ],
+    "gurmukhi": [
+     "ਅੰਗੂਰ"
+    ],
+    "odia": [
+     "ଅଙ୍ଗୁର"
+    ]
+   }
+  },
+  {
+   "term": "papaya",
+   "category": "Fruits",
+   "variants": {
+    "latin": [
+     "papita",
+     "papaya",
+     "papai",
+     "pepe",
+     "pappali",
+     "boppayi",
+     "pappaya"
+    ],
+    "devanagari": [
+     "पपीता",
+     "पपई"
+    ],
+    "bengali": [
+     "পেঁপে"
+    ],
+    "tamil": [
+     "பப்பாளி"
+    ],
+    "telugu": [
+     "బొప్పాయి"
+    ],
+    "gujarati": [
+     "પપૈયું",
+     "પપૈયા"
+    ],
+    "kannada": [
+     "ಪರಂಗಿ",
+     "ಪಪ್ಪಾಯಿ"
+    ],
+    "malayalam": [
+     "പപ്പായ"
+    ],
+    "gurmukhi": [
+     "ਪਪੀਤਾ"
+    ],
+    "odia": [
+     "ପପିତା"
+    ]
+   }
+  },
+  {
+   "term": "watermelon",
+   "category": "Fruits",
+   "variants": {
+    "latin": [
+     "tarbooj",
+     "tarbuj",
+     "watermelon",
+     "kalingad",
+     "tormuj",
+     "tharbhoosani",
+     "puchakaya",
+     "pucchakaya",
+     "tarbuch",
+     "kallangadi",
+     "thannimathan",
+     "tarbooz",
+     "tarbuja"
+    ],
+    "devanagari": [
+     "तरबूज़",
+     "तरबूज",
+     "कलिंगड"
+    ],
+    "bengali": [
+     "তরমুজ"
+    ],
+    "tamil": [
+     "தர்பூசணி"
+    ],
+    "telugu": [
+     "పుచ్చకాయ"
+    ],
+    "gujarati": [
+     "તરબૂચ"
+    ],
+    "kannada": [
+     "ಕಲ್ಲಂಗಡಿ"
+    ],
+    "malayalam": [
+     "തണ്ണിമത്തൻ"
+    ],
+    "gurmukhi": [
+     "ਤਰਬੂਜ਼"
+    ],
+    "odia": [
+     "ତରଭୁଜ"
+    ]
+   }
+  },
+  {
+   "term": "pomegranate",
+   "category": "Fruits",
+   "variants": {
+    "latin": [
+     "anar",
+     "anaar",
+     "pomegranate",
+     "dalimb",
+     "dalim",
+     "madulai",
+     "mathulai",
+     "danimma",
+     "dadam",
+     "dalimbe",
+     "mathalanarangga",
+     "dalimba"
+    ],
+    "devanagari": [
+     "अनार",
+     "डाळिंब"
+    ],
+    "bengali": [
+     "ডালিম"
+    ],
+    "tamil": [
+     "மாதுளை"
+    ],
+    "telugu": [
+     "దానిమ్మ"
+    ],
+    "gujarati": [
+     "દાડમ"
+    ],
+    "kannada": [
+     "ದಾಳಿಂಬೆ"
+    ],
+    "malayalam": [
+     "മാതളനാരങ്ങ",
+     "മാതളം"
+    ],
+    "gurmukhi": [
+     "ਅਨਾਰ"
+    ],
+    "odia": [
+     "ଡାଳିମ୍ବ"
+    ]
+   }
+  },
+  {
+   "term": "guava",
+   "category": "Fruits",
+   "variants": {
+    "latin": [
+     "amrood",
+     "amrud",
+     "guava",
+     "peru",
+     "peyara",
+     "koyya",
+     "koyyapazham",
+     "jama",
+     "jamapandu",
+     "jamphal",
+     "seebe",
+     "perakka",
+     "pijuli"
+    ],
+    "devanagari": [
+     "अमरूद",
+     "पेरू"
+    ],
+    "bengali": [
+     "পেয়ারা"
+    ],
+    "tamil": [
+     "கொய்யா",
+     "கொய்யாப்பழம்"
+    ],
+    "telugu": [
+     "జామ",
+     "జామకాయ"
+    ],
+    "gujarati": [
+     "જામફળ"
+    ],
+    "kannada": [
+     "ಸೀಬೆ",
+     "ಪೇರಲೆ"
+    ],
+    "malayalam": [
+     "പേരയ്ക്ക"
+    ],
+    "gurmukhi": [
+     "ਅਮਰੂਦ"
+    ],
+    "odia": [
+     "ପିଜୁଳି"
+    ]
+   }
+  },
+  {
+   "term": "pineapple",
+   "category": "Fruits",
+   "variants": {
+    "latin": [
+     "ananas",
+     "pineapple",
+     "anarosh",
+     "annasi",
+     "anasa",
+     "anannas",
+     "kaitha chakka"
+    ],
+    "devanagari": [
+     "अनानास",
+     "अननस"
+    ],
+    "bengali": [
+     "আনারস"
+    ],
+    "tamil": [
+     "அன்னாசி",
+     "அன்னாசிப்பழம்"
+    ],
+    "telugu": [
+     "అనాస",
+     "పైనాపిల్"
+    ],
+    "gujarati": [
+     "અનાનસ"
+    ],
+    "kannada": [
+     "ಅನಾನಸ್"
+    ],
+    "malayalam": [
+     "കൈതച്ചക്ക"
+    ],
+    "gurmukhi": [
+     "ਅਨਾਨਾਸ"
+    ],
+    "odia": [
+     "ଅନାନାସ"
+    ]
+   }
+  },
+  {
+   "term": "coconut",
+   "category": "Fruits",
+   "variants": {
+    "latin": [
+     "nariyal",
+     "narial",
+     "coconut",
+     "naral",
+     "narali",
+     "narkel",
+     "thengai",
+     "kobbari",
+     "kobbarikaya",
+     "nariyel",
+     "tengina kayi",
+     "thenginakayi",
+     "thenga",
+     "nadia"
+    ],
+    "devanagari": [
+     "नारियल",
+     "नारळ"
+    ],
+    "bengali": [
+     "নারকেল"
+    ],
+    "tamil": [
+     "தேங்காய்"
+    ],
+    "telugu": [
+     "కొబ్బరికాయ",
+     "కొబ్బరి"
+    ],
+    "gujarati": [
+     "નાળિયેર",
+     "નારિયેળ"
+    ],
+    "kannada": [
+     "ತೆಂಗಿನಕಾಯಿ",
+     "ತೆಂಗಿನ ಕಾಯಿ"
+    ],
+    "malayalam": [
+     "തേങ്ങ"
+    ],
+    "gurmukhi": [
+     "ਨਾਰੀਅਲ"
+    ],
+    "odia": [
+     "ନଡ଼ିଆ"
+    ]
+   }
+  },
+  {
+   "term": "turmeric powder",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "turmeric",
+     "haldi",
+     "haldi powder",
+     "halad",
+     "holud",
+     "manjal",
+     "manjal thool",
+     "pasupu",
+     "haldar",
+     "arishina",
+     "manjal podi",
+     "haladi"
+    ],
+    "devanagari": [
+     "हल्दी",
+     "हळद"
+    ],
+    "bengali": [
+     "হলুদ"
+    ],
+    "tamil": [
+     "மஞ்சள்"
+    ],
+    "telugu": [
+     "పసుపు"
+    ],
+    "gujarati": [
+     "હળદર"
+    ],
+    "kannada": [
+     "ಅರಿಶಿನ"
+    ],
+    "malayalam": [
+     "മഞ്ഞൾ പൊടി"
+    ],
+    "gurmukhi": [
+     "ਹਲਦੀ"
+    ],
+    "odia": [
+     "ହଳଦୀ"
+    ]
+   }
+  },
+  {
+   "term": "red chilli powder",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "red chilli",
+     "lal mirch",
+     "mirchi powder",
+     "mirch",
+     "lal tikhat",
+     "tikhat",
+     "lanka gura",
+     "milagai thool",
+     "milagai podi",
+     "karam",
+     "karam podi",
+     "lal marcha",
+     "marcha powder",
+     "menasina pudi",
+     "khara pudi",
+     "mulaku podi",
+     "lanka gunda"
+    ],
+    "devanagari": [
+     "लाल मिर्च",
+     "मिर्च",
+     "लाल तिखट",
+     "तिखट"
+    ],
+    "bengali": [
+     "লঙ্কা গুঁড়ো",
+     "লংকা গুঁড়া"
+    ],
+    "tamil": [
+     "மிளகாய் தூள்",
+     "மிளகாய்த்தூள்"
+    ],
+    "telugu": [
+     "కారం",
+     "కారం పొడి"
+    ],
+    "gujarati": [
+     "લાલ મરચું",
+     "મરચું પાઉડર",
+     "મરચા પાવડર"
+    ],
+    "kannada": [
+     "ಮೆಣಸಿನ ಪುಡಿ",
+     "ಖಾರದ ಪುಡಿ"
+    ],
+    "malayalam": [
+     "മുളകുപൊടി",
+     "മുളക് പൊടി"
+    ],
+    "gurmukhi": [
+     "ਮਿਰਚ ਪਾਊਡਰ"
+    ],
+    "odia": [
+     "ଲଙ୍କା ଗୁଣ୍ଡ"
+    ]
+   }
+  },
+  {
+   "term": "coriander powder",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "dhaniya powder",
+     "coriander powder",
+     "dhane powder",
+     "dhone gura",
+     "malli thool",
+     "dhaniyalu",
+     "dhana powder",
+     "dhaniya pudi",
+     "malli podi",
+     "dhania gunda"
+    ],
+    "devanagari": [
+     "धनिया पाउडर",
+     "धनिया पावडर",
+     "धणे पूड",
+     "धने पूड"
+    ],
+    "bengali": [
+     "ধনে গুঁড়ো"
+    ],
+    "tamil": [
+     "மல்லித்தூள்",
+     "கொத்தமல்லி தூள்"
+    ],
+    "telugu": [
+     "ధనియాల పొడి",
+     "ధనియాలు"
+    ],
+    "gujarati": [
+     "ધાણા પાઉડર",
+     "ધાણાજીરું"
+    ],
+    "kannada": [
+     "ಧನಿಯಾ ಪುಡಿ"
+    ],
+    "malayalam": [
+     "മല്ലിപ്പൊടി"
+    ],
+    "gurmukhi": [
+     "ਧਨੀਆ ਪਾਊਡਰ"
+    ],
+    "odia": [
+     "ଧନିଆ ଗୁଣ୍ଡ"
+    ]
+   }
+  },
+  {
+   "term": "cumin",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "jeera",
+     "zeera",
+     "cumin",
+     "jire",
+     "seeragam",
+     "jeeragam",
+     "jeelakarra",
+     "jiru",
+     "jeerige",
+     "jeerakam"
+    ],
+    "devanagari": [
+     "जीरा",
+     "जिरे",
+     "जीरे"
+    ],
+    "bengali": [
+     "জিরে",
+     "জিরা"
+    ],
+    "tamil": [
+     "சீரகம்"
+    ],
+    "telugu": [
+     "జీలకర్ర"
+    ],
+    "gujarati": [
+     "જીરું"
+    ],
+    "kannada": [
+     "ಜೀರಿಗೆ"
+    ],
+    "malayalam": [
+     "ജീരകം"
+    ],
+    "gurmukhi": [
+     "ਜੀਰਾ"
+    ],
+    "odia": [
+     "ଜିରା"
+    ]
+   }
+  },
+  {
+   "term": "mustard seeds",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "rai",
+     "sarson dana",
+     "mustard seeds",
+     "mohri",
+     "shorshe",
+     "sorshe",
+     "kadugu",
+     "avalu",
+     "sasive",
+     "sorisa"
+    ],
+    "devanagari": [
+     "राई",
+     "मोहरी"
+    ],
+    "bengali": [
+     "সরষে",
+     "সর্ষে"
+    ],
+    "tamil": [
+     "கடுகு"
+    ],
+    "telugu": [
+     "ఆవాలు"
+    ],
+    "gujarati": [
+     "રાઈ"
+    ],
+    "kannada": [
+     "ಸಾಸಿವೆ"
+    ],
+    "malayalam": [
+     "കടുക്"
+    ],
+    "gurmukhi": [
+     "ਰਾਈ"
+    ],
+    "odia": [
+     "ସୋରିଷ"
+    ]
+   }
+  },
+  {
+   "term": "garam masala",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "garam masala",
+     "gorom moshla"
+    ],
+    "devanagari": [
+     "गरम मसाला"
+    ],
+    "bengali": [
+     "গরম মসলা"
+    ],
+    "tamil": [
+     "கரம் மசாலா"
+    ],
+    "telugu": [
+     "గరం మసాలా"
+    ],
+    "gujarati": [
+     "ગરમ મસાલો"
+    ],
+    "kannada": [
+     "ಗರಂ ಮಸಾಲಾ"
+    ],
+    "malayalam": [
+     "ഗരം മസാല"
+    ],
+    "gurmukhi": [
+     "ਗਰਮ ਮਸਾਲਾ"
+    ],
+    "odia": [
+     "ଗରମ ମସଲା"
+    ]
+   }
+  },
+  {
+   "term": "black pepper",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "kali mirch",
+     "black pepper",
+     "pepper",
+     "miri",
+     "kali miri",
+     "golmorich",
+     "gol morich",
+     "milagu",
+     "miriyalu",
+     "kala marcha",
+     "kalimirch",
+     "kari menasu",
+     "kurumulaku",
+     "golmaricha"
+    ],
+    "devanagari": [
+     "काली मिर्च",
+     "मिरी",
+     "काळी मिरी"
+    ],
+    "bengali": [
+     "গোলমরিচ",
+     "গোল মরিচ"
+    ],
+    "tamil": [
+     "மிளகு"
+    ],
+    "telugu": [
+     "మిరియాలు"
+    ],
+    "gujarati": [
+     "કાળા મરી",
+     "મરી"
+    ],
+    "kannada": [
+     "ಕರಿಮೆಣಸು",
+     "ಕಾಳು ಮೆಣಸು"
+    ],
+    "malayalam": [
+     "കുരുമുളക്"
+    ],
+    "gurmukhi": [
+     "ਕਾਲੀ ਮਿਰਚ"
+    ],
+    "odia": [
+     "ଗୋଲମରିଚ"
+    ]
+   }
+  },
+  {
+   "term": "cardamom",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "elaichi",
+     "ilaichi",
+     "cardamom",
+     "veldoda",
+     "velchi",
+     "elach",
+     "elakkai",
+     "yalakulu",
+     "ilaychi",
+     "yalakki",
+     "elakka"
+    ],
+    "devanagari": [
+     "इलायची",
+     "वेलदोडा",
+     "वेलची"
+    ],
+    "bengali": [
+     "এলাচ"
+    ],
+    "tamil": [
+     "ஏலக்காய்"
+    ],
+    "telugu": [
+     "ఏలకులు"
+    ],
+    "gujarati": [
+     "એલચી"
+    ],
+    "kannada": [
+     "ಏಲಕ್ಕಿ"
+    ],
+    "malayalam": [
+     "ഏലയ്ക്ക"
+    ],
+    "gurmukhi": [
+     "ਇਲਾਇਚੀ"
+    ],
+    "odia": [
+     "ଅଳେଇଚି"
+    ]
+   }
+  },
+  {
+   "term": "cloves",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "laung",
+     "lavang",
+     "cloves",
+     "labongo",
+     "lobongo",
+     "kirambu",
+     "lavangalu",
+     "laving",
+     "lavanga",
+     "grambu",
+     "labanga"
+    ],
+    "devanagari": [
+     "लौंग",
+     "लवंग"
+    ],
+    "bengali": [
+     "লবঙ্গ"
+    ],
+    "tamil": [
+     "கிராம்பு"
+    ],
+    "telugu": [
+     "లవంగాలు"
+    ],
+    "gujarati": [
+     "લવિંગ"
+    ],
+    "kannada": [
+     "ಲವಂಗ"
+    ],
+    "malayalam": [
+     "ഗ്രാമ്പൂ"
+    ],
+    "gurmukhi": [
+     "ਲੌਂਗ"
+    ],
+    "odia": [
+     "ଲବଙ୍ଗ"
+    ]
+   }
+  },
+  {
+   "term": "cinnamon",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "dalchini",
+     "cinnamon",
+     "daruchini",
+     "pattai",
+     "lavangapattai",
+     "dalchina chekka",
+     "taj",
+     "karuvapatta"
+    ],
+    "devanagari": [
+     "दालचीनी",
+     "दालचिनी"
+    ],
+    "bengali": [
+     "দারুচিনি"
+    ],
+    "odia": [
+     "ଦାରୁଚିନି"
+    ],
+    "tamil": [
+     "பட்டை",
+     "இலவங்கப்பட்டை"
+    ],
+    "telugu": [
+     "దాల్చిన చెక్క"
+    ],
+    "gujarati": [
+     "તજ"
+    ],
+    "kannada": [
+     "ದಾಲ್ಚಿನ್ನಿ"
+    ],
+    "malayalam": [
+     "കറുവപ്പട്ട"
+    ],
+    "gurmukhi": [
+     "ਦਾਲਚੀਨੀ"
+    ]
+   }
+  },
+  {
+   "term": "asafoetida",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "hing",
+     "heeng",
+     "asafoetida",
+     "perungayam",
+     "inguva",
+     "ingu",
+     "kayam",
+     "hingu"
+    ],
+    "devanagari": [
+     "हींग",
+     "हिंग"
+    ],
+    "bengali": [
+     "হিং"
+    ],
+    "tamil": [
+     "பெருங்காயம்"
+    ],
+    "telugu": [
+     "ఇంగువ"
+    ],
+    "gujarati": [
+     "હિંગ"
+    ],
+    "kannada": [
+     "ಇಂಗು"
+    ],
+    "malayalam": [
+     "കായം"
+    ],
+    "gurmukhi": [
+     "ਹਿੰਗ"
+    ],
+    "odia": [
+     "ହିଙ୍ଗୁ"
+    ]
+   }
+  },
+  {
+   "term": "bay leaf",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "tej patta",
+     "tejpatta",
+     "bay leaf",
+     "tamalpatra",
+     "tejpata",
+     "biryani ilai",
+     "biryani aku",
+     "palav ele",
+     "vazhana ila",
+     "tejpatra"
+    ],
+    "devanagari": [
+     "तेज पत्ता",
+     "तेजपत्ता",
+     "तमालपत्र"
+    ],
+    "gujarati": [
+     "તમાલપત્ર"
+    ],
+    "bengali": [
+     "তেজপাতা"
+    ],
+    "tamil": [
+     "பிரியாணி இலை"
+    ],
+    "telugu": [
+     "బిర్యానీ ఆకు"
+    ],
+    "kannada": [
+     "ಪಲಾವ್ ಎಲೆ"
+    ],
+    "malayalam": [
+     "വഴനയില"
+    ],
+    "gurmukhi": [
+     "ਤੇਜ ਪੱਤਾ"
+    ],
+    "odia": [
+     "ତେଜପତ୍ର"
+    ]
+   }
+  },
+  {
+   "term": "fenugreek seeds",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "methi dana",
+     "methidana",
+     "methi",
+     "fenugreek",
+     "methi dane",
+     "venthayam",
+     "menthulu",
+     "menthya",
+     "uluva"
+    ],
+    "devanagari": [
+     "मेथी दाना",
+     "मेथी",
+     "मेथी दाणे"
+    ],
+    "bengali": [
+     "মেথি"
+    ],
+    "tamil": [
+     "வெந்தயம்"
+    ],
+    "telugu": [
+     "మెంతులు"
+    ],
+    "gujarati": [
+     "મેથી"
+    ],
+    "kannada": [
+     "ಮೆಂತ್ಯ"
+    ],
+    "malayalam": [
+     "ഉലുവ"
+    ],
+    "gurmukhi": [
+     "ਮੇਥੀ ਦਾਣਾ"
+    ],
+    "odia": [
+     "ମେଥି"
+    ]
+   }
+  },
+  {
+   "term": "fennel seeds",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "saunf",
+     "sauf",
+     "fennel",
+     "badishep",
+     "sombu",
+     "sompu",
+     "variyali",
+     "badisoppu",
+     "perinjeerakam"
+    ],
+    "devanagari": [
+     "सौंफ",
+     "बडीशेप"
+    ],
+    "bengali": [
+     "মৌরি"
+    ],
+    "odia": [
+     "ମୌରୀ"
+    ],
+    "tamil": [
+     "சோம்பு"
+    ],
+    "telugu": [
+     "సోంపు"
+    ],
+    "gujarati": [
+     "વરિયાળી"
+    ],
+    "kannada": [
+     "ಬಡೆಸೊಪ್ಪು",
+     "ಸೋಂಪು"
+    ],
+    "malayalam": [
+     "പെരുംജീരകം"
+    ],
+    "gurmukhi": [
+     "ਸੌਂਫ"
+    ]
+   }
+  },
+  {
+   "term": "ajwain",
+   "category": "Spices",
+   "variants": {
+    "latin": [
+     "ajwain",
+     "ajwayan",
+     "carom seeds",
+     "owa",
+     "joan",
+     "juan",
+     "omam",
+     "vamu",
+     "ajmo",
+     "oma",
+     "ayamodakam"
+    ],
+    "devanagari": [
+     "अजवाइन",
+     "अजवायन",
+     "ओवा"
+    ],
+    "bengali": [
+     "যোয়ান",
+     "জোয়ান"
+    ],
+    "tamil": [
+     "ஓமம்"
+    ],
+    "telugu": [
+     "వాము"
+    ],
+    "gujarati": [
+     "અજમો"
+    ],
+    "kannada": [
+     "ಓಮ"
+    ],
+    "malayalam": [
+     "അയമോദകം"
+    ],
+    "gurmukhi": [
+     "ਅਜਵਾਇਣ"
+    ]
+   }
+  },
+  {
+   "term": "idli dosa batter",
+   "category": "Staples",
+   "variants": {
+    "latin": [
+     "idli batter",
+     "dosa batter",
+     "idli dosa batter",
+     "idli maavu",
+     "dosa maavu",
+     "idli pindi",
+     "dosa pindi"
+    ],
+    "tamil": [
+     "இட்லி மாவு",
+     "தோசை மாவு"
+    ],
+    "telugu": [
+     "ఇడ్లీ పిండి",
+     "దోశ పిండి"
+    ],
+    "kannada": [
+     "ಇಡ್ಲಿ ಹಿಟ್ಟು",
+     "ದೋಸೆ ಹಿಟ್ಟು",
+     "ಇಡ್ಲಿ ದೋಸೆ ಹಿಟ್ಟು"
+    ],
+    "malayalam": [
+     "ഇഡ്ഡലി മാവ്",
+     "ദോശ മാവ്"
+    ]
+   }
+  },
+  {
+   "term": "eggs",
+   "category": "Eggs",
+   "variants": {
+    "latin": [
+     "eggs",
+     "egg",
+     "anda",
+     "ande",
+     "anday",
+     "dim",
+     "muttai",
+     "guddu",
+     "guddulu",
+     "inda",
+     "motte",
+     "mutta"
+    ],
+    "devanagari": [
+     "अंडा",
+     "अंडे",
+     "अंडी"
+    ],
+    "bengali": [
+     "ডিম"
+    ],
+    "tamil": [
+     "முட்டை"
+    ],
+    "telugu": [
+     "గుడ్డు",
+     "గుడ్లు"
+    ],
+    "gujarati": [
+     "ઈંડા",
+     "ઇંડા"
+    ],
+    "kannada": [
+     "ಮೊಟ್ಟೆ"
+    ],
+    "malayalam": [
+     "മുട്ട"
+    ],
+    "gurmukhi": [
+     "ਆਂਡੇ",
+     "ਅੰਡੇ"
+    ],
+    "odia": [
+     "ଅଣ୍ଡା"
+    ]
+   }
+  },
+  {
+   "term": "bread",
+   "category": "Bakery",
+   "variants": {
+    "latin": [
+     "bread",
+     "double roti",
+     "pav",
+     "pao",
+     "pauruti",
+     "pau ruti"
+    ],
+    "devanagari": [
+     "ब्रेड"
+    ],
+    "bengali": [
+     "পাউরুটি"
+    ],
+    "odia": [
+     "ପାଉଁରୁଟି",
+     "ବ୍ରେଡ୍"
+    ],
+    "tamil": [
+     "ப்ரெட்",
+     "பிரட்",
+     "பிரெட்"
+    ],
+    "telugu": [
+     "బ్రెడ్"
+    ],
+    "gujarati": [
+     "બ્રેડ"
+    ],
+    "kannada": [
+     "ಬ್ರೆಡ್"
+    ],
+    "malayalam": [
+     "ബ്രെഡ്"
+    ],
+    "gurmukhi": [
+     "ਬਰੈੱਡ"
+    ]
+   }
+  },
+  {
+   "term": "biscuits",
+   "category": "Snacks",
+   "variants": {
+    "latin": [
+     "biscuit",
+     "biscuits",
+     "biskut",
+     "bisket"
+    ],
+    "devanagari": [
+     "बिस्कुट",
+     "बिस्कीट",
+     "बिस्किट"
+    ],
+    "bengali": [
+     "বিস্কুট"
+    ],
+    "tamil": [
+     "பிஸ்கட்",
+     "பிஸ்கெட்"
+    ],
+    "telugu": [
+     "బిస్కెట్",
+     "బిస్కట్"
+    ],
+    "gujarati": [
+     "બિસ્કિટ",
+     "બિસ્કીટ"
+    ],
+    "kannada": [
+     "ಬಿಸ್ಕತ್ತು",
+     "ಬಿಸ್ಕೆಟ್"
+    ],
+    "malayalam": [
+     "ബിസ്കറ്റ്"
+    ],
+    "gurmukhi": [
+     "ਬਿਸਕੁਟ"
+    ],
+    "odia": [
+     "ବିସ୍କୁଟ"
+    ]
+   }
+  },
+  {
+   "term": "chocolate",
+   "category": "Snacks",
+   "variants": {
+    "latin": [
+     "chocolate",
+     "choclate"
+    ],
+    "devanagari": [
+     "चॉकलेट"
+    ],
+    "bengali": [
+     "চকলেট"
+    ],
+    "tamil": [
+     "சாக்லேட்"
+    ],
+    "telugu": [
+     "చాక్లెట్"
+    ],
+    "gujarati": [
+     "ચોકલેટ"
+    ],
+    "kannada": [
+     "ಚಾಕೊಲೇಟ್"
+    ],
+    "malayalam": [
+     "ചോക്ലേറ്റ്"
+    ],
+    "gurmukhi": [
+     "ਚਾਕਲੇਟ"
+    ],
+    "odia": [
+     "ଚକୋଲେଟ୍"
+    ]
+   }
+  },
+  {
+   "term": "chips",
+   "category": "Snacks",
+   "variants": {
+    "latin": [
+     "chips",
+     "wafers"
+    ],
+    "devanagari": [
+     "चिप्स",
+     "वेफर्स"
+    ],
+    "bengali": [
+     "চিপস"
+    ],
+    "tamil": [
+     "சிப்ஸ்"
+    ],
+    "telugu": [
+     "చిప్స్"
+    ],
+    "gujarati": [
+     "ચિપ્સ",
+     "વેફર્સ"
+    ],
+    "kannada": [
+     "ಚಿಪ್ಸ್"
+    ],
+    "malayalam": [
+     "ചിപ്സ്"
+    ],
+    "gurmukhi": [
+     "ਚਿਪਸ"
+    ],
+    "odia": [
+     "ଚିପ୍ସ"
+    ]
+   }
+  },
+  {
+   "term": "namkeen",
+   "category": "Snacks",
+   "variants": {
+    "latin": [
+     "namkeen",
+     "bhujia",
+     "farsan",
+     "chanachur",
+     "jhuri bhaja",
+     "mixture",
+     "gathiya"
+    ],
+    "devanagari": [
+     "नमकीन",
+     "भुजिया",
+     "फरसाण"
+    ],
+    "bengali": [
+     "নোনতা"
+    ],
+    "tamil": [
+     "மிக்சர்"
+    ],
+    "telugu": [
+     "మిక్చర్"
+    ],
+    "gujarati": [
+     "ફરસાણ",
+     "નમકીન",
+     "ગાંઠિયા"
+    ],
+    "kannada": [
+     "ಮಿಕ್ಸ್ಚರ್"
+    ],
+    "malayalam": [
+     "മിക്സ്ചർ"
+    ],
+    "gurmukhi": [
+     "ਨਮਕੀਨ"
+    ],
+    "odia": [
+     "ଚାନାଚୁର"
+    ]
+   }
+  },
+  {
+   "term": "papad",
+   "category": "Snacks",
+   "variants": {
+    "latin": [
+     "papad",
+     "papadam",
+     "papor",
+     "appalam",
+     "appadam",
+     "happala",
+     "pappadam",
+     "papada"
+    ],
+    "devanagari": [
+     "पापड़",
+     "पापड"
+    ],
+    "bengali": [
+     "পাঁপড়"
+    ],
+    "tamil": [
+     "அப்பளம்"
+    ],
+    "telugu": [
+     "అప్పడం"
+    ],
+    "gujarati": [
+     "પાપડ"
+    ],
+    "kannada": [
+     "ಹಪ್ಪಳ"
+    ],
+    "malayalam": [
+     "പപ്പടം"
+    ],
+    "gurmukhi": [
+     "ਪਾਪੜ"
+    ],
+    "odia": [
+     "ପାପଡ଼"
+    ]
+   }
+  },
+  {
+   "term": "pickle",
+   "category": "Snacks",
+   "variants": {
+    "latin": [
+     "achar",
+     "achaar",
+     "pickle",
+     "lonche",
+     "oorugai",
+     "uragaya",
+     "avakaya",
+     "athanu",
+     "uppinakayi"
+    ],
+    "devanagari": [
+     "अचार",
+     "लोणचे"
+    ],
+    "bengali": [
+     "আচার"
+    ],
+    "tamil": [
+     "ஊறுகாய்"
+    ],
+    "telugu": [
+     "ఊరగాయ"
+    ],
+    "gujarati": [
+     "અથાણું"
+    ],
+    "kannada": [
+     "ಉಪ್ಪಿನಕಾಯಿ"
+    ],
+    "malayalam": [
+     "അച്ചാർ"
+    ],
+    "gurmukhi": [
+     "ਅਚਾਰ"
+    ],
+    "odia": [
+     "ଆଚାର"
+    ]
+   }
+  },
+  {
+   "term": "bath soap",
+   "category": "Household",
+   "variants": {
+    "latin": [
+     "soap",
+     "sabun",
+     "nahane ka sabun",
+     "sabon",
+     "sabbu",
+     "saban"
+    ],
+    "devanagari": [
+     "साबुन",
+     "साबण"
+    ],
+    "bengali": [
+     "সাবান"
+    ],
+    "tamil": [
+     "சோப்பு",
+     "சோப்"
+    ],
+    "telugu": [
+     "సబ్బు"
+    ],
+    "gujarati": [
+     "સાબુ"
+    ],
+    "kannada": [
+     "ಸಾಬೂನು"
+    ],
+    "malayalam": [
+     "സോപ്പ്",
+     "സോപ്"
+    ],
+    "gurmukhi": [
+     "ਸਾਬਣ"
+    ],
+    "odia": [
+     "ସାବୁନ"
+    ]
+   }
+  },
+  {
+   "term": "detergent",
+   "category": "Household",
+   "variants": {
+    "latin": [
+     "detergent",
+     "surf",
+     "kapde dhone ka powder",
+     "washing powder"
+    ],
+    "devanagari": [
+     "डिटर्जेंट",
+     "डिटर्जंट",
+     "कपडे धुण्याची पावडर"
+    ],
+    "bengali": [
+     "ডিটারজেন্ট",
+     "কাপড় কাচার পাউডার"
+    ],
+    "tamil": [
+     "டிடர்ஜென்ட்",
+     "துணி துவைக்கும் தூள்"
+    ],
+    "telugu": [
+     "డిటర్జెంట్",
+     "బట్టలు ఉతికే పౌడర్"
+    ],
+    "gujarati": [
+     "ડિટર્જન્ટ",
+     "કપડાં ધોવાનો પાવડર"
+    ],
+    "kannada": [
+     "ಡಿಟರ್ಜೆಂಟ್",
+     "ಬಟ್ಟೆ ಒಗೆಯುವ ಪುಡಿ"
+    ],
+    "malayalam": [
+     "ഡിറ്റർജന്റ്",
+     "തുണി കഴുകുന്ന പൊടി"
+    ],
+    "gurmukhi": [
+     "ਡਿਟਰਜੈਂਟ",
+     "ਕੱਪੜੇ ਧੋਣ ਵਾਲਾ ਪਾਊਡਰ"
+    ],
+    "odia": [
+     "ଡିଟର୍ଜେଣ୍ଟ",
+     "ଲୁଗା ଧୋଇବା ପାଉଡର"
+    ]
+   }
+  },
+  {
+   "term": "dishwash",
+   "category": "Household",
+   "variants": {
+    "latin": [
+     "dishwash",
+     "dish wash",
+     "bartan ka sabun",
+     "bartan sabun",
+     "bason dhuyar sabun",
+     "vantala sabbu",
+     "vasan sabu"
+    ],
+    "devanagari": [
+     "बर्तन धोने का साबुन",
+     "डिशवॉश",
+     "भांडी साबण"
+    ],
+    "bengali": [
+     "বাসন ধোয়ার সাবান",
+     "ডিশওয়াশ"
+    ],
+    "tamil": [
+     "பாத்திரம் கழுவும் சோப்பு",
+     "டிஷ்வாஷ்"
+    ],
+    "telugu": [
+     "గిన్నెలు కడిగే సబ్బు",
+     "డిష్వాష్"
+    ],
+    "gujarati": [
+     "વાસણ સાબુ",
+     "ડિશવોશ"
+    ],
+    "kannada": [
+     "ಪಾತ್ರೆ ತೊಳೆಯುವ ಸಾಬೂನು",
+     "ಡಿಶ್ವಾಶ್"
+    ],
+    "malayalam": [
+     "പാത്രം കഴുകുന്ന സോപ്പ്",
+     "ഡിഷ്വാഷ്"
+    ],
+    "gurmukhi": [
+     "ਭਾਂਡੇ ਧੋਣ ਵਾਲਾ ਸਾਬਣ",
+     "ਡਿਸ਼ਵਾਸ਼"
+    ],
+    "odia": [
+     "ବାସନ ସାବୁନ",
+     "ଡିସ୍ୱାସ୍"
+    ]
+   }
+  },
+  {
+   "term": "toothpaste",
+   "category": "Household",
+   "variants": {
+    "latin": [
+     "toothpaste",
+     "tooth paste"
+    ],
+    "devanagari": [
+     "टूथपेस्ट"
+    ],
+    "bengali": [
+     "টুথপেস্ট"
+    ],
+    "tamil": [
+     "பற்பசை",
+     "டூத்பேஸ்ட்"
+    ],
+    "telugu": [
+     "టూత్ పేస్ట్",
+     "టూత్పేస్ట్"
+    ],
+    "gujarati": [
+     "ટૂથપેસ્ટ"
+    ],
+    "kannada": [
+     "ಟೂತ್ಪೇಸ್ಟ್",
+     "ಹಲ್ಲುಜ್ಜುವ ಪೇಸ್ಟ್"
+    ],
+    "malayalam": [
+     "ടൂത്ത്പേസ്റ്റ്"
+    ],
+    "gurmukhi": [
+     "ਟੂਥਪੇਸਟ"
+    ],
+    "odia": [
+     "ଟୁଥପେଷ୍ଟ"
+    ]
+   }
+  },
+  {
+   "term": "toothbrush",
+   "category": "Household",
+   "variants": {
+    "latin": [
+     "toothbrush",
+     "tooth brush"
+    ],
+    "devanagari": [
+     "टूथब्रश"
+    ],
+    "bengali": [
+     "টুথব্রাশ"
+    ],
+    "tamil": [
+     "டூத்பிரஷ்",
+     "பல் துலக்கி"
+    ],
+    "telugu": [
+     "టూత్బ్రష్"
+    ],
+    "gujarati": [
+     "ટૂથબ્રશ"
+    ],
+    "kannada": [
+     "ಟೂತ್ಬ್ರಷ್"
+    ],
+    "malayalam": [
+     "ടൂത്ത്ബ്രഷ്"
+    ],
+    "gurmukhi": [
+     "ਟੂਥਬ੍ਰਸ਼"
+    ],
+    "odia": [
+     "ଟୁଥବ୍ରଶ"
+    ]
+   }
+  },
+  {
+   "term": "shampoo",
+   "category": "Household",
+   "variants": {
+    "latin": [
+     "shampoo"
+    ],
+    "devanagari": [
+     "शैम्पू",
+     "शैंपू",
+     "शाम्पू",
+     "शॅम्पू"
+    ],
+    "bengali": [
+     "শ্যাম্পু"
+    ],
+    "tamil": [
+     "ஷாம்பு"
+    ],
+    "telugu": [
+     "షాంపూ"
+    ],
+    "gujarati": [
+     "શેમ્પૂ"
+    ],
+    "kannada": [
+     "ಶಾಂಪೂ"
+    ],
+    "malayalam": [
+     "ഷാംപൂ"
+    ],
+    "gurmukhi": [
+     "ਸ਼ੈਂਪੂ"
+    ],
+    "odia": [
+     "ଶ୍ୟାମ୍ପୁ"
+    ]
+   }
+  },
+  {
+   "term": "hand wash",
+   "category": "Household",
+   "variants": {
+    "latin": [
+     "handwash",
+     "hand wash"
+    ],
+    "devanagari": [
+     "हैंडवॉश",
+     "हैंड वॉश"
+    ],
+    "bengali": [
+     "হ্যান্ডওয়াশ"
+    ],
+    "tamil": [
+     "ஹேண்ட்வாஷ்"
+    ],
+    "telugu": [
+     "హ్యాండ్‌వాష్",
+     "హ్యాండ్ వాష్"
+    ],
+    "gujarati": [
+     "હેન્ડવોશ"
+    ],
+    "kannada": [
+     "ಹ್ಯಾಂಡ್ವಾಶ್"
+    ],
+    "malayalam": [
+     "ഹാൻഡ്വാഷ്"
+    ],
+    "gurmukhi": [
+     "ਹੈਂਡਵਾਸ਼"
+    ],
+    "odia": [
+     "ହ୍ୟାଣ୍ଡୱାସ୍"
+    ]
+   }
+  },
+  {
+   "term": "toilet cleaner",
+   "category": "Household",
+   "variants": {
+    "latin": [
+     "toilet cleaner"
+    ],
+    "devanagari": [
+     "टॉयलेट क्लीनर"
+    ],
+    "bengali": [
+     "টয়লেট ক্লিনার"
+    ],
+    "tamil": [
+     "டாய்லெட் கிளீனர்"
+    ],
+    "telugu": [
+     "టాయిలెట్ క్లీనర్"
+    ],
+    "gujarati": [
+     "ટોયલેટ ક્લીનર"
+    ],
+    "kannada": [
+     "ಟಾಯ್ಲೆಟ್ ಕ್ಲೀನರ್"
+    ],
+    "malayalam": [
+     "ടോയ്ലറ്റ് ക്ലീനർ"
+    ],
+    "gurmukhi": [
+     "ਟਾਇਲਟ ਕਲੀਨਰ"
+    ],
+    "odia": [
+     "ଟଏଲେଟ୍ କ୍ଲିନର୍"
+    ]
+   }
+  },
+  {
+   "term": "floor cleaner",
+   "category": "Household",
+   "variants": {
+    "latin": [
+     "floor cleaner",
+     "phenyl"
+    ],
+    "devanagari": [
+     "फ्लोर क्लीनर",
+     "फिनायल",
+     "फिनाईल"
+    ],
+    "bengali": [
+     "ফিনাইল"
+    ],
+    "tamil": [
+     "பினாயில்"
+    ],
+    "telugu": [
+     "ఫినాయిల్"
+    ],
+    "gujarati": [
+     "ફિનાઈલ"
+    ],
+    "kannada": [
+     "ಫಿನಾಯಿಲ್"
+    ],
+    "malayalam": [
+     "ഫിനോയിൽ"
+    ],
+    "gurmukhi": [
+     "ਫਿਨਾਇਲ"
+    ],
+    "odia": [
+     "ଫିନାଇଲ"
+    ]
+   }
+  },
+  {
+   "term": "matchbox",
+   "category": "Household",
+   "variants": {
+    "latin": [
+     "matchbox",
+     "machis",
+     "diyasalai",
+     "kadepeti",
+     "deshlai",
+     "theepetti",
+     "aggipetti",
+     "divasali",
+     "benkipottana"
+    ],
+    "devanagari": [
+     "माचिस",
+     "काडेपेटी"
+    ],
+    "bengali": [
+     "দেশলাই"
+    ],
+    "tamil": [
+     "தீப்பெட்டி"
+    ],
+    "malayalam": [
+     "തീപ്പെട്ടി"
+    ],
+    "telugu": [
+     "అగ్గిపెట్టె"
+    ],
+    "gujarati": [
+     "દીવાસળી"
+    ],
+    "kannada": [
+     "ಬೆಂಕಿಪೊಟ್ಟಣ"
+    ],
+    "gurmukhi": [
+     "ਮਾਚਿਸ"
+    ],
+    "odia": [
+     "ଦିଆସିଲି"
+    ]
+   }
+  },
+  {
+   "term": "incense sticks",
+   "category": "Household",
+   "variants": {
+    "latin": [
+     "agarbatti",
+     "agarbati",
+     "incense",
+     "udbatti",
+     "dhup",
+     "dhoop",
+     "ooduvathi",
+     "agarbathi",
+     "chandanathiri",
+     "agarabati"
+    ],
+    "devanagari": [
+     "अगरबत्ती",
+     "उदबत्ती"
+    ],
+    "bengali": [
+     "ধূপ",
+     "ধুপকাঠি"
+    ],
+    "tamil": [
+     "ஊதுபத்தி",
+     "அகர்பத்தி"
+    ],
+    "telugu": [
+     "అగరబత్తి",
+     "అగరుబత్తి"
+    ],
+    "gujarati": [
+     "અગરબત્તી"
+    ],
+    "kannada": [
+     "ಅಗರಬತ್ತಿ",
+     "ಊದುಬತ್ತಿ"
+    ],
+    "malayalam": [
+     "ചന്ദനത്തിരി",
+     "അഗർബത്തി"
+    ],
+    "gurmukhi": [
+     "ਅਗਰਬੱਤੀ"
+    ],
+    "odia": [
+     "ଅଗରବତୀ"
+    ]
+   }
+  }
+ ]
+}

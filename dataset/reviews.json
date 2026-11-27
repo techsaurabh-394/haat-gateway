@@ -1,0 +1,4 @@
+{
+  "devanagari": { "reviewed": false, "reviewers": [], "note": "Hindi entries were hand-written by the maintainer; Marathi and Bhojpuri are machine-drafted. No native-speaker review yet." },
+  "latin": { "reviewed": false, "reviewers": [], "note": "Hinglish spellings were hand-written; other languages typed in Latin letters are machine-drafted. No native-speaker review yet." }
+}

@@ -1,0 +1,2114 @@
+[
+{
+"lang": "hinglish",
+"text": "2 kilo atta aur 1 litre doodh",
+"expect": [
+{
+"term": "wheat flour",
+"quantity": "2000g"
+},
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "do kilo aata",
+"expect": [
+{
+"term": "wheat flour",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "ek kilo chawal chahiye",
+"expect": [
+{
+"term": "rice",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "teen kilo cheeni",
+"expect": [
+{
+"term": "sugar",
+"quantity": "3000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kg namak",
+"expect": [
+{
+"term": "salt",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "aadha kilo paneer",
+"expect": [
+{
+"term": "paneer",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "dedh litre doodh",
+"expect": [
+{
+"term": "milk",
+"quantity": "1500ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 litre doodh aur 6 ande",
+"expect": [
+{
+"term": "milk",
+"quantity": "2000ml"
+},
+{
+"term": "eggs",
+"quantity": "6unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 dozen ande",
+"expect": [
+{
+"term": "eggs",
+"quantity": "12unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "ek dozen kela",
+"expect": [
+{
+"term": "banana",
+"quantity": "12unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "5 kilo pyaz aur 2 kilo aloo",
+"expect": [
+{
+"term": "onion",
+"quantity": "5000g"
+},
+{
+"term": "potato",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "pyaz tamatar aloo",
+"expect": [
+{
+"term": "onion",
+"quantity": null
+},
+{
+"term": "tomato",
+"quantity": null
+},
+{
+"term": "potato",
+"quantity": null
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "500 gram ghee",
+"expect": [
+{
+"term": "ghee",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "250 gm makhan",
+"expect": [
+{
+"term": "butter",
+"quantity": "250g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 litre sarson ka tel",
+"expect": [
+{
+"term": "mustard oil",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 packet biscuit",
+"expect": [
+{
+"term": "biscuits",
+"quantity": "2unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 packet maggi",
+"expect": [
+{
+"term": "noodles",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "toor dal 1 kilo",
+"expect": [
+{
+"term": "toor dal",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 kilo arhar dal",
+"expect": [
+{
+"term": "toor dal",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo moong dal aur 1 kilo masoor dal",
+"expect": [
+{
+"term": "moong dal",
+"quantity": "1000g"
+},
+{
+"term": "masoor dal",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "chana dal 500 gram",
+"expect": [
+{
+"term": "chana dal",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo rajma",
+"expect": [
+{
+"term": "rajma",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 kilo gehun ka atta",
+"expect": [
+{
+"term": "wheat flour",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "bhaiya 3 kilo besan bhej do",
+"expect": [
+{
+"term": "gram flour",
+"quantity": "3000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "mujhe 1 kilo suji chahiye",
+"expect": [
+{
+"term": "semolina",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "poha 500 gram",
+"expect": [
+{
+"term": "flattened rice",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 kilo gud",
+"expect": [
+{
+"term": "jaggery",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo chai patti",
+"expect": [
+{
+"term": "tea",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "coffee 200 gram",
+"expect": [
+{
+"term": "coffee",
+"quantity": "200g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo dahi",
+"expect": [
+{
+"term": "curd",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 litre chaach",
+"expect": [
+{
+"term": "buttermilk",
+"quantity": "2000ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "adrak lahsun",
+"expect": [
+{
+"term": "ginger",
+"quantity": null
+},
+{
+"term": "garlic",
+"quantity": null
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo nimbu",
+"expect": [
+{
+"term": "lemon",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "hari mirch 100 gram",
+"expect": [
+{
+"term": "green chilli",
+"quantity": "100g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "dhaniya patta 1 gaddi",
+"expect": [
+{
+"term": "coriander leaves",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 kilo gobhi",
+"expect": [
+{
+"term": "cauliflower",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo baingan",
+"expect": [
+{
+"term": "brinjal",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "bhindi 500 gram",
+"expect": [
+{
+"term": "okra",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo palak",
+"expect": [
+{
+"term": "spinach",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "matar 1 kilo",
+"expect": [
+{
+"term": "green peas",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 kilo gajar",
+"expect": [
+{
+"term": "carrot",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo kheera",
+"expect": [
+{
+"term": "cucumber",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "shimla mirch 500 gram",
+"expect": [
+{
+"term": "capsicum",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "lauki 1 kilo",
+"expect": [
+{
+"term": "bottle gourd",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "karela 500 gram",
+"expect": [
+{
+"term": "bitter gourd",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 kilo seb",
+"expect": [
+{
+"term": "apple",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 dozen santra",
+"expect": [
+{
+"term": "orange",
+"quantity": "12unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "aam 2 kilo",
+"expect": [
+{
+"term": "mango",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "angoor 500 gram",
+"expect": [
+{
+"term": "grapes",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo anar",
+"expect": [
+{
+"term": "pomegranate",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "haldi powder 200 gram",
+"expect": [
+{
+"term": "turmeric powder",
+"quantity": "200g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "lal mirch powder 100 gram",
+"expect": [
+{
+"term": "red chilli powder",
+"quantity": "100g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "jeera 100 gram",
+"expect": [
+{
+"term": "cumin",
+"quantity": "100g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "rai 100 gram",
+"expect": [
+{
+"term": "mustard seeds",
+"quantity": "100g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "garam masala 1 packet",
+"expect": [
+{
+"term": "garam masala",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "kali mirch 50 gram",
+"expect": [
+{
+"term": "black pepper",
+"quantity": "50g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "elaichi 50 gram",
+"expect": [
+{
+"term": "cardamom",
+"quantity": "50g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "laung 50 gram",
+"expect": [
+{
+"term": "cloves",
+"quantity": "50g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "dalchini 50 gram",
+"expect": [
+{
+"term": "cinnamon",
+"quantity": "50g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "hing 1 packet",
+"expect": [
+{
+"term": "asafoetida",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 packet bread",
+"expect": [
+{
+"term": "bread",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 packet namkeen",
+"expect": [
+{
+"term": "namkeen",
+"quantity": "2unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "papad 1 packet",
+"expect": [
+{
+"term": "papad",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "achar 1 kilo",
+"expect": [
+{
+"term": "pickle",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 chocolate",
+"expect": [
+{
+"term": "chocolate",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "3 sabun",
+"expect": [
+{
+"term": "bath soap",
+"quantity": "3unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo detergent",
+"expect": [
+{
+"term": "detergent",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "toothpaste 2 piece",
+"expect": [
+{
+"term": "toothpaste",
+"quantity": "2unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "shampoo 1 bottle",
+"expect": [
+{
+"term": "shampoo",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 matchbox",
+"expect": [
+{
+"term": "matchbox",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "agarbatti 2 packet",
+"expect": [
+{
+"term": "incense sticks",
+"quantity": "2unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 kilo atta, 1 kilo cheeni aur 1 litre tel",
+"expect": [
+{
+"term": "wheat flour",
+"quantity": "2000g"
+},
+{
+"term": "sugar",
+"quantity": "1000g"
+},
+{
+"term": "cooking oil",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "mujhe 5 kilo chawal aur 2 kilo dal chahiye",
+"expect": [
+{
+"term": "rice",
+"quantity": "5000g"
+},
+{
+"term": "dal",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "doodh, dahi aur paneer",
+"expect": [
+{
+"term": "milk",
+"quantity": null
+},
+{
+"term": "curd",
+"quantity": null
+},
+{
+"term": "paneer",
+"quantity": null
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo badam aur 500 gram kaju",
+"expect": [
+{
+"term": "almonds",
+"quantity": "1000g"
+},
+{
+"term": "cashew nuts",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "kishmish 250 gram",
+"expect": [
+{
+"term": "raisins",
+"quantity": "250g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 kilo moongfali",
+"expect": [
+{
+"term": "peanuts",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo shahad",
+"expect": [
+{
+"term": "honey",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo imli",
+"expect": [
+{
+"term": "tamarind",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "nariyal 2 piece",
+"expect": [
+{
+"term": "coconut",
+"quantity": "2unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 litre nariyal tel",
+"expect": [
+{
+"term": "coconut oil",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "5 litre sunflower oil",
+"expect": [
+{
+"term": "sunflower oil",
+"quantity": "5000ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 litre cold drink",
+"expect": [
+{
+"term": "cold drink",
+"quantity": "2000ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 litre juice",
+"expect": [
+{
+"term": "juice",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "paani ki bottle 2 litre",
+"expect": [
+{
+"term": "drinking water",
+"quantity": "2000ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo sooji aur 1 kilo maida",
+"expect": [
+{
+"term": "semolina",
+"quantity": "1000g"
+},
+{
+"term": "maida",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 kilo chawal ka atta",
+"expect": [
+{
+"term": "rice flour",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "daliya 1 kilo",
+"expect": [
+{
+"term": "broken wheat",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "sabudana 500 gram",
+"expect": [
+{
+"term": "sago",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "murmura 250 gram",
+"expect": [
+{
+"term": "puffed rice",
+"quantity": "250g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo bajra",
+"expect": [
+{
+"term": "bajra",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "ragi atta 1 kilo",
+"expect": [
+{
+"term": "ragi",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "sattu 500 gram",
+"expect": [
+{
+"term": "sattu",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo kala chana",
+"expect": [
+{
+"term": "chickpeas",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "urad dal 1 kilo",
+"expect": [
+{
+"term": "urad dal",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo mushroom",
+"expect": [
+{
+"term": "mushroom",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo chukandar",
+"expect": [
+{
+"term": "beetroot",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "mooli 1 kilo",
+"expect": [
+{
+"term": "radish",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo kaddu",
+"expect": [
+{
+"term": "pumpkin",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "curry patta 1 packet",
+"expect": [
+{
+"term": "curry leaves",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "pudina 1 gaddi",
+"expect": [
+{
+"term": "mint",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo ananas",
+"expect": [
+{
+"term": "pineapple",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "tarbooz 1 piece",
+"expect": [
+{
+"term": "watermelon",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "papita 1 piece",
+"expect": [
+{
+"term": "papaya",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "amrood 1 kilo",
+"expect": [
+{
+"term": "guava",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "2 kilo kela",
+"expect": [
+{
+"term": "banana",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "ajwain 100 gram",
+"expect": [
+{
+"term": "ajwain",
+"quantity": "100g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "methi dana 100 gram",
+"expect": [
+{
+"term": "fenugreek seeds",
+"quantity": "100g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "saunf 100 gram",
+"expect": [
+{
+"term": "fennel seeds",
+"quantity": "100g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "tej patta 1 packet",
+"expect": [
+{
+"term": "bay leaf",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "til 200 gram",
+"expect": [
+{
+"term": "sesame seeds",
+"quantity": "200g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo dalia",
+"expect": [
+{
+"term": "broken wheat",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "thanda 2 litre",
+"expect": [
+{
+"term": "cold drink",
+"quantity": "2000ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 packet noodles",
+"expect": [
+{
+"term": "noodles",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 kilo vermicelli",
+"expect": [
+{
+"term": "vermicelli",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "seviyan 500 gram",
+"expect": [
+{
+"term": "vermicelli",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "1 packet chips",
+"expect": [
+{
+"term": "chips",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "dish wash liquid 1 bottle",
+"expect": [
+{
+"term": "dishwash",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "handwash 2 bottle",
+"expect": [
+{
+"term": "hand wash",
+"quantity": "2unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "floor cleaner 1 litre",
+"expect": [
+{
+"term": "floor cleaner",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "toilet cleaner 1 bottle",
+"expect": [
+{
+"term": "toilet cleaner",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "hinglish",
+"text": "toothbrush 2",
+"expect": [
+{
+"term": "toothbrush",
+"quantity": "2unit"
+}
+]
+},
+{
+"lang": "english",
+"text": "2 kg wheat flour and 1 litre milk",
+"expect": [
+{
+"term": "wheat flour",
+"quantity": "2000g"
+},
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "english",
+"text": "1 kg sugar",
+"expect": [
+{
+"term": "sugar",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "english",
+"text": "500 g butter",
+"expect": [
+{
+"term": "butter",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "english",
+"text": "a dozen eggs",
+"expect": [
+{
+"term": "eggs",
+"quantity": null
+}
+]
+},
+{
+"lang": "english",
+"text": "2 kg onion and 1 kg tomato",
+"expect": [
+{
+"term": "onion",
+"quantity": "2000g"
+},
+{
+"term": "tomato",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "english",
+"text": "1 litre sunflower oil",
+"expect": [
+{
+"term": "sunflower oil",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "english",
+"text": "3 packets biscuits",
+"expect": [
+{
+"term": "biscuits",
+"quantity": "3unit"
+}
+]
+},
+{
+"lang": "english",
+"text": "green tea 1 packet",
+"expect": [
+{
+"term": "green tea",
+"quantity": "1unit"
+}
+]
+},
+{
+"lang": "english",
+"text": "2 kg basmati rice",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "english",
+"text": "1 kg potato",
+"expect": [
+{
+"term": "potato",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "मुझे दो किलो आटा और एक लीटर दूध चाहिए",
+"expect": [
+{
+"term": "wheat flour",
+"quantity": "2000g"
+},
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "२ किलो चीनी",
+"expect": [
+{
+"term": "sugar",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "एक किलो चावल",
+"expect": [
+{
+"term": "rice",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "आधा किलो पनीर",
+"expect": [
+{
+"term": "paneer",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "3 किलो प्याज",
+"expect": [
+{
+"term": "onion",
+"quantity": "3000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "1 किलो आलू और 1 किलो टमाटर",
+"expect": [
+{
+"term": "potato",
+"quantity": "1000g"
+},
+{
+"term": "tomato",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "दो दर्जन अंडे",
+"expect": [
+{
+"term": "eggs",
+"quantity": "24unit"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "500 ग्राम घी",
+"expect": [
+{
+"term": "ghee",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "1 लीटर सरसों का तेल",
+"expect": [
+{
+"term": "mustard oil",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "नमक 1 किलो",
+"expect": [
+{
+"term": "salt",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "तीन किलो गेहूं का आटा",
+"expect": [
+{
+"term": "wheat flour",
+"quantity": "3000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "दही 500 ग्राम",
+"expect": [
+{
+"term": "curd",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "1 किलो अरहर दाल",
+"expect": [
+{
+"term": "toor dal",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "2 किलो सेब",
+"expect": [
+{
+"term": "apple",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "हरी मिर्च 100 ग्राम",
+"expect": [
+{
+"term": "green chilli",
+"quantity": "100g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "गव्हाचे पीठ 2 किलो",
+"expect": [
+{
+"term": "wheat flour",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "1 लिटर दूध",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "१ किलो साखर",
+"expect": [
+{
+"term": "sugar",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "2 किलो बटाटा",
+"expect": [
+{
+"term": "potato",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "devanagari",
+"text": "1 किलो कांदा",
+"expect": [
+{
+"term": "onion",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "bengali",
+"text": "২ কেজি চাল",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "bengali",
+"text": "১ লিটার দুধ",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "bengali",
+"text": "১ কেজি চিনি",
+"expect": [
+{
+"term": "sugar",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "bengali",
+"text": "৫০০ গ্রাম পনির",
+"expect": [
+{
+"term": "paneer",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "bengali",
+"text": "২ কেজি আলু",
+"expect": [
+{
+"term": "potato",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "bengali",
+"text": "১ কেজি পেঁয়াজ",
+"expect": [
+{
+"term": "onion",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "tamil",
+"text": "இரண்டு கிலோ அரிசி",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "tamil",
+"text": "1 லிட்டர் பால்",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "tamil",
+"text": "1 கிலோ சர்க்கரை",
+"expect": [
+{
+"term": "sugar",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "tamil",
+"text": "2 கிலோ வெங்காயம்",
+"expect": [
+{
+"term": "onion",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "tamil",
+"text": "1 கிலோ தக்காளி",
+"expect": [
+{
+"term": "tomato",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "tamil",
+"text": "500 கிராம் நெய்",
+"expect": [
+{
+"term": "ghee",
+"quantity": "500g"
+}
+]
+},
+{
+"lang": "telugu",
+"text": "2 కిలో బియ్యం",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "telugu",
+"text": "1 లీటరు పాలు",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "telugu",
+"text": "1 కిలో పంచదార",
+"expect": [
+{
+"term": "sugar",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "telugu",
+"text": "2 కిలో ఉల్లిపాయ",
+"expect": [
+{
+"term": "onion",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "telugu",
+"text": "1 కిలో టమాటా",
+"expect": [
+{
+"term": "tomato",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "gujarati",
+"text": "2 કિલો ચોખા",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "gujarati",
+"text": "1 લિટર દૂધ",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "gujarati",
+"text": "1 કિલો ખાંડ",
+"expect": [
+{
+"term": "sugar",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "gujarati",
+"text": "2 કિલો બટાકા",
+"expect": [
+{
+"term": "potato",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "gujarati",
+"text": "1 કિલો ડુંગળી",
+"expect": [
+{
+"term": "onion",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "kannada",
+"text": "2 ಕಿಲೋ ಅಕ್ಕಿ",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "kannada",
+"text": "1 ಲೀಟರ್ ಹಾಲು",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "kannada",
+"text": "1 ಕಿಲೋ ಸಕ್ಕರೆ",
+"expect": [
+{
+"term": "sugar",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "kannada",
+"text": "2 ಕಿಲೋ ಈರುಳ್ಳಿ",
+"expect": [
+{
+"term": "onion",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "kannada",
+"text": "1 ಕಿಲೋ ಟೊಮೆಟೊ",
+"expect": [
+{
+"term": "tomato",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "malayalam",
+"text": "2 കിലോ അരി",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "malayalam",
+"text": "1 ലിറ്റർ പാൽ",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "malayalam",
+"text": "1 കിലോ പഞ്ചസാര",
+"expect": [
+{
+"term": "sugar",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "malayalam",
+"text": "2 കിലോ ഉള്ളി",
+"expect": [
+{
+"term": "onion",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "malayalam",
+"text": "1 കിലോ തക്കാളി",
+"expect": [
+{
+"term": "tomato",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "punjabi",
+"text": "2 ਕਿਲੋ ਚੌਲ",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "punjabi",
+"text": "1 ਲੀਟਰ ਦੁੱਧ",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "punjabi",
+"text": "1 ਕਿਲੋ ਖੰਡ",
+"expect": [
+{
+"term": "sugar",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "punjabi",
+"text": "2 ਕਿਲੋ ਪਿਆਜ਼",
+"expect": [
+{
+"term": "onion",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "punjabi",
+"text": "1 ਕਿਲੋ ਆਲੂ",
+"expect": [
+{
+"term": "potato",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "odia",
+"text": "2 କିଲୋ ଚାଉଳ",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "odia",
+"text": "1 ଲିଟର କ୍ଷୀର",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "odia",
+"text": "1 କିଲୋ ଚିନି",
+"expect": [
+{
+"term": "sugar",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "odia",
+"text": "2 କିଲୋ ପିଆଜ",
+"expect": [
+{
+"term": "onion",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "odia",
+"text": "1 କିଲୋ ଆଳୁ",
+"expect": [
+{
+"term": "potato",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "latin-regional",
+"text": "2 kilo arisi",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "latin-regional",
+"text": "1 litre paal",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "latin-regional",
+"text": "2 kilo biyyam",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "latin-regional",
+"text": "1 litre paalu",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "latin-regional",
+"text": "2 keji chal",
+"expect": [
+{
+"term": "rice",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "latin-regional",
+"text": "1 litre dudh",
+"expect": [
+{
+"term": "milk",
+"quantity": "1000ml"
+}
+]
+},
+{
+"lang": "latin-regional",
+"text": "1 kilo sakkare",
+"expect": [
+{
+"term": "sugar",
+"quantity": "1000g"
+}
+]
+},
+{
+"lang": "latin-regional",
+"text": "2 kilo kanda",
+"expect": [
+{
+"term": "onion",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "latin-regional",
+"text": "2 kilo batata",
+"expect": [
+{
+"term": "potato",
+"quantity": "2000g"
+}
+]
+},
+{
+"lang": "latin-regional",
+"text": "1 kilo tamatar",
+"expect": [
+{
+"term": "tomato",
+"quantity": "1000g"
+}
+]
+}
+]
