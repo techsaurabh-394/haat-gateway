@@ -5,6 +5,8 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 ## [Unreleased]
 
 ### Added
+- **Container image on GitHub's registry.** `.github/workflows/docker.yml` builds and pushes `ghcr.io/techsaurabh-394/haat-gateway` on every `v*` tag (tags `X.Y.Z`, `X.Y`, `latest`) and starts the pushed image to check `/health`. The image now also contains `agent/`.
+
 - **MCP server.** `node src/mcp/main.ts` speaks the Model Context Protocol over stdio (no new dependencies): tools `search_groceries` (Hindi, Hinglish and other languages), `place_order` and `order_status`. The person approves every order through MCP elicitation, the client's own dialog; the model cannot approve, and a client without elicitation can never place an order. Declining orders nothing. It runs on the local mock network unless `HAAT_URL` is set. See `docs/mcp.md`.
 
 ### Added
